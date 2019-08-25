@@ -1,3 +1,12 @@
+## specific files from HSU template
+*.sty
+_changelog.txt
+/examples_latex/
+makebst.tex
+*.bst
+*.dbj
+
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -22,7 +31,7 @@
 # *.pdf
 
 ## Generated if empty string is given at "Please type another file name for output:"
-.pdf
+Thesis.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
