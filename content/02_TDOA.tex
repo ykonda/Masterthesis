@@ -1,0 +1,18 @@
+\section{Time Difference Of Arrival}
+
+The direction of a signal source can be computed by the relative time delay between
+two microphones.
+- describe how the direction is defined by TDOA
+It is assumed that the distance from the sensors to the sound source is
+significantly large so that the signal waves proceed parallel.
+Then, calculations for the direction of the sound source can be done with a simple
+geometrical approach like done in \cite{Valin_Michaud}.
+
+With the definition of a whistle signal as stated in \ref{eq:02_whistleSignal},
+the microphone sensors $mic_1$ and $mic_2$ will output
+\subbea
+    x_1(t) = s_1(t) + n_1(t)\\
+    x_2(t) = \alpha * s_1(t - D) + n_2(t).
+    \label{eq:02_sensorOutputsTimeDomain}
+\subeea
+Here, $D$ is the delay of $x_2$ relative to $x_1$ for which is looked for.

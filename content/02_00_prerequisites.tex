@@ -1,3 +1,26 @@
 \chapter{Prerequisites}
 
+- To localize a whistle sound source, it must be detected firstly (was done by previous work
+and is implemented)
+- calculate the direction of the whistle sound on one Nao\\
+- This can be done by determining the \ac{TDOA} of microphone pairs\\
+- With the delay, the angle of the sound source relative to angle pair
+can be is known.\\
+- By combining these, a direction ray is defined on each Nao\\
+- The results are filtered by updating it with the singe rays, assuming
+gaussian distribution. (known error, Trigonometry)
+
+- why other theories do not fit into this problem
+(finger printing, beam forming)
+
+-
+
+\input{content/02_whistleSignal}
+
+\input{content/02_TDOA}
+\input{content/02_cc}
 \input{content/02_gcc}
+%\input{content/02_phase}
+%\input{content/02_Trigonometry}
+
+%\input{content/02_filter}

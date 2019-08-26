@@ -1,0 +1,16 @@
+\section{Cross Correlation}
+
+The \ac{CC} provides information about the similarity of two signals.
+Thus, the delay of one signal can be detected where the \ac{CC} $r_{12}(t)$ is largest.
+In time domain, the \ac{CC} of two signals $x_1$ and $x_2$ is denoted as
+\bea
+    r_{x_1x_2}(t) = x_1(t) \circledast x_2(t) = \int^{+\infty}_{-\infty}x_1(\tau-t)x_2(\tau)d\tau.
+\eea
+Considering the frequency domain, the function can be transformed into
+\bea
+    \mathcal{F}[r_{12}(t)] = R_{x_1x_2}(f) = X_1(f)X_2^{\ast}(f)
+\eea
+with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X^*(f)$ indicating the conjugate complex form.
+However, the finite observation time of the microphone signal and noise corrupts the fourier
+transform so that only an estimation $\hat R_{x_1x_2}(f)$ is given. \cite{Knapp_Carter_GCC}
+- improve this estimation with filtering
