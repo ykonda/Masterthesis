@@ -6,6 +6,8 @@ makebst.tex
 *.bst
 *.dbj
 
+.vscode/*
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
