@@ -10,9 +10,9 @@ geometrical approach like done in \cite{Valin_Michaud}.
 
 With the definition of a whistle signal as stated in \ref{eq:02_whistleSignal},
 the microphone sensors $mic_1$ and $mic_2$ will output
-\subbea
-    x_1(t) = s_1(t) + n_1(t)\\
-    x_2(t) = \alpha * s_1(t - D) + n_2(t).
-    \label{eq:02_sensorOutputsTimeDomain}
-\subeea
+\bsub \bal
+    x_1(t) &= s(t) + n_1(t)\\
+    x_2(t) &= \alpha s(t - D) + n_2(t).
+\eal \esub
+\label{eq:02_signalTimeDomain}
 Here, $D$ is the delay of $x_2$ relative to $x_1$ for which is looked for.

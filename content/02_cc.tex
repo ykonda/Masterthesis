@@ -3,14 +3,35 @@
 The \ac{CC} provides information about the similarity of two signals.
 Thus, the delay of one signal can be detected where the \ac{CC} $r_{12}(t)$ is largest.
 In time domain, the \ac{CC} of two signals $x_1$ and $x_2$ is denoted as
-\bea
-    r_{x_1x_2}(t) = x_1(t) \circledast x_2(t) = \int^{+\infty}_{-\infty}x_1(\tau-t)x_2(\tau)d\tau.
-\eea
+\bal
+    R_{x_1x_2}(t) = x_1(t) \circledast x_2(t) = \int^{+\infty}_{-\infty}x_1(\tau-t)x_2(\tau)d\tau.
+\eal
 Considering the frequency domain, the function can be transformed into
-\bea
-    \mathcal{F}[r_{12}(t)] = R_{x_1x_2}(f) = X_1(f)X_2^{\ast}(f)
-\eea
-with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X^*(f)$ indicating the conjugate complex form.
-However, the finite observation time of the microphone signal and noise corrupts the fourier
-transform so that only an estimation $\hat R_{x_1x_2}(f)$ is given. \cite{Knapp_Carter_GCC}
-- improve this estimation with filtering
+\bal
+    \mathcal{F}[R_{12}(t)] = G_{x_1x_2}(f) = X_1^*(f)X_2(f)
+\eal
+with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X_i^*(f)$ indicating the conjugate complex form.
+However, the finite observation time of the received signal corrupts the fourier
+transform \cite{Knapp_Carter_GCC}
+and noise of sensors may introduce false peaks in the \ac{CC} \cite{Hassab_Boucher_GCC}.
+In frequency domain, the signals $x_1(t)$ and $x_2(t)$ from \ref{eq:02_signalTimeDomain}
+can be expressed as
+\bsub \bal
+    X_1(f) &= S(f) + N_1(f)\\
+    X_2(f) &= \alpha S(f) e^{-j2\pi fD}+ N_2(f).
+\eal \esub
+\label{eq:02_signalFreqDomain}
+Thus, the \ac{CC} is
+\bsub \bal
+    G_{x_1x_2}(f) = \alpha |S(f)|^2 e^{-j2\pi fD} + N_1^*(f)N_2(f) + S^*(f) N_2(f) + \alpha S(f) e^{-j2\pi fD}N_1^*(f)
+\eal \esub
+which will be shortened as
+\bsub \begin{align*}
+    G_{x_1x_2}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_{n_1n_2}(f) + \phi_c(f)\\
+\intertext{where}
+    \phi_s(f) &= |S(f)|^2
+\end{align*} \esub
+
+
+- improve this estimation with filtering\\
+- noise can not be seen as uncorrelated
