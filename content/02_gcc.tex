@@ -1,15 +1,48 @@
 \section{Generalized Cross Correlation}
 
-- improve normal cross correlation\\
-- whistle frequency between 2000Hz and 4000Hz (low-pass)\\
-- thus, the peaks of the cross-correlation are wide\\
-- to avoid this circumstance, the generalized cross correlation (GCC)
-was introduced by Knapp and Carter 1976 \cite{K_C_GCC} \\
-- weightings before iFFT to maximize expected signal peak relative
-to output noise \cite{H_B_GCC}
+As depict in \ref{sec:cc}, the \ac{CC} can bring some error sources in the context of
+incorrect delay results and inaccuracy.
+Improvements were done in \cite{K_C_GCC} by introducing prefilters for the signals
+which is equal to general frequency weighting.
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=0.35\columnwidth]{figures/GCC_weight}
+	\caption{Generalized cross correlation for time delay estimation}
+	\label{fig:GCC}
+\end{figure}
+With certain weightings $H_i(f)$ the peak detection of the \ac{CC} can be rectified by improving the
+relation between peak and noise or enhancing the accuracy. \cite{H_B_GCC}
+Having $\Psi = H_1^*(f)H_2$ defined as the weighting prior to the \ac{iFT}, the \ac{GCC} is declared as
+\bal
+    R^{(g)}_{x_1x_2}(t) = \int^{+\infty}_{-\infty}\Psi(f)G_{x_1x_2}(f)e^{j2\pi ft} df.
+\eal
+\label{eq:02_gcc}
+Written-out, it gets clear how the choice of $\Psi$ impacts the individual segments of \ref{eq:02_Gx1x2}
+as
+\bal
+    R^{(g)}_{x_1x_2}(f) &= \mathcal{F}^{-1}[\Psi(f) \alpha \phi_s(f) e^{-j2\pi fD}] \nonumber \\
+    &+ \mathcal{F}^{-1}[\Psi(f) \phi_n(f)] + \mathcal{F}^{-1}[\Psi(f) \phi_c(f)].
+\eal
+\label{eq:02_gcc_long}
+Several variants of the weighting were designed by various researchers with different criteria.
+The effect of the most common filters will be shortly pointed out in the following.
 
 
-- 
-"The filters have a function to ensure a large sharp peak in the obtained cross-versions of the two received signals. The filters have a function to ensure a large sharp peak in the obtained cross- correlation thus ensuring a high time delay resolution in
-function to ensure a large sharp peak in the obtained cross- correlation thus ensuring a high time delay resolution in generalized cross-correlation method.
-correlation thus ensuring a high time delay resolution in generalized cross-correlation method." - 
+\subsection{The Scmoothed Coherence Transform (SCOT)}
+\missing[inline]{Content for SCOT}
+
+\subsection{The Phase Transform (PHAT)}
+The \ac{PHAT} weighting is known as
+\bal
+    \Psi(f) = \frac{1}{|G_{x_1x_2}(f)|}.
+\eal
+For the ideal case that $\phi_n$ and $\phi_c$ are nonexistent, the the \ac{GCC} results in
+\bal
+    R^{(p)}_{x_1x_2}(t) = \mathcal{F}^{-1}[\frac{\alpha |S(f)|^2 e^{-j2\pi fD}}{|G_{x_1x_2}(f)|}] = \delta(t-D)
+\eal
+because $|G_{x_1x_2}(f)| = \alpha |S(f)|^2$.
+This filter is used regularly in research, because the peak is not spread by the signal spectrum what gives
+a high accuracy.
+
+%- whistle frequency between 2000Hz and 4000Hz (low-pass)\\
+%- thus, the peaks of the cross-correlation are wide\\
