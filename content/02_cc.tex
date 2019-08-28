@@ -12,8 +12,8 @@ Considering the frequency domain, the function can be transformed into
 \eal
 with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X_i^*(f)$ indicating the conjugate complex form.
 However, the finite observation time of the received signal corrupts the fourier
-transform \cite{Knapp_Carter_GCC}
-and noise of sensors may introduce false peaks in the \ac{CC} \cite{Hassab_Boucher_GCC}.
+transform \cite{K_C_GCC}
+and noise of sensors may introduce false peaks in the \ac{CC} \cite{H_B_GCC}.
 In frequency domain, the signals $x_1(t)$ and $x_2(t)$ from \ref{eq:02_signalTimeDomain}
 can be expressed as
 \bsub \bal
@@ -22,16 +22,26 @@ can be expressed as
 \eal \esub
 \label{eq:02_signalFreqDomain}
 Thus, the \ac{CC} is
+\unsure[]{better formatting?}
 \bsub \bal
-    G_{x_1x_2}(f) = \alpha |S(f)|^2 e^{-j2\pi fD} + N_1^*(f)N_2(f) + S^*(f) N_2(f) + \alpha S(f) e^{-j2\pi fD}N_1^*(f)
-\eal \esub
-which will be shortened as
-\bsub \begin{align*}
-    G_{x_1x_2}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_{n_1n_2}(f) + \phi_c(f)\\
+    G_{x_1x_2}(f) &= \alpha |S(f)|^2 e^{-j2\pi fD} + N_1^*(f)N_2(f) + S^*(f) N_2(f) + \alpha S(f) e^{-j2\pi fD}N_1^*(f)\\
+\intertext{which will be shortened as}
+    G_{x_1x_2}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx1x2_simple} \\
 \intertext{where}
-    \phi_s(f) &= |S(f)|^2
-\end{align*} \esub
-
-
-- improve this estimation with filtering\\
-- noise can not be seen as uncorrelated
+\phi_s(f) &= |S(f)|^2 \label{eq:02_phi_s} \\
+\phi_n(f) &= N_1^*(f)N_2(f) \label{eq:02_phi_n1n2} \\
+\phi_c(f) &= S^*(f) N_2(f)+\alpha S(f)e^{-j2\pi fD}N_1^*(f) \label{eq:02_phi_c}.
+\eal \esub
+\label{eq:02_Gx1x2}
+%\cite{H_B_GCC}
+Considering the ideal case where $s(t)$, $n_1(t)$ and $n_2(t)$ are uncorrelated, the terms
+$\phi_c$ and $\phi_n$ disappear and the \ac{CC} results in
+\bal
+    R_{12}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] \circledast \delta(t-D).
+\eal
+\label{eq_02_R12_noNoise}
+\unsure[]{do I fully understand this? Is this correct?}
+This means there exists a peak at delay $D$ which is altered by the inverse fourier transform
+of the signal spectrum.
+In general, $\phi_c$ and $\phi_n$ can neither be neglected nor assumed as uncorrelated to the signal \cite{H_B_prob},
+so that they introduce inaccuracies and errors.
