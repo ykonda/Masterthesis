@@ -1,0 +1,15 @@
+\section{Signal Start Detection}
+\label{sec:02_signalStartDetection}
+
+One focus of the whistle signal localization is the correct choice of the
+signal frame, with which the \ac{TDOA} measurement is done.
+In order to perform the \ac{FFT} most efficiently, the size of one frame
+should be a power of 2.
+Assuming that the clearest signal without reverberation and with minimal
+multipath propagated subsignals is at the start of a sound signal,
+the frame to investigate is chosen to be at the beginning of a whistle sound.
+Several methods exist and can be combined at will.
+In the next subsections, signal start detection using entropy, energy and
+zero crossing rate are subject of discussion.
+
+\subsection{Entropy}
