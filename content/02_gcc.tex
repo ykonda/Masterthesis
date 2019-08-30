@@ -35,14 +35,18 @@ as
 Several variants of the weighting were designed by various researchers with different criteria.
 The effect of the most common filters will be shortly pointed out in the following.
 
-
+%_______________________________________________________________________________________________________________
 \subsection{The Scmoothed Coherence Transform (SCOT)}
-\missing[inline]{Content for SCOT}
+\missing[inline]{Content for SCOT, Characteristics (small where noise is large)}
+\bal
+    \Psi^{(S)}(f) = \frac{1}{\sqrt{G_{x_1x_1}(f)G_{x_2x_2}(f)}}.
+\eal
 
+%_______________________________________________________________________________________________________________
 \subsection{The Phase Transform (PHAT)}
 The \ac{PHAT} weighting is known as
 \bal
-    \Psi(f) = \frac{1}{|G_{x_1x_2}(f)|}.
+    \Psi^{(P)}(f) = \frac{1}{|G_{x_1x_2}(f)|}.
 \eal
 For the ideal case that $\phi_n$ and $\phi_c$ are nonexistent, the the \ac{GCC} results in
 \bal
