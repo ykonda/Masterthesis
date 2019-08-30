@@ -9,7 +9,74 @@ Assuming that the clearest signal without reverberation and with minimal
 multipath propagated subsignals is at the start of a sound signal,
 the frame to investigate is chosen to be at the beginning of a whistle sound.
 Several methods exist and can be combined at will.
-In the next subsections, signal start detection using entropy, energy and
-zero crossing rate are subject of discussion.
+In the next subsections, signal start detection using short time energy,
+zero crossing rate and spectral entropy are subject of discussion.
 
-\subsection{Entropy}
+\subsection{Short Time Energy and Zero Crossing Rate}
+
+A common method in signal start and endpoint detection is the evaluation
+of the \ac{STE} and \ac{ZCR}.
+
+\subsubsection{Short Time Energy}
+The energy
+\bal
+    E(n) = \sum_{i=1}^N |X(n)|^2
+    \label{eq:02_energy}
+\eal
+of signal frames with length $N$ are expected to be higher than noise frames
+and therefore, noise and signal can be distinguished
+according to \cite{Z_W_voiceActivity}.
+A threshold needs to be specified according to the environment.
+
+\subsubsection{Zero Crossing Rate}
+
+The \ac{ZCR} of one frame $Z$ needs small computational effort in order to
+identify a periodic signal in time domain.
+Its formula is
+\bal
+    Z = \sum_{k=2}^N |sgn(x(k)) - sgn(x(k-1))|
+    \label{eq:02_zcr}
+\eal
+with the sign function
+\begin{align*}
+    sign(x) =
+    \begin{cases}
+        1 & \quad \text{if } x\geq 0 \\
+        -1 & \quad \text{if } x < 0
+    \end{cases}
+\end{align*}
+for a discrete signal $x(k)$ of a frame with length $N$ \cite{Z_W_voiceActivity}.
+A higher \ac{ZCR} is an indication for a sinusoidal signal.
+To detect the signal start, a threshold is determined dynamically.
+The \ac{ZCR} mean of frames which are known to be noise only
+are averaged with the mean of those frames, that include the whistle signal.
+The signal start is detected at the point in time, where the \ac{ZCR} exceeds
+this threshold.
+
+\subsection{Spectral Entropy}
+
+Entropy provides information about the disorder of a system.
+From this, one can derive that noise has a high entropy compared to
+a whistle sound, which is a highly structured sound signal and a high
+amount of information accordingly.
+The spectral entropy of a signal is determined by normalizing the
+\ac{PDF} over all frequency components as described in \cite{S_J_entropy}.
+When $X(n)$ is the \ac{DFT} of the sampled signal $x(k)$, the \ac{PDF} is
+\bal
+    P(n) &= \frac{E(n)}{\sum_{i=1}^N E(n_i)}
+    \label{eq:02_pdf}\\
+\eal
+with \ref{eq:02_energy} as the energy function and $N$ as the frame length.
+Finally, the spectral entropy results in
+\bal
+    H &= - \sum_{n=1}^N P(n) log_2P(n).
+\eal
+\unsure[]{How should the energy be written? Discrete time correct?}
+Utilizing some a priori knowledge about the signal, the entropy estimation
+can be improved.
+In this work, the frequency of a whistle sound is known to be
+between $2000Hz$ and $4000Hz$ from \cite{Hasselbring},
+Thus, only the frequency components in the whistle range is considered.
+\unsure[]{weighting factors as described in S-J-entropy?}
+Differentiating between noise samples where no signal is present and
+signal frames, a dynamic threshold can be set to detect the signal start point.
