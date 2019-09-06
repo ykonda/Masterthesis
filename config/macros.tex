@@ -29,6 +29,13 @@
 \newcommand{\info}[2][1=]{\todo[linecolor=green!75!black,backgroundcolor=green!75!black!30,bordercolor=green!75!black,#1]{#2}}
 \newcommand{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
+\newcommand{\code}[4]{\lstinputlisting[float=htp, language=Python, basicstyle=\ttfamily\scriptsize,
+        caption={#4},
+        label=lst:bsp,
+        numbers=left,
+        firstline=#2, lastline=#3,
+        stepnumber=1]{sourcecodes/#1.py}}
+
 
 \newcommand{\bi}{\begin{itemize}}
         \newcommand{\ei}{\end{itemize}}
