@@ -28,16 +28,9 @@ The formula to calculate the spectral entropy of a signal is \ref{eq:02_entropy}
 - use non-cleaned signal because of entropy information
 - first frames are known as noise only
 - mean of noise signal can be set as threshold
-- look from back until thresold is exceeded. This is signal start index
+- look from back until threshold is exceeded. This is signal start index
 
-\lstinputlisting[float=htp,
-	caption={Entropy calculation},
-	label=lst:bsp,
-	numbers=left,
-	firstline=7, lastline=38, 
-	stepnumber=1]{sourcecodes/spectral_entropy.py}
-
-Variable \lstinline!calcFFt!
+% Variable \lstinline!calcFFt!
 
 \begin{figure}[ht]
 	\centering
@@ -49,13 +42,12 @@ Variable \lstinline!calcFFt!
 \subsubsection*{Energy}
 
 \ref{eq:02_energy} results in the energy of each frequency component of each frame.
-According to this, the energy of one frame is the sum of $E_f(n)$.
+According to this, the energy of one frame is \ref{eq:02_energy}
 As the frames of the whole signal are overlapping, the energy function plotted in
 \ref{fig:03_energy} results from overlapping and adding the frame energies.\\
 - with a priori knowledge: only look for energy between 2000Hz and 4000Hz
 One downside of the energy information is that the threshold can not be
 set dynamically. It has to be adapted manually for the related environment.
-
 
 \begin{figure}[ht]
 	\centering

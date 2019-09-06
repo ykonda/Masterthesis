@@ -20,8 +20,11 @@ of the \ac{STE} and \ac{ZCR}.
 \subsubsection{Short Time Energy}
 The energy
 \bal
-    E(n) = \sum_{i=1}^N |X(n)|^2
+    E &= \sum_{n=1}^N E_s(n)\\
     \label{eq:02_energy}
+ \intertext{with the energy spectral density}
+    E_s(n) &= |X(n)|^2
+    \label{eq:02_spectralEnergy}
 \eal
 of signal frames with length $N$ are expected to be higher than noise frames
 and therefore, noise and signal can be distinguished
@@ -64,10 +67,11 @@ The spectral entropy of a signal is determined by normalizing the
 \ac{PDF} over all frequency components as described in \cite{S_J_entropy}.
 When $X(n)$ is the \ac{DFT} of the sampled signal $x(k)$, the \ac{PDF} is
 \bal
-    P(n) &= \frac{E(n)}{\sum_{i=1}^N E(n_i)}
+    P(n) &= \frac{E_s(n)}{\sum_{i=1}^N E(n_i)}
     \label{eq:02_pdf}\\
 \eal
-with \ref{eq:02_energy} as the energy function and $N$ as the frame length.
+with \ref{eq:02_spectralEnergy} as the spectral energy density function and $N$
+as the frame length.
 Finally, the spectral entropy results in
 \bal
     H &= - \sum_{n=1}^N P(n) log_2P(n).
