@@ -1,5 +1,19 @@
 \section{Front and Rear Distance}
 \label{sec:03_distance}
 
+If the front and rear direction candidates dissolve each other to a small
+value, it is assumed that the signal source is on the X-axis of the robot.
+The side delays are then used as indicator for the distance to the robot as
+explained in \ref{sec:02_distance} and need to be smaller than
+\change[]{change name?} $samples_{xz}$.
+To estimate the distance, the height of the sound source needs to be set as
+constant \change[]{change name?} \lstinline!height_source!.\\
+Restrictions of the front and rear distance measurement differ.
 For the front case, the maximal angle for a unambiguous distance calculation
 is $\frac{\pi}{2}- 2\alpha$.
+Thus, the maximal front distance that can be approximated shrinks to
+$\Delta x = (\Delta h_{source} - \Delta h_{Nao}) \cdot \tan(\frac{\pi}{2} - 2\alpha)$
+according to \ref{eq:02_deltaX}.
+To the rear, the maximal value for $\gamma$ is bounded by \change[]{naming?}
+\lstinline!xz_delay_limit!.
+

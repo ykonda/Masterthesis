@@ -8,13 +8,13 @@ what can provide rough information about the distance of the sound source
 for the particular case when the signal comes straight from front or behind.
 If $delay_{01}$ and $delay_{20}$ are both very small, the signal comes from
 the front or the back most likely.
-figure ...\missing[]{reference to nao channel figure} evinces, that one of
-the sidewise delays need to be larger or equal to 5.41 samples for a signal
-to arrive from front with a small angle.
+Figure ...\missing[]{reference to nao channel figure} evinces, that one of
+the sidewise delays need to be larger or equal to 5.41 \change[]{number to variable}
+samples for a signal to arrive from the side.
 When the delays of the side channels are smaller, they can be used to
 detect the angle of the sound source in vertical YZ plane.
 Figure \ref{fig:02_headSideTdoa} is a lateral illustration of
-the Nao.
+the Nao's right microphones $channel_1$ and $channel_3$.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -30,10 +30,10 @@ to the Z-axis can be determined with
 \gamma &= \alpha + \gamma'\\
 \gamma' &= sign(delay) \cdot sin^{-1}(\frac{delay}{max_{samples}})\\
 \intertext{with}
-\alpha &= tan^{-1}(\frac{\Delta z_{channel}}{\Delta x_{channel}})\\
-\intertext{which is the angle to the orthogonal axis of the plane though
-front and rear channels.}
+\alpha &= tan^{-1}(\frac{\Delta z_{channel}}{\Delta x_{channel}})
 \eal \esub
+which is the angle to the orthogonal axis to the plane though
+front and rear channels.\\
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -47,7 +47,8 @@ of the sound source can be approximated with an assumed height $\Delta h_{source
 of the source.
 So, the distance to the sound source is
 % -------------------------------------------------------------
-\bsub \bal
-\Delta x &= (\Delta h_{source} - \Delta h_{Nao}) \cdot \tan(\gamma)
-\eal \esub
+\bal
+\Delta x &= (\Delta h_{source} - \Delta h_{Nao}) \cdot \tan(\gamma).
+\label{eq:02_deltaX}
+\eal
 % -------------------------------------------------------------
