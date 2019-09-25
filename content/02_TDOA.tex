@@ -1,16 +1,28 @@
 \section{Time Difference Of Arrival}
 
-The direction of a signal source can be computed by the relative time delay between
-two microphones.
+The direction of a signal source $\gamma$ can be detected by the time delay of
+one signal relative to the neighboring channel signal.
+Assuming the speed of sound $c_s$ being 343\si{m/s} in air, the angle
+$\gamma'$ which is relative to a vector between the microphone positions
+is defined as
+\bsub \bal
+    \gamma' &= cos^{-1}(\frac{|delay|}{s_{max}})
+    \label{eq:02_tdoaAngle}\\
+    \intertext{with the maximum number of samples between two channels}
+    s_{max} &= \frac{f_s * d_{max}}{c_s}.
+\eal \esub
+$f_s$ sampling rate, 
+% -------------------------------------------------------------
+\missing[inline]{- describe how the direction is defined by TDOA}
+% -------------------------------------------------------------
 
-- describe how the direction is defined by TDOA
-
+% -------------------------------------------------------------
 It is assumed that the distance from the sensors to the sound source is
 significantly large so that the signal waves proceed parallel.
 Then, calculations for the direction of the sound source can be done with a simple
 geometrical approach like done in \cite{Valin_Michaud}.
 
-With the definition of a whistle signal as stated in \ref{eq:02_whistleSignal},
+With the definition of a whistle signal as stated in \cref{eq:02_whistleSignal},
 the microphone sensors $mic_1$ and $mic_2$ will output
 \bsub \bal
     x_1(t) &= s(t) + n_1(t)\\

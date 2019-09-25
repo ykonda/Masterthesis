@@ -6,14 +6,15 @@ horizontal plane only.
 However, the front and rear microphones differ 0.0212\si{m} in height
 what can provide rough information about the distance of the sound source
 for the particular case when the signal comes straight from front or behind.
-If $delay_{01}$ and $delay_{20}$ are both very small, the signal comes from
+If $delay_{01}$ and $delay_{32}$ are both very small, the signal comes from
 the front or the back most likely.
 Figure ...\missing[]{reference to nao channel figure} evinces, that one of
-the sidewise delays need to be larger or equal to 5.41 \change[]{number to variable}
-samples for a signal to arrive from the side.
+the sidewise delays need to be larger or equal to 5.41 \change[]{number to variable?}
+samples for a signal to arrive from sideways.
 When the delays of the side channels are smaller, they can be used to
 detect the angle of the sound source in vertical YZ plane.
-Figure \ref{fig:02_headSideTdoa} is a lateral illustration of
+
+Figure \cref{fig:02_headSideTdoa} is a lateral illustration of
 the Nao's right microphones $channel_1$ and $channel_3$.
 % -------------------------------------------------------------
 \begin{figure}[ht]
@@ -28,12 +29,12 @@ to the Z-axis can be determined with
 % -------------------------------------------------------------
 \bsub \bal
 \gamma &= \alpha + \gamma'\\
-\gamma' &= sign(delay) \cdot sin^{-1}(\frac{delay}{max_{samples}})\\
+\gamma' &= sign(delay) \cdot sin^{-1}(\frac{delay}{samples_{max}})\\
 \intertext{with}
 \alpha &= tan^{-1}(\frac{\Delta z_{channel}}{\Delta x_{channel}})
 \eal \esub
 which is the angle to the orthogonal axis to the plane though
-front and rear channels.\\
+front and rear channels.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering

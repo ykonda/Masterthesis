@@ -1,8 +1,9 @@
 \section{Cross Correlation}
-\label{sec:cc}
+\label{sec:02_cc}
 
 The \ac{CC} provides information about the similarity of two signals.
 Thus, the delay of one signal can be detected where the \ac{CC} $r_{12}(t)$ is largest.
+% -------------------------------------------------------------
 In time domain, the \ac{CC} of two signals $x_1$ and $x_2$ is denoted as
 \bal
     R_{x_1x_2}(t) = x_1(t) \circledast x_2(t) = \int^{+\infty}_{-\infty}x_1(\tau-t)x_2(\tau)d\tau.
@@ -12,16 +13,19 @@ Considering the frequency domain, the function can be transformed into
     \mathcal{F}[R_{12}(t)] = G_{x_1x_2}(f) = X_1^*(f)X_2(f)
 \eal
 with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X_i^*(f)$ indicating the conjugate complex form.
+% -------------------------------------------------------------
 However, the finite observation time of the received signal corrupts the fourier
 transform \cite{K_C_GCC}
 and noise of sensors may introduce false peaks in the \ac{CC} \cite{H_B_GCC}.
-In frequency domain, the signals $x_1(t)$ and $x_2(t)$ from \ref{eq:02_signalTimeDomain}
+% -------------------------------------------------------------
+In frequency domain, the signals $x_1(t)$ and $x_2(t)$ from \cref{eq:02_signalTimeDomain}
 can be expressed as
 \bsub \bal
     X_1(f) &= S(f) + N_1(f)\\
     X_2(f) &= \alpha S(f) e^{-j2\pi fD}+ N_2(f).
 \eal \esub
 \label{eq:02_signalFreqDomain}
+% -------------------------------------------------------------
 Thus, the \ac{CC} is
 \unsure[]{better formatting?}
 \bsub \bal
@@ -35,14 +39,34 @@ Thus, the \ac{CC} is
 \eal \esub
 \label{eq:02_Gx1x2}
 %\cite{H_B_GCC}
+% -------------------------------------------------------------
 Considering the ideal case where $s(t)$, $n_1(t)$ and $n_2(t)$ are uncorrelated, the terms
 $\phi_c$ and $\phi_n$ disappear and the \ac{CC} results in
 \bal
     R_{12}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] \circledast \delta(t-D).
 \eal
 \label{eq_02_R12_noNoise}
-\unsure[]{do I fully understand this? Is this correct?}
-This means there exists a peak at delay $D$ which is altered by the \ac{iFT}
-of the signal spectrum.
+% \unsure[]{do I fully understand this? Is this correct?}
+% This means there exists a peak at delay $D$ which is altered by the \ac{iFT}
+% of the signal spectrum.
+The \ac{CC} gives insight about the similarity of two signals and at peak, they
+are most alike.
+Thus, the shift between the zero index and the peak is the resulting delay.
+% -------------------------------------------------------------
 In general, $\phi_c$ and $\phi_n$ can neither be neglected nor assumed as uncorrelated to the signal \cite{H_B_prob},
 so that they introduce inaccuracies and errors.
+% -------------------------------------------------------------
+
+Figure \cref{fig:03_ccTheory} is the outcome of two similar, but shifted sine signals with
+3000\si{Hz} and normally distributed noise.
+As the second signal is delayed by 10 samples, the peak can be detected where $shift = 10$.
+The example signals are attached in \cref{fig:ap1_signals}.
+One disadvantage of this technique is that for periodic signals the \ac{CC} also is periodic
+and the peak is not always easily detectable. Noise and inaccuracies of the \ac{FFT} then
+may influence the result what can make the peak unobvious \cite{L_L_GCC}.
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=1\columnwidth]{figures/CC_theory}
+	\caption{Cross correlation of two generated sine signals with 3000Hz.}
+    \label{fig:03_ccTheory}
+\end{figure}

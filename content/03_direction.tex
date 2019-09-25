@@ -1,0 +1,47 @@
+\section{Source Direction Estimation}
+\label{sec:03_direction}
+
+After the \lstinline!WhistleData! was filled by the \lstinline!WhistleDetection!,
+the \lstinline!WhistleLocalization! start to process the buffered microphone data.
+First, the frames to consider for the calculation of the \ac{TDOA} are chosen.
+Different criteria apply for the correlation methods and phase method, but the
+resulting \lstinline!start_index! of the signal start detection implementation
+\cref{sec:03_signalStartDetection} is utilized in both.
+
+For the correlation methods in \cref{sec:02_cc} and \cref{sec:02_gcc}, the beginning
+of the signal is chosen where the change from noise to signal is visible preferably.
+\lstinline!frame_size/2! samples before and after the \lstinline!start_index! are defined
+as frame.
+It gets undecidable which signal came first for later frames. Thus, if the start detection
+is inaccurate the resulting \ac{TDOA} is not reliable.
+
+Regarding the phase method,
+%\cref{sec:02_phase}%,
+\missing[]{reference to 02 phase}
+the frames with the same maximal frequency for each channel are used for the
+phase difference calculation.
+The phase difference of this frequency is then considered for the phase difference
+calculation. %\cref{sec:03_phase}
+\missing[]{reference to 03 phase}
+
+Before determining the delays, the frames are windowed with a Hann window and can be
+normalized optionally.
+According to the method delays between the channels and the consequential direction
+candidates are computed.
+For each delay between neighboring channels, one positive signed and one negative
+signed candidate arise.
+The relative angle $\gamma'$ to the vector from one channel to the other is defined
+by \cref{eq:02_tdoaAngle}.
+Depending on the sign of the delay, both candidates needs to be transformed
+into robot coordinates.
+In code \ref{lst:03_direction}, the 
+
+\code{tdoa}{0}{10}{Calculation of whistle direction in robot coordinates.}{03_direction}
+
+As there exists the exceptional case that the sidewise and forward delays are both small
+as considered in \cref{sec:02_distance}, the invalidity of
+\lstinline!small_y_shift && small_x_shift! must be confirmed.
+If so, not only the direction but also an approximate distance can be determined
+as depicted in \cref{sec:03_distance}.
+Otherwise, the direction with the smallest difference between the channel
+candidates is submitted as final result.

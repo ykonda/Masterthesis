@@ -2,21 +2,24 @@
 \label{sec:02_signalStartDetection}
 
 One focus of the whistle signal localization is the correct choice of the
-signal frame, with which the \ac{TDOA} measurement is done.
-In order to perform the \ac{FFT} most efficiently, the size of one frame
-should be a power of 2.
+signal frame, with which the \ac{TDOA} calculation is done.
 Assuming that the clearest signal without reverberation and with minimal
 multipath propagated subsignals is at the start of a sound signal,
 the frame to investigate is chosen to be at the beginning of a whistle sound.
-Several methods exist and can be combined at will.
+
+By knowing the frequency band of a whistle signal, the start can be detected
+where these frequencies dominate.
+Using this indicator only does not always give the desired accuracy, that is why
+different methods are investigated in this work.
 In the next subsections, signal start detection using short time energy,
 zero crossing rate and spectral entropy are subject of discussion.
-\missing[inline]{
-    Explain, why not only frequency is considered:\\
-    \tab - Check, if other methods and combinations leads to higher accuracy.\\
-    \tab - Light computing with ZCR\\
-    \tab - Make it possible for signals that are not whistle
-}
+Also, the methods require
+various computational power. According to the circumstances, the most suitable
+approach can be chosen.
+Another point is, that robustness can be increased by considering these methods
+in combination.
+As a latter, the consensus of the single methods can be passed as information
+about the certainty of the computed direction result.
 
 \subsection{Short Time Energy and Zero Crossing Rate}
 
@@ -35,7 +38,7 @@ The energy
 of signal frames with length $N$ are expected to be higher than noise frames
 and therefore, noise and signal can be distinguished
 according to \cite{Z_W_voiceActivity}.
-A threshold needs to be specified according to the environment.
+A threshold needs to be specified appropriately dependent on the environment.
 
 \subsubsection{Zero Crossing Rate}
 
@@ -55,7 +58,7 @@ with the sign function
     \end{cases}
 \end{align*}
 for a discrete signal $x(k)$ of a frame with length $N$ \cite{Z_W_voiceActivity}.
-A higher \ac{ZCR} is an indication for a sinusoidal signal.
+A higher \ac{ZCR} is an indication for a periodic signal.
 To detect the signal start, a threshold is determined dynamically.
 The \ac{ZCR} mean of frames which are known to be noise only
 are averaged with the mean of those frames, that include the whistle signal.
@@ -76,19 +79,19 @@ When $X(n)$ is the \ac{DFT} of the sampled signal $x(k)$, the \ac{PDF} is
     P(n) &= \frac{E_s(n)}{\sum_{i=1}^N E(n_i)}
     \label{eq:02_pdf}\\
 \eal
-with \ref{eq:02_spectralEnergy} as the spectral energy density function and $N$
+with \cref{eq:02_spectralEnergy} as the spectral energy density function and $N$
 as the frame length.
 Finally, the spectral entropy results in
 \bal
     H &= - \sum_{n=1}^N P(n) log_2P(n).
 \eal
 \label{eq:02_entropy}
-\unsure[]{How should the energy be written? Discrete time correct?}
+\unsure[]{How should the energy be written?}
 Utilizing some a priori knowledge about the signal, the entropy estimation
 can be improved.
 In this work, the frequency of a whistle sound is known to be
 between $2000\si{Hz}$ and $4000\si{Hz}$ from \cite{Hasselbring},
 Thus, only the frequency components in the whistle range is considered.
-\unsure[]{weighting factors as described in S-J-entropy?}
+% \unsure[]{weighting factors as described in S-J-entropy?}
 Differentiating between noise samples where no signal is present and
 signal frames, a dynamic threshold can be set to detect the signal start point.

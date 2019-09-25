@@ -1,46 +1,50 @@
 \section{Signal Start Detection}
 \label{sec:03_signalStartDetection}
 
-As mentioned in \ref{sec:02_signalStartDetection}, the detection of the
+As mentioned in \cref{sec:02_signalStartDetection}, the detection of the
 signal start is crucial for the localization.
 The implementation of the different methods will be presented coupled with
-an examination of real measurement data. By knowing the frequency band
-of a whistle signal, the start can be detected where these frequencies dominate.
-Using this indicator only does not always give the desired accuracy, that is why
-different methods are investigated in this work. Also, the methods require
-unequal computational power. According to the circumstances, the most suitable
-approach can be chosen.
-Another point is, that the robustness can be increased by considering these methods
-in combination.\change[]{Move this into theory part?}
-As a latter, the consensus of the single methods can be passed as information
-about the certainty of the computed direction result.
+an examination of real measurement data.
 \\
 To reduce undesirable effects and demonstrate the simplest form, a sinusoidal
-signal of $3000\si{Hz}$ with a sample rate of $44100\si{Hz}$. For this
-data, the sound source was placed $2\si{m}$ in front of the robot.
+signal of $3000\si{Hz}$ was recorded with a sample rate of $44100\si{Hz}$.
+For the following data, the sound source was placed $2\si{m}$ in front of the robot.
 \\
 In order to find the time point where the signal starts, information about
 smaller fractions are required.
 So, the original $44100$ samples that were buffered by the
-\change[]{correct font and wording}
-"WhistleLocalization" module are divided into several overlapping
+\lstinline!WhistleLocalization! module are divided into several overlapping
 frames with size $256$. The computational effort raises with smaller frame size,
 but delivers a higher precision in return.
+In order to perform the \ac{FFT} most efficiently, the size of one frame
+should be a power of 2.
 To compute the energy and entropy, the frames are transformed into
 frequency domain with the \ac{FFT}.
 The \ac{ZCR} does not require such a transformation.
-\missing[]{final start index by combination of these 3 methods}
+In the evaluation section \cref{sec:04_signalStartDetection}, the result of the single
+methods are compared to each other.
 For better visualization, the following data is shortened to $2400$ samples.
 
+\missing[]{Start detection by frequency}
 
 \subsubsection*{Spectral Entropy}
 
-The formula to calculate the spectral entropy of a signal is \ref{eq:02_entropy}.
-- use non-cleaned signal because of entropy information
-- first frames are known as noise only
-- mean of noise signal can be set as threshold
-- look from back until threshold is exceeded. This is signal start index
-
+The formula to calculate the spectral entropy of a signal is introduced as \cref{eq:02_entropy}
+in the previous chapter.
+For the entropy information, the signal must not be cleaned previously.
+The first frames are known as noise only, as well as the last frames are assumed
+to contain signal and noise.
+By comparing the mean of the received noise at the beginning of the measurement and
+the mean of the signal part, a dynamic threshold can be defined and the beginning of the
+signal is detectable.
+In this work, the crossing of the entropy threshold is observed from the last
+value to the first. The reason is, that the noise entropy subceeds the threshold with higher risk.
+Of course, this approach does not work for real-time systems.
+Figure \cref{fig:03_entropy} is a plot of the recorded sine signal with the corresponding
+entropy.
+According to the frame size, the accuracy of the start index can be increased.
+However, the frame size is limited by the required number of samples for one \ac{FFT} and
+its computational effort.
 
 \begin{figure}[ht]
 	\centering
@@ -51,13 +55,17 @@ The formula to calculate the spectral entropy of a signal is \ref{eq:02_entropy}
 
 \subsubsection*{Energy}
 
-\ref{eq:02_energy} results in the energy of each frequency component of each frame.
-According to this, the energy of one frame is \ref{eq:02_energy}
-As the frames of the whole signal are overlapping, the energy function plotted in
-\ref{fig:03_energy} results from overlapping and adding the frame energies.\\
-- with a priori knowledge: only look for energy between 2000Hz and 4000Hz
-One downside of the energy information is that the threshold can not be
-set dynamically. It has to be adapted manually for the related environment.
+As mentioned above, the total signal is divided into multiple overlapping frames.
+Equation \cref{eq:02_spectralEnergy} represents the energy of each frequency
+component.
+According to this, the energy of one of those frames is \cref{eq:02_energy}.
+Assuming that the energy holds for the whole frame, overlapping and adding the energy
+results in \cref{fig:03_energy}.
+If the frequency of the examined signal is known as for the whistle, only energy values
+of the relevant frequencies needs to be considered.
+One downside of the energy information is that the threshold has to be adapted
+manually for the related environment.
+Especially at the tournament, parameters like these should be avoided.
 
 \begin{figure}[ht]
 	\centering
@@ -71,11 +79,15 @@ set dynamically. It has to be adapted manually for the related environment.
 
 \subsubsection*{Zero Crossing Rate}
 
-- count the sign changes in frame
-- calculate the noise mean at the beginning of signal
-- calculate signal mean at end of signal
-- mean of both is set as threshold
-- start index is detected at that point where zcr is higher than this threshold
+To receive a higher accuracy, the frames of the \ac{ZCR} are set to 80 samples.
+In each frame, the the sign changes are counted.
+It is known that only noise is received at the beginning of the measurement and on the
+contrary, signal noise is present at the end.
+The same as for the spectral entropy, a dynamic threshold can be set.
+In figure \cref{fig:03_zcr} and in this work , the threshold is set between the
+noise and signal mean.
+The implementation of the \ac{ZCR} in Python is very simple.
+\code{zcr}{1}{2}{Calculation of Zero Crossing Rate in Python}{03_zcr}
 
 \begin{figure}[ht]
 	\centering
