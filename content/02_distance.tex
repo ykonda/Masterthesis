@@ -9,8 +9,8 @@ for the particular case when the signal comes straight from front or behind.
 If $delay_{01}$ and $delay_{32}$ are both very small, the signal comes from
 the front or the back most likely.
 Figure ...\missing[]{reference to nao channel figure} evinces, that one of
-the sidewise delays need to be larger or equal to 5.41 \change[]{number to variable?}
-samples for a signal to arrive from sideways.
+the sidewise delays need to be larger or equal to 5.41 samples
+\change[]{number to variable?} for a signal to arrive from sideways.
 When the delays of the side channels are smaller, they can be used to
 detect the angle of the sound source in vertical YZ plane.
 
@@ -24,12 +24,12 @@ the Nao's right microphones $channel_1$ and $channel_3$.
     \label{fig:02_headSideTdoa}
 \end{figure}
 % -------------------------------------------------------------
-With the delay samples $\tau$, the angle of the sound source $\gamma$ relative
+With the delay $D$, the angle of the sound source $\gamma$ relative
 to the Z-axis can be determined with
 % -------------------------------------------------------------
 \bsub \bal
 \gamma &= \alpha + \gamma'\\
-\gamma' &= sign(delay) \cdot sin^{-1}(\frac{delay}{samples_{max}})\\
+\gamma' &= sign(D) \cdot sin^{-1}(\frac{D}{D_{max}})\\
 \intertext{with}
 \alpha &= tan^{-1}(\frac{\Delta z_{channel}}{\Delta x_{channel}})
 \eal \esub
