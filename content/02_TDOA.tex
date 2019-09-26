@@ -1,26 +1,36 @@
 \section{Time Difference Of Arrival}
+\label{sec:02_tdoa}
 
-The direction of a signal source $\gamma$ can be detected by the time delay of
-one signal relative to the neighboring channel signal.
-Assuming the speed of sound $c_s$ being 343\si{m/s} in air, the angle
-$\gamma'$ which is relative to a vector between the microphone positions
-is defined as
+The direction of a signal source $\gamma'$ can be detected by the time delay of
+the received signal.
+Calculations for the direction of the sound source can be done with a
+geometrical approach like in \cite{Valin_Michaud}.
+\Cref{fig:02_tdoa} illustrates the delay introduced by the direction angle
+of the sound source relative to a vector between channels 0 and 1.
+If the delay is zero, the signal is perpendicular to this channels vector.
+It's value can be $s_{max}$ maximally which delivers the result that the source
+direction must be aligned to the channels vector direction.
+It is assumed that the distance from the sensors to the sound source is
+significantly large so that the signal waves proceed parallel which is a necessary
+criterion for the approach to be valid.
+\begin{figure}[ht]
+	\centering
+		\includegraphics[width=0.4\columnwidth]{figures/tdoa_waves}
+	\caption{Illustration of TDOA principle.}
+    \label{fig:02_tdoa}
+\end{figure}
+% -------------------------------------------------------------
+
+Specifying the speed of sound $c_s$ being 343\si{m/s} in air, the angle
+$\gamma'$ can be defined as
 \bsub \bal
     \gamma' &= cos^{-1}(\frac{|delay|}{s_{max}})
     \label{eq:02_tdoaAngle}\\
-    \intertext{with the maximum number of samples between two channels}
-    s_{max} &= \frac{f_s * d_{max}}{c_s}.
+    \intertext{with}
+    s_{max} &= \frac{f_s * d_{max}}{c_s}
 \eal \esub
-$f_s$ sampling rate, 
+where $f_s$is the sampling rate.
 % -------------------------------------------------------------
-\missing[inline]{- describe how the direction is defined by TDOA}
-% -------------------------------------------------------------
-
-% -------------------------------------------------------------
-It is assumed that the distance from the sensors to the sound source is
-significantly large so that the signal waves proceed parallel.
-Then, calculations for the direction of the sound source can be done with a simple
-geometrical approach like done in \cite{Valin_Michaud}.
 
 With the definition of a whistle signal as stated in \cref{eq:02_whistleSignal},
 the microphone sensors $mic_1$ and $mic_2$ will output
