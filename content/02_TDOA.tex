@@ -33,10 +33,10 @@ where $f_s$is the sampling rate.
 % -------------------------------------------------------------
 
 With the definition of a whistle signal as stated in \cref{eq:02_whistleSignal},
-the microphone sensors $mic_1$ and $mic_2$ will output
+the microphone sensors $mic_0$ and $mic_2$ will output
 \bsub \bal
-    x_1(t) &= s(t) + n_1(t)\\
+    x_0(t) &= s(t) + n_0(t)\\
     x_2(t) &= \alpha s(t - D) + n_2(t).
 \eal \esub
 \label{eq:02_signalTimeDomain}
-Here, $D$ is the delay of $x_2$ relative to $x_1$ for which is looked for.
+Here, $D$ is the delay of $x_2$ relative to $x_0$ for which is looked for.
