@@ -27,15 +27,15 @@
 
 % macros for todo
 \newcommand{\missing}[2][1=]{\todo[linecolor=blue!20!red,backgroundcolor=blue!20!red!40,bordercolor=blue!20!red,#1]{#2}}
-\newcommand{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!20,bordercolor=red,#1]{#2}}
+\newcommand{\info}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!60!,bordercolor=yellow,#1]{#2}}
 \newcommand{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
-\newcommand{\info}[2][1=]{\todo[linecolor=green!75!black,backgroundcolor=green!75!black!30,bordercolor=green!75!black,#1]{#2}}
+\newcommand{\unsure}[2][1=]{\todo[linecolor=green!75!black,backgroundcolor=green!75!black!30,bordercolor=green!75!black,#1]{#2}}
 \newcommand{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
 % pseudo code
-\newcommand{\code}[4]{\lstinputlisting[float=htp, language=Python, basicstyle=\ttfamily\scriptsize,
+\newcommand{\code}[5]{\lstinputlisting[float=htp, language=python, basicstyle=\ttfamily\scriptsize,
         caption={#4},
-        label=lst:bsp,
+        label=lst:#5,
         numbers=left,
         firstline=#2, lastline=#3,
         stepnumber=1]{sourcecodes/#1.py}}
@@ -207,7 +207,7 @@
 \newcommand{\mbf}[1]{\mathbf{#1}} %boldface
 \newcommand{\gbf}[1]{\boldsymbol{#1}} %boldface greek letters
 %Verweis auf Gleichungen mit Klammern um Gl.-Nr.
-%\newcommand{\eqref}[1]{(\ref{#1})}
+%\newcommand{\eqref}[1]{(\cref{#1})}
 % \eqref defined in package amsmath
 
 
