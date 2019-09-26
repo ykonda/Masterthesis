@@ -20,15 +20,18 @@ and noise of sensors may introduce false peaks in the \ac{CC} \cite{H_B_GCC}.
 % -------------------------------------------------------------
 In frequency domain, the signals $x_0(t)$ and $x_1(t)$ from \cref{eq:02_signalTimeDomain}
 can be expressed as
-\bsub \bal
+\bsub
+\label{eq:02_signalFreqDomain}
+\bal
     X_0(f) &= S(f) + N_0(f)\\
     X_1(f) &= \alpha S(f) e^{-j2\pi fD}+ N_1(f).
 \eal \esub
-\label{eq:02_signalFreqDomain}
 % -------------------------------------------------------------
 Thus, the \ac{CC} is
 \unsure[]{better formatting?}
-\bsub \bal
+\bsub
+\label{eq:02_Gx1x2}
+\bal
     G_{x_0x_1}(f) &= \alpha |S(f)|^2 e^{-j2\pi fD} + N_0^*(f)N_1(f) + S^*(f) N_1(f) + \alpha S(f) e^{-j2\pi fD}N_0^*(f)\\
 \intertext{which will be shortened as}
     G_{x_0x_1}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx1x2_simple} \\
@@ -37,15 +40,14 @@ Thus, the \ac{CC} is
 \phi_n(f) &= N_0^*(f)N_1(f) \label{eq:02_phi_n1n2} \\
 \phi_c(f) &= S^*(f) N_1(f)+\alpha S(f)e^{-j2\pi fD}N_0^*(f) \label{eq:02_phi_c}.
 \eal \esub
-\label{eq:02_Gx1x2}
 %\cite{H_B_GCC}
 % -------------------------------------------------------------
 Considering the ideal case where $s(t)$, $n_0(t)$ and $n_1(t)$ are uncorrelated, the terms
 $\phi_c$ and $\phi_n$ disappear and the \ac{CC} results in
 \bal
     R_{12}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] \circledast \delta(t-D).
+    \label{eq:02_R12_noNoise}
 \eal
-\label{eq_02_R12_noNoise}
 % \unsure[]{do I fully understand this? Is this correct?}
 % This means there exists a peak at delay $D$ which is altered by the \ac{iFT}
 % of the signal spectrum.
