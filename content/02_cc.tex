@@ -4,13 +4,13 @@
 The \ac{CC} provides information about the similarity of two signals.
 Thus, the delay of one signal can be detected where the \ac{CC} $r_{12}(t)$ is largest.
 % -------------------------------------------------------------
-In time domain, the \ac{CC} of two signals $x_0$ and $x_2$ is denoted as
+In time domain, the \ac{CC} of two signals $x_0$ and $x_1$ is denoted as
 \bal
-    R_{x_0x_2}(t) = x_0(t) \circledast x_2(t) = \int^{+\infty}_{-\infty}x_0(\tau-t)x_2(\tau)d\tau.
+    R_{x_0x_1}(t) = x_0(t) \circledast x_1(t) = \int^{+\infty}_{-\infty}x_0(\tau-t)x_1(\tau)d\tau.
 \eal
 Considering the frequency domain, the function can be transformed into
 \bal
-    \mathcal{F}[R_{12}(t)] = G_{x_0x_2}(f) = X_0^*(f)X_2(f)
+    \mathcal{F}[R_{12}(t)] = G_{x_0x_1}(f) = X_0^*(f)X_1(f)
 \eal
 with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X_i^*(f)$ indicating the conjugate complex form.
 % -------------------------------------------------------------
@@ -18,29 +18,29 @@ However, the finite observation time of the received signal corrupts the fourier
 transform \cite{K_C_GCC}
 and noise of sensors may introduce false peaks in the \ac{CC} \cite{H_B_GCC}.
 % -------------------------------------------------------------
-In frequency domain, the signals $x_0(t)$ and $x_2(t)$ from \cref{eq:02_signalTimeDomain}
+In frequency domain, the signals $x_0(t)$ and $x_1(t)$ from \cref{eq:02_signalTimeDomain}
 can be expressed as
 \bsub \bal
     X_0(f) &= S(f) + N_0(f)\\
-    X_2(f) &= \alpha S(f) e^{-j2\pi fD}+ N_2(f).
+    X_1(f) &= \alpha S(f) e^{-j2\pi fD}+ N_1(f).
 \eal \esub
 \label{eq:02_signalFreqDomain}
 % -------------------------------------------------------------
 Thus, the \ac{CC} is
 \unsure[]{better formatting?}
 \bsub \bal
-    G_{x_0x_2}(f) &= \alpha |S(f)|^2 e^{-j2\pi fD} + N_0^*(f)N_2(f) + S^*(f) N_2(f) + \alpha S(f) e^{-j2\pi fD}N_0^*(f)\\
+    G_{x_0x_1}(f) &= \alpha |S(f)|^2 e^{-j2\pi fD} + N_0^*(f)N_1(f) + S^*(f) N_1(f) + \alpha S(f) e^{-j2\pi fD}N_0^*(f)\\
 \intertext{which will be shortened as}
-    G_{x_0x_2}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx1x2_simple} \\
+    G_{x_0x_1}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx1x2_simple} \\
 \intertext{where}
 \phi_s(f) &= |S(f)|^2 \label{eq:02_phi_s} \\
-\phi_n(f) &= N_0^*(f)N_2(f) \label{eq:02_phi_n1n2} \\
-\phi_c(f) &= S^*(f) N_2(f)+\alpha S(f)e^{-j2\pi fD}N_0^*(f) \label{eq:02_phi_c}.
+\phi_n(f) &= N_0^*(f)N_1(f) \label{eq:02_phi_n1n2} \\
+\phi_c(f) &= S^*(f) N_1(f)+\alpha S(f)e^{-j2\pi fD}N_0^*(f) \label{eq:02_phi_c}.
 \eal \esub
 \label{eq:02_Gx1x2}
 %\cite{H_B_GCC}
 % -------------------------------------------------------------
-Considering the ideal case where $s(t)$, $n_0(t)$ and $n_2(t)$ are uncorrelated, the terms
+Considering the ideal case where $s(t)$, $n_0(t)$ and $n_1(t)$ are uncorrelated, the terms
 $\phi_c$ and $\phi_n$ disappear and the \ac{CC} results in
 \bal
     R_{12}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] \circledast \delta(t-D).

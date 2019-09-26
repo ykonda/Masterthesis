@@ -15,7 +15,7 @@ With certain weightings $H_i(f)$ prior to the \ac{CC}, the peak detection
 can be rectified by improving the relation between peak and noise or
 enhancing the accuracy \cite{H_B_GCC}.
 Figure \cref{fig:02_GCC} illustrates the process of a \ac{GCC} with both filters combined as
-$\Psi(f) = H_0^*(f)H_2$. The figure in \cref{appendix:a1_alternativeGcc} represents the
+$\Psi(f) = H_0^*(f)H_1$. The figure in \cref{appendix:a1_alternativeGcc} represents the
 \ac{GCC} with $H_i(f)$.
 After transforming the signals $x_i(f)$ into frequency domain, the cross correlated
 signals are multiplied with the weighting $\Psi(f)$ and transformed back into time domain.
@@ -24,11 +24,11 @@ The subsequent steps are similar to the \ac{CC}.
 Thus, the \ac{GCC} is declared as
 \bsub
 \bal
-    R^{(g)}_{x_0x_2}(t) &= \int^{+\infty}_{-\infty}\Psi(f)G_{x_0x_2}(f)e^{j2\pi ft} df.
+    R^{(g)}_{x_0x_1}(t) &= \int^{+\infty}_{-\infty}\Psi(f)G_{x_0x_1}(f)e^{j2\pi ft} df.
     \label{eq:02_gcc}\\
 \intertext{Written-out it is visible how the choice of $\Psi(f)$ impacts the individual segments of \cref{eq:02_Gx1x2}
 as}
-    R^{(g)}_{x_0x_2}(f) &= \mathcal{F}^{-1}[\Psi(f) \alpha \phi_s(f) e^{-j2\pi fD}] \nonumber \\
+    R^{(g)}_{x_0x_1}(f) &= \mathcal{F}^{-1}[\Psi(f) \alpha \phi_s(f) e^{-j2\pi fD}] \nonumber \\
     &+ \mathcal{F}^{-1}[\Psi(f) \phi_n(f)] + \mathcal{F}^{-1}[\Psi(f) \phi_c(f)].
     \label{eq:02_gcc_long}
 \eal
@@ -43,14 +43,14 @@ is chosen as weighting function.
 \subsection{The Phase Transform (PHAT)}
 The \ac{PHAT} weighting is known as
 \bal
-    \Psi^{(P)}(f) = \frac{1}{|G_{x_0x_2}(f)|}.
+    \Psi^{(P)}(f) = \frac{1}{|G_{x_0x_1}(f)|}.
 \eal
 For the ideal case that $\phi_n$ and $\phi_c$ are nonexistent due to non-correlation,
 the the \ac{GCC} results in
 \bal
-    R^{(p)}_{x_0x_2}(t) = \mathcal{F}^{-1}[\frac{\alpha |S(f)|^2 e^{-j2\pi fD}}{|G_{x_0x_2}(f)|}] = \delta(t-D)
+    R^{(p)}_{x_0x_1}(t) = \mathcal{F}^{-1}[\frac{\alpha |S(f)|^2 e^{-j2\pi fD}}{|G_{x_0x_1}(f)|}] = \delta(t-D)
 \eal
-because $|G_{x_0x_2}(f)| = \alpha |S(f)|^2$.
+because $|G_{x_0x_1}(f)| = \alpha |S(f)|^2$.
 This filter is used regularly in research, due to the characteristic of sharpening
 the peak what leads in high accuracy.
 % -------------------------------------------------------------
