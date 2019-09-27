@@ -1,0 +1,54 @@
+\section{Delay Estimation}
+\label{sec:03_delay}
+
+To ascertain the direction of the sound source on one robot, the
+delay of the signal from each channel to it's neighboring
+next channel is the key information.
+The implementation of the \ac{CC} from \cref{sec:02_cc} and the \ac{GCC-PHAT}
+introduced in \cref{sec:02_gcc}, as well as the phase difference method
+of \cref{sec:02_phase} will be presented shortly.
+
+For all methods performed in frequency domain, the \ac{FFT} of the
+signal is required. Hence the library NumPy, known for it's high-level
+mathematical functions also provides a module with fundamental
+functions for the \ac{DFT}, \lstinline!numpy.fft.fft()! and
+\lstinline!numpy.fft.ifft()! can be utilized.
+To estimate the delay between \lstinline!signal_0! and \lstinline!signal_1!,
+both frames of the signals were Hann windowed in advance.
+% -------------------------------------------------------------
+\subsection*{Correlation}
+\label{subsec:03_cc}
+
+In Python, using the \ac{DFT} functions given by NumPy the \ac{CC} and \ac{GCC} calculation
+can be implemented with little lines of code.
+Function \lstinline!correlation! of \cref{lst:03_cc} itemizes the steps to accomplish
+a correlation in Python with input signals \lstinline!x0! and \lstinline!x1!.
+Determining the index of the maximal value of the correlation relative to the zero delay
+index delivers the delay of \lstinline!x1! compared to \lstinline!x1! as the function
+\lstinline!compute_delay! demonstrates.
+% -------------------------------------------------------------
+\code{delay}{1}{18}{Source code for delay calculation with correlation method.}{03_cc}
+% -------------------------------------------------------------
+\subsection*{Subsample Delay}
+\label{subsec:03_subsample}
+
+Integer delays only offers resulting direction angles with low resolution.
+To avoid this, the subsample shift estimation as in \cref{sec:02_subsampleShift}
+is added to the delay estimation.
+% -------------------------------------------------------------
+\code{delay}{20}{21}{Subsample shift source code.}{03_subsample}
+% -------------------------------------------------------------
+In \cref{lst:03_subsample} the maximum value and it's previous and subsequent values
+are buffered in \lstinline!r!. The calculation is then alike to \cref{eq:02_subsample}
+and added to the integer delay $D$.
+
+\subsection*{Phase Difference}
+\label{subsec:03_phase}
+
+Periodicity is a known problem and is bypassed with following conditions:\\
+- don't consider channel 0 and 1\\
+- only frequencies above xxx\\
+- assume that channel with higher amplitude was first\\
+This helps, because known that phase difference can not be larger than $\pi/2$
+
+\missing[]{content}
