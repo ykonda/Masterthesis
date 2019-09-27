@@ -1,4 +1,4 @@
-\section{Source Direction Estimation}
+\section{Direction Estimation}
 \label{sec:03_direction}
 
 After the \lstinline!WhistleData! was filled by the \lstinline!WhistleDetection!,
@@ -34,19 +34,20 @@ According to the method, the delays between the channels are computed to conclud
 consequential direction candidates.
 For each delay between neighboring channels, one positive signed and one negative
 signed candidate arise.
+
 % -------------------------------------------------------------
 \Cref{lst:03_direction} lists the single steps that are necessary for the sound source
 candidates in robot coordinates.
 Positive values for delays mean that the signal first arrived at the \lstinline!base_channel!.
 Exemplary considering the case where the delay is equal to the positive maximal delay,
 the signal was first
-detected by the \lstinline!base_channel! and before arriving at the \lstinline!next_channel!.
+detected by the \lstinline!base_channel! before arriving at the \lstinline!next_channel!.
 As a consequence, the direction of the source is opposite to the channel vector and equal
 to the \lstinline!max_delay_vector!.
 Generally, the direction candidates are calculated relative to this \lstinline!max_delay_vector!,
 where the angle $\gamma'$ is determined by \cref{eq:02_tdoaAngle}.
 \Cref{fig:03_tdoaCode} shows resulting candidates of same situation as \cref{fig:02_tdoa} with
-the resulting \lstinline!candidates!.
+the resulting possible source directions \lstinline!candidates!.
 % -------------------------------------------------------------
 \code{tdoa}{0}{10}{Calculation of whistle direction in robot coordinates.}{03_direction}
 % -------------------------------------------------------------
@@ -59,8 +60,16 @@ the resulting \lstinline!candidates!.
 
 As there exists the exceptional case that the sidewise and forward delays are both small
 as considered in \cref{sec:02_distance}, the invalidity of
-\lstinline!small_y_shift && small_x_shift! must be confirmed.
+\lstinline!small_y_shift && small_x_shift! as notated in \cref{lst:03_distance} must
+be confirmed.
 If so, not only the direction but also an approximate distance can be determined
 as depicted in \cref{sec:03_distance}.
 Otherwise, the direction with the smallest difference between the
 candidates of each channel is submitted as final result.
+
+A final result of the sound source direction relative to one robot must be defined
+a the eight candidates of the four delays.
+Therefore, the sum of the difference for each combination of the candidates
+is taken as decisive criterion to find a final direction angle $\gamma$ in robot coordinates.
+During research, different factors like signal strength were tested to include
+more properties of the signal. They will be topic in \ref{sec:04_direction}.
