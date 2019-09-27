@@ -37,20 +37,25 @@ signed candidate arise.
 % -------------------------------------------------------------
 \Cref{lst:03_direction} lists the single steps that are necessary for the sound source
 candidates in robot coordinates.
-* direction of vector between channels and its angle depending on sign of delay\\
-The relative angle $\gamma'$ relative to the channels vector is defined
-by \cref{eq:02_tdoaAngle}.\\
-* one candidate for positive gamma , one with negative gamma to channel angle\\
-\code{tdoa}{0}{10}{Calculation of whistle direction in robot coordinates.}{03_direction}
+Positive values for delays mean that the signal first arrived at the \lstinline!base_channel!.
+Exemplary considering the case where the delay is equal to the positive maximal delay,
+the signal was first
+detected by the \lstinline!base_channel! and before arriving at the \lstinline!next_channel!.
+As a consequence, the direction of the source is opposite to the channel vector and equal
+to the \lstinline!max_delay_vector!.
+Generally, the direction candidates are calculated relative to this \lstinline!max_delay_vector!,
+where the angle $\gamma'$ is determined by \cref{eq:02_tdoaAngle}.
+\Cref{fig:03_tdoaCode} shows resulting candidates of same situation as \cref{fig:02_tdoa} with
+the resulting \lstinline!candidates!.
 % -------------------------------------------------------------
-* Figure shows resulting candidates of same situation as \cref{fig:02_tdoa}
+\code{tdoa}{0}{10}{Calculation of whistle direction in robot coordinates.}{03_direction}
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
 		\includegraphics[width=0.6\columnwidth]{figures/tdoa_code}
 	\caption{Illustration of the resulting candidates of \ac{TDOA} implementation.}
+	\label{fig:03_tdoaCode}
 \end{figure}
-\label{fig:03_tdoaCode}
 
 As there exists the exceptional case that the sidewise and forward delays are both small
 as considered in \cref{sec:02_distance}, the invalidity of
