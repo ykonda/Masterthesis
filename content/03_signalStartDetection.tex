@@ -21,7 +21,7 @@ should be a power of 2.
 To compute the energy and entropy, the frames are transformed into
 frequency domain with the \ac{FFT}.
 The \ac{ZCR} does not require such a transformation.
-In the evaluation section \cref{sec:04_signalStartDetection}, the result of the single
+In the evaluation \cref{sec:04_signalStartDetection}, the result of the single
 methods are compared to each other.
 For better visualization, the following data is shortened to $2400$ samples.
 
@@ -40,7 +40,7 @@ signal is detectable.
 In this work, the crossing of the entropy threshold is observed from the last
 value to the first. The reason is, that the noise entropy subceeds the threshold with higher risk.
 Of course, this approach does not work for real-time systems.
-Figure \cref{fig:03_entropy} is a plot of the recorded sine signal with the corresponding
+\Cref{fig:03_entropy} is a plot of the recorded sine signal with the corresponding
 entropy.
 According to the frame size, the accuracy of the start index can be increased.
 However, the frame size is limited by the required number of samples for one \ac{FFT} and
@@ -50,13 +50,13 @@ its computational effort.
 	\centering
 		\includegraphics[]{figures/sine_entropy}
 	\caption{Entropy of a sinusoidal signal with 3000Hz.}
+	\label{fig:03_entropy}
 \end{figure}
-\label{fig:03_entropy}
 
 \subsubsection*{Energy}
 
 As mentioned above, the total signal is divided into multiple overlapping frames.
-Equation \cref{eq:02_spectralEnergy} represents the energy of each frequency
+\Cref{eq:02_spectralEnergy} represents the energy of each frequency
 component.
 According to this, the energy of one of those frames is \cref{eq:02_energy}.
 Assuming that the energy holds for the whole frame, overlapping and adding the energy
@@ -71,8 +71,8 @@ Especially at the tournament, parameters like these should be avoided.
 	\centering
 		\includegraphics[]{figures/sine_energy}
 	\caption{Energy of a sinusoidal signal with 3000Hz.}
+	\label{fig:03_energy}
 \end{figure}
-\label{fig:03_energy}
 
 % \code{signal_processing}{9}{19}{Whistle energy}
 % Variable \lstinline!calcFFt!
@@ -84,7 +84,7 @@ In each frame, the the sign changes are counted.
 It is known that only noise is received at the beginning of the measurement and on the
 contrary, signal noise is present at the end.
 The same as for the spectral entropy, a dynamic threshold can be set.
-In figure \cref{fig:03_zcr} and in this work , the threshold is set between the
+In \cref{fig:03_zcr} and in this work , the threshold is set between the
 noise and signal mean.
 The implementation of the \ac{ZCR} in Python is very simple.
 \code{zcr}{1}{2}{Calculation of Zero Crossing Rate in Python}{03_zcr}
@@ -93,5 +93,5 @@ The implementation of the \ac{ZCR} in Python is very simple.
 	\centering
 		\includegraphics[]{figures/sine_zcr}
 	\caption{Zero Crossing Rate of a sinusoidal signal with 3000Hz.}
+	\label{fig:03_zcr}
 \end{figure}
-\label{fig:03_zcr}

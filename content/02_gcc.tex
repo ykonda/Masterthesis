@@ -14,7 +14,7 @@ which is equal to general frequency weighting as stated in \cite{K_C_GCC}.
 With certain weightings $H_i(f)$ prior to the \ac{CC}, the peak detection
 can be rectified by improving the relation between peak and noise or
 enhancing the accuracy \cite{H_B_GCC}.
-Figure \cref{fig:02_GCC} illustrates the process of a \ac{GCC} with both filters combined as
+\Cref{fig:02_GCC} illustrates the process of a \ac{GCC} with both filters combined as
 $\Psi(f) = H_0^*(f)H_1$. The figure in \cref{appendix:a1_alternativeGcc} represents the
 \ac{GCC} with $H_i(f)$.
 After transforming the signals $x_i(f)$ into frequency domain, the cross correlated
@@ -55,11 +55,11 @@ This filter is used regularly in research, due to the characteristic of sharpeni
 the peak what leads in high accuracy.
 % -------------------------------------------------------------
 
-Figure \cref{fig:03_gccTheory} shows the result of the \ac{GCC-PHAT} algorithm with a generated
+\Cref{fig:03_gccTheory} shows the result of the \ac{GCC-PHAT} algorithm with a generated
 simple Hann-windowed signal as input. Both signals are 3000\si{Hz} sine signals, whereby
 the second signal is shifted by 10 samples.
 The signals are similar to the ones used in \cref{sec:02_cc}
-and are plotted in \cref{sec:abbreviations}.
+and are plotted in \cref{fig:ap1_signals}.
 Compared to the \ac{CC} in \cref{sec:02_cc}, the sharp peak is distinct.
 However, \cite{K_C_GCC} complains about the lower robustness of this algorithm.
 \begin{figure}[ht]
