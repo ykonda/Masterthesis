@@ -76,13 +76,12 @@ The spectral entropy of a signal is determined by normalizing the
 \ac{PDF} over all frequency components as described in \cite{S_J_entropy}.
 When $X(n)$ is the \ac{DFT} of the sampled signal $x(k)$, the \ac{PDF} is
 \bal
-    P(n) &= \frac{E_s(n)}{\sum_{i=1}^N E(n_i)}
+    P(n) &= \frac{E_s(n)}{E}
     \label{eq:02_pdf}\\
 \eal
-with \cref{eq:02_spectralEnergy} as the spectral energy density function and $N$
-as the frame length.
+with \cref{eq:02_spectralEnergy} as the spectral energy density function for $E_s(n)$
+and $E$ as the energy.
 Finally, the spectral entropy results in
-\unsure[]{How should the energy be written?}
 \bal
     H &= - \sum_{n=1}^N P(n) log_2P(n).
     \label{eq:02_entropy}
@@ -90,7 +89,7 @@ Finally, the spectral entropy results in
 Utilizing some a priori knowledge about the signal, the entropy estimation
 can be improved.
 In this work, the frequency of a whistle sound is known to be
-between $2000\si{Hz}$ and $4000\si{Hz}$ from \cite{Hasselbring},
+between $2\si{\kilo\hertz}$ and $4\si{\kilo\hertz}$ from \cite{Hasselbring},
 Thus, only the frequency components in the whistle range is considered.
 % \unsure[]{weighting factors as described in S-J-entropy?}
 Differentiating between noise samples where no signal is present and

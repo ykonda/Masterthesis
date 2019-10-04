@@ -2,7 +2,7 @@
 \label{sec:02_cc}
 
 The \ac{CC} provides information about the similarity of two signals.
-Thus, the delay of one signal can be detected where the \ac{CC} $r_{12}(t)$ is largest.
+Thus, the delay of one signal can be detected where the \ac{CC} $R_{12}(t)$ is largest.
 % -------------------------------------------------------------
 In time domain, the \ac{CC} of two signals $x_0$ and $x_1$ is denoted as
 \bal
@@ -59,7 +59,7 @@ so that they introduce inaccuracies and errors.
 % -------------------------------------------------------------
 
 \Cref{fig:03_ccTheory} is the outcome of two similar, but shifted sine signals with
-3000\si{Hz} and normally distributed noise.
+3\si{\kilo\hertz} and normally distributed noise.
 As the second signal is delayed by 10 samples, the peak can be detected where $shift = 10$.
 The example signals are attached in \cref{fig:ap1_signals}.
 One disadvantage of this technique is that for periodic signals the \ac{CC} also is periodic
@@ -68,6 +68,6 @@ may influence the result what can make the peak unobvious \cite{L_L_GCC}.
 \begin{figure}[ht]
 	\centering
 		\includegraphics[width=1\columnwidth]{figures/CC_theory}
-	\caption{Cross correlation of two generated sine signals with 3000Hz.}
+	\caption{Cross correlation of two generated sine signals with 3\si{\kilo\hertz}.}
     \label{fig:03_ccTheory}
 \end{figure}
