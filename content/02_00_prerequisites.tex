@@ -9,25 +9,27 @@ are introduced in this chapter on a general basis.
 As this work specializes on the localization of a whistle sound, this sound pattern
 must be detected at first.
 This was already done by previous work \cite{Hasselbring}.
-Hence, the flow of the whistle detection are briefly explained in \cref{sec:02_whistleSignal}.
-The position of the sound source is determined by combining the
+Hence, the flow of the whistle detection is only briefly explained in \cref{sec:02_whistleSignal}.
+The position of the sound source is determined by combining
 separate direction results on the single robots.
-Utilizing the \ac{TDOA} information as in \cref{sec:02_tdoa} between the pairs
+Utilizing the \ac{TDOA} information referenced in \cref{sec:02_tdoa} between pairs
 of the Naos' microphones, every robot produces a sound direction ray which
-are feed into the team decision filter.
+are fed into the team decision filter.
 As mentioned in \cref{chap:01_introduction}, different methods exist to identify the \ac{TDOA}
 and are terms of content in \cref{sec:02_cc,sec:02_gcc,sec:02_phase}.
-Due to the low resolution arising from the sample rate and the distance between the microphones,
-a subsample estimation is used based on \cref{sec:02_subsampleShift}.
-One of the most significant factors is the selection of the signal frame that is used for
-the direction determination.
-In order to provide a correct and stable decision process, the different approaches to
-consider are shortly mentioned in \cref{sec:02_signalStartDetection}.
+Due to the low resolution arising from the sample rate and small distance between the microphones,
+a subsample estimation is stated in \cref{sec:02_subsampleShift}.
+One of the most significant factors is the selection of the signal frame that is going to
+be used for the direction determination.
+In order to provide a correct and stable decision process, different approaches
+are considered.
+In all cases, the focus is on finding the signal starting index
+and are listed in \cref{sec:02_signalStartDetection}.
 After all, the results of the individual robots are filtered by assuming
 gaussian distribution to produce a sound source position.
 By passing information about the certainty of the single robot result, the
-filtering explained in \cref{sec:02_filter} is related to a Kalman filter without
-prediction step.
+filtering is related to a Kalman filter without prediction step.
+Thus, \cref{sec:02_filter} describes the simplest form of Kalman filtering.
 
 % \missing[]{
 % - CC in time domain, because low frequency resolution (44100Hz/512samples=resolution)\\
