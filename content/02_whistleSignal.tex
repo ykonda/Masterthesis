@@ -2,17 +2,19 @@
 \label{sec:02_whistleSignal}
 
 In this work the localization of a whistle sound source is to be to the fore.
-The detection of such a signal is implemented as stated in \cite{Hasselbring}.\\
-\missing[inline]{
-- short explanation of how the whistle is detected\\
-- whistle sound is around 2000Hz and 4000Hz
-}
+Detection of the whistle is done in frequency domain by assuming the whistle
+sound to be higher than 2000Hz and lower than 4000Hz.
+By comparing the mean of the signal between this band with the overall mean of the
+received signal, a peak arising around the whistle frequency can be detected.
+For the whistle detection, only one channel of the robot is used and the
+mean of the whistle band must exceed the threshold multiple cycles in a row.
+If the team takes action due to the detected signal on individual robots is a team decision.
 
-Further on, the mathematical model of a received whistle signal at one microphone sensor
-is defined as
+Further on for this work, the mathematical model of a received whistle
+signal at one of the four microphone sensor is defined as
 \be
-x(t) = s(t) + n(t)
+x_i(t) = s_i(t) + n_i(t) \text{ for } i \in \{0, 1, 2, 3\}
 \label{eq:02_whistleSignal}
 \ee
 where $s(t)$ represents the signal and $n(t)$ noise.
-Both are real, jointly stationary random processes.
+Both are assumed as real, jointly stationary random processes.
