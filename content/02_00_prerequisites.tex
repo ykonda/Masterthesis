@@ -1,23 +1,38 @@
 \chapter{Prerequisites}
+\label{chap:02_prerequisites}
 
-\missing[inline]{
-- To localize a whistle sound source, it must be detected firstly (was done by previous work
-and is implemented)\\
-- calculate the direction of the whistle sound on one Nao\\
-- This can be done by determining the TDOA of microphone pairs\\
-- With the delay, the angle of the sound source relative to angle pair
-can be is known.\\
-- By combining these, a direction ray is defined on each Nao\\
-- The results are filtered by updating it with the singe rays, assuming
-gaussian distribution. (known error, Trigonometry)\\
-- why other theories do not fit into this problem (like finger printing, beam forming)
-- CC in time domain, because low frequency resolution (44100Hz/512samples=resolution)\\
-and also CC corrupted and we want to detect which signal was first\\
-- reverberation is a problem and assumed as not multi-path system\\
-- entropy for large scale start detection\\
-- zcr and energy for smaller scale (because high precision needed)\\
-- more content
-}
+For the whistle sound source localization with multiple robots, some
+sequential steps needs to interact for a final result.
+To work with the implementations in \cref{chap:03_implementation}, the fundamentals
+are introduced in this chapter on a general basis.
+
+As this work specializes on the localization of a whistle sound, this sound pattern
+must be detected at first.
+This was already done by previous work \cite{Hasselbring}.
+Hence, the flow of the whistle detection are briefly explained in \cref{sec:02_whistleSignal}.
+The position of the sound source is determined by combining the
+separate direction results on the single robots.
+Utilizing the \ac{TDOA} information as in \cref{sec:02_tdoa} between the pairs
+of the Naos' microphones, every robot produces a sound direction ray which
+are feed into the team decision filter.
+As mentioned in \cref{chap:01_introduction}, different methods exist to identify the \ac{TDOA}
+and are terms of content in \cref{sec:02_cc,sec:02_gcc,sec:02_phase}.
+Due to the low resolution arising from the sample rate and the distance between the microphones,
+a subsample estimation is used based on \cref{sec:02_subsampleShift}.
+One of the most significant factors is the selection of the signal frame that is used for
+the direction determination.
+In order to provide a correct and stable decision process, the different approaches to
+consider are shortly mentioned in \cref{sec:02_signalStartDetection}.
+After all, the results of the individual robots are filtered by assuming
+gaussian distribution to produce a sound source position.
+By passing information about the certainty of the single robot result, the
+filtering explained in \cref{sec:02_filter} is related to a Kalman filter without
+prediction step.
+
+% \missing[]{
+% - CC in time domain, because low frequency resolution (44100Hz/512samples=resolution)\\
+% and also CC corrupted and we want to detect which signal was first\\
+% }
 
 \input{content/02_whistleSignal}
 \input{content/02_TDOA}
@@ -26,7 +41,5 @@ and also CC corrupted and we want to detect which signal was first\\
 \input{content/02_phase}
 \input{content/02_subsampleShift}
 \input{content/02_startDetection}
-%\input{content/02_Trigonometry}
-\input{content/02_distance}
-
-%\input{content/02_filter}
+\input{content/02_spectralSubtraction}
+\input{content/02_teamFilter}
