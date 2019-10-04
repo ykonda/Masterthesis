@@ -10,7 +10,7 @@ First, the result of the direction detection on one robot
 is examined profoundly with one measurement as an example.
 There, we focus on the correctness and precision of the different methods.
 To investigate the final localization of the team, measurements were
-done with five robots on a field.
+done with five robots on the field.
 At the end, all measurements are used to assess the methods in a general matter.
 
 \subsection{\ac{TDOA} Methods}
@@ -21,6 +21,7 @@ Part of the channel inputs of the whistle signal used in this section is plotted
 in \ref{fig:04_tdoaSignal}.
 Here, the sound source is placed -33.7\si{\degree} on the right front
 of the robot with 4.5\si{m} distance.
+In \cref{fig:04_tdoaSignal} we see the first samples of this whistle signal.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -30,27 +31,78 @@ of the robot with 4.5\si{m} distance.
 \end{figure}
 % -------------------------------------------------------------
 
-The frames used for the \ac{CC} and \ac{GCC} methods are chosen in the same way
-and are therefore equal.
+The signal start index to choose the frame is detected with the algorithm introduced in
+\change[]{which index? Explain better.} \cref{sec:03_signalStartDetection}.
+A frame size is set to 256 samples and is selected around the start index for
+\ac{CC} and \ac{GCC}.
+For the phase method the first frame with the same maximal frequency is chosen.
 
 \subsubsection{Cross Correlation}
 % -------------------------------------------------------------
+
+To visualize the result of the \ac{CC}, the correlations are plotted in
+\cref{fig:04_cc}. For $R_{23}$ and $R_{13}$ the peak is clearly traceable.
+However, for the other \ac{CC} the problem mentioned in \cref{sec:02_cc}
+arises and the maximum peak does not differ much from the other tips.
+
 \begin{figure}[ht]
 	\centering
 		\includegraphics[]{figures/evaluation/cc_frontRight_1}
-	\caption{Signal start section of a whistle sound recorded from front right.}
-	\label{fig:04_tdoaSignal}
+	\caption{Cross correlation results of signal from front right.}
+	\label{fig:04_cc}
 \end{figure}
-% -------------------------------------------------------------
 
+\btline{ht}{1.2}
+\btab{|c|c|c|c|c|}
+\hline
+Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
+\hline
+0 & 1 & -8.25 & -144.9 & -35.1\\
+\hline
+1 & 3 & -4.59 & -17.4 & 78.6\\
+\hline
+2 & 0 & 9.16 & -30.6 & -30.6\\
+\hline
+3 & 2 & 3.94 & -150.2 & -29.8\\
+\hline
+\etab
+\et{Cross correlation delay results of singal from front right.}{04_cc}
+
+According to the delays in \cref{tab:04_cc}, the final result of the \ac{CC}
+is -26.9\si{\degree} with an error of 6.8\si{\degree}.
+Taking a closer look at the delay between channel 2 and channel 0, we see that
+the delay is larger than the expected maximal delay of 6.85 samples
+% -------------------------------------------------------------
 \subsubsection{Generalized Cross Correlation}
+% -------------------------------------------------------------
+\Cref{fig:04_gcc} demonstrates the results of the \ac{GCC} of the received signal.
+The single delays and the resulting angle candidates are listed in \cref{tab:04_gcc}
+and lead to a final direction of -30.8\si{\degree} with an error of 2.85\si{\degree}.
+We can see that the peaks of the \ac{GCC} are better to detect than the peaks of the
+\ac{CC}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
 		\includegraphics[]{figures/evaluation/gcc_frontRight_1}
-	\caption{Signal start section of a whistle sound recorded from front right.}
-	\label{fig:04_tdoaSignal}
+	\caption{Generalized cross correlation results of signal from front right.}
+	\label{fig:04_gcc}
 \end{figure}
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|c|c|}
+\hline
+Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
+\hline
+0 & 1 & -8.96 & -141.3 & -38.7\\
+\hline
+1 & 3 & -3.85 & -25.2 & 86.4\\
+\hline
+2 & 0 & 7.71 & -30.6 & -30.6\\
+\hline
+3 & 2 & 4.38 & -146.6 & -33.4\\
+\hline
+\etab
+\et{Generalized cross correlation delay results of singal from front right.}{04_gcc}
 % -------------------------------------------------------------
 
 \subsection{Team Decision Filter}
