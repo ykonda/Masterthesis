@@ -29,10 +29,10 @@ of the \ac{STE} and \ac{ZCR}.
 \subsubsection{Short Time Energy}
 The energy
 \bal
-    E &= \sum_{n=1}^N E_s(n)\\
+    E &= \sum_{n=1}^N E_s(n)
     \label{eq:02_energy}
  \intertext{with the energy spectral density}
-    E_s(n) &= |X(n)|^2
+    E_s(n) &= |x(n)|^2
     \label{eq:02_spectralEnergy}
 \eal
 of signal frames with length $N$ are expected to be higher than noise frames
@@ -46,7 +46,7 @@ The \ac{ZCR} of one frame $Z$ needs small computational effort in order to
 identify a periodic signal in time domain.
 Its formula is
 \bal
-    Z = \sum_{k=2}^N |sgn(x(k)) - sgn(x(k-1))|
+    Z = \sum_{n=2}^N |sgn(x(n)) - sgn(x(n-1))|
     \label{eq:02_zcr}
 \eal
 with the sign function
