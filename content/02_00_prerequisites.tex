@@ -27,9 +27,7 @@ In all cases, the focus is on finding the signal starting index
 and are listed in \cref{sec:02_signalStartDetection}.
 After all, the results of the individual robots are filtered by assuming
 gaussian distribution to produce a sound source position.
-By passing information about the certainty of the single robot result, the
-filtering is related to a Kalman filter without prediction step.
-Thus, \cref{sec:02_filter} describes the simplest form of Kalman filtering.
+\Cref{sec:02_filter} describes the formulas for Bayesian Updating.
 
 % \missing[]{
 % - CC in time domain, because low frequency resolution (44100Hz/512samples=resolution)\\
@@ -43,5 +41,5 @@ Thus, \cref{sec:02_filter} describes the simplest form of Kalman filtering.
 \input{content/02_phase}
 \input{content/02_subsampleShift}
 \input{content/02_startDetection}
-\input{content/02_spectralSubtraction}
+% \input{content/02_spectralSubtraction}
 \input{content/02_teamFilter}
