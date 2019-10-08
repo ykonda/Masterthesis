@@ -1,2 +1,25 @@
-\section{Team Filter}
+\section{Bayesian Updating}
 \label{sec:02_filter}
+
+Assuming gaussian distribution of the single robot results,
+the multi-agent decision process is done by Bayesian Updating.
+One dimensional probability density functions of states with
+variance $\sigma^2$ and mean $\mu$ are described as
+\bal
+    \mathcal{N}(x,\sigma,\mu) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\sigma)^2}{2\sigma^2}}.
+    \label{eq:02_probabilityDensity}
+\eal
+Having two values $\mu_0$ and $\mu_1$ with their variances,
+the result $\mu'$ of the combination of both is
+\bal
+    \mathcal{N}(x,\sigma',\mu') = \mathcal{N}(x,\sigma_0',\mu_0') \cdot \mathcal{N}(x,\sigma_1',\mu_1').
+    \label{eq:02_newProbabilityDensity}
+\eal
+By substitution and conversion, $\mu'$ and $\sigma'^2$ can be
+formulated to
+\bsub
+\bal
+    \mu' &= \mu_0 + \frac{\sigma_0^2(\mu_1-\mu_0)}{\sigma_0^2+\sigma_1^2}\\
+    \sigma'^2 &= \sigma_0^2 - \frac{\sigma_0^4}{\sigma_0^2+\sigma_1^2}.
+\eal
+\esub
