@@ -1,0 +1,142 @@
+\section{Team Evaluation}
+\label{sec:04_teamEvaluation}
+
+First, the start indexes were set manually to provide a decoupled result.
+
+\subsection{Measurement Setup}
+\label{subsec:04_labMeasurements}
+In order to evaluate the localization methods, 11 measurement were
+taken. \Cref{fig:04_setup} illustrates the positions of the Nao robots
+and the positions of the whistle sound source.
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|c|}
+\hline
+Nao & x [\si{m}] & y [\si{m}] & $\theta$ [\si{deg}]\\
+\hline
+21 & 3,75 & 2,5 & -40,2\\
+\hline
+24 & 3,75 & -2,5 & 90\\
+\hline
+26 & 0 & 0 & 0\\
+\hline
+27 & -3,75 & -2,5 & 66,06\\
+\hline
+28 & -2,45 & 0 & 0\\
+\hline
+\etab
+\et{Positions of the whistle sound sources for evaluation measurement.}{04_sources}
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|}
+\hline
+Number & x [\si{m}] & y [\si{m}]\\
+\hline
+[0] & 3,75 & 2,5\\
+\hline
+[1] & 3,75 & -2,5\\
+\hline
+[2] & -3,75 & -2,5\\
+\hline
+[3,9] & -3,75 & 2,5\\
+\hline
+[4] & -2,45 & 0\\
+\hline
+[5] & 2,45 & 0\\
+\hline
+[6,10] & 0 & 0\\
+\hline
+[7] & 0 & -2.5\\
+\hline
+[8] & -6.05 & 0\\
+\hline
+\etab
+\et{Positions of the whistle sound sources for evaluation measurement.}{04_sources}
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/setup}
+	\caption{Setup of robots and sound source positions for the evaluation measurement.}
+    \label{fig:04_setup}
+\end{figure}
+% -------------------------------------------------------------
+
+\subsection{SNR}
+\label{subsec:04_snr}
+
+For the team filter, it the validity a robot result is useful information.
+Depending on the uncertainty, the covariance of the incoming result can be adjusted.
+Thus, one intuitive hypothesis is assuming the existence of a relation between the
+received signal strength and distance to the source.
+Taking the measurements of \ref{subsec:04_labMeasurements}, this hypothesis is
+investigated by looking at the distance between one robot and the sound source.
+According to this distance, it is looked at the \ac{SNR} of one measurement on
+one robot proportional to all robots' \acp{SNR} of this measurement.
+The \ac{SNR} on a single robot consists of the mean over all microphones' \acp{SNR}.
+We can see in \cref{fig:04_snrDistance} that there is no straightforward
+link between both values.
+Also only taking a frame of size 256 samples into consideration
+does not change the result.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/snr_scatter}
+	\caption{Visualization of relation between SNR and distance.}
+    \label{fig:04_snrDistance}
+\end{figure}
+% -------------------------------------------------------------
+
+Due to the unexpected result, further analysis on the \ac{SNR} values
+on individual robots are done.
+Therefore, a sine signal with fixed distance to the robot
+was recorded from different angles with constant volume.
+The main purpose of this measurement is to ensure that the lone channels
+are not biased somehow.
+Resulting from 14 measurements of a 3\si{\kilo\hertz} sine signal
+with are distance of 0.73\si{m}, no tendency could be detected.
+Further evaluation is done by determining the channel with the maximum
+\ac{SNR} of one measurement. At 85,71\si{\percent} of the cases,
+result coincided with the expected channel.
+From this, we can say that the general recordings of the microphones
+are neither biased nor falsified.
+
+The same investigation is done with the real whistle recordings of the
+measurement in \ref{subsec:04_labMeasurements}.
+With these measurements only 54,55\si{\percent} of the maximum \acp{SNR}
+match with the expected channels.
+Consequentially, we must assume that the environmental circumstances
+like multi-path propagation and reflection have large influence
+on the signal magnitude.
+
+\subsection{PSNR}
+\label{subsec:04_psnr}
+
+As referred in \cref{sec:02_gcc}, one characteristic of the \ac{GCC-PHAT}
+algorithm is the sharp peak.
+In conclusion, one can assume that if no sharp peak can be detected the
+delay result of the \ac{GCC} has less informative value.
+The validity of this statement is tested by comparing the \ac{PSNR} value
+to the error of the direction angle resulting from the \ac{GCC-PHAT} delay.
+Two cases of errors are taken into consideration.
+In both, the \ac{PSNR} is recorded as high if it exceeds 17,5.
+
+Firstly, each channel pair on one robot is looked at by determining the
+smaller error between the actual angle and one of both direction candidates.
+If the \ac{PSNR} of the \ac{GCC} is greater than the threshold of 17,5,
+the \ac{RMSE} of its result is grouped to the errors with high \ac{PSNR}.
+Elsewise it pertains to the errors with low \ac{PSNR}.
+This valuation is done with the measurements of \cref{subsec:04_labMeasurements}
+and manually set start indexes.
+Having 76 correlations assessed with low \ac{PSNR}, the \ac{RMSE} of these
+is 35,77\si{\degree}.
+Compared to this, the \ac{RMSE} of the remaining 144 measurements
+is 15,86\si{\degree}.
+
+To see the impact on a complete robot result, the same is done
+with the final errors on single robots.
+Here, the \ac{RMSE} of the lower \ac{PSNR} case results in 25,36\si{\degree}
+whereat the error of the other case is 14,41\si{\degree}.
+
+From this, one can identify the \ac{PSNR} as valid additional information
+for the covariance of a \ac{GCC-PHAT} delay result that enriches the
+outcome of a robot direction ray that proceeds into the team filter.
