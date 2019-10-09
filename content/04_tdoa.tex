@@ -1,19 +1,5 @@
-At first, the results of the methods on single robots must be investigated
-in order to evaluate the performance of the final localization algorithm.
-Depending on the accuracy of the individual direction results, the quality
-of the team decision is limited.
-
-Primary, whistle sounds were recorded in the laboratory of the HULKs.
-If not emphasized particularly, the height of the sound source is 1.5\si{m}.
-% signal start detection evaluation
-First, the result of the direction detection on one robot
-is examined profoundly with one measurement as an example.
-There, we focus on the correctness and precision of the different methods.
-To investigate the final localization of the team, measurements were
-done with five robots on the field.
-At the end, all measurements are used to assess the methods in a general matter.
-
-\subsection{\ac{TDOA} Methods}
+\section{Single Robot Method Comparison}
+\label{sec:04_tdoaSingle}
 
 For comparability of the results, the same measurements are taken into
 account to analyse the \ac{TDOA} methods.
@@ -37,7 +23,8 @@ A frame size is set to 256 samples and is selected around the start index for
 \ac{CC} and \ac{GCC}.
 For the phase method the first frame with the same maximal frequency is chosen.
 
-\subsubsection{Cross Correlation}
+\subsection{Cross Correlation}
+\label{subsec:04_ccSingle}
 % -------------------------------------------------------------
 
 To visualize the result of the \ac{CC}, the correlations are plotted in
@@ -73,7 +60,8 @@ is -26.9\si{\degree} with an error of 6.8\si{\degree}.
 Taking a closer look at the delay between channel 2 and channel 0, we see that
 the delay is larger than the expected maximal delay of 6.85 samples
 % -------------------------------------------------------------
-\subsubsection{Generalized Cross Correlation}
+\subsection{Generalized Cross Correlation}
+\label{subsec:04_gccSingle}
 % -------------------------------------------------------------
 \Cref{fig:04_gcc} demonstrates the results of the \ac{GCC} of the received signal.
 The single delays and the resulting angle candidates are listed in \cref{tab:04_gcc}
@@ -104,10 +92,6 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 \etab
 \et{Generalized cross correlation delay results of singal from front right.}{04_gcc}
 % -------------------------------------------------------------
-
-\subsection{Team Decision Filter}
-
-The size of the field used in this work is smaller than the regular \ac{SPL}
-field. It's length is 7.5\si{m} and it's width is 5\si{m}.
-It is looked at the result of one exemplary measurement where the behavior
-of the team filter is of prime importance.
+\subsection{Phase Difference}
+\label{subsec:04_phaseSingle}
+% -------------------------------------------------------------

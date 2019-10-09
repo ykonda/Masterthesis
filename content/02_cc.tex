@@ -2,15 +2,15 @@
 \label{sec:02_cc}
 
 The \ac{CC} provides information about the similarity of two signals.
-Thus, the delay of one signal can be detected where the \ac{CC} $R_{12}(t)$ is largest.
+Thus, the delay of one signal can be detected where the \ac{CC} function $R_{x_0x_1}(t)$ is largest.
 % -------------------------------------------------------------
 In time domain, the \ac{CC} of two signals $x_0$ and $x_1$ is denoted as
 \bal
-    R_{x_0x_1}(t) = x_0(t) \circledast x_1(t) = \int^{+\infty}_{-\infty}x_0(\tau-t)x_1(\tau)d\tau.
+    R_{x_0x_1}(t) = \int^{+\infty}_{-\infty}x_0(\tau-t)x_1(\tau)d\tau.
 \eal
 Considering the frequency domain, the function can be transformed into
 \bal
-    \mathcal{F}[R_{12}(t)] = G_{x_0x_1}(f) = X_0^*(f)X_1(f)
+    \mathcal{F}[R_{x_0x_1}(t)] = G_{x_0x_1}(f) = X_0^*(f)X_1(f)
 \eal
 with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X_i^*(f)$ indicating the conjugate complex form.
 % -------------------------------------------------------------
@@ -44,7 +44,7 @@ Thus, the \ac{CC} is
 Considering the ideal case where $s(t)$, $n_0(t)$ and $n_1(t)$ are uncorrelated, the terms
 $\phi_c$ and $\phi_n$ disappear and the \ac{CC} results in
 \bal
-    R_{12}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] \circledast \delta(t-D).
+    R_{x_0x_1}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] * \delta(t-D).
     \label{eq:02_R12_noNoise}
 \eal
 % \unsure[]{do I fully understand this? Is this correct?}

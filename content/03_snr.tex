@@ -1,14 +1,14 @@
 \section{SNR and PSNR}
 \label{sec:03_snr}
 
-The \acf{SNR} is a common value to express the signal strength compared
-to background noise.
+The \acf{SNR} is a common value to express the signal power $P_{signal}$ compared
+to power of the background noise $P_{noise}$.
 Conveniently, the buffered audio signal in this work always consists of
 a clean-cut delimitation between signal and noise which is set by the
 start index.
 Thus, the \ac{SNR} which is defined as
 \bal
-    SNR_{db} = \frac{P_{signal} - P_{noise}}{P_{noise}}
+    SNR_{db} = 10\log_{10}(\frac{P_{signal} - P_{noise}}{P_{noise}})
     \label{eq:03_snr}
 \eal
 in decibels can be implemented straightforwardly.
@@ -22,10 +22,14 @@ and its noise is related to the \ac{GCC-PHAT} outcome and called \ac{PSNR}
 henceforth.
 As stated in \cref{sec:02_gcc}, the most significant characteristic
 of the \ac{GCC-PHAT} is the resulting sharp peak which now can be
-assessed with one value.
-A connection between the \ac{PSNR} and accuracy of the \ac{GCC} delay result
-is linked in \cref{subsec:04_psnr}.
+assessed with one value
+\bal
+    PSNR_{db} = 10\log_{10}(\frac{P_{peak}}{P_{noise}}).
+    \label{eq:03_psnr}
+\eal
 From the implementation view, the power of the correlation peak is divided by
 the power of the remaining correlation signal.
 It has to be noted that two adjacent values prior and after the peak
 are disregarded as they might belong to the peak.
+A validation if and how much the \ac{PSNR} and the accuracy of the \ac{GCC}
+delay result are linked is done in \cref{subsec:04_psnr}.
