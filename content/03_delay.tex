@@ -44,5 +44,35 @@ Periodicity is a known problem and is bypassed with following conditions:\\
 - only frequencies above xxx\\
 - assume that channel with higher amplitude was first\\
 This helps, because known that phase difference can not be larger than $\pi/2$
-
 \missing[]{content}
+
+There are two ways to determine the angle by phase difference
+between two channels.
+One can either look at the phase of a fixed frequency or set the frequency
+dynamically.
+For both, the signal must be divided into multiple frames.
+The implementation for the fixed frequency case is straight forward.
+From the result of the signal start detection, the frames
+are set with an appropriate frame size and then transformed into
+frequency domain.
+As we know, the frequency of the whistle is between 2\si{\kilo\hertz}
+and 4\si{\kilo\hertz}.
+Thus, a suitable frequency in this range is chosen for analysis.
+In the other case, the frame is chosen by doing a
+frequency analysis.
+For each channel frame in frequency domain after signal start,
+the maximal absolute value and its belonging frequency is determined.
+If this frequency is equal for all channels, these frames
+are chosen.
+\Cref{fig:03_maxFreq} shows that such frames exists for signals that
+were transformed into frequency domain with a frame size of 256.
+The frequency resolution changes with zero padding the signal prior
+to the transformation.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/maxFreq}
+	\caption{}
+    \label{fig:03_maxFreq}
+\end{figure}
+% -------------------------------------------------------------
