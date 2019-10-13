@@ -39,13 +39,6 @@ is added to the delay estimation.
 \subsection*{Phase Difference}
 \label{subsec:03_phase}
 
-Periodicity is a known problem and is bypassed with following conditions:\\
-- don't consider channel 0 and 1\\
-- only frequencies above xxx\\
-- assume that channel with higher amplitude was first\\
-This helps, because known that phase difference can not be larger than $\pi/2$
-\missing[]{content}
-
 There are two ways to determine the angle by phase difference
 between two channels.
 One can either look at the phase of a fixed frequency or set the frequency
@@ -68,6 +61,7 @@ are chosen.
 were transformed into frequency domain with a frame size of 256.
 The frequency resolution changes with zero padding the signal prior
 to the transformation.
+\change[]{Finalize!}
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -76,3 +70,33 @@ to the transformation.
     \label{fig:03_maxFreq}
 \end{figure}
 % -------------------------------------------------------------
+
+If the \ac{TDOA} is determined by phase difference, it must be ensured
+that the maximal difference between two channels must not overflow $\pi$.
+Meeting this condition, the signed difference is ascertainable.
+As \cref{tab:03_maxFrequncies} presents, the distance between channel 0 and 1
+is too large because its maximal frequency is not in whistle frequency range.
+For this reason, the phase difference information between this pair is neglected.
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|}
+\hline
+Channel Pairs & Absolute Distance [\si{\meter}] & Frequency [\si{\hertz}]\\
+\hline
+0 and 1 & 0,116 & 1536,75\\
+\hline
+1 and 3 & 0,0533 & 3217,11\\
+\hline
+2 and 0 & 0,0533 & 3217,11\\
+\hline
+2 and 3 & 0.0618 & 2775,08\\
+\hline
+\etab
+\et{Maximal feasible frequencies for unambiguous phase difference detection}{03_maxFrequncies}
+% -------------------------------------------------------------
+
+To facilitate the implementation, the phase difference is easily convertible into
+delay samples $D_s$ with
+\bal
+	D_s = \frac{f_s \cdot \Delta \psi}{2 \pi \cdot f_c}.
+\eal
