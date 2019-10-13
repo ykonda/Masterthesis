@@ -2,13 +2,15 @@
 \label{sec:02_phase}
 
 With a different approach to the correlation methods, the \ac{TDOA} can be
-detected by observing the phase of one certain frequency.
+detected by observing the phase of one certain frequency $f_c$.
 The phase of a signal frequency is easily computable in frequency domain
 with
 \bal
-    \phi(f) &= tan^{-1}(\frac{imag(X(f))}{real(X(f))}).\\
-\intertext{With the difference of the phases of two channel, the delay is defined as}
-    D &= \frac{\Delta \phi \cdot c_s}{2 \pi \cdot f}.
+    \phi(f_c) &= tan^{-1}(\frac{imag(X(f_c))}{real(X(f_c))}).
+\eal
+With the difference of the phases of two channel, the delay in meters is defined as
+\bal
+    D &= \frac{\Delta \phi \cdot c_s}{2 \pi \cdot f_c}.
 \eal
 From that, the direction angle calculation of \cref{eq:02_tdoaAngle} can
 be followed.
