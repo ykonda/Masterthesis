@@ -152,3 +152,41 @@ whereat the error of the other case is 14,41\si{\degree}.
 From this, one can identify the \ac{PSNR} as valid additional information
 for the covariance of a \ac{GCC-PHAT} delay result that enriches the
 outcome of a robot direction ray that proceeds into the team filter.
+
+Another option is to include the PSNR information into the single
+robot whistle direction determination.
+In \cref{fig:04_psnr2FrameShift}, the frame to investigate is
+shifted multiple times before and after the signal start index
+for the same measurement as in \cref{sec:04_tdoaSingle}.
+There the robot was positioned at the center point
+while the whistle was blown at -33,7\si{\degree} with 4,5\si{\meter}
+distance.
+The frame size of the \ac{GCC} is set to 256 samples and the shift
+was set to a quarter of the frame size.
+Samples of the rear left channel are plotted for better understanding.
+The second graph shows the \ac{RMSE} of the single robot result
+over the frame shifts.
+For the lower graph, the mean over the \acp{PSNR} of all channels
+is presented.
+At zero shift, the start of the frame is set 50 samples previous to the
+manually defined start index.
+One sees, how the error is low with high \ac{PSNR} what confirms
+the previous statement in this subsection.
+For shifts smaller than -2, the signal is not represented in the
+frames yet what explains the high error.
+An important notice is that the result changes with proceeding
+frames.
+Without additional information about the rough direction,
+ambiguity exists due to periodicity of the signal.
+Due to the inconclusive result of the \ac{SNR} in \cref{subsec:04_snr}
+one decides not to take the signal magnitude as such information
+into account.
+Thus, the decisive role of the start of the signal is underlined again.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/gcc_frame_shift}
+	\caption{}
+	\label{fig:04_psnr2FrameShift}
+\end{figure}
+% -------------------------------------------------------------
