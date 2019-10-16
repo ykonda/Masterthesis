@@ -1,5 +1,76 @@
 \section{Distance Measurements}
 \label{sec:04_distance}
 
+\Cref{sec:03_distance} clarified the conditions to identify the distance of
+the sound source by one robot.
 To examine this, measurements from the front and back of the robot were
 collected and evaluated.
+\Cref{tab:04_distance} lists the distances and their results by the
+all methods.
+For the two measurements with zero distance, the whistle was blown
+once from the front with opposite orientation than the robot (180\si{\degree}) and
+once from directly behind the robot with the same orientation as the robot
+(0\si{\degree}).
+The distance is represented in robot coordinates, so that a source with positive
+distance was placed in front of the robot and oriented towards the robot and
+vise versa.
+
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|c|c|c|}
+\hline
+Nr. & Real Distance [\si{\meter}] & GCC Result [\si{\meter}] & CC Result [\si{\meter}] & Phase Result [\si{\meter}]\\
+\hline
+1 & 0,9 & $\infty$  & $\infty$ & $\infty$ \\
+\hline
+2 & 0,6 & $\infty$ & $\infty$ & $\infty$ \\
+\hline
+3 & 0,3 & 0,35 & 0,25 &  0,13 \\
+\hline
+4 & 0,0 (180\si{\degree}) & -0,13 & -0,15 & -0,23 \\
+\hline
+5 & -0,0 (0\si{\degree}) & 0,22 & 0,21 & 0,02 \\
+\hline
+6 & -0,3 & -0,15 & -0,27 & -0,45 \\
+\hline
+7 & -0,6 & -0.34 & -0,50 & -0,62 \\
+\hline
+8 & -0,9 & -0.70 & -0,91 & -0,99 \\
+\hline
+9 & -1,2 & -1,00 & -1,28 & -1,71 \\
+\hline
+10 & -1,5 & -1,39 & -1,59 & -2,98 \\
+\hline
+11 & -1,8 & -1,72 & -2,07 & -3,33 \\
+\hline
+12 & -2,1 & -2,16 & $\infty$ & -3,02\\
+\hline
+13 & -2,4 & -2,31 & $\infty$ & $\infty$ \\
+\hline
+14 & -3,75 & -3,66 & -9,51 & -4,15 \\
+\hline
+15 & -6,4 & -7,35 & -7,27 & $\infty$  \\
+\hline
+16 & -9,8 & $\infty$ & $\infty$ & $\infty$ \\
+\hline
+\etab
+\et{Result of front and rear distance for all methods.}{04_distance}
+% -------------------------------------------------------------
+As the results show, the distance can be determined with small error.
+We can see that the \ac{GCC} results are erroneous for small distances,
+but gives a correct approximation steadily.
+Compared to this, the \ac{CC} method performs better for small distances,
+but fails completely for some measurements.
+Those incorrect cases without distance result arose due to the computed
+lateral delays exceeding the maximum lateral samples.
+The phase methods provides most incorrect results with measurement 10 being
+double the real value.
+
+For all measurements, the resulting direction angle of the sound source were
+accurate.
+Rightfully, the algorithm detects sources that are out of observable range.
+
+Unfortunately, for real cases one can not rely on the height parameter of the sound
+source which varies from the referee's body height.
+Having this as approximation only, the distance result should be handled
+with care.
