@@ -1,0 +1,159 @@
+{
+    "rear_30cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_30cm",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                13.671623280117036,
+                13.164265657696298,
+                13.247107049366518,
+                12.945831498311444
+            ],
+            "psnr_mean": 13.257206871372823,
+            "distance": 0.2674235934744591
+        }
+    },
+    "rear_60cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_60cm",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                15.58929983036174,
+                13.694836766510257,
+                15.818649161929766,
+                14.46372769003209
+            ],
+            "psnr_mean": 14.891628362208461,
+            "distance": 0.5024309471836278
+        }
+    },
+    "rear_90cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_90cm",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                16.64672074552736,
+                15.98941253858496,
+                15.846222602115477,
+                15.754643697083132
+            ],
+            "psnr_mean": 16.059249895827733,
+            "distance": 0.9086785936680093
+        }
+    },
+    "rear_120cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_120cm",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                10.109656322671816,
+                10.227461257140009,
+                10.041513975834597,
+                10.728088118349543
+            ],
+            "psnr_mean": 10.276679918498992,
+            "distance": 1.271830951665199
+        }
+    },
+    "rear_150cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_150cm",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                17.944530957776138,
+                11.869968035745826,
+                16.806334643640604,
+                11.70500470372447
+            ],
+            "psnr_mean": 14.58145958522176,
+            "distance": 1.5936993443850795
+        }
+    },
+    "rear_180cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_180cm",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                10.904771927967483,
+                10.860407837442793,
+                10.847244027220139,
+                10.959011694833327
+            ],
+            "psnr_mean": 10.892858871865934,
+            "distance": 2.1261460179661684
+        }
+    },
+    "rear_210cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_210cm",
+            "error_deg": 0.22327874944959158,
+            "expected_deg": 180.0,
+            "result_deg": -179.77672125055042,
+            "psnr": [
+                10.548853757304526,
+                9.894528228171886,
+                10.54819559774731,
+                10.692499264552868
+            ],
+            "psnr_mean": 10.421019211944149
+        }
+    },
+    "rear_240cm": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_240cm",
+            "error_deg": 1.435976635932804,
+            "expected_deg": 180.0,
+            "result_deg": -178.5640233640672,
+            "psnr": [
+                9.993305600526948,
+                8.61755378812741,
+                9.148107065543726,
+                8.771100824256502
+            ],
+            "psnr_mean": 9.132516819613647
+        }
+    },
+    "rear_goal": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_goal",
+            "error_deg": 3.7105827951368733,
+            "expected_deg": 180.0,
+            "result_deg": -176.2894172048631,
+            "psnr": [
+                9.722055003791416,
+                7.7160469190397425,
+                8.264121329777243,
+                8.128818238743683
+            ],
+            "psnr_mean": 8.45776037283802
+        }
+    },
+    "rear_wall": {
+        "28": {
+            "path": "/home/ykonda/workspace/MA/audio_files/2019_09_14/single_rear/28/rear_wall",
+            "error_deg": 0.0,
+            "expected_deg": 180.0,
+            "result_deg": 180.0,
+            "psnr": [
+                13.696121235831548,
+                13.280456672419723,
+                13.286316594151886,
+                10.824874167720528
+            ],
+            "psnr_mean": 12.771942167530922,
+            "distance": 5.937357106697807
+        }
+    }
+}
