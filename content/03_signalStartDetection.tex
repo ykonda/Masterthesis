@@ -79,15 +79,20 @@ Especially at the tournament, parameters like these should be avoided.
 
 \subsubsection*{Zero Crossing Rate}
 
-To receive a higher accuracy, the frames of the \ac{ZCR} are set to 80 samples.
+To receive a higher accuracy, the frames of the \ac{ZCR} can be set small.
+% are set to 80 samples.
 In each frame, the sign changes are counted.
 It is known that only noise is received at the beginning of the measurement and on the
 contrary, signal noise is present at the end.
 The same as for the spectral entropy, a dynamic threshold can be set.
-In \cref{fig:03_zcr} and in this work , the threshold is set between the
-noise and signal mean.
-The implementation of the \ac{ZCR} in Python is very simple.
-\code{zcr}{1}{2}{Calculation of Zero Crossing Rate in Python}{03_zcr}
+% In \cref{fig:03_zcr} and in this work, the threshold is set by multiplying the
+% mean of the noise and signal mean by factor 1,25.
+Here, the mean of noise and signal mean is reduced by factor 0,9 to
+lower the threshold.
+Number of noise and signal frames are parameter values which depend
+on the amount of samples and the size of the frame.
+The implementation of the \ac{ZCR} is very simple and little
+computational effort is needed.
 
 \begin{figure}[ht]
 	\centering
