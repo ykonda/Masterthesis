@@ -1,0 +1,19 @@
+\section{Team Decision}
+\label{03_teamDecision}
+
+For the evaluation of the methods, the team decision is implemented in
+python for offline analysis of the sample data.
+Therefore, the result is computed for each robot and introduced into
+the team decision filter as direction ray. %with covariance and distance
+% is front or rear
+Each value input is paired with the other rays. If they cross, the
+filter is updated with this intersection until all pairs of direction
+rays are being considered.
+\missing[]{More info}
+
+For the real case, a team whistle localization module is
+introduced into the HULKs' framework.
+Here, each robots fills the result of the determined direction into
+the team message.
+\missing[inline]{How this works.}
+

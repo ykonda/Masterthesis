@@ -23,7 +23,17 @@ Lastly, the detection is restricted to whistle sounds only.
 Hereinafter, the characteristics of the methods are pointed out by
 analyzing the error between algorithmically determined start index
 and manually set start index.
-
+For evaluation, the eleven measurements of \cref{subsec:04_labMeasurements}
+on all robots are taken into consideration.
+Considering the frame size of the \ac{FFT} being set to 256 samples for the
+correlation methods, a start index error of at least the frame size is
+desired.
+Therefore, a start index detection result is regarded as failure for errors
+larger than 256 in the following sections.
+We distinguish between the number of failed detections for each channel of
+all 220 sample data ($11 \text{measurements} \cdot 5 \text{robots} \cdot 4 \text{channel}$)
+and a measurement counted as error if one of the channels failed.
+For this case, we have 55 measurements.
 
 \subsection{ZCR}
 \label{subsec:04_zcr}
@@ -56,10 +66,10 @@ the failure can be compensated with a smart voting procedure.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/zcr_fail}
-    \caption{Channel 3 data from measurement 5 of \cref{subsec:04_labMeasurements}
-             for robot number 21. A failing example for the start detection by \ac{ZCR}
-             is shown.}
+	\includegraphics[]{figures/evaluation/zcr_fail}
+	\caption{Channel 3 data from measurement 5 of \cref{subsec:04_labMeasurements}
+		for robot number 21. A failing example for the start detection by \ac{ZCR}
+		is shown.}
 	\label{fig:04_zcrFail}
 \end{figure}
 % -------------------------------------------------------------
@@ -104,8 +114,8 @@ In comparison, three channels fail with the \ac{ZCR} method in this case.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/entropy_good}
-    \caption{}
+	\includegraphics[]{figures/evaluation/entropy_good}
+	\caption{}
 	\label{fig:04_entropyGood}
 \end{figure}
 % -------------------------------------------------------------
@@ -118,23 +128,27 @@ In comparison, three channels fail with the \ac{ZCR} method in this case.
 \subsection{Whistle Detection}
 \label{subsec:04_wd}
 
-For the purpose of detection the start of a whistle signal, the whistle
-detection can be utilized.
-9\si{\percent} 23\si{\percent} with np.argmax(), looking at the next 300
-values and with a step size of 50 the result is 15\si{\percent} and 36\si{\percent}
-and with step size 1, it is 13\si{\percent} and 33\si{\percent}.
-This is computationally very costy and the reward is small.
+First, the accuracy of the whistle detection in regard of the start index
+is evaluated in this section.
+Due to the implementation, that the data is saved after the whistle detection
+found a signal, the algorithm never fails with submitted data.
+Standing alone, the error is always in the range of \si{\pm1024} samples due to the
+set frame size of 1024 samples.
+For all measurements in \cref{subsec:04_labMeasurements}, in all of the 55 recordings
+at least one of the channels has a larger error than
+the accepted 256 samples.
+Thus, the whistle detection can not be used as stand-alone solution of the start index
+detection.
+With a smaller frame size of 256, the accuracy gets better with an error of
+9\si{\percent} in regard to the 220 sample data but has an error rate of
+25,5\si{\percent} for the measurements.
+Here, the start index is defined as the first index where the whistle detection
+found a whistle.
+With the results, we can say that the whistle detection is not sufficient
+for the start detection.
+Furthermore, this approach as it is is limited to sounds in fixed and known frequency range.
 
-\subsection{Start Detection Conclusion}
-\label{subsec:04_startDetectionConclusion}
-
-If the start of a whistle sound is wanted and computational effort is
-neglected, the evaluation shows that the start detection with the
-existing whistle detection algorithm performs best.
-that a rough start detection by the exiting whistle detection
-with a large frame size followed by a \ac{ZCR} detection with small
-window size.
-This is a good trade-off with regard to the computational effort.
-\change[inline]{change for more noisy signals? -> then maybe entropy?}
-% - entropy for large scale start detection\\
-% - zcr and energy for smaller scale (because high precision needed)\\
+% looking at the next 300
+% values and with a step size of 50 the result is 15\si{\percent} and 36\si{\percent}
+% and with step size 1, it is 13\si{\percent} and 33\si{\percent}.
+% This is computationally very costly and the reward is small.

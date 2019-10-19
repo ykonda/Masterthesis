@@ -2,6 +2,10 @@
 \label{sec:04_teamEvaluation}
 
 \change[]{correct}
+Before assessing the whistle localization as whole, the three methods
+were evaluated in the last chapters independently.
+With the results of these operations as input values for the
+final team whistle localization, the 
 First, the start indexes were set manually to provide a decoupled result.
 The size of the field used in this work is smaller than the regular \ac{SPL}
 field. Its length is 7.5\si{m} and its width is 5\si{m}.
@@ -190,3 +194,9 @@ Thus, the decisive role of the start of the signal is underlined again.
 	\label{fig:04_psnr2FrameShift}
 \end{figure}
 % -------------------------------------------------------------
+
+\subsection{GCC Method}
+\label{04_teamGcc}
+
+For the overall result, each robot executes the sound source direction
+detection with the \ac{GCC-PATH} method on its own.
