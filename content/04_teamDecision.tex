@@ -3,14 +3,18 @@
 
 \change[]{correct}
 Before assessing the whistle localization as whole, the three methods
-were evaluated in the last chapters independently.
-With the results of these operations as input values for the
-final team whistle localization, the 
+to determine the sound source direction relatively
+were evaluated on standalone robots in the last chapters independently.
+With the results of these operations as input,
+the final whistle localization outputs an absolute sound source position
+with variance.
 First, the start indexes were set manually to provide a decoupled result.
+
 The size of the field used in this work is smaller than the regular \ac{SPL}
-field. Its length is 7.5\si{m} and its width is 5\si{m}.
-It is looked at the result of one exemplary measurement where the behavior
-of the team filter is of prime importance.
+field with 7.5\si{m} length and 5\si{m} width.
+Further information about the measurement setup is introduced in \cref{subsec:04_labMeasurements}.
+% It is looked at the result of one exemplary measurement where the behavior
+% of the team filter is of prime importance.
 
 \subsection{Measurement Setup}
 \label{subsec:04_labMeasurements}
@@ -19,7 +23,7 @@ taken. \Cref{fig:04_setup} illustrates the positions of the Nao robots
 and the positions of the whistle sound source.
 According to these. the x and y values of the sources and robots are
 listed in \cref{tab:04_robots} and \cref{tab:04_sources}.
-The angle $\theta$ of the robots are relative to the x-axis and
+The orientation $\theta$ of the robots are defined relatively to the x-axis and
 corresponds to the definition in \cref{subsec:03_coordinates}.
 In the following sections, the signal data from these measurements
 will be used mainly.
@@ -198,5 +202,46 @@ Thus, the decisive role of the start of the signal is underlined again.
 \subsection{GCC Method}
 \label{04_teamGcc}
 
-For the overall result, each robot executes the sound source direction
-detection with the \ac{GCC-PATH} method on its own.
+To determine an overall result, each robot executes the sound source direction
+detection with the \ac{GCC-PHAT} method standing alone.
+For clarity, measurement 1 of \cref{subsec:04_labMeasurements} is presented
+extensively.
+\Cref{fig:04_gccResult} illustrates the result of the
+relative direction angle outputs $\gamma$ of the individual robots
+listed in \cref{tab:04_gccResult}.
+Same as in \cref{fig:04_setup}, the yellow dots symbolizes the robots with
+its orientation as short yellow line.
+The resulting arrows represent the direction $\gamma$.
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|c|}
+\hline
+Nao & $\gamma$ [\si{\deg}] & Abs. Error [\si{\deg}] & PSNR \\
+\hline
+21 & -26,22 & 3,71 & 18,3\\
+\hline
+24 & -133,77 & 9,32 & 16,8\\
+\hline
+26 & -30,19 & 3,50 & 19,6\\
+\hline
+27 & -75,26 & 1,71 & 17,4\\
+\hline
+28 & -15,90 & 2,53 & 15,1\\
+\hline
+\etab
+\et{Resulting directions of the single robots with \ac{GCC-PHAT} method for a
+whistle sound signal in the right front corner of the playing field.}{04_gccResult}
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/gcc_team}
+	\caption{Team whistle localization result with \ac{GCC-PHAT}
+	method.}
+    \label{fig:04_gccResult}
+\end{figure}
+% -------------------------------------------------------------
+
+% - intersections
+% - updates
+% - covariance
+% - PSNR
