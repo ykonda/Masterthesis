@@ -1,27 +1,39 @@
 \chapter{Evaluation}
 
+In this chapter, experimental results are presented while setting
+focus on different aspects.
 At first, the results of the methods on single robots must be investigated
-in order to evaluate the performance of the final localization algorithm.
+before evaluating the performance of the final localization algorithm.
+Thus, the results of the direction detection methods
+is examined profoundly on one robot taking one measurement as example
+in \cref{sec:04_tdoaSingle}.
+There, the focus is set on the \ac{TDOA} methods itself for each channel pair
+before combining them to a robot direction result.
+
+% Additional Info
+In \cref{chap:03_implementation}, the presence of determinable supplementary
+information was discussed regarding the \ac{SNR}, \ac{PSNR} and distance
+approximation.
+If and in what extent these factors are applicable for the source localization
+is analysed in \cref{sec:04_additionalInformation}.
+
+% Team filter
+To investigate the whistle sound source localization of the robots as team,
+measurements were done with five Naos on the field of the HULKs' laboratory
+as specified in \cref{subsec:04_labMeasurements}.
+The results of the \ac{TDOA} methods for all measurements are presented and
+compared in \cref{sec:04_teamEvaluation} to have a closer look at their performance.
 Depending on the accuracy of the individual direction results, the quality
-of the team decision is limited.
+of the team filter is limited.
+Therefore, the angular error of the single robots is demonstrated for each
+measurement and method in addition.
 
 Primary, whistle sounds were recorded in the laboratory of the HULKs.
 If not emphasized particularly, the height of the sound source is 1.5\si{m}.
+
 % signal start detection evaluation
 
-First, the result of the direction detection on one robot
-is examined profoundly with one measurement as an example.
-There, we focus on the correctness and precision of the different methods.
-To investigate the final localization of the team, measurements were
-done with five robots on the field.
-At the end, all measurements are used to assess the methods in a general matter.
-
-In the following, the correlation function $R_{x_ax_b}$ of two signals
-$x_a$ and $x_b$ as in \cref{chap:02_prerequisites} is shortened
-to $R_{ab}$ for simplicity.
-
 \input{content/04_tdoa}
-\input{content/04_distance}
-\input{content/04_SNR}
+\input{content/04_additionalInfo}
 \input{content/04_teamDecision}
 \input{content/04_signalStartDetection}

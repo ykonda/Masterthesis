@@ -1,5 +1,5 @@
-\section{Delay Estimation}
-\label{sec:03_delay}
+\section{Time Difference of Arrival}
+\label{sec:03_tdoa}
 
 To ascertain the direction of the sound source on one robot, the
 delay of the signal from each channel to its neighboring
@@ -50,7 +50,7 @@ The implementation for the fixed frequency case is straight forward.
 From the result of the signal start detection, the frames
 are set with an appropriate frame size and then transformed into
 frequency domain.
-As we know, the frequency of the whistle is between 2\si{\kilo\hertz}
+As known from \cite{Hasselbring}, the frequency of the whistle is between 2\si{\kilo\hertz}
 and 4\si{\kilo\hertz}.
 Thus, a suitable frequency in this range is chosen for analysis.
 In the other case, the frame is chosen by doing a

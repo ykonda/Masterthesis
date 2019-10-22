@@ -1,13 +1,13 @@
 \section{Single Robot Method Comparison}
 \label{sec:04_tdoaSingle}
 
-For comparability of the results, the same measurements are taken into
-account to analyse the \ac{TDOA} methods.
-Part of the channel inputs of the whistle signal used in this section is plotted
-in \ref{fig:04_tdoaSignal}.
-Here, the sound source is placed -33.7\si{\degree} on the right front
+For comparability of the results, one exemplary measurement is utilized
+to present and analyse the \ac{TDOA} methods.
+In this data set, the sound source is placed at the right front
 of the robot with 4.5\si{m} distance.
-In \cref{fig:04_tdoaSignal} we see the first samples of this whistle signal.
+This corresponds to an an angle of -33.7\si{\degree} in robot coordinates.
+Some samples around the signal start of the received signal data
+is plotted in \ref{fig:04_tdoaSignal} for all channels.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -17,11 +17,17 @@ In \cref{fig:04_tdoaSignal} we see the first samples of this whistle signal.
 \end{figure}
 % -------------------------------------------------------------
 
-The signal start index to choose the frame is detected with the algorithm introduced in
-\change[]{which index? Explain better.} \cref{sec:03_signalStartDetection}.
-A frame size is set to 256 samples and is selected around the start index for
-\ac{CC} and \ac{GCC}.
-For the phase method the first frame with the same maximal frequency is chosen.
+As the next sections focus on the performance of the \ac{TDOA} methods,
+the start index is set manually.
+A frame size is defined with 256 samples and is selected around the start index for
+the correlation methods as explained in \cref{sec:03_tdoa}.
+For the phase method, the first frame with a size of 64 samples
+is chosen where a whistle is detected in all channels.
+
+In the following, the correlation function $R_{x_ax_b}$ of two signals
+$x_a$ and $x_b$ as in \cref{chap:02_prerequisites} is shortened
+to $R_{ab}$ for simplicity.
+
 
 \subsection{Cross Correlation}
 \label{subsec:04_ccSingle}
@@ -29,16 +35,16 @@ For the phase method the first frame with the same maximal frequency is chosen.
 
 To visualize the result of the \ac{CC}, the correlations are plotted in
 \cref{fig:04_cc}. For $R_{23}$ and $R_{13}$ the peak is clearly traceable.
-However, for the other \ac{CC} the problem mentioned in \cref{sec:02_cc}
-arises and the maximum peak does not differ much from the other tips.
-
+However, for the other \ac{CC} the problem of a low maximum peak
+arises as mentioned in \cref{sec:02_cc}.
+% -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
 		\includegraphics[]{figures/evaluation/cc_frontRight_1}
-	\caption{Cross correlation results of signal from front right.}
+	\caption{Cross correlation results of signal from front right (-33,7\si{\degree}).}
 	\label{fig:04_cc}
 \end{figure}
-
+% -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|}
 \hline
@@ -53,25 +59,32 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 3 & 2 & 3.94 & -150.2 & -29.8\\
 \hline
 \etab
-\et{Cross correlation delay results of singal from front right.}{04_cc}
+\et{Cross correlation delay results of singal from front right}{04_cc}
+% -------------------------------------------------------------
 
 According to the delays in \cref{tab:04_cc}, the final result of the \ac{CC}
-is -26.9\si{\degree} with an error of 6.8\si{\degree}.
-Taking a closer look at the delay between channel 2 and channel 0, we see that
-the delay is larger than the expected maximal delay of 6.85 samples
+is -26.9\si{\degree} which emerges an error of 6.8\si{\degree}.
+The delay between channel 2 and 0 is larger than the maximal delay of 6.85 samples
+and therefore cut to the maximal sample delay.
+Besides these, the \ac{TDOA} between the channel pairs produce one appropriate
+direction candidate which correctly points to the sound source.
 % -------------------------------------------------------------
+
 \subsection{Generalized Cross Correlation}
 \label{subsec:04_gccSingle}
 % -------------------------------------------------------------
-\Cref{fig:04_gcc} demonstrates the results of the \ac{GCC} of the received signal.
-The single delays and the resulting angle candidates are listed in \cref{tab:04_gcc}
-and lead to a final direction of -30.8\si{\degree} with an error of 2.85\si{\degree}.
-We can see that the peaks of the \ac{GCC} are better to detect than the peaks of the
+\Cref{fig:04_gcc} presents the cross correlation result by the \ac{GCC} method of
+the same signal data as in the previous section.
+The subsample delays for each channel pair and their resulting direction candidates
+are listed in \cref{tab:04_gcc}.
+From this, a final direction of -30.0\si{\degree} is determined
+resulting in an error of 3,69\si{\degree}.
+It is apparent that the peaks of the \ac{GCC} are better to detect than the peaks of the
 \ac{CC}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/gcc_frontRight_1}
+		\includegraphics[]{figures/evaluation/gcc_frontRight}
 	\caption{Generalized cross correlation results of signal from front right.}
 	\label{fig:04_gcc}
 \end{figure}
@@ -81,13 +94,13 @@ We can see that the peaks of the \ac{GCC} are better to detect than the peaks of
 \hline
 Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 \hline
-0 & 1 & -8.96 & -141.3 & -38.7\\
+0 & 1 & -8,28 & -144,7 & -35,3\\
 \hline
-1 & 3 & -3.85 & -25.2 & 86.4\\
+1 & 3 & -4,09 & -22,8 & 84,0\\
 \hline
-2 & 0 & 7.71 & -30.6 & -30.6\\
+2 & 0 & 7,60 & -30.6 & -30.6\\
 \hline
-3 & 2 & 4.38 & -146.6 & -33.4\\
+3 & 2 & 4,13 & -148,7 & -31,3\\
 \hline
 \etab
 \et{Generalized cross correlation delay results of singal from front right}{04_gcc}
@@ -95,8 +108,8 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 \subsection{Phase Difference}
 \label{subsec:04_phaseSingle}
 
-For the source direction detection with phase difference, a smaller frame
-size of 62 samples is set.
+For detecting the source direction with phase difference, a smaller frame
+size of 64 samples is set.
 Previously, two cases were introduced in \cref{subsec:03_phase} where either a
 fixed frequency is focused on or the frequency with maximal magnitude is
 taken for reference.
