@@ -109,23 +109,25 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 \label{subsec:04_phaseSingle}
 
 For detecting the source direction with phase difference, a smaller frame
-size of 64 samples is set.
-Previously, two cases were introduced in \cref{subsec:03_phase} where either a
-fixed frequency is focused on or the frequency with maximal magnitude is
+size of 64 samples is defined.
+Previously in \cref{subsec:03_phase}, two cases were introduced where either a
+fixed frequency is set or a frequency that is dominant for all four channels is
 taken for reference.
+
+\subsubsection*{Dynamic Frequency Selection}
 
 First, the result of the dynamically selected frequency is presented.
 As stated in the implementation chapter, the frame is chosen where the
 frequencies of the maximal amplitudes coincides for all channel which is
 at 2756,25\si{\hertz}.
-In the upper plot of \cref{fig:04_phaseSingle} one sees the received samples which
-will be transformed into frequency domain by \ac{FFT} and using a Hann window.
+In the upper plot of \cref{fig:04_phaseSingle} one sees the received microphone data
+which will be Hann windowed and then transformed into frequency domain by \ac{FFT}.
 The resulting phases and amplitudes are listed in \cref{tab:04_phaseSingle}.
 For comprehensibility, the determined frequency information visualized by
-wave signals with these phases and amplitudes
+wave signals with the detected phases and amplitudes
 in the lower subplot of \cref{fig:04_phaseSingle}.
 Due to the larger distance between channels 0 and 1, the phase difference
-information is neglected.
+information must be neglected because the phase difference is ambiguous.
 Outcome from the applied phase differences is -29,2\si{\degree} by the combination of
 -17,6\si{\degree}, -30,6\si{\degree} and -39,3\si{\degree}.
 % -------------------------------------------------------------
@@ -143,15 +145,13 @@ Channel & Phase [\si{\deg}] & Amplitude\\
 3 & -75,0 & 0,00372\\
 \hline
 \etab
-\et{Phase and amplitude of frame signals with 2756,25Hz}{04_phaseSingle}
+\et{Phase and amplitude of frame signals with $f_c$ = 2756,25Hz}{04_phaseSingle}
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|}
 \hline
 Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 & & [\si{\deg}] & [\si{\deg}] & [\si{\deg}] \\
-\hline
-0 & 1 & 176,2 & 33,07 & 146,9\\
 \hline
 1 & 3 & -102,7 & -17,6 & 78,8\\
 \hline
@@ -170,11 +170,13 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \end{figure}
 % -------------------------------------------------------------
 
+\subsubsection*{Static Frequency Selection}
+
 Secondly, the frequency to examine $f_c$ is set to the first represented frequency
-larger than 2600\si{\hertz} which is 2627,1\si{\hertz} at a \ac{FFT} length
+larger than 2600\si{\hertz} which is 2627,1\si{\hertz} with a \ac{FFT} length
 of 256.
 At this frequency, outcome of the direction candidates listed in \cref{tab:04_fixedFreqResult}
-with the considered delays is -29,6\si{\degree}.
+is -29,6\si{\degree} which results in an error of 4,1\si{\degree}.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|}
@@ -190,7 +192,65 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \hline
 \etab
 \et{Resulting candidates of phase difference method with fixed frequency
-	2411,72Hz of example measurement from front right
-	(-33,3\si{\degree})}{04_fixedFreqResult}
+	2627,1Hz of example measurement from front right
+	(-33,7\si{\degree})}{04_fixedFreqResult}
 % -------------------------------------------------------------
-\input{content/04_res_26}
+
+% Configuration for Phase Method
+\subsubsection*{Static Frequency Value}
+\label{subsubsec:04_fixedFrequencyVal}
+
+In order to observe the influence of the chosen frequency $f_c$
+the phase method is tested with different frequencies in the whistle range.
+To have a more generalized conclusion, more measurements are taken for this
+investigation.
+From eleven positions, all recordings of the whistle sounds are done
+with one robot arranged at the center point.
+This data corresponds to the measurements of the robot with number 26
+in \cref{subsec:04_labMeasurements}.
+
+As shown in \cref{fig:04_diffFc} shows, the \ac{RMSE} is high for
+frequencies smaller than 2600\si{\hertz}.
+With a frequency of 2024.12\si{\hertz}, error is largest.
+The result complies with the information in \cref{fig:03_maxFreq} showing that
+in a whistle signal frequencies higher than 2500\si{\hertz} are dominant.
+With this outcome, the fixed frequency is set to 2627,1\si{\hertz}
+for further usage of the direction detection by phase method.
+Limitation exists due to the ambiguity of the signal which is
+content of \cref{subsec:03_phase}.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/phase_fc_rmse}
+	\caption{Result of all measurements done with robot 26 to compare different
+	fixed frequency values in whistle range.}
+	\label{fig:04_diffFc}
+\end{figure}
+% -------------------------------------------------------------
+\subsubsection*{Frame Number}
+\label{subsubsec:04_frameNumber}
+
+Not only does the frequency play a major role for the phase method,
+but also the chosen frame.
+To evaluate if and how the result changes over time, the frame to
+utilize is shifted by half the frame size for all measurements
+of \cref{subsec:04_labMeasurements} for the robot at the center
+point.
+% [ 29.08029745  58.1426789   65.27548831  67.91984464  76.82890558
+%   97.33976251  96.63736674 100.2203543  105.14752253  61.28179302
+%   60.0017076   50.60063622  53.80158271  49.0830362   62.64453085]
+In \cref{fig:04_phaseOverTime} one sees that the first channel frames
+with zero shift gives the best result with a \ac{RMSE} of 29,1\si{\degree}.
+It validates that not any frame can be chosen for the
+direction detection what again confirms that the signal start detection
+plays a large role for the correct result.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/phase_over_time}
+	\caption{Changing results by shifting the frame over the
+	samples. All measurements of \cref{subsec:04_labMeasurements}
+	with robot nr. 26 are taken into consideration.}
+	\label{fig:04_phaseOverTime}
+\end{figure}
+% -------------------------------------------------------------

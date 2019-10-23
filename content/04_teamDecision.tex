@@ -1,14 +1,15 @@
+\newpage
 \section{Team Evaluation}
 \label{sec:04_teamEvaluation}
 
-\change[]{correct}
-Before assessing the whistle localization as whole, the three methods
-to determine the sound source direction relatively
-were evaluated on standalone robots in the last chapters independently.
-With the results of these operations as input,
-the final whistle localization outputs an absolute sound source position
-with variance.
-First, the start indexes were set manually to provide a decoupled result.
+In the last chapters the performance of the three \ac{TDOA} methods
+were validated on standalone robots independently.
+Here, the focus is on the final whistle localization algorithm
+as multi agent system.
+With the results of the single operations as input,
+the team whistle localization outputs an absolute sound source position.
+To provide a decoupled result to the signal start detection,
+the start indexes were set manually.
 
 The size of the field used in this work is smaller than the regular \ac{SPL}
 field with 7.5\si{m} length and 5\si{m} width.
@@ -18,13 +19,15 @@ Further information about the measurement setup is introduced in \cref{subsec:04
 
 \subsection{Measurement Setup}
 \label{subsec:04_labMeasurements}
-In order to evaluate the localization methods, 11 measurement were
-taken. \Cref{fig:04_setup} illustrates the positions of the Nao robots
-and the positions of the whistle sound source.
+
+11 measurement were taken with five robots on the small-sized \ac{SPL} field
+of the HULKs laboratory.
+\Cref{fig:04_setup} illustrates the positions of the Nao robots
+and the positions of the whistle sound sources.
 According to these. the x and y values of the sources and robots are
 listed in \cref{tab:04_robots} and \cref{tab:04_sources}.
 The orientation $\theta$ of the robots are defined relatively to the x-axis and
-corresponds to the definition in \cref{subsec:03_coordinates}.
+correspond to the definition in \cref{subsec:03_coordinates}.
 In the following sections, the signal data from these measurements
 will be used mainly.
 % -------------------------------------------------------------
@@ -79,6 +82,7 @@ Measurement & x [\si{m}] & y [\si{m}]\\
     \label{fig:04_setup}
 \end{figure}
 % -------------------------------------------------------------
+
 \subsection{GCC Method}
 \label{04_teamGcc}
 
@@ -97,7 +101,7 @@ Same as in \cref{fig:04_setup}, the yellow dots symbolizes the robots with
 its orientation as short yellow line.
 The resulting arrows represent the direction $\gamma$ where the sound source
 is predicted.
-The real source is marked as start in the graphic and the resulting
+In the graphic the real source is marked as star and the resulting
 position as cross.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
@@ -202,12 +206,6 @@ poorer compared to the \ac{GCC-PHAT} method with an \ac{RMSE} of
 1,45\si{\meter} in distance and 10,67\si{\degree} angular.
 Indeed, the statements in \cref{sec:02_cc} prove to be true.
 
-Further information about the origin of the error can be obtained
-by looking at the single robot results of each measurement.
-Because the team filter is updated by the intersections of the
-single robot rays, the accuracy of the absolute position
-depends on the number of arising intersections.
-This will be discussed in \cref{subsec:04_singleRobotAngleError}.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|}
@@ -240,16 +238,20 @@ Measurement & Error x [\si{\meter}] & Error y [\si{\meter}] & Abs. Distance Erro
 \et{Whistle localization results for all measurements in \cref{subsec:04_labMeasurements} with
 \ac{CC} method}{04_ccTeamResult}
 
+Further information about the origin of the error can be obtained
+by looking at the single robot results of each measurement.
+Because the team filter is updated by the intersections of the
+single robot rays, the accuracy of the absolute position
+depends on the number of arising intersections.
+This will be discussed in \cref{subsec:04_singleRobotAngleError}.
 % -------------------------------------------------------------
 \subsection{Phase Method}
 \label{04_teamPhase}
 
-For the results with phase method, the minimal frequency value
+For the results by phase method, the minimal frequency value
 parameter is set to 2700\si{\hertz}.
-Just like in the previous sections, the results of the
-\cref{subsec:04_labMeasurements} measurements are shown in
-\cref{tab:04_phaseTeamResult} and shows the errors of the
-single measurement in detail.
+Just like for the other methods, the results of the
+measurements are shown in \cref{tab:04_phaseTeamResult}.
 The \ac{RMSE} according to the distance is in the same
 order of magnitude as the \ac{CC} method with 1,33\si{\meter}.
 Having a much larger \ac{RMSE} regarding the angle with 74,8\si{\degree},
@@ -301,8 +303,8 @@ into the results of the single robots prior to the team filter is given.
 \Cref{fig:04_compareRmse} presents the \ac{RMSE} considering the
 direction results of all five robots for each measurement in
 \cref{subsec:04_labMeasurements}.
-Additionally, the standard deviation of each measurement gives insight
-about the validity of the single robot results.
+Additionally, the standard deviation of each measurement allows insight
+into the validity of the single robot results.
 As one can see, the standard deviation in degrees of the \ac{GCC} method is
 significantly smaller in comparison to the phase method for most
 measurements.
