@@ -1,6 +1,8 @@
 \section{Front and Rear Distance}
 \label{sec:03_distance}
 
+\change[]{Image! Coordinate is not correct for set coordinate system}
+
 For simplicity, the direction of the sound source is determined in
 horizontal plane only.
 However, the front and rear microphones differ 0.0212\si{m} in height
@@ -15,7 +17,7 @@ When the delays of the side channels are smaller, they can be used to
 detect the angle of the sound source in vertical YZ plane.
 
 \Cref{fig:02_headSideTdoa} is a lateral illustration of
-the Nao's right microphones $channel_1$ and $channel_3$.
+the NAO's right microphones $channel_1$ and $channel_3$.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -49,7 +51,7 @@ of the source.
 So, the distance to the sound source is
 % -------------------------------------------------------------
 \bal
-\Delta x &= (\Delta h_{source} - \Delta h_{Nao}) \cdot \tan(\gamma).
+\Delta x &= (\Delta h_{source} - \Delta h_{NAO}) \cdot \tan(\gamma).
 \label{eq:02_deltaX}
 \eal
 % -------------------------------------------------------------
@@ -64,11 +66,11 @@ Restrictions of the front and rear distance measurement differ.
 For the front case, the maximal angle for a unambiguous distance calculation
 is $\frac{\pi}{2}- 2\alpha$.
 Thus, the maximal front distance that can be approximated shrinks to
-$\Delta x = (\Delta h_{source} - \Delta h_{Nao}) \cdot \tan(\frac{\pi}{2} - 2\alpha)$
+$\Delta x = (\Delta h_{source} - \Delta h_{NAO}) \cdot \tan(\frac{\pi}{2} - 2\alpha)$
 according to \cref{eq:02_deltaX}.
 To the rear, the maximal value for $\gamma$ is bounded by \change[]{naming?}
 \lstinline!xz_delay_limit!.
-Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{Nao}$ to 0,57\si{m},
+Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{NAO}$ to 0,57\si{m},
 the maximal measurable distance to the front is about 0.66\si{m}.
 With the same values and 5.3 samples as \lstinline!xz_delay_limit!, the
 minimum $\Delta x$ value is 33.29\si{m}.
