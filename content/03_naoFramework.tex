@@ -30,39 +30,70 @@ Two coordinate systems are introduced to consider the whistle sound position.
 One for the relative orientation of the source to the robot's head and another
 for the absolute position determination in field coordinates.
 
-\Cref{fig:03_naoCoordinates} visualizes the coordinate system of the
+\Cref{fig:03_naoCoordinate} visualizes the coordinate system of the
 robot.
-Relative direction angles are specified around the z-axis in
-mathematically positive direction.
+Direction angles $\gamma$ are specified around the z-axis in
+mathematically positive direction and range between $-\pi$ and $\pi$.
+The direction where the whistle source is believed at by a single robot
+will be described as $\gamma$.
 % -------------------------------------------------------------
+
 \begin{figure}[ht]
-	\centering
-    \missingfigure{Naos head with coordinate system and angle}
-	\caption{Coordinate System of NAO's head}
-	\label{fig:03_naoCoordinates}
+      \centering
+      \includegraphics[width=0.60\columnwidth]{figures/nao_coor_both}
+      \label{fig:03_naoCoordinate}
+      \caption{Coordinate System of NAO's head.}
 \end{figure}
 % -------------------------------------------------------------
 
 For field coordinates, only the planar case matters in this work.
 It is defined as \cref{fig:03_fieldCoordinates} shows.
+In game, the robots play into x-direction.
+The whistle position of the team filter will be described
+in this coordinate system.
 % -------------------------------------------------------------
 \begin{figure}[ht]
-	\centering
-    \missingfigure{Field coordinate system}
-	\caption{Field Coordinate System}
-	\label{fig:03_fieldCoordinates}
+      \centering
+      \includegraphics[width=0.50\columnwidth]{figures/field}
+      \caption{Field Coordinate System.}
+      \label{fig:03_fieldCoordinates}
 \end{figure}
 % -------------------------------------------------------------
 
-
-% -------------------------------------------------------------
 \subsection{Microphones}
 \label{subsec:03_microphones}
 
-Next channel is always defined as the right adjacent channel.
-\missing[inline]{image of mics}
-
+In \cref{fig:03_micPos} the positions of the four microphones on
+the NAO's head that are listed in \cref{tab:03_micPos} with their channel
+numbers are outlined.
+% channel number from alsa??
 % -------------------------------------------------------------
+\begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.35\columnwidth]{figures/mic_pos}
+      \caption{Microphone positions on NAO's head.}
+      \label{fig:03_micPos}
+\end{figure}
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|c|}
+\hline
+Channel & x [\si{\meter}] & y [\si{\meter}] & z [\si{\meter}]\\
+\hline
+0 & -0,0215 & 0,0558 & 0,0774\\
+\hline
+1 & -0,0215 & -0,0558 & 0,0774\\
+\hline
+2 & 0,0206 & 0,0309 & 0,0986\\
+\hline
+3 & 0,0206 & -0,0309 & 0,0986\\
+\hline
+\etab
+\et{Positions of the microphones on the NAO's head}{03_micPos}
+% -------------------------------------------------------------
+
+In this thesis, the next channel is defined as the right adjacent channel.
+
 \subsection{Existing Whistle Detection}
 \label{subsec:03_whistleDetection}
 
@@ -78,15 +109,15 @@ The procedure of the whistle localization can be briefly outlined by
 the following steps:
 % -------------------------------------------------------------
 \begin{enumerate}
-    \item \textbf{Buffer}: the \lstinline!WhistleLocalization! module saves microphone
-          data until whistle is detected by the \lstinline!WhistleDetection! module.
-    \item \textbf{Single Robot Whistle Localization}: the \lstinline!WhistleLocalization!
-          performs the sound source localization algorithm and outputs a
-          believed direction angle and additional information if a whistle was detected.
-    \item \textbf{Send via Team Message}: angular direction result and additional information
-          are sent to other robots by team message.
-    \item \textbf{Team Whistle Localization}: wait for results of all agents to be present
-          and filter direction information for a final sound position.
+      \item \textbf{Buffer}: the \lstinline!WhistleLocalization! module saves microphone
+            data until whistle is detected by the \lstinline!WhistleDetection! module.
+      \item \textbf{Single Robot Whistle Localization}: the \lstinline!WhistleLocalization!
+            performs the sound source localization algorithm and outputs a
+            believed direction angle and additional information if a whistle was detected.
+      \item \textbf{Send via Team Message}: angular direction result and additional information
+            are sent to other robots by team message.
+      \item \textbf{Team Whistle Localization}: wait for results of all agents to be present
+            and filter direction information for a final sound position.
 \end{enumerate}
 % -------------------------------------------------------------
 
