@@ -1,12 +1,14 @@
 \section{Single Robot Method Comparison}
 \label{sec:04_tdoaSingle}
+\todo[inline]{Klingt etwas verkettet. Vielleicht geht sowas wie: "Direction Prediction on a Single Robot"?}
+\todo[inline]{Hast du fuer die "single robot method" noch mehr als diese eine Messung? Ich finde es sehr gut, das an Hand einer einzelnen Messung zu zeigen. Fuer eine quantiative Aussage waere es aber auch gut, noch messungen aus anderen Richtungen zu haben, wenn du die hast (nur Tabelle, nicht noch mal diskutieren)}
 
 For comparability of the results, one exemplary measurement is utilized
 to present and analyse the \ac{TDOA} methods.
 In this data set, the sound source is placed at the right front
 of the robot with 4.5\si{m} distance.
 This corresponds to an an angle of -33.7\si{\degree} in robot coordinates.
-Some samples around the signal start of the received signal data
+Some\todo{some klingt etwas informell} samples around the signal start of the received signal data
 is plotted in \cref{fig:04_tdoaSignal} for all channels.
 % -------------------------------------------------------------
 \begin{figure}[ht]
@@ -20,13 +22,13 @@ is plotted in \cref{fig:04_tdoaSignal} for all channels.
 As the next sections focus on the performance of the \ac{TDOA} methods,
 the start index is set manually.
 A frame size is defined with 256 samples and is selected around the start index for
-the correlation methods as explained in \cref{sec:03_tdoa}.
+the correlation methods as explained in \cref{sec:03_tdoa}.\todo{widerspricht sich mit dem satz davor (?) manuell vs automatisch}
 For the phase method, the first frame with a size of 64 samples
 is chosen where a whistle is detected in all channels.
 
-In the following, the correlation function $R_{x_ax_b}$ of two signals
-$x_a$ and $x_b$ as in \cref{chap:02_prerequisites} is shortened
-to $R_{ab}$ for simplicity.
+For the sake of conciseness, throughout the following sections the correlation
+function $R_{x_ax_b}$ of two signals $x_a$ and $x_b$  (\cf
+\cref{chap:02_prerequisites}) is denoted as $R_{ab}$.
 
 
 \subsection{Cross Correlation}
@@ -34,7 +36,8 @@ to $R_{ab}$ for simplicity.
 % -------------------------------------------------------------
 
 To visualize the result of the \ac{CC}, the correlations are plotted in
-\cref{fig:04_cc}. For $R_{23}$ and $R_{13}$ the peak is clearly traceable.
+\cref{fig:04_cc}. For $R_{23}$\todo{In der figure steht "R32" statt "R23"} and
+$R_{13}$ a peak is clearly visible.
 However, for the other \ac{CC} the problem of a low maximum peak
 arises as mentioned in \cref{sec:02_cc}.
 % -------------------------------------------------------------
@@ -63,9 +66,10 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 % -------------------------------------------------------------
 
 According to the delays in \cref{tab:04_cc}, the final result of the \ac{CC}
-is -26.9\si{\degree} which emerges an error of 6.8\si{\degree}.
+is -26.9\si{\degree}\todo{wo kommt diese Zahl her? Finde ich die in der
+Tabelle?}. Hence, the resulting prediction error is 6.8\si{\degree}.
 The delay between channel 2 and 0 is larger than the maximal delay of 6.85 samples
-and therefore cut to the maximal sample delay.
+and therefore cut to the maximum sample delay.
 Besides these, the \ac{TDOA} between the channel pairs produce one appropriate
 direction candidate which correctly points to the sound source.
 % -------------------------------------------------------------
@@ -110,9 +114,13 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 
 For detecting the source direction with phase difference, a smaller frame
 size of 64 samples is defined.
-Previously in \cref{subsubsec:03_phase}, two cases were introduced where either a
-fixed frequency is set or a frequency that is dominant for all four channels is
-taken for reference.
+In \cref{subsec:03_phase} two variants of this method were introduced that use
+different strategies to identify a reference frequency. The first version uses
+a static reference frequency that is fixed a-priori by the user. The second version
+dynamically estimates a dominant frequency across all four channels. Hereafter,
+the performance of variants is discussed.
+
+\todo[inline]{Reihenfolge anpassen}
 
 \subsubsection*{Dynamic Reference Frequency Selection}
 
