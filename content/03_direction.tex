@@ -36,7 +36,9 @@ For each delay between neighboring channels, one positive signed and one negativ
 signed candidate arise.
 
 % -------------------------------------------------------------
-\Cref{lst:03_direction} lists the single steps that are necessary for the sound source
+% \Cref{lst:03_direction} 
+\change[]{removed cref to code}
+lists the single steps that are necessary for the sound source
 candidates in robot coordinates.
 Positive values for delays mean that the signal first arrived at the \lstinline!base_channel!.
 Exemplary considering the case where the delay is equal to the positive maximal delay,
@@ -49,7 +51,7 @@ where the angle $\gamma'$ is determined by \cref{eq:02_tdoaAngle}.
 \Cref{fig:03_tdoaCode} shows resulting candidates of same situation as \cref{fig:02_tdoa} with
 the resulting possible source directions \lstinline!candidates!.
 % -------------------------------------------------------------
-\code{tdoa}{0}{10}{Calculation of whistle direction in robot coordinates.}{03_direction}
+% \code{tdoa}{0}{10}{Calculation of whistle direction in robot coordinates.}{03_direction}
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -59,9 +61,10 @@ the resulting possible source directions \lstinline!candidates!.
 \end{figure}
 
 As there exists the exceptional case that the sidewise and forward delays are both small
-as considered in \cref{sec:02_distance}, the invalidity of
-\lstinline!small_y_shift && small_x_shift! as notated in \cref{lst:03_distance} must
-be confirmed.
+as considered in \cref{sec:03_distance}, the invalidity of
+\lstinline!small_y_shift && small_x_shift! as notated in %\cref{lst:03_distance}
+\change[]{removed cref to code}
+must be confirmed.
 If so, not only the direction but also an approximate distance can be determined
 as discussed in \cref{sec:03_distance}.
 Otherwise, the direction with the smallest difference between the
