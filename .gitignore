@@ -1,5 +1,4 @@
 ## specific files from HSU template
-*.sty
 _changelog.txt
 /examples_latex/
 makebst.tex
