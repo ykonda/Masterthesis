@@ -1,5 +1,5 @@
-\section{Front and Rear Distance}
-\label{sec:03_distance}
+\subsection{Front and Rear Distance}
+\label{subsec:03_distance}
 
 \change[]{Image! Coordinate is not correct for set coordinate system}
 
@@ -80,3 +80,39 @@ minimum $\Delta x$ value is 33.29\si{m}.
 \missing[]{removed code}
 % \code{distance}{0}{35}{Pseudo code of distance approximation on X-axis.}{03_distance}
 \unsure[]{I am not really sure how pseudo codes should look like and if one is necessary anyway?}
+
+\subsection{SNR and PSNR}
+\label{subsec:03_snr}
+
+The \acf{SNR} is a common value to express the signal power $P_{signal}$ compared
+to power of the background noise $P_{noise}$.
+Conveniently, the buffered audio signal in this work always consists of
+a clean-cut delimitation between signal and noise which is set by the
+start index.
+Thus, the \ac{SNR} which is defined as
+\bal
+    SNR_{db} = 10\log_{10}(\frac{P_{signal} - P_{noise}}{P_{noise}})
+    \label{eq:03_snr}
+\eal
+in decibels can be implemented straightforwardly.
+Informational content about this measure is investigated in \cref{subsec:04_snr}.
+Expectations are that the \ac{SNR} can be feed into the covariance matrix
+of an incoming result in the Bayesian update process.
+
+In image processing, the \acf{PSNR} indicates the quality of a compressed
+image. Here in this work, the ratio between the peak of a signal
+and its noise is related to the \ac{GCC-PHAT} outcome and called \ac{PSNR}
+henceforth.
+As stated in \cref{sec:02_gcc}, the most significant characteristic
+of the \ac{GCC-PHAT} is the resulting sharp peak which now can be
+assessed with one value
+\bal
+    PSNR_{db} = 10\log_{10}(\frac{P_{peak}}{P_{noise}}).
+    \label{eq:03_psnr}
+\eal
+From the implementation view, the power of the correlation peak is divided by
+the power of the remaining correlation signal.
+It has to be noted that two adjacent values prior and after the peak
+are disregarded as they might belong to the peak.
+A validation if and how much the \ac{PSNR} and the accuracy of the \ac{GCC}
+delay result are linked is done in \cref{subsec:04_psnr}.

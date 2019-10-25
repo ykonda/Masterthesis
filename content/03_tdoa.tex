@@ -1,5 +1,5 @@
-\section{Time Difference of Arrival}
-\label{sec:03_tdoa}
+\subsection{Time Difference of Arrival}
+\label{subsec:03_tdoa}
 
 To ascertain the direction of the sound source on one robot, the
 delay of the signal from each channel to its neighboring
@@ -17,8 +17,8 @@ In C++, the library \ac{FFTW} exists and delivers the same \ac{DFT} functions.
 To estimate the delay between \lstinline!signal_0! and \lstinline!signal_1!,
 both frames of the signals were Hann windowed in advance.
 % -------------------------------------------------------------
-\subsection*{Correlation}
-\label{subsec:03_cc}
+\subsubsection*{Correlation}
+\label{subsubsec:03_cc}
 
 In Python, using the \ac{DFT} functions given by NumPy the \ac{CC} and \ac{GCC} calculation
 can be implemented with little lines of code.
@@ -31,15 +31,15 @@ index delivers the delay of \lstinline!x1! compared to \lstinline!x1! as the fun
 \missing[inline]{start index - 50 samples for frame size of 256 samples, Maybe how
 frame is chosen by PSNR}
 % -------------------------------------------------------------
-\subsection*{Subsample Delay}
-\label{subsec:03_subsample}
+\subsubsection*{Subsample Delay}
+\label{subsubsec:03_subsample}
 
 Integer delays only offers resulting direction angles with low resolution.
 To avoid this, the subsample shift estimation as in \cref{sec:02_subsampleShift}
 is added to the delay estimation.
 
-\subsection*{Phase Difference}
-\label{subsec:03_phase}
+\subsubsection*{Phase Difference}
+\label{subsubsec:03_phase}
 
 % Frame size of 64 samples -> better result
 % periodicity -> maximal possible frame with given distance

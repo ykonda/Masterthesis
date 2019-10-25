@@ -277,8 +277,9 @@
 \fi
 
 \usepackage{cleveref}
-\renewcommand\lstlistingname{Sourcecode}
-\crefname{listing}{sourcecode}{sourcecodes}
+% \renewcommand\lstlistingname{Sourcecode}
+% \crefname{listing}{sourcecode}{sourcecodes}
+
 % Herausgehobene Todos
 \usepackage[colorinlistoftodos, prependcaption, textsize=small]{todonotes}
 
@@ -310,8 +311,8 @@
 \input{config/layout.tex}
 
 \addto\captionsenglish{%
-	\renewcommand{\lstlistlistingname}{List of Sourcecodes} % default: "Listings"
-	\renewcommand{\lstlistingname}{Sourcecode} % default: "Listing"
+	\renewcommand{\lstlistlistingname}{List of Listings} % default: "Listings"
+	\renewcommand{\lstlistingname}{Listing} % default: "Listing"
 }
 
 
@@ -389,8 +390,8 @@
 
 	\include{postcontent/appendix1}
 
-	\cleardoublepage
-	\include{postcontent/appendix2}
+	% \cleardoublepage
+	% \include{postcontent/appendix2}
 
 \end{appendix}
 

@@ -1,6 +1,11 @@
 \section{Team Decision}
 \label{sec:03_teamDecision}
 
+To agree on a whistle position as multi-agent system, the detected sound source
+direction is added into the team message as float.
+Depending on the implementation, additional information like distance or
+\ac{PSNR} can be appended.
+
 For the evaluation of the methods, the team decision is implemented in
 python for offline analysis of the sample data.
 Therefore, the result is computed for each robot and introduced into
@@ -16,4 +21,7 @@ introduced into the HULKs' framework.
 Here, each robots fills the result of the determined direction into
 the team message.
 \missing[inline]{How this works.}
+
+\subsection{C++ Realization}
+\label{subsec:03_cppRealization}
 

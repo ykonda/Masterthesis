@@ -1,0 +1,27 @@
+\section{Single Robot Whistle Localization}
+\label{subsec:03_singleRobot}
+
+By one stand-alone system in form of a robot with four microphones
+attached on the head, only the direction of a sound source can be
+determined.
+As shortly introduced in \cref{subsec:03_whistleLocalizationStructure},
+the \lstinline!WhistleLocalization! module is responsible to
+determine the direction of the whistle sound detected by the \lstinline!WhistleDetection!.
+
+The direction of a whistle sound source is calculated after a whistle sound was detected
+by the existing \lstinline!WhistleDetection! module.
+
+
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[height=0.7\textheight]{figures/state_machine}
+	\caption{Concept of whistle localization on single robot.}
+	\label{fig:04_stateMachine}
+\end{figure}
+% -------------------------------------------------------------
+\input{content/03_signalStartDetection}
+\input{content/03_tdoa}
+\input{content/03_directionEstimation}
+\input{content/03_additionalInfo}
+% -------------------------------------------------------------

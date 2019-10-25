@@ -63,18 +63,36 @@ in this coordinate system.
 \subsection{Microphones}
 \label{subsec:03_microphones}
 
-In \cref{fig:03_micPos} the positions of the four microphones on
-the NAO's head that are listed in \cref{tab:03_micPos} with their channel
-numbers are outlined.
-% channel number from alsa??
+Four microphones are attached on the NAO's head.
+Their positions are listed in \cref{tab:03_micPos} with respect
+to the head's coordinate system introduced in \cref{subsec:03_coordinates}
+\cite{v6_docu} and outlined in \cref{fig:03_micPos}.
+As per documentation \cite{nao_docu}, the operating frequency range
+is between 150\si{\hertz} and 12\si{\kilo\hertz}.
+The sensitivity is indicated with 20\si{\milli\volt/\pascal\pm3\decibel} at
+1\si{\kilo\hertz}.
+
+Prior to this work, there was no need to address more than one microphone
+on one robot.
+Thus, receiving data from multiple microphone channels was implemented
+into the audio interface of the HULKs' framework.
+Raw microphone data of all channels is captured in interleaved format
+and unpacked by the \lstinline!AudioReceiver! module which makes
+the samples accessible per channel for further usage.
+The index number of the channels is derived from the order of the
+interleaved data format straight forwardly.
+The sampling frequency $f_s$ of the microphones is set to 4,1\si{\kilo\hertz}.
 % -------------------------------------------------------------
-\begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.35\columnwidth]{figures/mic_pos}
-      \caption{Microphone positions on NAO's head.}
-      \label{fig:03_micPos}
-\end{figure}
+% as \cref{lst:03_buffer} shows.
+% \lstinputlisting[float=htp, language=C++, basicstyle=\ttfamily\scriptsize,
+%         caption={Deinterleaving procedure of captured microphone data.},
+%         label=lst:03_buffer,
+%         numbers=left,
+%         stepnumber=1]{sourcecodes/audio_capture.cpp}
 % -------------------------------------------------------------
+
+% -------------------------------------------------------------
+
 \btline{ht}{1.2}
 \btab{|c|c|c|c|}
 \hline
@@ -92,21 +110,88 @@ Channel & x [\si{\meter}] & y [\si{\meter}] & z [\si{\meter}]\\
 \et{Positions of the microphones on the NAO's head}{03_micPos}
 % -------------------------------------------------------------
 
-In this thesis, the next channel is defined as the right adjacent channel.
+\begin{figure}[ht]
+      \centering
+      \includegraphics[width=0.35\columnwidth]{figures/mic_pos}
+      \caption{Microphone positions on NAO's head.}
+      \label{fig:03_micPos}
+\end{figure}
+% -------------------------------------------------------------
+
+In order to determine the direction of the sound source,
+the \ac{TDOA} between two channels is observed in this work.
+Hereinafter, the right adjacent channel of the \textit{base channel} is defined as
+\textit{next channel}.
+This relation is pictured with arrows in \cref{fig:03_micPos} where
+the arrowhead points towards the next channel.
+From the implementation point of view, this order makes the most sense
+when iterating over all channels.
+
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|}
+\hline
+Base channel & Next channel\\
+\hline
+0 & 1 \\
+\hline
+1 & 3 \\
+\hline
+2 & 0 \\
+\hline
+3 & 2 \\
+\hline
+\etab
+\et{Definition of \textbf{next channel} in respect of \textbf{base channel}}{03_channelOrder}
+% -------------------------------------------------------------
+
+\subsubsection*{ALSA}
+\label{subsubsec:04_alsa}
+
+Among with the addressing of multiple microphones, the audio interface was
+reworked and utilizes the open source library \ac{API} of \ac{ALSA} \cite{alsa}.
+Using this library, configuration for connecting to the microphones can be realized
+as desired.
+Here, the \textit{access type} is set to interleaved format.
+The data format is set to float 32 bit as well as the sampling rate to 4,1\si{\kilo\hertz}.
+% -------------------------------------------------------------
 
 \subsection{Existing Whistle Detection}
 \label{subsec:03_whistleDetection}
 
-% only one channel used
-% 1024 fft buffer size in whistle detection.cpp
+Since the whistle detection was already present before this work,
+it is introduced only in a short manner.
+The existing whistle detection is based of the implementation of the \ac{SPL}
+team \ac{UNSW}.
+After 1024 samples are collected in the buffer, these samples are Hann-windowed
+and then transformed into frequency domain using \ac{FFT}.
+A threshold is defined by the mean of the magnitude of the overall spectrum increased
+by a factor of 1,3.
+Dividing the the frequency band between 2\si{\kilo\hertz} and 4\si{\kilo\hertz}
+into multiple parts, the frequency band is narrowed from both sides until
+the mean value of one part exceeds the threshold per side.
+If the mean of the remaining frequency band is larger than a second threshold
+which is 2,3-fold than the overall mean, a whistle is detected in this frame.
+Both factors are parameterized.
+Whistles need to be detected in multiple frames within a short period of time
+until the \lstinline!whistleFound! state is set to true.
 
+For the whistle localization, the boolean of the whistle data can only be set to true
+after 3000\si{\milli\second} again. \change[]{better explanation}
 
+Only one channel is used for the whistle detection which is channel 0
+(rear left) by default.
+All transformations into frequency domain are executed with the C++ library
+\ac{FFTW}.
+This open source library provides most common functions for operations
+in frequency domain.
 % -------------------------------------------------------------
-\section{Whistle Localization}
-\label{sec:03_whistleLocalization}
 
-The procedure of the whistle localization can be briefly outlined by
-the following steps:
+\subsection{Whistle Localization Structure}
+\label{subsec:03_whistleLocalizationStructure}
+
+The procedure of the whistle localization in the context of the existing
+NAO framework can be briefly outlined by the following steps:
 % -------------------------------------------------------------
 \begin{enumerate}
       \item \textbf{Buffer}: the \lstinline!WhistleLocalization! module saves microphone
@@ -114,28 +199,10 @@ the following steps:
       \item \textbf{Single Robot Whistle Localization}: the \lstinline!WhistleLocalization!
             performs the sound source localization algorithm and outputs a
             believed direction angle and additional information if a whistle was detected.
+            The signal start detection is part of this module.
       \item \textbf{Send via Team Message}: angular direction result and additional information
             are sent to other robots by team message.
       \item \textbf{Team Whistle Localization}: wait for results of all agents to be present
             and filter direction information for a final sound position.
 \end{enumerate}
-% -------------------------------------------------------------
-
-
-\subsection{Single Robot}
-\label{subsec:03_singleRobot}
-
-The direction of a whistle sound source is calculated after a whistle sound was detected
-by the existing \lstinline!WhistleDetection! module.
-% -------------------------------------------------------------
-
-\subsection{Multi-Agent System}
-\label{subsec:03_multiAgend}
-
-% Transform orientation and ray into field coordinates
-To agree on a whistle position as multi-agent system, the detected sound source
-direction is added into the team message as float.
-Depending on the implementation, additional information like distance or
-\ac{PSNR} can be appended.
-
 % -------------------------------------------------------------

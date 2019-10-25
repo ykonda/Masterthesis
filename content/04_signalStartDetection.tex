@@ -98,13 +98,6 @@ Some measurements prove, that this is not always the case as \cref{fig:04_zcrFai
 Here, the data of the front right channel of robot 21 with the whistle source
 at position 5 in \cref{subsec:04_labMeasurements}
 illustrates how the signal ended around 35000 samples already.
-If the start index is determined at the point where the \ac{ZCR}
-falls below the threshold searching backwards as stated in \cref{sec:02_signalStartDetection},
-the detection fails.
-
-In most cases, only one channel of four output a erroneous result.
-Because the final start index on one robot is set equal for all channel,
-the failure can be compensated with a smart voting procedure.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -115,6 +108,13 @@ the failure can be compensated with a smart voting procedure.
 	\label{fig:04_zcrFail}
 \end{figure}
 % -------------------------------------------------------------
+If the start index is determined at the point where the \ac{ZCR}
+falls below the threshold searching backwards as stated in \cref{sec:02_signalStartDetection},
+the detection fails.
+
+In most cases, only one channel of four output a erroneous result.
+Because the final start index on one robot is set equal for all channel,
+the failure can be compensated with a smart voting procedure.
 
 Another option exists by changing the process of finding the
 threshold excess onwards.
