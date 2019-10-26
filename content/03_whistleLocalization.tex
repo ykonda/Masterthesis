@@ -33,8 +33,10 @@ be sure that the buffer contains a number of whistle samples.
 Out of the buffered samples, the signal start is calculated by the \ac{SSD}
 which will be further described in \cref{sec:02_signalStartDetection}.
 
-According to the \ac{TDOA} method, frames are chosen differently.
-Elaborated descriptions are given in the corresponding method sections.
+According to the \ac{TDOA} method, frames considered for the delay estimation
+are chosen differently.
+Detailed descriptions are given in the corresponding method
+\cref{subsubsec:03_cc,subsubsec:03_phase}.
 By \ac{TDOA} the delays between the two microphone channels are
 determined by either \ac{GCC-PHAT}, \ac{CC} or phase difference method.
 Each delay generates two potential source direction candidates as stated
@@ -45,15 +47,23 @@ More precise explanation is given in \cref{subsec:03_distance}.
 For a final direction, the mean of the candidates with smallest difference
 is formed.
 
-If one of the correlation methods are considered, the frames are
-shifted in loop up to defined range to obtain various results.
-From these variants, one direction is chosen by certain conditions and
-is set as definitive result.
-Taking the \ac{GCC-PHAT} as example, the \ac{PSNR} provides information about
-the certainty of the \ac{GCC} as \cref{subsec:04_psnr} proves.
-By considering the \ac{PSNR} values of several frames around the signal start,
-potential start estimation inaccuracies can be corrected and decision process
-can be optimized with best performing frames.
+If one of the correlation methods are used, the \ac{TDOA} is calculated
+multiple times shifting the frame over samples.
+The range in which the frame is shifted around the start index is parameterized
+as well as the size of the shift.
+By saving the calculated \ac{TDOA} values and looking up certain conditions per frame shift,
+the most promising result can be chosen.
+This way, potential start estimation inaccuracies can be corrected and
+decision process is optimized.
+In case of the \ac{GCC-PHAT}, the \ac{PSNR} provides information about
+the certainty of the \ac{TDOA} estimation as \cref{subsec:04_psnr} proves.
+A frame shift delivers \ac{TDOA} values for each channel pair and a
+mean of all \acp{PSNR} from the \ac{GCC} functions.
+Comparing the frame shifts, the \ac{TDOA} results with
+greatest \ac{PSNR} mean value is assumed as best performing.
+The same procedure is done with the \ac{CC} method but by investigating
+the greatest \ac{CC} function value.
+
 Regardless of the method, the production of this module is a
 \lstinline!WhistleDirection! data type which contains calculated
 direction outcome in radians and additional information like distance or \ac{PSNR}.
