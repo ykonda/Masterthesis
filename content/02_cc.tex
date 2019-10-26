@@ -11,6 +11,7 @@ In time domain, the \ac{CC} of two signals $x_0$ and $x_1$ is denoted as
 Considering the frequency domain, the function can be transformed into
 \bal
     \mathcal{F}[R_{x_0x_1}(t)] = G_{x_0x_1}(f) = X_0^*(f)X_1(f)
+    \label{eq:02_ccBaseFunction}
 \eal
 with $\mathcal{F}[x_i(t)] = X_i(f)$ and $X_i^*(f)$ indicating the conjugate complex form.
 % -------------------------------------------------------------
@@ -29,11 +30,11 @@ can be expressed as
 % -------------------------------------------------------------
 Thus, the \ac{CC} is
 \bsub
-\label{eq:02_Gx1x2}
+\label{eq:02_Gx0x1}
 \bal
     G_{x_0x_1}(f) &= \alpha |S(f)|^2 e^{-j2\pi fD} + N_0^*(f)N_1(f) + S^*(f) N_1(f) + \alpha S(f) e^{-j2\pi fD}N_0^*(f)\\
 \intertext{which will be shortened as}
-    G_{x_0x_1}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx1x2_simple} \\
+    G_{x_0x_1}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx0x1_simple} \\
 \intertext{where}
 \phi_s(f) &= |S(f)|^2 \label{eq:02_phi_s} \\
 \phi_n(f) &= N_0^*(f)N_1(f) \label{eq:02_phi_n1n2} \\
@@ -47,15 +48,22 @@ $\phi_c$ and $\phi_n$ disappear and the \ac{CC} results in
     R_{x_0x_1}(t) = \mathcal{F}^{-1}[\alpha \phi_s(f) e^{-j2\pi fD}] = \alpha \mathcal{F}^{-1}[\phi_s(f)] * \delta(t-D).
     \label{eq:02_R12_noNoise}
 \eal
+In general, $\phi_c$ and $\phi_n$ can neither be neglected nor assumed as uncorrelated to the signal \cite{H_B_prob},
+so that they introduce inaccuracies and errors.
+
+% -------------------------------------------------------------
 % \unsure[]{do I fully understand this? Is this correct?}
 % This means there exists a peak at delay $D$ which is altered by the \ac{iFT}
 % of the signal spectrum.
-The \ac{CC} gives insight about the similarity of two signals and at peak, they
+As introduced, the \ac{CC} gives insight about the similarity of two signals and at peak, they
 are most alike.
-Thus, the shift between the zero index and the peak is the resulting delay.
-% -------------------------------------------------------------
-In general, $\phi_c$ and $\phi_n$ can neither be neglected nor assumed as uncorrelated to the signal \cite{H_B_prob},
-so that they introduce inaccuracies and errors.
+Received signals from microphone sensors are digital signals sampled with a certain
+frequency.
+The derivations are just as applicable, but transformations into frequency
+domain are done by \ac{DFT}.
+In the case of real data samples with length $n$ and similar \ac{DFT} size, the shift between
+the zero index and the peak is the resulting delay $D$.
+Zero index is defined as the index of the peak if no shift exists.
 % -------------------------------------------------------------
 
 \Cref{fig:03_ccTheory} is the outcome of two similar, but shifted sine signals with
