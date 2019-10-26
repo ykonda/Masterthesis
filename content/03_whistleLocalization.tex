@@ -1,18 +1,17 @@
-\section{Single Robot Whistle Localization}
-\label{subsec:03_singleRobot}
+\section{Whistle Source Direction Estimation}
+\label{subsec:03_directionEstimation}
 
+% started with \ac{WSDE}
 By one stand-alone system in form of a robot with four microphones
 attached on the head, only the direction of a sound source can be
-determined.
+estimated.
 As shortly introduced in \cref{subsec:03_whistleLocalizationStructure},
-the \lstinline!WhistleLocalization! module is responsible to
+the \lstinline!WhistleDirectionEstimation! module is responsible to
 determine the direction of the whistle sound detected by the \lstinline!WhistleDetection!.
-
-The direction of a whistle sound source is calculated after a whistle sound was detected
-by the existing \lstinline!WhistleDetection! module.
-
-
+Before going into detail, the overall structure of the \ac{WSDE} on a single robot
+is summarized by means of \cref{fig:04_stateMachine}.
 % -------------------------------------------------------------
+
 \begin{figure}[ht]
 	\centering
 		\includegraphics[height=0.7\textheight]{figures/state_machine}
@@ -20,6 +19,52 @@ by the existing \lstinline!WhistleDetection! module.
 	\label{fig:04_stateMachine}
 \end{figure}
 % -------------------------------------------------------------
+
+\lstinline!WhistleDirectionEstimation! depends on the data type \lstinline!WhistleData!
+which is a production of \lstinline!WhistleDetection!.
+Currently, it contains two values. A timestamp when the whistle was last detected
+and a boolean value if a whistle start is found.
+Until this value is set to true by the \lstinline!WhistleDetection!, the
+\lstinline!WhistleDirectionEstimation! buffers up to
+44100 audio samples per channel.
+As a whistle needs to be detected for multiple cycles in a short time, one can
+be sure that the buffer contains a number of whistle samples.
+
+Out of the buffered samples, the signal start is calculated by the \ac{SSD}
+which will be further described in \cref{sec:02_signalStartDetection}.
+
+According to the \ac{TDOA} method, frames are chosen differently.
+Elaborated descriptions are given in the corresponding method sections.
+By \ac{TDOA} the delays between the two microphone channels are
+determined by either \ac{GCC-PHAT}, \ac{CC} or phase difference method.
+Each delay generates two potential source direction candidates as stated
+in \cref{sec:02_tdoa}.
+In the event of candidates indicating a nearby signal from straight forward or
+backwards, the distance to the source is estimated in addition.
+More precise explanation is given in \cref{subsec:03_distance}.
+For a final direction, the mean of the candidates with smallest difference
+is formed.
+
+If one of the correlation methods are considered, the frames are
+shifted in loop up to defined range to obtain various results.
+From these variants, one direction is chosen by certain conditions and
+is set as definitive result.
+Taking the \ac{GCC-PHAT} as example, the \ac{PSNR} provides information about
+the certainty of the \ac{GCC} as \cref{subsec:04_psnr} proves.
+By considering the \ac{PSNR} values of several frames around the signal start,
+potential start estimation inaccuracies can be corrected and decision process
+can be optimized with best performing frames.
+Regardless of the method, the production of this module is a
+\lstinline!WhistleDirection! data type which contains calculated
+direction outcome in radians and additional information like distance or \ac{PSNR}.
+
+All transformations into frequency domain and inverse transformations
+are executed with the \ac{FFTW} library just as the \lstinline!WhistleDetection!.
+For parallel development in Python, the widespread package \textit{NumPy} delivers
+all fundamental functions for computation in frequency domain.
+
+% -------------------------------------------------------------
+
 \input{content/03_signalStartDetection}
 \input{content/03_tdoa}
 \input{content/03_directionEstimation}
