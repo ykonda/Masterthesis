@@ -26,7 +26,7 @@ Thus, the \ac{GCC} is declared as
 \bal
     R^{(g)}_{x_0x_1}(t) &= \int^{+\infty}_{-\infty}\Psi(f)G_{x_0x_1}(f)e^{j2\pi ft} df.
     \label{eq:02_gcc}\\
-\intertext{Written-out it is visible how the choice of $\Psi(f)$ impacts the individual segments of \cref{eq:02_Gx1x2}
+\intertext{Written-out it is visible how the choice of $\Psi(f)$ impacts the individual segments of \cref{eq:02_Gx0x1}
 as}
     R^{(g)}_{x_0x_1}(f) &= \mathcal{F}^{-1}[\Psi(f) \alpha \phi_s(f) e^{-j2\pi fD}] \nonumber \\
     &+ \mathcal{F}^{-1}[\Psi(f) \phi_n(f)] + \mathcal{F}^{-1}[\Psi(f) \phi_c(f)].
@@ -44,6 +44,7 @@ is chosen as weighting function.
 The \ac{PHAT} weighting is known as
 \bal
     \Psi^{(P)}(f) = \frac{1}{|G_{x_0x_1}(f)|}.
+    \label{eq:02_gccPhat}
 \eal
 For the ideal case that $\phi_n$ and $\phi_c$ are nonexistent due to non-correlation,
 the \ac{GCC} results in
