@@ -124,20 +124,28 @@ the performance of variants is discussed.
 
 \subsubsection*{Dynamic Reference Frequency Selection}
 
-First, the result of the dynamically selected frequency is presented.
-As stated in the implementation chapter, the frame is chosen where the
-frequencies of the maximal amplitudes coincides for all channel which is
-at 2756,25\si{\hertz}.
-In the upper plot of \cref{fig:04_phaseSingle} one sees the received microphone data
-which will be Hann windowed and then transformed into frequency domain by \ac{FFT}.
-The resulting phases and amplitudes are listed in \cref{tab:04_phaseSingle}.
+First, the result of the phase difference method using a  dynamically selected
+frequency are presented. As stated in the implementation chapter, the frame is
+chosen where the frequencies of the maximal\todo{Du schreibst haeufiger
+"maximal". Laut dictCC gibt es das aber es ist glaube ich eher unueblich}
+amplitudes coincides for all channels. For the running example discussed here
+this corresponds to a frequency of 2756,25\si{\hertz}.
+In the upper plot of \cref{fig:04_phaseSingle}\todo{Die figure ist ganz schoen
+weit weg (ich musste ein bisschen suchen)} one sees the received microphone
+data which will be Hann windowed and then transformed into frequency domain by
+\ac{FFT}. The resulting phases and amplitudes are listed in
+\cref{tab:04_phaseSingle}.
 For comprehensibility, the determined frequency information visualized by
 wave signals with the detected phases and amplitudes
 in the lower subplot of \cref{fig:04_phaseSingle}.
-Due to the larger distance between channels 0 and 1, the phase difference
-information must be neglected because the phase difference is ambiguous.
-Outcome from the applied phase differences is -29,2\si{\degree} by the combination of
--17,6\si{\degree}, -30,6\si{\degree} and -39,3\si{\degree}.
+Due to the larger distance between channels 0 and 1 \todo{distance in welcher
+Metric? Physical distance of the microphones? Kannst du vielleicht noch einen
+satz zur klarstellung dazu schreiben.}, the phase difference information must
+be neglected because the phase difference is ambiguous. Following the procedure
+discussed in \todo[inline]{section ref} the resulting phase difference estimate
+is -29,2\si{\degree} by combining the candidate direction -17,6\si{\degree},
+-30,6\si{\degree} and -39,3\si{\degree} from channel 1, 2 and 3, respectively
+(\cf \cref{tab:04_phaseDiffSingle}).
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|}
@@ -180,11 +188,14 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 
 \subsubsection*{Static Reference Frequency Selection}
 
-Secondly, the frequency to examine $f_c$ is set to the first represented frequency
-larger than 2600\si{\hertz} which is 2670,1\si{\hertz} with a \ac{FFT} length
-of 256.
-At this frequency, outcome of the direction candidates listed in \cref{tab:04_fixedFreqResult}
-is -29,6\si{\degree} which results in an error of 4,1\si{\degree}.
+For the phase difference method using a static frequency estimate $f_c$,
+the reference frequency is set to be the first represented frequency larger
+than 2600\si{\hertz}.\todo{why? Einen Satz zur Begruendung wenn es eine gibt.}
+Hence, we chose $f_c = 2627,1\si{\hertz}$ with a \ac{FFT} length of 256.
+Applying the phase difference method for this reference frequency, the final
+direction estimate computed from the candidates listed in
+\cref{tab:04_fixedFreqResult} is -29,6\si{\degree} which results in an error of
+4,1\si{\degree}.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|}
@@ -208,14 +219,19 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \subsubsection*{Static Reference Frequency Value}
 \label{subsubsec:04_fixedFrequencyVal}
 
-In order to observe the influence of the chosen frequency $f_c$
+\todo[inline]{soll das so, dass "Static Frequency Value" nicht ein unterpunt von "Static Frequency Selection" ist?}
+\todo[inline]{Ich wuere fuer fc immer das wort "reference frequency" (oder
+einen anderen spezifischen Term) schreiben damit man die nicht mit anderen
+verwechselt.}
+
+In order to determine the influence of the chosen reference frequency $f_c$
 the phase method is tested with different frequencies in the whistle range.
-To have a more generalized conclusion, more measurements are taken for this
-investigation.
-From eleven positions, all recordings of the whistle sounds are done
-with one robot arranged at the center point.
-This data corresponds to the measurements of the robot with number 26
-in \cref{subsec:04_labMeasurements}.
+For this purpose we consider a larger dataset of
+\todo[inline]{num-of-measurements} measurements. In this experiment, the sound
+source is recorded from eleven different positions centered around the
+robot.\todo{Wenn vorhanden hier vielleicht auf eine Figure verweisen. Wenn
+nicht, aber auch nicht schlimm.} This data corresponds to the measurements of
+the robot with number 26 in \cref{subsec:04_labMeasurements}.
 
 As shown in \cref{fig:04_diffFc} shows, the \ac{RMSE} is high for
 frequencies smaller than 2600\si{\hertz}.
@@ -234,6 +250,8 @@ content of \cref{subsubsec:03_phase}.
 	fixed frequency values in whistle range.}
 	\label{fig:04_diffFc}
 \end{figure}
+\todo[inline]{Errorbars?}
+\todo[inline]{Ein RMSE von 30 deg scheint sehr hoch, oder nicht?}
 % -------------------------------------------------------------
 \subsubsection*{Frame Number}
 \label{subsubsec:04_frameNumber}
@@ -247,11 +265,11 @@ point.
 % [ 29.08029745  58.1426789   65.27548831  67.91984464  76.82890558
 %   97.33976251  96.63736674 100.2203543  105.14752253  61.28179302
 %   60.0017076   50.60063622  53.80158271  49.0830362   62.64453085]
-In \cref{fig:04_phaseOverTime} one sees that the first channel frames
-with zero shift gives the best result with a \ac{RMSE} of 29,1\si{\degree}.
-It validates that not any frame can be chosen for the
-direction detection what again confirms that the signal start detection
-plays a large role for the correct result.
+In \cref{fig:04_phaseOverTime} one sees that the first channel frames with zero
+shift gives the best result with a \ac{RMSE} of 29,1\si{\degree}. These results
+show that the frame position has a significant influence on the prediction
+accuracy of the direction detection. Therefore, an accurate signal start
+detection is crucial for precise sound source localization.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
