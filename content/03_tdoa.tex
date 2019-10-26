@@ -1,41 +1,67 @@
 \subsection{Time Difference of Arrival}
 \label{subsec:03_tdoa}
 
-To ascertain the direction of the sound source on one robot, the
-delay of the signal from each channel to its neighboring
-next channel is the key information.
-The implementation of the \ac{CC} from \cref{sec:02_cc} and the \ac{GCC-PHAT}
-introduced in \cref{sec:02_gcc}, as well as the phase difference method
-of \cref{sec:02_phase} will be presented shortly.
+The \ac{TDOA} estimation is the main component to identify the
+whistle source location.
+Theoretical background to this approach of source localization is
+given in \cref{sec:02_tdoa}.
+As stated there, the \ac{TDOA} of a signal measured between two microphone sensors
+provides details about the direction of the source.
+Having four channels attached on a NAO's head, an overdetermined system it
+given where each channel pair provides \ac{TDOA} information.
 
-For all methods performed in frequency domain, the \ac{FFT} of the
-signal is required. Hence the 
-In C++, the library \ac{FFTW} exists and delivers the same \ac{DFT} functions.
-To estimate the delay between \lstinline!signal_0! and \lstinline!signal_1!,
-both frames of the signals were Hann windowed in advance.
+The \ac{GCC-PHAT} method is a modification of the \ac{CC} method.
+Due to their implementation being equal except of the weighting function,
+they are discussed in \cref{subsubsec:03_cc} collectively.
+\Cref{subsubsec:03_phase} presents the implementation details with it's
+circumstances.
 % -------------------------------------------------------------
-\subsubsection*{Correlation}
+
+\subsubsection{Correlation}
 \label{subsubsec:03_cc}
 
-In Python, using the \ac{DFT} functions given by NumPy the \ac{CC} and \ac{GCC} calculation
-can be implemented with little lines of code.
-% Function \lstinline!correlation! of \cref{lst:03_cc} itemizes the steps to accomplish
-\change[]{text, removed code}
-a correlation in Python with input signals \lstinline!x0! and \lstinline!x1!.
-Determining the index of the maximal value of the correlation relative to the zero delay
-index delivers the delay of \lstinline!x1! compared to \lstinline!x1! as the function
-\lstinline!compute_delay! demonstrates.
-\missing[inline]{start index - 50 samples for frame size of 256 samples, Maybe how
-frame is chosen by PSNR}
+In theory, \acf{CC} in time domain is usually illustrated by shifting
+two signals about each other and recording the similarity for each shift.
+Thus, a peak will arise at that shift where signals are most similar.
+Imaging two equal signals, one can image a peak at the middle of the \ac{CC} function
+\lstinline!R!.
+The index in this case is called \lstinline!zeroIndex! and calculated with
+\lstinline!int(length(R))-1!.
+If one signal is alike the other but delayed by some samples, the peak will
+occur at so many samples next to the \lstinline!zeroIndex!.
+This delay which is directly related to the \ac{TDOA} is computed
+by the \ac{CC} and \ac{GCC} in the unit of samples.
+As \cref{sec:02_cc,sec:02_gcc} have shown, the \ac{GCC} is commonly performed
+in frequency domain.
+For unification, both \ac{CC} and \ac{GCC} are implemented in frequency domain.
+% Hereinafter, \ac{CC} and \ac{GCC} will be summarized as \textit{correlation} in this section.
+
+The samples for the \ac{CC} are defined by the start index and the frame shift
+according to \cref{subsec:03_directionEstimation} and originate from the data which was
+cleaned by spectral subtraction previously.
+The frame size in this work is set to 256 samples typically and the samples are Hann-windowed
+prior to the correlation.
+By zero padding the \ac{FFT} resolution can be increased, but is refrained from for now.
+For two real signals, the \ac{CC} can be realized by time-reversing one of the signals before
+the \ac{FFT} and then multiplying each component.
+In the event of \ac{GCC-PHAT}, each component of the multiplication is divided by the absolute
+value as the weighting function \cref{eq:02_gccPhat} defines.
+After this, the cross-correlated signal is transformed back into time domain and
+index of the peak \lstinline!peakIndex! is found.
+The delay in samples is then computed by \lstinline!peakIndex - zeroIndex!.
+In conformity with the definitions in thesis, a positive delay \lstinline!d_01!
+between \lstinline!x_0! (signal at channel 0) and \lstinline!x_1! (signal at channel 1)
+indicates that the signal was at channel 0 first.
 % -------------------------------------------------------------
+
 \subsubsection*{Subsample Delay}
 \label{subsubsec:03_subsample}
 
 Integer delays only offers resulting direction angles with low resolution.
 To avoid this, the subsample shift estimation as in \cref{sec:02_subsampleShift}
-is added to the delay estimation.
+is added to the delay estimation for both \ac{CC} and \ac{GCC}.
 
-\subsubsection*{Phase Difference}
+\subsubsection{Phase Difference}
 \label{subsubsec:03_phase}
 
 % Frame size of 64 samples -> better result
