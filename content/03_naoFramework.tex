@@ -4,8 +4,8 @@
 As stated, a complete code framework exists to address the NAO robots' hardware
 in C++ by the \ac{SPL} team \textit{HULKs}.
 It is implemented in such manner that \textit{Modules} waits for all input
-values (\textit{Dependencies}) which are needed to execute their task.
-Modules can be seen as larger coherent operations that fulfills specific purposes.
+values (\textit{Dependencies}) which are necessary to execute their task.
+Modules can be seen as larger coherent operations that performs specific roles.
 With the output produced by this Module (\textit{Productions}), successive
 Modules can start to perform their cycle.
 Due to this sequential process, modules are modifiable independently.
@@ -194,15 +194,15 @@ The procedure of the whistle localization in the context of the existing
 NAO framework can be briefly outlined by the following steps:
 % -------------------------------------------------------------
 \begin{enumerate}
-      \item \textbf{Buffer}: the \lstinline!WhistleLocalization! module saves microphone
+      \item \textbf{Buffer}: the \lstinline!WhistleDirectionEstimation! module saves microphone
             data until whistle is detected by the \lstinline!WhistleDetection! module.
-      \item \textbf{Single Robot Whistle Localization}: the \lstinline!WhistleLocalization!
+      \item \textbf{Single Robot Whistle Direction Estimation}: the \lstinline!WhistleDirectionEstimation!
             performs the sound source localization algorithm and outputs a
             believed direction angle and additional information if a whistle was detected.
             The signal start detection is part of this module.
-      \item \textbf{Send via Team Message}: angular direction result and additional information
+      \item \textbf{Send Direction via Team Message}: angular direction result plus additional information
             are sent to other robots by team message.
-      \item \textbf{Team Whistle Localization}: wait for results of all agents to be present
+      \item \textbf{Multi-Agent Whistle Localization}: wait for results of all agents to be present
             and filter direction information for a final sound position.
 \end{enumerate}
 % -------------------------------------------------------------
