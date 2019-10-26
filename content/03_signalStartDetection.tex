@@ -1,6 +1,11 @@
 \subsection{Signal Start Detection}
 \label{subsec:03_signalStartDetection}
 
+\change[]{Results show, that the accuracy of the whistle detection is not
+		  sufficient to be used stand alone.
+		  Thus, different approaches are evaluated with regard to higher
+		  precision and lower computational effort.}
+\info[]{need to be written up}
 As mentioned in \cref{sec:02_signalStartDetection}, the detection of the
 signal start is crucial for the localization.
 The implementation of the different approaches will be presented coupled with
@@ -28,6 +33,7 @@ For better visualization, the following data is shortened to $2400$ samples.
 
 \subsubsection*{Spectral Entropy}
 
+\info[]{need to be written up}
 The formula to calculate the spectral entropy of a signal is introduced as
 \cref{eq:02_entropy} in the previous chapter.
 For the entropy information, the signal must not be cleaned previously.
@@ -53,6 +59,7 @@ and its derivation is presented for evaluation.
 
 \subsubsection*{Energy}
 
+\info[]{need to be written up}
 As mentioned above, the total signal is divided into multiple overlapping frames.
 \Cref{eq:02_spectralEnergy} represents the energy of each frequency
 component.
@@ -76,6 +83,7 @@ the start detection by energy is inconvenient.
 
 \subsubsection*{Zero Crossing Rate}
 
+\info[]{need to be written up}
 Alike the other methods, the buffered signal is divided into smaller frames
 which can be set arbirary small for the \ac{ZCR} where no \ac{FFT} is necessary.
 % To receive a higher accuracy, the frames of the \ac{ZCR} can be set small.
