@@ -1,25 +1,30 @@
 \newpage
 \section{Additional Information}
 \label{sec:04_additionalInformation}
+\todo[inline]{Not sure whether I mentioned earlier: "investigate" must be uesd carefully. You can say things like: "The performance of XYZ will be investigated." (but here I would also prefer "examined"). But you certainly can not say "XYZ will be investigated" because in this context "investigate" has more of a "legal" connotation.}
 
-On top of the direction detection by \ac{TDOA}, additional information
-can be won by received microphone data.
+On top of the direction detection by \ac{TDOA}, additional information can be
+extracted from the microphone data.
 This information can be used to improve the single robot result or
-to feed the team filter with beta information.
-As \cref{subsec:03_distance} has described, the distance of the sound source
+to feed the team filter with beta\todo{beta or better? If beta: what does it mean?} information.
+As \cref{sec:03_distance} has described, the distance of the sound source
 can be estimated approximately for nearby signals that are aligned with
 the x-axis of the robot's head.
 Another intuitive approach is the inspection of the \ac{SNR} which
-is assumed as higher for closer sources.
-Apart from this, the \ac{PSNR} of the \ac{GCC} defined in \cref{subsec:03_snr,subsec:03_psnr}
-is investigated.
+is expected to be higher for closer sound sources.
+In addition, the \ac{PSNR} of the \ac{GCC} as defined in \cref{sec:03_snr} is examined.
 
 \subsection{Distance Approximation}
 \label{subsec:04_distance}
 
-\Cref{subsec:03_distance} clarified the conditions to identify the distance of
-the sound source by one robot.
-To examine the validity of this statement, measurements from the front and
+\Cref{sec:03_distance} presented the necessary conditions required to estimate the
+distance of the sound source on a single robot.\todo{Please check whether this
+sentence still states what you wanted to say. (Are you trying to say that under
+certain conditions one can estimate the distance of the sound source from
+a single robot? Or are you saying that certain conditions must hold for the
+single robot to compute the distance from multiple robots (e.g. single robot
+has to be able to resolve ambiguity of multiple candidates.))}
+To examine the validity of these assumptions, measurements from the front and
 back of the robot are collected and evaluated.
 \Cref{tab:04_distance} lists the distances and their results by the
 all methods.
