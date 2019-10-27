@@ -57,8 +57,8 @@ indicates that the signal was at channel 0 first.
 \subsubsection*{Subsample Delay}
 \label{subsubsec:03_subsample}
 
-Integer delays only offers resulting direction angles with low resolution.
-To avoid this, the subsample shift estimation as in \cref{sec:02_subsampleShift}
+Integer delays only offers a limited number of resulting direction angles.
+To avoid this low resolution, the subsample shift estimation as in \cref{sec:02_subsampleShift}
 is added to the delay estimation for both \ac{CC} and \ac{GCC}.
 
 \subsubsection{Phase Difference}
@@ -67,43 +67,29 @@ is added to the delay estimation for both \ac{CC} and \ac{GCC}.
 % Frame size of 64 samples -> better result
 % periodicity -> maximal possible frame with given distance
 
-There are two ways to determine the angle by phase difference
-between two channels.
-One can either look at the phase of a fixed frequency or set the frequency
-dynamically.
-For both, the signal must be divided into multiple frames.
-The implementation for the fixed frequency case is straight forward.
-From the result of the signal start detection, the frames
-are set with an appropriate frame size and then transformed into
-frequency domain.
-As known from \cite{Hasselbring}, the frequency of the whistle is between 2\si{\kilo\hertz}
-and 4\si{\kilo\hertz}.
-Thus, a suitable frequency in this range is chosen for analysis.
-In the other case, the frame is chosen by doing a
-frequency analysis.
-For each channel frame in frequency domain after signal start,
-the maximal absolute value and its belonging frequency is determined.
-If this frequency is equal for all channels, these frames
-are chosen.
-\Cref{fig:03_maxFreq} shows that such frames exists for signals that
-were transformed into frequency domain with a frame size of 256.
-The frequency resolution changes with zero padding the signal prior
-to the transformation.
-\change[]{Finalize!}
-% -------------------------------------------------------------
-\begin{figure}[ht]
-	\centering
-		\includegraphics[]{figures/maxFreq}
-	\caption{}
-    \label{fig:03_maxFreq}
-\end{figure}
-% -------------------------------------------------------------
-
-If the \ac{TDOA} is determined by phase difference, it must be ensured
-that the maximal difference between two channels must not overflow $\pi$.
-Meeting this condition, the signed difference is ascertainable.
-As \cref{tab:03_maxFrequncies} presents, the distance between channel 0 and 1
-is too large because its maximal frequency is not in whistle frequency range.
+In contrast to the previous methods, this method compares the phases of a
+specific reference frequency per channel.
+\Cref{sec:02_phase} covers the theoretical background of this approach.
+The circumstances that apply on the NAOs and the appropriate implementation
+is presented here.
+In order to calculate the phase difference $\phi$ between two frames, the reference
+frequency $f_c$ needs to be defined.
+One can either choose a static reference frequency equal for all measurements or
+set the reference frequency dynamically according to the sound signal.
+Both implementations were realized in this work for evaluation with following
+conditions:
+\begin{itemize}
+	\item The reference frequency must be within whistle frequency range (2\si{\kilo\hertz}
+		  to 4\si{\kilo\hertz} as proposed in \cite{Hasselbring}).
+	\item The maximal phase difference between two channels must not overflow $\pi$ with
+		  the selected reference frequency.
+\end{itemize}
+Meeting this conditions, a signed phase difference is ascertainable that indicates a
+distinct direction.
+\Cref{tab:03_maxFrequncies} lists the maximal feasible reference frequencies (Max. Frequency)
+meeting the second requirement.
+As the table presents, the distance between channel 0 and 1 is too large so that the
+reference frequency would need to be smaller than 2\si{\kilo\hertz}.
 For this reason, the phase difference information between this pair is neglected.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
@@ -123,8 +109,46 @@ Channel Pairs & Absolute Distance [\si{\meter}] & Max. Frequency [\si{\hertz}]\\
 \et{Maximal feasible frequencies for unambiguous phase difference detection}{03_maxFrequncies}
 % -------------------------------------------------------------
 
-To facilitate the implementation, the phase difference is easily convertible into
-delay samples $D_s$ with
+For compatibility with the correlation method implementation, the phase difference
+is converted to delay samples $D_s$ with
 \bal
-	D_s = \frac{f_s \cdot \Delta \psi}{2 \pi \cdot f_c}.
+	D_s = \frac{f_s \cdot \Delta \phi}{2 \pi \cdot f_c}.
 \eal
+% -------------------------------------------------------------
+
+\subsubsection*{Static Reference Frequency}
+
+Considering the sensor pair of the two front channels, the maximal feasible
+reference frequency value is limited to 2775,08\si{\hertz} as stated in the table above.
+Evaluation of \cref{fig:04_diffFc} has shown, that the quality of the phase difference
+method relies on the reference frequency to some extent.
+To realize best performance, a reference frequency between 2,6\si{\kilo\hertz} 2,775\si{\kilo\hertz}
+should be chosen.
+The frequency resolution of \acp{FFT} is $\frac{f_s}{N}$ depending on the sample frequency $f_s$ and
+the number of data points $N$.
+As the frame size for this method is set to 64 samples, the samples are zero-padded
+up to 512 samples before transforming them into frequency domain for higher resolution.
+With this \ac{FFT} size, it can be selected between 2670,1\si{\hertz}
+and 2756,25\si{\hertz}.
+Frames after the signal start index are chosen, where a whistle is detected
+in all channels by the same algorithm as the existent whistle detection.
+% -------------------------------------------------------------
+
+\subsubsection*{Dynamic Reference Frequency}
+
+In the other case, the frame is chosen by doing a frequency analysis on
+multiple frames after the start index.
+The frequency $f_m$ belonging to the maximal magnitude of the signal spectrum
+is determined.
+The first frame is chosen where $f_m$ is equal for all channels and
+within whistle range.
+For better understanding, the $f_m$s per frame are plotted in \cref{fig:03_maxFreq}.
+Here, one sees that the conditions apply at the beginning of the whistle signal.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/maxFreq}
+	\caption{Frequencies of maximal magnitude in signal spectrum per frame.}
+    \label{fig:03_maxFreq}
+\end{figure}
+% -------------------------------------------------------------

@@ -1,85 +1,88 @@
 \subsection{Front and Rear Distance}
 \label{subsec:03_distance}
 
-\change[]{Image! Coordinate is not correct for set coordinate system}
+% \change[]{Image! Coordinate is not correct for set coordinate system}
 
-For simplicity, the direction of the sound source is determined in
-horizontal plane only.
-However, the front and rear microphones differ 0.0212\si{m} in height
-what can provide rough information about the distance of the sound source
-for the particular case when the signal comes straight from front or behind.
-If $delay_{01}$ and $delay_{32}$ are both very small, the signal comes from
+% For simplicity, the direction of the sound source is determined in
+% horizontal plane only.
+% However, the front and rear microphones differ 0.0212\si{m} in height
+% what can provide rough 
+For the particular case when the signal comes straight from front or behind
+the distance of the sound source can be estimated approximately.
+If $delay_{01}$ (delay between channel 0 and 1) and $delay_{32}$ (delay between channel 3 and 2)
+are both very small, the signal comes from
 the front or the back most likely.
-Figure ...\missing[]{reference to nao channel figure} evinces, that one of
-the sidewise delays need to be larger or equal to 5.41 samples
-\change[]{number to variable?} for a signal to arrive from sideways.
-When the delays of the side channels are smaller, they can be used to
-detect the angle of the sound source in vertical YZ plane.
-
-\Cref{fig:02_headSideTdoa} is a lateral illustration of
-the NAO's right microphones $channel_1$ and $channel_3$.
+In theory, for this case the lateral delays are larger or equal the maximal
+sample difference between the front and rear channels on the x-axis which is
+to 5,41 samples.
+With smaller lateral delays and some assumptions, the angle of the sound source in XZ
+plane can be estimated.
+\Cref{fig:02_headSideTdoa} illustrates the NAO's head from the right with
+channels 1 and 3.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
 		\includegraphics[width=0.45\columnwidth]{figures/side_head_tdoa}
-	\caption{Illustration of arriving sound for sources from near behind.}
+    \caption{Illustration of arriving sound for sources from near behind.
+             Adapted from \cite{nao_docu}.}
     \label{fig:02_headSideTdoa}
 \end{figure}
 % -------------------------------------------------------------
-With the delay $D$, the angle of the sound source $\gamma$ relative
-to the Z-axis can be determined with
+
+Assuming, that $delay_{01}$ and $delay_{32}$ are small,
+the angle of the sound source $\gamma$ relative
+to the Z-axis can be determined with delay $D$ as
 % -------------------------------------------------------------
 \bsub \bal
 \gamma &= \alpha + \gamma'\\
-\gamma' &= sign(D) \cdot sin^{-1}(\frac{D}{D_{max}})\\
-\intertext{with}
-\alpha &= tan^{-1}(\frac{\Delta z_{channel}}{\Delta x_{channel}})
+\gamma' &= sign(D) \cdot sin^{-1}\left(\frac{D}{D_{max}}\right)\\
+\intertext{whereby}
+\alpha &= tan^{-1}\left(\frac{\Delta z_{channel}}{\Delta x_{channel}}\right)
 \eal \esub
 which is the angle to the orthogonal axis to the plane though
 front and rear channels.
+$\Delta z_{channel}$ and $\Delta x_{channel}$ are the distances between the channels
+in z- and x-direction in \si{\meter}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
 		\includegraphics[width=0.6\columnwidth]{figures/x_distance}
-	\caption{}
+	\caption{Illustration of distance estimation.}
     \label{fig:02_xDistance}
 \end{figure}
 % -------------------------------------------------------------
-Known that the sound source is positioned above of the robot, the distance
+
+Known that the sound source is ordinarily positioned above of the robot, the distance
 of the sound source can be approximated with an assumed height $\Delta h_{source}$
-of the source.
-So, the distance to the sound source is
+of the source. $\Delta h_{source}$ differs from referee and thus, is only
+a averaged value.
+So, the distance in x-direction $\Delta x$ is
 % -------------------------------------------------------------
 \bal
 \Delta x &= (\Delta h_{source} - \Delta h_{NAO}) \cdot \tan(\gamma).
 \label{eq:02_deltaX}
 \eal
 % -------------------------------------------------------------
-If the front and rear direction candidates dissolve each other to a small
-value, it is assumed that the signal source is on the X-axis of the robot.
-The side delays are then used as indicator for the distance to the robot
-%  as
-% explained in \cref{sec:02_distance} and 
-\change[]{removed cref}
-need to be smaller than
-\change[]{change name?} $samples_{xz}$.
-To estimate the distance, the height of the sound source needs to be set as
-constant \change[]{change name?} \lstinline!height_source!.\\
+
+The distance estimation is triggered, if the direction candidates of
+$delay_{01}$ and $delay_{32}$ are smaller than $\pm$ 10\si{\degree}
+or larger than $\pm$ 170\si{\degree}.
+Additionally, the lateral delays must be smaller than 5,41 samples as mentioned above.
+
 Restrictions of the front and rear distance measurement differ.
 For the front case, the maximal angle for a unambiguous distance calculation
 is $\frac{\pi}{2}- 2\alpha$.
 Thus, the maximal front distance that can be approximated shrinks to
 $\Delta x = (\Delta h_{source} - \Delta h_{NAO}) \cdot \tan(\frac{\pi}{2} - 2\alpha)$
 according to \cref{eq:02_deltaX}.
-To the rear, the maximal value for $\gamma$ is bounded by \change[]{naming?}
-\lstinline!xz_delay_limit!.
-Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{NAO}$ to 0,57\si{m},
-the maximal measurable distance to the front is about 0.66\si{m}.
-With the same values and 5.3 samples as \lstinline!xz_delay_limit!, the
-minimum $\Delta x$ value is 33.29\si{m}.
-\missing[]{removed code}
-% \code{distance}{0}{35}{Pseudo code of distance approximation on X-axis.}{03_distance}
-\unsure[]{I am not really sure how pseudo codes should look like and if one is necessary anyway?}
+To the rear, the maximal value for $\gamma$ is bounded by the 5,41 samples that
+are set as condition.
+Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{NAO}$ to 0,57\si{\meter} for example,
+the maximal measurable distance to the front is about 0,66\si{\meter}.
+With the same values the maximal distance backwards is around 9\si{\meter}.
+\change[]{CORRECT DISTANCE!}
+
+% -------------------------------------------------------------
 
 \subsection{SNR and PSNR}
 \label{subsec:03_snr}
