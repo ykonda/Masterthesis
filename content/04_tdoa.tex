@@ -110,11 +110,11 @@ Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 
 For detecting the source direction with phase difference, a smaller frame
 size of 64 samples is defined.
-Previously in \cref{subsec:03_phase}, two cases were introduced where either a
+Previously in \cref{subsubsec:03_phase}, two cases were introduced where either a
 fixed frequency is set or a frequency that is dominant for all four channels is
 taken for reference.
 
-\subsubsection*{Dynamic Frequency Selection}
+\subsubsection*{Dynamic Reference Frequency Selection}
 
 First, the result of the dynamically selected frequency is presented.
 As stated in the implementation chapter, the frame is chosen where the
@@ -170,10 +170,10 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \end{figure}
 % -------------------------------------------------------------
 
-\subsubsection*{Static Frequency Selection}
+\subsubsection*{Static Reference Frequency Selection}
 
 Secondly, the frequency to examine $f_c$ is set to the first represented frequency
-larger than 2600\si{\hertz} which is 2627,1\si{\hertz} with a \ac{FFT} length
+larger than 2600\si{\hertz} which is 2670,1\si{\hertz} with a \ac{FFT} length
 of 256.
 At this frequency, outcome of the direction candidates listed in \cref{tab:04_fixedFreqResult}
 is -29,6\si{\degree} which results in an error of 4,1\si{\degree}.
@@ -192,12 +192,12 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \hline
 \etab
 \et{Resulting candidates of phase difference method with fixed frequency
-	2627,1Hz of example measurement from front right
+	2670,1Hz of example measurement from front right
 	(-33,7\si{\degree})}{04_fixedFreqResult}
 % -------------------------------------------------------------
 
 % Configuration for Phase Method
-\subsubsection*{Static Frequency Value}
+\subsubsection*{Static Reference Frequency Value}
 \label{subsubsec:04_fixedFrequencyVal}
 
 In order to observe the influence of the chosen frequency $f_c$
@@ -214,10 +214,10 @@ frequencies smaller than 2600\si{\hertz}.
 With a frequency of 2024.12\si{\hertz}, error is largest.
 The result complies with the information in \cref{fig:03_maxFreq} showing that
 in a whistle signal frequencies higher than 2500\si{\hertz} are dominant.
-With this outcome, the fixed frequency is set to 2627,1\si{\hertz}
+With this outcome, the fixed frequency is set to 2670,1\si{\hertz}
 for further usage of the direction detection by phase method.
 Limitation exists due to the ambiguity of the signal which is
-content of \cref{subsec:03_phase}.
+content of \cref{subsubsec:03_phase}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering

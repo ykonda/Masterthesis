@@ -91,7 +91,7 @@ a clean-cut delimitation between signal and noise which is set by the
 start index.
 Thus, the \ac{SNR} which is defined as
 \bal
-    SNR_{db} = 10\log_{10}(\frac{P_{signal} - P_{noise}}{P_{noise}})
+    SNR_{db} = 10\log_{10}\left(\frac{P_{signal} - P_{noise}}{P_{noise}}\right)
     \label{eq:03_snr}
 \eal
 in decibels can be implemented straightforwardly.
@@ -107,7 +107,7 @@ As stated in \cref{sec:02_gcc}, the most significant characteristic
 of the \ac{GCC-PHAT} is the resulting sharp peak which now can be
 assessed with one value
 \bal
-    PSNR_{db} = 10\log_{10}(\frac{P_{peak}}{P_{noise}}).
+    PSNR_{db} = 10\log_{10}\left(\frac{P_{peak}}{P_{noise}}\right).
     \label{eq:03_psnr}
 \eal
 From the implementation view, the power of the correlation peak is divided by
