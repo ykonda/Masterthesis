@@ -26,8 +26,8 @@ single robot to compute the distance from multiple robots (e.g. single robot
 has to be able to resolve ambiguity of multiple candidates.))}
 To examine the validity of these assumptions, measurements from the front and
 back of the robot are collected and evaluated.
-\Cref{tab:04_distance} lists the distances and their results by the
-all methods.
+\Cref{tab:04_distance} lists the true distance as well as the distance estimate
+for each measurement.
 For both measurements with zero distance, the orientation of the whistle differed.
 180\si{\degree} indicates that the whistle was turned in the opposite direction
 of the robot.
@@ -35,11 +35,21 @@ In the other case (0\si{\degree}), the whistle was aligned with the robot.
 The distance is represented in robot coordinates, so that positive distance
 expresses that the source was placed in front of the robot and oriented towards it
 and vise versa.
+\todo[inline]{Maybe it would be good to use the same convention for all
+measurements here. You could either annotate all measurements with an angle and
+only positive distances or have a only a sign for all measurements (omit angle
+for 0 as you can simply write +0 and -0) but have an explicit sign for all
+measurements ( write +0.9 instead of 0.9)}
+\todo[inline]{It might be more helpful to report errors here instead of the
+estimates, but it's not a big problem if you leave it like this.}
+\todo[inline]{I am guessing that for measurement 1 and 2 the true distance was
+6 and 9 meters rather than 0.6 and 0.9 meters? Also, is there a reason why you
+have more measurements from the back than from the front?}
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|c|}
 \hline
-Nr. & Real Distance [\si{\meter}] & GCC Result [\si{\meter}] & CC Result [\si{\meter}] & Phase Result [\si{\meter}]\\
+Nr. & True Distance [\si{\meter}] & GCC Result [\si{\meter}] & CC Result [\si{\meter}] & Phase Result [\si{\meter}]\\
 \hline
 1 & 0,9 & $\infty$  & $\infty$ & $\infty$ \\
 \hline
@@ -77,19 +87,31 @@ Nr. & Real Distance [\si{\meter}] & GCC Result [\si{\meter}] & CC Result [\si{\m
 \et{Result of front and rear distance for all methods.}{04_distance}
 % -------------------------------------------------------------
 
-As the results show, the distance can be approximated with adequate error.
-One can see that the \ac{GCC} results are erroneous for small distances,
-but gives a correct approximation steadily.
+As the results show, that in many cases the distance can be approximated with
+adequate\todo{adequate rather means something like "hinreichend/ausreichend", maybe use "adequately
+small error" oder "sufficiently small error"} error. One can see that the
+\ac{GCC} results are erroneous for small
+distances, but gives a correct approximation steadily.\todo{What do you mean by "steadily"?}
 Compared to this, the \ac{CC} method performs better for small distances,
 but fails completely for some measurements.
-Those failing cases mostly arose when lateral delays exceeded the maximum
-lateral samples incorrectly.
-The phase methods provides most incorrect results.
+These failures of the \ac{CC} could be mostly attributed to cases where the
+lateral delays exceeded the maximum lateral samples incorrectly.\todo{What do
+you mean by "exceeded incorrectly", maybe drop "incorrectly"?}
+The phase method provides most incorrect results.
 Especially measurement 10 stands out by being double the real value.
+
+\todo[inline]{Maybe you can show only the error statistics here and put the
+real measurements in the appendix?}
 
 For all measurements, the resulting direction angle of the sound source were
 accurate.
-Rightfully, the algorithm detects sources that are out of observable range.
+\todo[inline]{For all measurements and all methods? Or does this statement only
+hold for GCC? It seems like CC and Phase have some wrong predictions in 12 and
+13}
+Furthermore, the algorithm correctly detects sources that are out of
+observable range.\todo{Is this the "observable range" or should this rather be
+the "relevant range" (since these bounds seem to be imposed by SPL, not in
+general)}
 
 Unfortunately, for real cases one can not rely on the height parameter of the sound
 source which varies from the referee's body height.
@@ -99,9 +121,11 @@ with care.
 \subsection{SNR}
 \label{subsec:04_snr}
 
-The validity of a result can be brought in the Bayesian updating algorithm.
-Depending on the uncertainty, the covariance value of the incoming result can be adjusted
-so that unreliable results have less influence to the filtering.
+Estimates of the uncertainty of a measurement can be utilized to inform the
+Bayesian updating algorithm.
+Depending on the uncertainty, the covariance matrix of the incoming result can
+be adjusted so that predictions that are assumed to have higher error have
+a smaller influence to the posterior estimate.
 If a relation between received signal strength and distance to the source exists,
 it would be a simple way to predict the sound source position roughly.
 This can help for example, when team filter intersections are clustered so that
@@ -116,7 +140,11 @@ the \ac{SNR} is scaled by the overall mean of all robots' \acp{SNR} for one
 measurement.
 % $\text{Relative SNR} = \frac{SNR_{robot}}{Mean(SNR_{measurement})}$.
 In \cref{fig:04_snrDistance} no straightforward
-link between both values can be found unexpectedly.
+link between both values can be found unexpectedly.\todo{I would not write
+"unexpectedly" here.}
+\todo[inline]{Maybe report the correlation of these measurements. You can then
+say, that SNR and Distance are only weakly correlated (small rho) which is
+a bit more precise that using the "optisch gefuehlte Korrelation".}
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
