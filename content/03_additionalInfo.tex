@@ -37,7 +37,7 @@ to the Z-axis can be determined with delay $D$ as
 \gamma &= \alpha + \gamma'\\
 \gamma' &= sign(D) \cdot sin^{-1}\left(\frac{D}{D_{max}}\right)\\
 \intertext{whereby}
-\alpha &= tan^{-1}\left(\frac{\Delta z_{channel}}{\Delta x_{channel}}\right)
+\alpha &= tan^{-1}\left(\frac{\Delta z_{channel}}{\Delta x_{channel}}\right) \approx 26,73\si{\degree}
 \eal \esub
 which is the angle to the orthogonal axis to the plane though
 front and rear channels.
@@ -79,17 +79,18 @@ To the rear, the maximal value for $\gamma$ is bounded by the 5,41 samples that
 are set as condition.
 Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{NAO}$ to 0,57\si{\meter} for example,
 the maximal measurable distance to the front is about 0,66\si{\meter}.
-With the same values the maximal distance backwards is around 9\si{\meter}.
-\change[]{CORRECT DISTANCE!}
+With the same values the maximal distance backwards is more than 50\si{\meter} in theory.
+However, measurements in \cref{subsec:04_distance} show that 7\si{\meter} is the
+limit for the real case.
 
 % -------------------------------------------------------------
 
-\subsection{SNR and PSNR}
+\subsection{SNR}
 \label{subsec:03_snr}
 
 The \acf{SNR} is a common value to express the signal power $P_{signal}$ compared
 to power of the background noise $P_{noise}$.
-Conveniently, the buffered audio signal in this work always consists of
+Conveniently, the buffered audio signal in this thesis always consists of
 a clean-cut delimitation between signal and noise which is set by the
 start index.
 Thus, the \ac{SNR} which is defined as
@@ -102,6 +103,8 @@ Informational content about this measure is investigated in \cref{subsec:04_snr}
 Expectations are that the \ac{SNR} can be feed into the covariance matrix
 of an incoming result in the Bayesian update process.
 
+\subsection{PSNR}
+\label{subsec:03_psnr}
 In image processing, the \acf{PSNR} indicates the quality of a compressed
 image. Here in this work, the ratio between the peak of a signal
 and its noise is related to the \ac{GCC-PHAT} outcome and called \ac{PSNR}
