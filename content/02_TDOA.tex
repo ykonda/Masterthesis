@@ -11,14 +11,27 @@ Here, the signal arrives first at channel 0. Ideally, the same signal values
 are measured at channel 1 with delay $D$.
 If the delay is zero, the signal is perpendicular to the channels vector.
 Its value can be $D_{max}$ maximally which in that case delivers the
-result of the source direction vector being aligned to the channels vector.
+result of the source direction vector being opposite to the \textit{channels vector}.
+The channels vector is defined as vector directing from one channel to another which
+in this case starts at channel 0 and points towards channel 1.
 It is assumed that the distance from the sensors to the sound source is
 significantly large so that the signal waves proceed parallel which is a necessary
 criterion for the approach to be valid.
 \begin{figure}[ht]
-	\centering
-		\includegraphics[width=0.4\columnwidth]{figures/tdoa_waves}
-	\caption{Illustration of TDOA principle.}
+    \centering
+    \subfigure[Illustration of TDOA principle where signal comes from front.]{
+        \includegraphics[width=0.4\columnwidth]{figures/tdoa_waves}
+        \label{fig:02_tdoaFront}
+    }
+    % \qquad
+    \\
+    \subfigure[Illustration of \ac{TDOA} principle for the second possible case
+               with equal delay where signal comes from rear.]{
+        \includegraphics[width=0.4\columnwidth]{figures/tdoa_waves_rear}
+        \label{fig:02_tdoaRear}
+    }
+    \caption[Illustration of TDOA]{Picturing both possible sources of the sound when a delay D is
+               measured between channels 0 and 1.}
     \label{fig:02_tdoa}
 \end{figure}
 % -------------------------------------------------------------
@@ -33,11 +46,11 @@ $\gamma'$ can be defined as
 \eal \esub
 where $f_s$ is the sampling rate and $d_{01}$ is the distance between both channels.
 Not to forget is the ambiguity of the result by observing two channels only.
-Having a look at \cref{fig:02_tdoa} once more and assuming that the sound source
+Having a look at \cref{fig:02_tdoaFront} once more and assuming that the sound source
 is positioned in front in this case, the same delay can be the result of a
 sound source from behind.
 For quick understanding, one can find an illustration of the second possible
-source directions in \cref{fig:ap1_tdoaRear}.
+source directions in \cref{fig:02_tdoaRear}.
 
 % -------------------------------------------------------------
 
