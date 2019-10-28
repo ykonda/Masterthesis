@@ -22,10 +22,10 @@ and noise of sensors may introduce false peaks in the \ac{CC} \cite{H_B_GCC}.
 In frequency domain, the signals $x_0(t)$ and $x_1(t)$ from \cref{eq:02_signalTimeDomain}
 can be expressed as
 \bsub
-\label{eq:02_signalFreqDomain}
-\bal
-    X_0(f) &= S(f) + N_0(f)\\
-    X_1(f) &= \alpha S(f) e^{-j2\pi fD}+ N_1(f).
+    \label{eq:02_signalFreqDomain}
+    \bal
+        X_0(f) &= S(f) + N_0(f)\\
+        X_1(f) &= \alpha S(f) e^{-j2\pi fD}+ N_1(f).
 \eal \esub
 % -------------------------------------------------------------
 Thus, the \ac{CC} is
@@ -33,12 +33,12 @@ Thus, the \ac{CC} is
 \label{eq:02_Gx0x1}
 \bal
     G_{x_0x_1}(f) &= \alpha |S(f)|^2 e^{-j2\pi fD} + N_0^*(f)N_1(f) + S^*(f) N_1(f) + \alpha S(f) e^{-j2\pi fD}N_0^*(f)\\
-\intertext{which will be shortened as}
+    \intertext{which will be shortened as}
     G_{x_0x_1}(f) &= \alpha \phi_s(f) e^{-j2\pi fD} + \phi_n(f) + \phi_c(f) \label{eq_02_Gx0x1_simple} \\
-\intertext{where}
-\phi_s(f) &= |S(f)|^2 \label{eq:02_phi_s} \\
-\phi_n(f) &= N_0^*(f)N_1(f) \label{eq:02_phi_n1n2} \\
-\phi_c(f) &= S^*(f) N_1(f)+\alpha S(f)e^{-j2\pi fD}N_0^*(f) \label{eq:02_phi_c}.
+    \intertext{where}
+    \phi_s(f) &= |S(f)|^2 \label{eq:02_phi_s} \\
+    \phi_n(f) &= N_0^*(f)N_1(f) \label{eq:02_phi_n1n2} \\
+    \phi_c(f) &= S^*(f) N_1(f)+\alpha S(f)e^{-j2\pi fD}N_0^*(f) \label{eq:02_phi_c}.
 \eal \esub
 %\cite{H_B_GCC}
 % -------------------------------------------------------------
@@ -66,16 +66,29 @@ the zero index and the peak is the resulting delay $D$.
 Zero index is defined as the index of the peak if no shift exists.
 % -------------------------------------------------------------
 
-\Cref{fig:03_ccTheory} is the outcome of two similar, but shifted sine signals with
-3\si{\kilo\hertz} and normally distributed noise.
+\Cref{fig:03_ccTheoryR} is the outcome of two similar, but shifted sine signals with
+3\si{\kilo\hertz} and normally distributed noise shown in \cref{fig:03_ccTheorySignals}.
 As the second signal is delayed by 10 samples, the peak can be detected where $shift = 10$.
-The example signals are attached in \cref{fig:ap1_signals}.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+    \centering
+    \subfigure[Generated example sine signals with 3\si{\kilo\hertz} after applying
+               Hann-window and sampled with 44.1\si{\kilo\hertz}.
+               \textit{signal 1} is the same signal as \textit{signal 0} but
+               shifted by 10 samples.]{
+        \includegraphics[width=0.9\columnwidth]{figures/signals_theory}
+        \label{fig:03_ccTheorySignals}
+    }
+    \\
+    \subfigure[Cross correlation of two generated sine signals with 3\si{\kilo\hertz}.]{
+        \includegraphics[width=0.9\columnwidth]{figures/CC_theory}
+        \label{fig:03_ccTheoryR}
+    }
+    \caption[\ac{CC} of generated example signal.]
+            {Graph of \ac{CC} of generated example signal.}
+    \label{fig:03_ccTheory}
+\end{figure}
+% -------------------------------------------------------------
 One disadvantage of this technique is that for periodic signals the \ac{CC} also is periodic
 and the peak is not always easily detectable. Noise and inaccuracies of the \ac{FFT} then
 may influence the result what can make the peak unobvious \cite{L_L_GCC}.
-\begin{figure}[ht]
-	\centering
-		\includegraphics[width=1\columnwidth]{figures/CC_theory}
-	\caption[]{Cross correlation of two generated sine signals with 3\si{\kilo\hertz}.}
-    \label{fig:03_ccTheory}
-\end{figure}
