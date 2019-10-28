@@ -131,7 +131,6 @@
 \usepackage{xcolor}
 
 \usepackage{listings}
-
 % Einfache Handhabung von Abkürzungen
 \usepackage{acronym}
 
@@ -279,6 +278,16 @@
 \usepackage{cleveref}
 % \renewcommand\lstlistingname{Sourcecode}
 % \crefname{listing}{sourcecode}{sourcecodes}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{adjustbox}
+\makeatletter
+\let\OldStatex\Statex
+\renewcommand{\Statex}[1][3]{%
+  \setlength\@tempdima{\algorithmicindent}%
+  \OldStatex\hskip\dimexpr#1\@tempdima\relax}
+\makeatother
 
 % Herausgehobene Todos
 \usepackage[colorinlistoftodos, prependcaption, textsize=small]{todonotes}
