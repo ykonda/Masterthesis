@@ -10,55 +10,6 @@ task is set in focus.
 How the process of the multi-agent decision proceeds including the communication
 is dealt within \cref{subsec:03_teamCommunication}.
 
-Exemplary, two robots at position $\vec{p_1}$ and $\vec{p_2}$ with their \ac{WSDE} results
-are illustrated in \cref{fig:03_rays}.
-Every robot's result is represented as \textit{ray} which consists of the robot position
-$\vec{p_j}$ and the \ac{WSDE} angle $\Phi_j$, both in field coordinates.
-The \ac{WSDE} angle $\gamma_j$ is defined relative to the robot and the robot's orientation $\theta$
-is known by its team message information.
-Thus, the absolute angle is
-\bal
-\Phi_j &= \theta_j + \gamma_j\\
-\intertext{from which the whistle source direction ray can be described as}
-\vec{r_j} &= \vec{p_j} + \vec{d_j} % = \begin{pmatrix}p_{jx}\\p_{jy}\end{pmatrix} + \ell \begin{pmatrix}d_{jx}\\d_{jy}\end{pmatrix}
-    = \begin{pmatrix}p_{jx}\\p_{jy}\end{pmatrix} + \ell \begin{pmatrix}\cos(\Phi_j)\\\sin(\Phi_j)\end{pmatrix}.
-\eal
-
-An intersection point of two rays $\vec{r_j}$ and $\vec{r_k}$ is expressed as
-\bal
-    \vec{i_{jk}} &= \begin{pmatrix}i_{jkx}\\i_{jky}\end{pmatrix}
-\eal
-with x- and y-coordinates.
-If two real numbers $u$ and $v$ exist, so that
-\bal
-    \vec{i_{12}} &= \vec{p_1} + u \cdot \vec{d_1} = \vec{p_2} + v \cdot \vec{d_2}\\
-    \intertext{a intersection point can be determined by simple geometrical relations.
-               With the given terms and conditions $u$ and $v$ values are computed by
-               dividing the vectors into x- and y-value and solving the equations, resulting in}
-    u &= \frac{p_{1y} \cdot d_{2x} + d_{2y} \cdot p_{2x} - p_{2y} \cdot d_{2x} - d_{2y} \cdot p_{1x}}
-            {d_{1x} \cdot d_{2y} - d_{1y} \cdot d_{2x}}\\
-    v &= \frac{p_{1x} + d_{1x} \cdot u - p_{2x}}{d_{2x}}.
-\eal
-% -------------------------------------------------------------
-
-\begin{figure}[ht]
-	\centering
-		\includegraphics[width=0.50\textwidth]{figures/rays}
-    \caption[Nomenclature for multi-agent localization algorithm]
-            {Nomenclature for multi-agent localization algorithm.}
-    \label{fig:03_rays}
-\end{figure}
-% -------------------------------------------------------------
-
-% DEFINITION COVARIANCE MATRIX
-The covariance matrix 
-\bal
-\frac{ix}{\delta \Phi_1} = \frac{(\cos(\Phi_2) \cdot (\cos(\Phi_1)^2 + \sin(\Phi_1)^2) \cdot ((p_{1y} - p_{2y}) \cdot \cos(\Phi_2) +
-                                  (-p_{1x} + p_{2x}) \cdot \sin(\Phi_2)))}
-                                  {(-\cos(\Phi_2) \cdot \sin(\Phi_1) + \cos(\Phi_1) \cdot \sin(\Phi_2))^2}
-\eal
-
-
 % -------------------------------------------------------------
 
 % PSEUDO CODE UPDATING ALGORITHM
