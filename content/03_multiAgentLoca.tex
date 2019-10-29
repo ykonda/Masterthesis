@@ -1,7 +1,7 @@
 \section{Multi-Agent Source Localization}
 \label{sec:03_multiAgentLoca}
 
-The final whistle sound source localization is realized by collecting the
+The final whistle source localization is realized by collecting the
 all \ac{WSDE} results of all active robots and combining the directions
 into one xy-position outcome.
 Two separate implementation details are covered in the following.
@@ -9,8 +9,21 @@ First, the actual localization algorithm that concludes the source localization
 task is set in focus.
 How the process of the multi-agent decision proceeds including the communication
 is dealt within \cref{subsec:03_teamCommunication}.
-
 % -------------------------------------------------------------
+
+As stated, the actual Bayesian updating filter algorithm is addressed first
+by paying attention on \cref{alg:03_multiAgentLoca}.
+With the specification of the filter made in \cref{subsec:02_2dTeam}, the
+whistle source localization is realized when the results of the individual robots
+are available.
+The multi-agent localization algorithm receives an array of rays that represent
+the \ac{WSDE} results in the field coordinate system.
+The whistle sound position to return consists of the x- and y-position $\vec{\mu}$ and
+a covariance matrix \textbit{C}.
+For each combination of the rays $R[j]$ and $R[k]$, the intersecting point position
+$\vec{\mu_{jk}}$ along with its covariance matrix $\textbit{C}_{jk}$ is examined.
+If such intersection exists, the whistle source position information is updated until
+until all intersections were taken into consideration.
 
 % PSEUDO CODE UPDATING ALGORITHM
 \begin{algorithm}[H]
@@ -23,12 +36,12 @@ is dealt within \cref{subsec:03_teamCommunication}.
                     \State $\textbf{\textit{C}}_{jk} \gets \Call{CalulateCovariance}{R[j], R[k]}$
                     \If{first intersection found}
                         \State $\vec{\mu} \gets \vec{\mu}_{jk}$
-                        \State $\textbf{\textit{Q}} \gets \textbf{\textit{C}}_{jk}$
+                        \State $\textbf{\textit{C}} \gets \textbf{\textit{C}}_{jk}$
                     \ElsIf{intersection found}
-                        \State $\textbf{\textit{S}}_{jk} \gets \textbf{\textit{Q}} + \textbf{\textit{C}}_{jk}$
-                        \State $\textbf{\textit{K}}_{jk} \gets \textbf{\textit{Q}} \cdot \textbf{\textit{S}}_{jk}^{-1}$
+                        \State $\textbf{\textit{S}}_{jk} \gets \textbf{\textit{C}} + \textbf{\textit{C}}_{jk}$
+                        \State $\textbf{\textit{K}}_{jk} \gets \textbf{\textit{C}} \cdot \textbf{\textit{S}}_{jk}^{-1}$
                         \State $\vec{\mu} \gets \vec{\mu} + \textbf{\textit{K}}_{jk} \cdot (\vec{\mu}_{jk} - \vec{\mu})$
-                        \State $\textbf{\textit{Q}} \gets \textbf{\textit{Q}} - \textbf{\textit{K}}_{jk} \cdot \textbf{\textit{Q}}$
+                        \State $\textbf{\textit{C}} \gets \textbf{\textit{C}} - \textbf{\textit{K}}_{jk} \cdot \textbf{\textit{C}}$
                     \EndIf
                 \EndFor
             \EndFor
@@ -38,25 +51,16 @@ is dealt within \cref{subsec:03_teamCommunication}.
 \end{algorithm}
 % -------------------------------------------------------------
 
-
-For the evaluation of the methods, the team decision is implemented in
-Python for offline analysis of the sample data additionally.
-
-% Each value input is paired with the other rays. If they cross, the
-% filter is updated with this intersection until all pairs of direction
-% rays are being considered.
-% \missing[]{More info}
-
-% For the real case, a team whistle localization module is
-% introduced into the HULKs' framework.
-% Here, each robots fills the result of the determined direction into
-% the team message.
-% \missing[inline]{How this works.}
-
 \subsection{Team Communication}
 \label{subsec:03_teamCommunication}
 
-To agree on a whistle position as multi-agent system, the detected sound source
-direction is added into the team message as float.
-Depending on the implementation, additional information like distance or
-\ac{PSNR} can be appended.
+To agree on a whistle position as multi-agent system by computing the whistle
+localization algorithm \cref{alg:03_multiAgentLoca}, the \ac{WSDE} results of the
+stand-alone robots must be collected.
+As introduced in \cref{sec:03_naoFramework}, the robots are able to send and receive
+information from team mates wirelessly.
+By present implementation, the team message includes xy-position information as well as
+the orientation of all connected robots.
+Thus, only the angular \ac{WSDE} and its additional information (distance, \ac{PSNR}) are to be
+appended to the team message.
+
