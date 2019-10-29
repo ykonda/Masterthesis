@@ -19,16 +19,16 @@ is dealt within \cref{subsec:03_teamCommunication}.
         \Procedure {WhistleLocalization}{$array<R>$}
             \For{$j \in 0:R.size()$}
                 \For{$k \in j+1:R.size()$}
-                    \State $\vec{i} \gets \Call{FindIntersection}{R[j], R[k]}$
-                    \State $\textbf{\textit{C}} \gets \Call{CalulateCovariance}{R[j], R[k]}$
+                    \State $\vec{i}_{jk} \gets \Call{FindIntersection}{R[j], R[k]}$
+                    \State $\textbf{\textit{C}}_{jk} \gets \Call{CalulateCovariance}{R[j], R[k]}$
                     \If{first intersection found}
-                        \State $\vec{\mu} \gets \vec{i}$
-                        \State $\textbf{\textit{Q}} \gets \textbf{\textit{C}}$
+                        \State $\vec{\mu} \gets \vec{i}_{jk}$
+                        \State $\textbf{\textit{Q}} \gets \textbf{\textit{C}}_{jk}$
                     \ElsIf{intersection found}
-                        \State $\textbf{\textit{S}} \gets \textbf{\textit{Q}} + \textbf{\textit{C}}$
-                        \State $\textbf{\textit{K}} \gets \textbf{\textit{Q}} \cdot \textbf{\textit{S}}^{-1}$
-                        \State $\vec{\mu} \gets \vec{\mu} + \textbf{\textit{K}} \cdot (\vec{i} - \vec{\mu})$
-                        \State $\textbf{\textit{Q}} \gets \textbf{\textit{Q}} - \textbf{\textit{K}} \cdot \textbf{\textit{Q}}$
+                        \State $\textbf{\textit{S}}_{jk} \gets \textbf{\textit{Q}} + \textbf{\textit{C}}_{jk}$
+                        \State $\textbf{\textit{K}}_{jk} \gets \textbf{\textit{Q}} \cdot \textbf{\textit{S}}_{jk}^{-1}$
+                        \State $\vec{\mu} \gets \vec{\mu} + \textbf{\textit{K}}_{jk} \cdot (\vec{i}_{jk} - \vec{\mu})$
+                        \State $\textbf{\textit{Q}} \gets \textbf{\textit{Q}} - \textbf{\textit{K}}_{jk} \cdot \textbf{\textit{Q}}$
                     \EndIf
                 \EndFor
             \EndFor
