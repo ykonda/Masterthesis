@@ -28,12 +28,20 @@ formulated to
 \subsection{Two Dimensional Case}
 \label{subsec:02_2dTeam}
 
-Imaging having results from two agents that accomplished the \ac{WSDE} algorithm by
+Imaging having results from two agents $robot_j$, $robot_k$ that accomplished the \ac{WSDE} algorithm by
 computing the \ac{TDOA} with any method, either the \ac{WSDE} angles of both robots
 cross and an intersection point would be found or no final whistle source position result arises.
-Each of these intersection points can be interpreted as whistle source positions
-with given state $\mu$ and variance $\sigma$ of \cref{eq:02_probabilityDensity}.
-Final whistle source position of all robots is estimated by iterating over
+Each of these intersection points $\vec{i_{jk}}$ can be described as whistle source position
+state $\vec{\mu_{jk}}$ with variance $\textbit{C}_{jk}$ in accordance to \cref{eq:02_probabilityDensity}.
+% -------------------------------------------------------------
+
+Furthermore, the following nomenclature applies:
+\begin{itemize}
+\item $\vec{v}$: vector pointing at $\left( \begin{matrix} v_x \\ v_y \end{matrix} \right)$ in
+      x- and y-coordinates
+\item \textbit{M}: matrix with elements $\left( \begin{matrix} m_{xx} & m_{xy} \\ m_{yx} & m_{yy} \end{matrix} \right)$.
+\end{itemize}
+Final whistle source position $\vec{\mu}$ of all robots is estimated by iterating over
 all intersections and updating the result with \cref{eq:02_intersectionState}.
 
 Exemplary, two robots at position $\vec{p_j}$ and $\vec{p_k}$ with their \ac{WSDE} results
@@ -60,30 +68,30 @@ Thus, the absolute angle is
 \label{eq:03_ray}
 \eal
 
-An intersection point of two rays $\vec{r_j}$ and $\vec{r_k}$ is expressed as
+An position of an intersection point by two rays $\vec{r_j}$ and $\vec{r_k}$ is expressed as
 \bal
-    \vec{i_{jk}} &= \begin{pmatrix}i_{jkx}\\i_{jky}\end{pmatrix}
+    \vec{\mu_{jk}} &= \begin{pmatrix}\mu_{jkx}\\\mu_{jky}\end{pmatrix}
 \eal
 with x- and y-coordinates.
 If two real numbers $u$ and $v$ exist, so that
 \bal
-    \vec{i_{12}} &= \vec{p_1} + u \cdot \vec{d_1} = \vec{p_2} + v \cdot \vec{d_2}
+    \vec{\mu_{jk}} &= \vec{p_j} + u \cdot \vec{d_j} = \vec{p_k} + v \cdot \vec{d_k}
     \label{eq:03_intersection}
     \\
     \intertext{a intersection point can be determined by simple geometrical relations.
                With the given terms and conditions $u$ and $v$ values are computed by
                dividing the vectors into x- and y-value and solving the equations, resulting in}
-    u &= \frac{p_{1y} \cdot d_{2x} + d_{2y} \cdot p_{2x} - p_{2y} \cdot d_{2x} - d_{2y} \cdot p_{1x}}
-            {d_{1x} \cdot d_{2y} - d_{1y} \cdot d_{2x}}
+    u &= \frac{p_{jy} \cdot d_{kx} + d_{ky} \cdot p_{kx} - p_{ky} \cdot d_{kx} - d_{ky} \cdot p_{jx}}
+            {d_{jx} \cdot d_{ky} - d_{jy} \cdot d_{kx}}
             \label{eq:03_intersectionU}
             \\
-    v &= \frac{p_{1x} + d_{1x} \cdot u - p_{2x}}{d_{2x}}.
+    v &= \frac{p_{jx} + d_{jx} \cdot u - p_{kx}}{d_{kx}}.
 \eal
 % -------------------------------------------------------------
 
 % DEFINITION COVARIANCE MATRIX
 The covariance matrix $\textbit{C}_{jk}$ is obtained in the spirit of an Extended Kalman filter \cite{kalman}
-considering the Jacobian matrix $\textbit{J}_{jk}(\Phi_j, \Phi_k)$ and the average angle error $\varepsilon_{\Phi}$
+considering the Jacobian matrix of an intersection point $\textbit{J}_{i}(\Phi_j, \Phi_k)$ and the average angle error $\varepsilon_{\Phi}$
 over all available measurements.
 Expressing the direction vector $\vec{d}_j$ of the ray by angle $\Phi_j$ as in \cref{eq:03_ray}, the covariance
 matrix of the intersection of two rays $\vec{r}_j$ and $\vec{r}_k$ is
@@ -94,28 +102,52 @@ matrix of the intersection of two rays $\vec{r}_j$ and $\vec{r}_k$ is
                         \varepsilon_{\Phi} & 0 \\
                         0 & \varepsilon_{\Phi} \\
                       \end{matrix} \right) \cdot \textbit{J}_i(\Phi_j, \Phi_k)
+     =
+    \left(\begin{matrix}
+        \sigma_{xx}^2 & 0 \\ 0 & \sigma_{yy}^2 \\
+    \end{matrix}\right)
 \\
 \intertext{with the Jacobian matrix}
 \textbit{J}_i(\Phi_j, \Phi_k) &= \left(\begin{matrix}
-    \frac{\partial ix}{\partial \Phi_j} & \frac{\partial ix}{\partial \Phi_k} \\
-    \frac{\partial iy}{\partial \Phi_j} & \frac{\partial iy}{\partial \Phi_k} \\
+    \frac{\partial \mu_x}{\partial \Phi_j} & \frac{\partial \mu_x}{\partial \Phi_k} \\
+    \frac{\partial \mu_y}{\partial \Phi_j} & \frac{\partial \mu_y}{\partial \Phi_k} \\
     \end{matrix}\right).
 \eal
 \esub
 The elements of the Jacobian result by derivation of the intersection formula \cref{eq:03_intersection}
 with \cref{eq:03_intersectionU,eq:03_ray} and yield
 \begin{align*}
-\frac{\partial ix}{\partial \Phi_1} &= \frac{(\cos(\Phi_2) \cdot (\cos(\Phi_1)^2 + \sin(\Phi_1)^2) \cdot ((p_{1y} - p_{2y}) \cdot \cos(\Phi_2) +
-                                  (-p_{1x} + p_{2x}) \cdot \sin(\Phi_2)))}
-                                  {(-\cos(\Phi_2) \cdot \sin(\Phi_1) + \cos(\Phi_1) \cdot \sin(\Phi_2))^2}
+\frac{\partial \mu_x}{\partial \Phi_j} &= \frac{(\cos(\Phi_k) \cdot (\cos(\Phi_j)^2 + \sin(\Phi_j)^2) \cdot ((p_{jy} - p_{ky}) \cdot \cos(\Phi_k) +
+                                  (-p_{jx} + p_{kx}) \cdot \sin(\Phi_k)))}
+                                  {(-\cos(\Phi_k) \cdot \sin(\Phi_j) + \cos(\Phi_j) \cdot \sin(\Phi_k))^2}
                                   \\
-\frac{\partial ix}{\partial \Phi_2} &= \frac{-(\cos(\Phi_1) \cdot (\cos(\Phi_2)^2 + \sin(\Phi_2)^2) \cdot ((p_{1y} - p_{2y}) \cdot \cos(\Phi_1) + (-p_{1x} + p_{2x}) \cdot \sin(\Phi_1)))}
-                                {(\cos(\Phi_1) \cdot \sin(\Phi_2) - \cos(\Phi_2) \cdot \sin(\Phi_1))^2}
+\frac{\partial \mu_x}{\partial \Phi_k} &= \frac{-(\cos(\Phi_j) \cdot (\cos(\Phi_k)^2 + \sin(\Phi_k)^2) \cdot ((p_{jy} - p_{ky}) \cdot \cos(\Phi_j) + (-p_{jx} + p_{kx}) \cdot \sin(\Phi_j)))}
+                                {(\cos(\Phi_j) \cdot \sin(\Phi_k) - \cos(\Phi_k) \cdot \sin(\Phi_j))^2}
                                 \\
-\frac{\partial iy}{\partial \Phi_1} &= \frac{(\cos(\Phi_1)^2 + \sin(\Phi_1)^2) \cdot \sin(\Phi_2) \cdot ((p_{1y} - p_{2y}) \cdot \cos(\Phi_2) + (-p_{1x} + p_{2x}) \cdot \sin(\Phi_2))}
-                                {(-\cos(\Phi_2) \cdot \sin(\Phi_1) + \cos(\Phi_1) \cdot \sin(\Phi_2))^2}
+\frac{\partial \mu_y}{\partial \Phi_j} &= \frac{(\cos(\Phi_j)^2 + \sin(\Phi_j)^2) \cdot \sin(\Phi_k) \cdot ((p_{jy} - p_{ky}) \cdot \cos(\Phi_k) + (-p_{jx} + p_{kx}) \cdot \sin(\Phi_k))}
+                                {(-\cos(\Phi_k) \cdot \sin(\Phi_j) + \cos(\Phi_j) \cdot \sin(\Phi_k))^2}
                                 \\
-\frac{\partial iy}{\partial \Phi_2} &= \frac{(\cos(\Phi_2)^2 + \sin(\Phi_2)^2) \cdot \sin(\Phi_1) \cdot ((-p_{1y} + p_{2y}) \cdot \cos(\Phi_1) + (p_{1x} - p_{2x}) \cdot \sin(\Phi_1))}
-                                {(\cos(\Phi_1) \cdot \sin(\Phi_2) - \cos(\Phi_2) \cdot \sin(\Phi_1))^2}.
+\frac{\partial \mu_y}{\partial \Phi_k} &= \frac{(\cos(\Phi_k)^2 + \sin(\Phi_k)^2) \cdot \sin(\Phi_j) \cdot ((-p_{jy} + p_{ky}) \cdot \cos(\Phi_j) + (p_{jx} - p_{kx}) \cdot \sin(\Phi_j))}
+                                {(\cos(\Phi_j) \cdot \sin(\Phi_k) - \cos(\Phi_k) \cdot \sin(\Phi_j))^2}.
 %  \label{eq:03_jacobianElements}
 \end{align*}
+% -------------------------------------------------------------
+
+% IN MATRIX FORMULATION
+The one-dimensional formulation \cref{eq:02_intersectionState} can be rewritten by defining
+an updating matrix \textbit{K} as combination of present and incoming covariance
+\bal
+    \textbit{K} = \frac{\textbit{C}}{\textbit{C} + \textbit{C}_{jk}}.
+\eal
+
+It follows the new two-dimensional probability density function for the estimated
+whistle position with
+\bsub
+\bal
+    \vec{\mu}' &= \vec{\mu} + \textbit{K} \cdot \left(\vec{\mu_{jk}} - \vec{\mu}\right)
+    \\
+    \intertext{being the latest state along with}
+    \textbit{C}' &= \textbit{C} = \textbit{C} - \textbit{K} \cdot \textbit{C}
+\eal
+\esub
+as its updated covariance matrix.
