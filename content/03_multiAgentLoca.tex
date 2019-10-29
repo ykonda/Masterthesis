@@ -59,8 +59,29 @@ localization algorithm \cref{alg:03_multiAgentLoca}, the \ac{WSDE} results of th
 stand-alone robots must be collected.
 As introduced in \cref{sec:03_naoFramework}, the robots are able to send and receive
 information from team mates wirelessly.
-By present implementation, the team message includes xy-position information as well as
-the orientation of all connected robots.
-Thus, only the angular \ac{WSDE} and its additional information (distance, \ac{PSNR}) are to be
-appended to the team message.
+By present implementation, the team message includes a robot's xy-position information,
+the orientation as well as the time point of the last detected whistle (and much more).
+Thus, only the angular \ac{WSDE} and its additional information like distance and \ac{PSNR}
+are to be appended to the team message.
 
+In order to wait for the team mates,
+a delay of 3\si{\second} is implemented before collecting the \ac{WSDE} results
+of the other players.
+By this artificially introduced delay, synchronization issues due to network lags and
+whistle detection differences can be circumvented.
+For each team mate available in the network, a ray object is created by considering the
+last time when the whistle was heard, the robot position with its orientation and the \ac{WSDE} angle.
+If the time point of the detected whistle differs more than 4\si{\second}, it is assumed that
+the result does not involve the identical whistles and is not counted.
+
+% \begin{algorithm}[H]
+%     \caption{Team Data Collection}\label{alg:03_collectRays}
+%     \begin{algorithmic}[1]
+%         \Procedure {CollectPlayerData}{}
+%             \For{$j \in 0:R.size()$}
+%             \EndFor
+%             \State \textbf{return} $array<R>$
+%         \EndProcedure\vspace{12pt}
+%     \end{algorithmic}
+% \end{algorithm}
+% % -------------------------------------------------------------
