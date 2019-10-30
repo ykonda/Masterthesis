@@ -107,17 +107,30 @@ whistle sounds.
 \section{Objective}
 \label{sec:01_objective}
 
-The sixth generation used in this work consists of four microphones attached on
-the robot's head.
-For all 
+For elaboration of this thesis, the sixth generation of NAO robots are being used
+which consists of four microphones attached on the robot's head.
+Detailed information about the robots hardware relevant for this work are presented
+in \cref{subsec:03_microphones}.
+For development on the NAOs, a extensive software framework is provided by the
+\ac{SPL} team \textit{HULKs} which is student association at the \ac{TUHH}.
+As a stable whistle detection exist already in this framework,
+it will be utilized for the development of the \ac{SSL}.
+Its high reliability stated in \cite{Hasselbring} was proven to be true at
+competitions in the past.
+False positives only occur when whistles are heard from other fields as explained above.
+
+% Thus, SSL would be very helpful to prevent false starts
+% To realise a SSL ->
+% Use available whistle detection,
+% This method implies that the utilized system must be attached with multiple microphones.
+% make microphone channel available
+% find appropriate method to localize on single robot
+% Make multi-agent decision based on the wsde of the individual/stand-alone systems
+
 % hulks software framework for whole set up and tests
 % we have whistle detection, is very stable instead 
-% say that all measurements were done in lab -> in evaluation part
-The \ac{SPL} team \textit{HULKs} is a student association of the \ac{TUHH}.
-% This implies that the utilized system is attached with multiple microphones.
-% hardware limitations
-% Naos with four mics
 
+% say that all measurements were done in lab -> in evaluation part
 % conclusion -> multimodales filtering, expizite ausreißerfilter, include prior knowledge
 % of refree position
 % evaluation -> SSD at beginning
