@@ -1,13 +1,11 @@
 \chapter{Introduction}
 \label{chap:01_introduction}
 
-\todo[inline]{
-Margins needs to be reduced back in layout.tex to
-"oddsidemargin 2.7cm", "evensidemargin 2.6cm"
-and "usepackage[paperwidth=275.9mm, paperheight=279.4mm]{geometry}"
-in Thesis.tex needs to be removed.}
-
-The \ac{SPL} team \textit{HULKs} is a student association of the \ac{TUHH}.
+% \todo[inline]{
+% Margins needs to be reduced back in layout.tex to
+% "oddsidemargin 2.7cm", "evensidemargin 2.6cm"
+% and "usepackage[paperwidth=275.9mm, paperheight=279.4mm]{geometry}"
+% in Thesis.tex needs to be removed.}
 
 % - why other theories do not fit into this problem (like finger printing, beam forming)
 % -> TDOA between robots -> one does not want to send signal samples
@@ -18,3 +16,38 @@ The \ac{SPL} team \textit{HULKs} is a student association of the \ac{TUHH}.
 % be synchronized in time. The whistle detection time point can then be taken for calculating
 % the time difference of arrival. The distance between the robots needs to be known
 % Robots needs to be synchronized (which is difficult with NTP only)
+
+\acf{SSL} is content of research for many years with
+application scenarios in various environments due to its
+validity for all sorts of signals (sonar, radar, acoustic, seismology,
+geophysics, ultrasonics, communications \cite{Chen2006}) 
+Explicitly for audio signals, use cases emerge with the progressing
+ordinariness of technical equipment on daily basis.
+% As technical devices gained in importance more and more,
+Assuming robots as forthcoming everyday object, reaction to acoustic
+input is one essential step for natural human-robot interaction.
+For example, one plausible scenario is a humanoid robot keeping the eye
+contact with an interacting human.
+An even more tangible case can be seen in conference rooms of business environments
+where remote participation is commonplace in these days.
+Functions of communication systems like speaker identification and tracking of active talkers
+get crucially important to provide smooth operation \cite{Brandstein96apractical}.
+In general, \ac{SSL} algorithms can be divided into three categories
+which are based on beamforming, eigenvalue decomposition or \ac{TDOA} \cite{Brandstein96apractical}.
+% intuitive handling with acoustic input
+% Especially, many use cases exist regarding non-acoustic signals
+% like sonar, radar,
+% investigated by researchers a broad topic which is 
+% In this field of signal processing, signal source localization is 
+
+This thesis investigates different implementations of the \ac{TDOA} algorithm for \acp{SSL}
+focussing on whistle sounds in the context of the \ac{SPL} \textit{RoboCup}.
+
+
+
+
+
+
+\section{Motivation}
+
+The \ac{SPL} team \textit{HULKs} is a student association of the \ac{TUHH}.
