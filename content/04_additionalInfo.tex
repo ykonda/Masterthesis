@@ -156,18 +156,27 @@ a bit more precise that using the "optisch gefuehlte Korrelation".}
 
 Due to the result, further analysis on the \ac{SNR} values
 on individual robots is done for evaluation of the microphones' validity.
+\todo{How does this relate to your last sentence above? (I thought that the
+conclusion was that things don't correlate?)}
 For this purpose, a signal is played back digitally from fixed distance
 and constant volume with different angles.
-The main purpose of this measurement is to ensure that the lone channels
-are not biased.
+The main purpose of this measurement is to ensure that the individual channels
+are not biased.\todo{Biased towards what?}
 14 measurements of a 3\si{\kilo\hertz} sine signal
 with are distance of 0.73\si{m} are done but no tendency is detectable.
 Further evaluation is done by determining the channel with the maximum
 \ac{SNR} of one measurement.
 It is expected that the nearest channel to the sound source has maximum \ac{SNR}.
-At 85,71\si{\percent} of the cases this assertion could be evidenced.
+At 85,71\si{\percent} of the measurements this assertion could be
+evidenced.\todo{How many measurements did you take?}
 From this, it can be said that the general recordings of the microphones
-are neither biased nor falsified.
+are neither biased nor falsified.\todo{What do you men by falsified here?}
+\todo[inline]{From the number of comments I put to this section I would
+conclude that you could add a little bit more details on what the purpose of
+this measurement was.}
+\todo[inline]{IMHO a good practice is to report the number of experiments
+and/or have the data in the appendix (if you still have the data). But having
+it in the appendix is not super relevant. Don't waste time on it.}.
 
 The same procedure is done with the real whistle recordings of the
 measurement in \cref{subsec:04_labMeasurements}.
@@ -185,62 +194,84 @@ the \ac{SNR} can be utilized.
 As referred in \cref{sec:02_gcc}, the main characteristic of the \ac{GCC-PHAT}
 algorithm is the emerging sharp peak.
 In conclusion, one can assume that the lack of a sharp peak indicates
-a less valid delay result of the \ac{GCC}.
+a less valid delay result of the \ac{GCC}.\todo{What is the reasoning behind
+this conclusion? Maybe it is obvious to GCC familiar people but I fail to see
+the causality.}
+\todo[inline]{From this section introduction it is not clear what is happening in
+this section. Maybe add a sentence on what is going to happen in 4.2.3 PSNR}
 
 \subsubsection*{Informative Value}
 
 This statement is examined by comparing the \ac{PSNR} value
 to the error of the direction angle resulting from the \ac{GCC-PHAT} delay.
 % Two cases of errors are taken into consideration.
-In the following, the \ac{PSNR} is recorded as high if it exceeds 17,5 whereat the
-\ac{PSNR} value ranges from 10,1 to 28,8 for measurements in
+In the following, the \ac{PSNR} is referred to as high if it exceeds 17,5
+whereat the \ac{PSNR} value ranges from 10,1 to 28,8 for measurements in
 \cref{subsec:04_labMeasurements}.
 
-Firstly, it is looked at each channel pair by determining the
-error between true direction and the most suited direction candidate emerging
-from the \ac{GCC} delay.
-The results are split by the \ac{PSNR} value.
+\todo[inline]{"Firstly" can not be used like this (it means "erstens" not
+"zunaechst/zuerst"). Maybe grep through the document to make sure you don't use
+it.}
+First, for each channel pair the error between true direction and the most
+suited direction candidate\todo{most suited according to which metric? The one
+that is closest to the true direction or the one that has the "sharpest peak"?}
+emerging from the \ac{GCC} delay.
+The results are grouped into two classes based on the associated \ac{PSNR} value.
 If the \ac{PSNR} of the \ac{GCC} is greater than the threshold of 17,5,
 the \ac{RMSE} of its result is grouped to the errors with high \ac{PSNR}.
-Elsewise it pertains to the errors with low \ac{PSNR}.
+Elsewise, it pertains to the errors with low \ac{PSNR}.
 This valuation is done with the measurements of \cref{subsec:04_labMeasurements}
-and manually set start indexes.
+and manually set start indices.
+\todo[inline]{Maybe rather:"Out of a total number of X measurements,
+Y correlations reported a PSNR below the threshold. The RMSE within this group
+was 35.77\si{degree}".}
 Having 76 correlations assessed with low \ac{PSNR}, the \ac{RMSE} of this group
 is 35,77\si{\degree}.
 Compared to this, the \ac{RMSE} of the remaining 144 measurements
 is 15,86\si{\degree} only.
+\todo[inline]{Always report what the RMSE belong to. E.g. here I can only
+conclude from the unit that these are errors on the phase. But the context
+sounds like they are errors on the PSNR.}
 
 To see the impact on a complete robot result, the same is done
 with the final angular errors of single robots results.
 Here, the \ac{RMSE} of the lower \ac{PSNR} case results in 25,36\si{\degree}
 whereat the error of the other case is 14,41\si{\degree}.
-From this, one can identify the \ac{PSNR} as valid enriching information.
+From this correlation between PSNR value and prediction accuracy one can
+conclude that the PSNR is a useful indicator to inform about the validity of
+direction estimates.\todo{Make sure that this sentence still says what you want it
+to say.}
 
 \subsubsection*{Frame Selection}
 
 Another perspective is to include the PSNR information into the single
-robot whistle direction determination.
+robot whistle direction estimation.
 In \cref{fig:04_psnr2FrameShift}, the frame to investigate is
-shifted before and after the signal start index.
+shifted before and after the signal start index.\todo{Signal start marked manually?}
 Here, the same measurement as in \cref{sec:04_tdoaSingle} is used where
 the robot was positioned at the center point
 while the whistle is blown at -33,7\si{\degree} with 4,5\si{\meter}
-distance.
+distance.\todo{I would not cross-reference to another section here. Just
+explain the experiment setup again as if it was a stand-alone experiment.
+Jumping to other sections is annoying for the reader and it is not relevant to
+know that you used the exact same data.}
 The frame size of the \ac{GCC} is set to 256 samples and the shift
 was set to a quarter of the frame size.
 Samples of the rear left channel are plotted for better understanding
-in the upper graph of \cref{fig:04_psnr2FrameShift}.
+in the upper graph of \cref{fig:04_psnr2FrameShift}.\todo{Why "rear left" if
+the signal comes from front right?}
 The second graph shows the \ac{RMSE} of the robot direction result
 over the frame shifts.
 For the lower graph, the mean over the \acp{PSNR} of all channels
 is presented.
-One sees, how the error is low with high \ac{PSNR} what confirms
-the previous statement in this section.
-For shifts smaller than -2, the signal is not represented in the
-frames yet what explains the high error.
-An important notice is that the result changes with proceeding
-frames what indicates that the implemented \ac{GCC-PHAT} method is
-not suitable for arbitrary frames.
+As a general trend, it can be observed that the error of the predicted
+direction is low for frame shifts with a high \ac{PSNR}. This again confirm the
+hypothesis stated early in this section.
+For shifts smaller than -2, the whistle signal does not intersect with the
+evaluated frames. Therefore, the prediction error in this regime is high.
+An important notice is that the \ac{PSNR} decays as the frame is shifted towards
+later samples on the whistle signal. This indicates that the implemented
+\ac{GCC-PHAT} method is not suitable for arbitrary subsamples of the signal.
 % Without additional information about the rough direction,
 % ambiguity exists due to periodicity of the signal.
 % Due to the inconclusive result of the \ac{SNR} in \cref{subsec:04_snr}
@@ -262,4 +293,5 @@ not suitable for arbitrary frames.
 \end{figure}
 % -------------------------------------------------------------
 
-
+\todo[inline]{Do you ever explicitly say how you end up using this information
+in the team filter?}

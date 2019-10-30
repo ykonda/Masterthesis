@@ -1,35 +1,48 @@
 \newpage
+\todo[inline]{General, use pont instead of comma for numerical values}
 \section{Team Evaluation}
 \label{sec:04_teamEvaluation}
 
-In the last chapters the performance of the three \ac{TDOA} methods
-were validated on standalone robots independently.
-Here, the focus is on the final whistle localization algorithm
-as multi agent system.
-With the results of the single operations as input,
-the team whistle localization outputs an absolute sound source position.
-To provide a decoupled result to the signal start detection,
-the start indexes were set manually.
+\todo[inline]{It took me a while to understand that you evaluate the team-performance
+with all TDOA methods here. The introduction should point that out so that the reader
+is not surprised. (see my comment on "why did you choose GCC)}
+
+In the preceding sections of this chapter the performance of the three
+\ac{TDOA} methods were evaluated with respect to the prediction accuracy on
+individual robots.
+The remaining part of this chapter focuses on the performance of the joint
+whistle localization using measurements of multiple agents. \todo{Find
+a consistent term to talk about "joint whistle localization"}
+Input to the joint whistle localization are the direction estimates of each
+robot in the team. Base on these results, the team whistle localization outputs
+an absolute sound source position. To provide a decoupled result to the signal
+start detection, the start indexes were set manually. \todo{for the entire chapter?}
+\todo[inline]{(outdated, see comment at the beginning of this section) Which
+TDOA method did you end up using here and why? Maybe there needs to be }
 
 The size of the field used in this work is smaller than the regular \ac{SPL}
 field with 7.5\si{m} length and 5\si{m} width.
-Further information about the measurement setup is introduced in \cref{subsec:04_labMeasurements}.
+Further information about the measurement setup is introduced in
+\cref{subsec:04_labMeasurements}.\todo{Maybe state that this is the HULKs lab
+(just to show that this is the largest field you had access to, not that you
+scaled it on purpose.)}
 % It is looked at the result of one exemplary measurement where the behavior
 % of the team filter is of prime importance.
 
 \subsection{Measurement Setup}
 \label{subsec:04_labMeasurements}
 
-11 measurement were taken with five robots on the small-sized \ac{SPL} field
+Eleven measurement were taken with five robots on the small-sized \ac{SPL} field
 of the HULKs laboratory.
 \Cref{fig:04_setup} illustrates the positions of the NAO robots
 and the positions of the whistle sound sources.
-According to these. the x and y values of the sources and robots are
-listed in \cref{tab:04_robots} and \cref{tab:04_sources}.
-The orientation $\theta$ of the robots are defined relatively to the x-axis and
-correspond to the definition in \cref{subsec:03_coordinates}.
-In the following sections, the signal data from these measurements
-will be used mainly.
+According to these, the x- and y-coordinates of the sound source positions and
+robots are listed in \cref{tab:04_robots} and \cref{tab:04_sources}, respectively.
+The orientation $\theta$ of the robots are defined relatively to the global
+x-axis as defined in \cref{subsec:03_coordinates}. In the following sections,
+the signal data from these measurements will be used mainly.\todo{I don't think
+this sentence is relevant. If you want to keep it, clarify what you mean by
+"these"}
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|}
@@ -48,6 +61,7 @@ NAO & x [\si{m}] & y [\si{m}] & $\theta$ [\si{deg}]\\
 \hline
 \etab
 \et{Positions of the robots for evaluation measurement}{04_robots}
+\todo[inline]{I would not put the Measurements in brackets}
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|}
@@ -86,23 +100,26 @@ Measurement & x [\si{m}] & y [\si{m}]\\
 \subsection{GCC Method}
 \label{04_teamGcc}
 
-To determine an overall result, each robot executes the sound source direction
-detection with the \ac{GCC-PHAT} method standing alone.
-After that, the results are input into the team decision filter as specified
-in \cref{sec:03_multiAgentLoca} which determines a final sound source position
-result with Bayesian updating.
+To determine an overall result, each robot computes a direction prediction from
+the locally recorded signal using the \ac{GCC-PHAT} method standing
+alone.\todo{I feel like the conclusion of "what is the best TDOA method" needs
+to be before this section. Otherwise it is not clear why you use GCC-PHAT here}
+These local direction estimates of individual robots are fed to the team
+decision filter as specified in \cref{sec:03_teamDecision} which estimates the
+global sound source position by combining all measurements through Bayesian
+updates.
 
-For further clarification, details of the result for measurement 1 of
-\cref{subsec:04_labMeasurements} is presented extensively here.
-\Cref{fig:04_gccResult} illustrates the result of the
-relative direction angle outputs $\gamma$ of the individual robots
-listed in \cref{tab:04_gccResult}.
-Same as in \cref{fig:04_setup}, the yellow dots symbolizes the robots with
-its orientation as short yellow line.
-The resulting arrows represent the direction $\gamma$ where the sound source
-is predicted.
-In the graphic the real source is marked as star and the resulting
-position as cross.
+For further clarification, measurement 1 of \cref{subsec:04_labMeasurements} is
+presented in greater detail as an example.
+\Cref{fig:04_gccResult} illustrates the result of the relative direction
+estimates $\gamma$ of the individual robots listed in \cref{tab:04_gccResult}
+for this example.\todo{Maybe gamma should have a lower index}
+For \cref{fig:04_setup,fig:04_gccResult}, robot positions are marked by yellow dots
+where a short yellow line indicates each robot's orientation.
+The arrows in \cref{fig:04_gccResult} represent the local direction estimates
+$\gamma$ as predicted by each robot. Finally, the true position of the sound
+source is marked with a red star while the joint position estimate over all
+robots is visualized by a cross.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|}
@@ -120,8 +137,10 @@ NAO & $\gamma$ [\si{\deg}] & Abs. Error [\si{\deg}] & Mean PSNR \\
 28 & -15,90 & 2,53 & 15,1\\
 \hline
 \etab
-\et{Resulting directions of the single robots with \ac{GCC-PHAT} method for a
-whistle sound signal in the right front corner of the playing field}{04_gccResult}
+\et{Resulting direction estimates of the individual robots with \ac{GCC-PHAT}
+method for a whistle sound signal in the right front corner of the playing
+field}{04_gccResult} \todo[inline]{Does Abs Error refer to the true error or
+the estimated error (e.g. uncertainty).}
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -132,9 +151,10 @@ whistle sound signal in the right front corner of the playing field}{04_gccResul
 \end{figure}
 % -------------------------------------------------------------
 
-The final result and its corresponding errors are listed \cref{tab:04_gccTeamResult}.
-With an absolute distance error of less than 1\si{\meter} and small angular error,
-the source localization works sufficiently for this case of application.
+The final result and its corresponding errors are listed in
+\cref{tab:04_gccTeamResult}. With an absolute distance error of less than
+1\si{\meter} and small angular error, the source localization works
+sufficiently for this case of application.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|}
@@ -199,12 +219,15 @@ Measurement & Error x [\si{\meter}] & Error y [\si{\meter}] & Abs. Distance Erro
 \subsection{CC Method}
 \label{04_teamCc}
 
-Evaluation is done of the same measurements in \cref{subsec:04_labMeasurements}
-with normal \ac{CC}.
-The results show that the normal \ac{CC} without weighting performs
-poorer compared to the \ac{GCC-PHAT} method with an \ac{RMSE} of
-1,45\si{\meter} in distance and 10,67\si{\degree} angular.
-Indeed, the statements in \cref{sec:02_cc} prove to be true.
+The \ac{CC} method is evaluated on the same data as in
+\cref{subsec:04_labMeasurements}.\todo{You should probably just say this once
+in the beginning (e.g. all evaluations use the same dataset).}
+The results for the predictions of this method are reported in
+\cref{tab:04_ccTeamResult}. Over all measurements, the \ac{CC} predictor has
+a \ac{RMSE} of 1.45\si{\meter} in distance and 10.67\si{\degree} angular. The
+results show that the standard \ac{CC} performs worse as compared to the
+\ac{GCC-PHAT} method. Indeed, the statements in \cref{sec:02_cc} prove to be
+true.
 
 % -------------------------------------------------------------
 \btline{ht}{1.2}
@@ -238,30 +261,38 @@ Measurement & Error x [\si{\meter}] & Error y [\si{\meter}] & Abs. Distance Erro
 \et{Whistle localization results for all measurements in \cref{subsec:04_labMeasurements} with
 \ac{CC} method}{04_ccTeamResult}
 
-Further information about the origin of the error can be obtained
+Further information about the source of the error can be obtained
 by looking at the single robot results of each measurement.
-Because the team filter is updated by the intersections of the
-single robot rays, the accuracy of the absolute position
-depends on the number of arising intersections.
+Since the team filter is updated computing the intersections of the
+individual robot's direction estimates, the accuracy of the absolute position
+depends on the number of arising intersections.\todo[inline]{It is not immediately
+clear whether "more intersections" is better or worse.}
 This will be discussed in \cref{subsec:04_singleRobotAngleError}.
 % -------------------------------------------------------------
 \subsection{Phase Method}
 \label{04_teamPhase}
 
-For the results by phase method, the minimal frequency value
-parameter is set to 2700\si{\hertz}.
-Just like for the other methods, the results of the
-measurements are shown in \cref{tab:04_phaseTeamResult}.
-The \ac{RMSE} according to the distance is in the same
-order of magnitude as the \ac{CC} method with 1,33\si{\meter}.
-Having a much larger \ac{RMSE} regarding the angle with 74,8\si{\degree},
-especially these angular errors of measurements 6 and 10 catch one's eye.
-Both measurements are taken at the center point of the field.
-Because the absolute position is in an acceptable
-error range, these both angular results
-will be neglected from the error calculation.
-Thus, the angular \ac{RMSE} of the phase method without
-measurements 6 and 10 is 11,69\si{\degree}.
+Finally, the performance  of the phase method is evaluated. For this
+experiment, the minimal frequency value parameter is set to
+2700\si{\hertz}.\todo{Is this even relevant? It seems like it does not add
+information, unless you justify why this is a good choice of parameters. I would
+drop it.}
+The results of phase method for this experiment are shown in
+\cref{tab:04_phaseTeamResult}.
+The \ac{RMSE} of the position estimate is close to the prediction accuracy of
+the \ac{CC} method with 1,33\si{\meter}.
+The \ac{RMSE} of global direction estimate of 74,8\si{\degree}
+shows a significantly worse performance than the other two methods.
+However, it must be noted that these angular error mainly arise from
+measurements 6 and 10. Both measurements are taken at the center point of the
+field. Since the absolute position is in an acceptable error range, these
+angular results will be treated as outliers for the error calculation. Thus,
+the angular \ac{RMSE} of the phase method without measurements 6 and 10 is
+11,69\si{\degree}.\todo{Does it even make sense to report the angular error for
+the team estimate? This has weirdly non-linear as the error statistics
+essentially have a singularity at 0. It does not even seem to be well defined
+what should be the "true orientation" if the whistle is blown at 6 or 10. Any
+direction would be correct for this case.}
 
 % -------------------------------------------------------------
 \btline{ht}{1.2}
@@ -297,16 +328,19 @@ phase method}{04_phaseTeamResult}
 
 \subsection{Single Robot Angle Error}
 \label{subsec:04_singleRobotAngleError}
+\todo[inline]{This seems a bit misplaced (e.g. jumping back to angle errors of
+individual robots)}
 
 To identify the difference between the methods, a closer look
 into the results of the single robots prior to the team filter is given.
 \Cref{fig:04_compareRmse} presents the \ac{RMSE} considering the
 direction results of all five robots for each measurement in
 \cref{subsec:04_labMeasurements}.
-Additionally, the standard deviation of each measurement allows insight
-into the validity of the single robot results.
-As one can see, the standard deviation in degrees of the \ac{GCC} method is
-significantly smaller in comparison to the phase method for most
+Additionally, the estimated standard deviation\todo{Is it standard deviation or
+variance here?} of each measurement
+provides insight into the validity of the single robot results.
+As one can see, the standard deviation of the relative angle of the \ac{GCC}
+method is significantly smaller as compared to the phase method for most
 measurements.
 How this influences the reliability of the sound localization is
 subject of discussion in \cref{sec:05_methodComparison}.
