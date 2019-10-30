@@ -37,17 +37,51 @@ which are based on beamforming, eigenvalue decomposition or \ac{TDOA} \cite{Bran
 % intuitive handling with acoustic input
 % Especially, many use cases exist regarding non-acoustic signals
 % like sonar, radar,
-% investigated by researchers a broad topic which is 
-% In this field of signal processing, signal source localization is 
+% investigated by researchers a broad topic which is
+% In this field of signal processing, signal source localization is
 
-This thesis investigates different implementations of the \ac{TDOA} algorithm for \acp{SSL}
-focussing on whistle sounds in the context of the \ac{SPL} \textit{RoboCup}.
-
-
-
-
-
+In this thesis, the \ac{TDOA} method was chosen to estimate the \ac{SSL} and evaluates
+different implementations focussing on whistle sounds in the context of an engineering competition
+\textit{\ac{RoboCup}}.
+As \cite{BAS_estimator} states, beamforming is computationally expensive and eigenvalue
+decomposition is little suitable
+for signals with small bandwidth which is why the \ac{TDOA} method was selected as most
+appropriate solution.
+A widespread approach is to cross-correlate the sensor readings of two microphones
+to obtain the time delay between those.
+By this, the direction of a signal source can be derived by geometrical relation by one
+stand-alone system and a position by a multi-agent system.
 
 \section{Motivation}
 
+The \acf{RoboCup} is known for promoting research on autonomous robotic systems
+by scientists and students of universities.
+It offers a platform, where focus is set on fast intelligent systems and multi-agent
+collaboration \cite{robocup}.
+This initiative encourages young engineers to work in real case scenarios
+by providing several leagues with different engineering tasks that are required
+on the subject of robotics.
+
+In the \ac{SPL} of the \ac{RoboCup}, humanoid robots are developed to play soccer autonomously
+for scientific purpose.
+By requirement, the hardware is identical for all competitors in this league and no modification
+is allowed.
+Since 
+
+Within this scope, a \acf{WSL} competition was introduced as \textit{technical challenge} in 2019 that
+acted as initiator for this work.
+The technical challenge covers smaller game independent tasks to test the realizability of
+concepts on the specific platform.
+By slightly changing the rules every year, the difficulty is increased and the conditions
+are adapted to reach the level of human soccer as overarching goal.
+% Whistles in game
+
+
+
+It was taken care that the implemented result is not limited to whistle sounds.
+
+\section{Platform}
 The \ac{SPL} team \textit{HULKs} is a student association of the \ac{TUHH}.
+% This implies that the utilized system is attached with multiple microphones.
+% hardware limitations
+% Naos with four mics
