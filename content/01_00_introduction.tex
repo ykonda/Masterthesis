@@ -66,22 +66,58 @@ In the \ac{SPL} of the \ac{RoboCup}, humanoid robots are developed to play socce
 for scientific purpose.
 By requirement, the hardware is identical for all competitors in this league and no modification
 is allowed.
-Since 
+Since 2008 commercially available humanoid robots named \textit{NAO} provided by the
+company \textit{SoftBank Robotics} are used.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+        \includegraphics[width=0.6\columnwidth]{figures/robot}
+	\caption[NAO robot]{V6 NAO robots while game play at the \ac{RoboCup} Sydney in 2019.}
+	\label{fig:01_robot}
+\end{figure}
+% -------------------------------------------------------------
 
-Within this scope, a \acf{WSL} competition was introduced as \textit{technical challenge} in 2019 that
-acted as initiator for this work.
+Within this scope, a \acf{WSL} competition \textit{Directional Whistle Challenge} was
+introduced as technical challenge in 2019 that acted as initiator for this work.
 The technical challenge covers smaller game independent tasks to test the realizability of
-concepts on the specific platform.
+concepts and investigate preliminary ideas that might affect the prospective rules for the games.
 By slightly changing the rules every year, the difficulty is increased and the conditions
-are adapted to reach the level of human soccer as overarching goal.
-% Whistles in game
+are adapted to reach the level of human soccer as overarching goal until 2050.
+Content of 2019's challenge specified to locate the position of a whistle blown by a referee
+with one or multiple robots on the soccer field.
+So far, whistles are only used for indicating the kick off of a game.
+However, future consideration exist to use the whistle more frequent
+to mark game state changes.
+%  like executions of free kicks which include corner kicks or kick-ins.
+Currently, the issue occurs that robots detect whistles of neighboring
+games and start playing ahead of the own game start what yields to a penalty.
+With increasing function of whistles, this difficulty propagates.
 
+As another imaginable case of application, a \ac{SSL} can operate as confirmation
+functionality between team members.
+For example, the own keeper could send a audio output while an offensive player prepares
+to shoot a goal.
+If this audio signal is detected in the front by the offensive player, he recognizes
+that he is about to score a own goal.
+Potential mistakes and failure of other program components can be corrected by such
+confirmation behavior between the robots.
+For this reason, it was taken care that the implemented result is not limited to
+whistle sounds.
 
+\section{Objective}
+\label{sec:01_objective}
 
-It was taken care that the implemented result is not limited to whistle sounds.
-
-\section{Platform}
+The sixth generation used in this work consists of four microphones attached on
+the robot's head.
+For all 
+% hulks software framework for whole set up and tests
+% we have whistle detection, is very stable instead 
+% say that all measurements were done in lab -> in evaluation part
 The \ac{SPL} team \textit{HULKs} is a student association of the \ac{TUHH}.
 % This implies that the utilized system is attached with multiple microphones.
 % hardware limitations
 % Naos with four mics
+
+% conclusion -> multimodales filtering, expizite ausreißerfilter, include prior knowledge
+% of refree position
+% evaluation -> SSD at beginning
