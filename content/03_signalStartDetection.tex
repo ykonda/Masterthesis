@@ -1,13 +1,13 @@
 \subsection{Signal Start Detection}
 \label{subsec:03_signalStartDetection}
 
-\change[]{Results show, that the accuracy of the whistle detection is not
-		  sufficient to be used stand alone.
-		  Thus, different approaches are evaluated with regard to higher
-		  precision and lower computational effort.}
-\info[]{need to be written up}
 As mentioned in \cref{sec:02_signalStartDetection}, the detection of the
 signal start is crucial for the localization.
+Results show, that the accuracy of the whistle detection is not
+sufficient to be used stand alone concerning the start index.
+Thus, different approaches are evaluated with regard to higher
+precision and lower computational effort.
+
 The implementation of the different approaches will be presented coupled with
 an examination of real measurement data.
 To reduce undesirable effects and demonstrate the simplest form, a sinusoidal
@@ -16,6 +16,7 @@ whistle sounds.
 For the following data, the sound source was placed $2\si{m}$ in front of the robot.
 In order to find the time point where the signal starts, information about
 smaller fractions are required.
+\info[]{need to be written up from here}
 So, the original $44100$ samples that were buffered by the
 \lstinline!WhistleLocalization! module are divided into several overlapping
 frames with size $256$. The computational effort raises with smaller frame size,
