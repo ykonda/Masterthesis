@@ -1,4 +1,36 @@
 \chapter{Conclusion}
+\label{chap:05_conclusion}
+
+\begin{comment}
+    - Objective of this work:
+        x a whistle sound locator (in xy-plane) with multiple robots
+        x stationary robots and sources
+        x evaluated different tdoa methods
+        - found a approach to detect direction of source on single robots
+\end{comment}
+
+The purpose of this work was to find an approach to localize a whistle
+signal with a multi-agent system consisting of multiple NAO robots.
+Each of these robots have four microphones attached on their head which
+record audio signals within a range of 150\si{\hertz} and 12\si{\kilo\hertz}
+with a sample rate of 44,1\si{\kilo\hertz}.
+Only stationary sound sources and robots were considered in the scope of this
+work.
+Roughly, the implementation can be divided into three parts.
+Of capital importance is the \acf{WSDE} executed by stand-alone robots which
+is realized by computing the \ac{TDOA} between the four channels on the robots' head.
+Two fundamentally different approaches were evaluated to obtain a stable method
+for the delay estimation.
+One obtains the \ac{TDOA} by cross-correlating signal samples with standard
+\acf{CC} and \acf{GCC-PHAT} algorithms in frequency domain.
+The other analyses recorded samples in frequency domain in terms of
+a phase of a reference frequency which is described as \acf{PD} method.
+% Correct
+It was assumed that the start of a signal is most reliable 
+To circumvent impact of multi-path propagation and reverberation, 
+was investigated and is true
+Thus, \acf{SSD} approaches were compared with regard to accuracy and computational effort.
+Finally, 
 
 \input{content/05_startDetection}
 \input{content/05_methodComparison}
