@@ -68,6 +68,8 @@ By requirement, the hardware is identical for all competitors in this league and
 is allowed.
 Since 2008 commercially available humanoid robots named \textit{NAO} provided by the
 company \textit{SoftBank Robotics} are used.
+They are equipped with multiple units like cameras, speakers, microphones, sonar sensors,
+joint position sensors, tactile sensors, \ac{IMU} and many more \cite{nao_docu}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -127,9 +129,13 @@ sound source by a \ac{TDOA} method separately.
 After this, the results are collected exchanging information between the
 team members via wireless communication so that a multi-agent decision can be executed.
 A inter-team communication what can be expanded at will also exists in the framework of the HULKs.
-Three \ac{TDOA} algorithms were implemented and evaluated within this work
+Three \ac{TDOA} algorithms are implemented and evaluated within this work
 to find an appropriate method in order to compute reliable delays between the four robots'
 microphone sensors.
+The standard \acf{CC} method is compared with the \acf{GCC}, as well as a \ac{PD} method which
+observes the phases of a reference frequency between the microphones.
+In order to avoid reverberation and observing multi-path propagated signals, focus is layed on the
+start of the signal which is assumed to be most unaffected.
 Finally, the objective is to provide a full working \ac{SSL} process that can be executed
 in real-time within the HULKs framework with various numbers of robots.
 
@@ -139,6 +145,7 @@ in real-time within the HULKs framework with various numbers of robots.
 \section{Structure}
 \label{sec:01_Structure}
 
+\missing[]{Content}
 % Chapter 2: Prerequisites
-In order to clarify the technical principles used in this work, \cref{chap:02_prerequisites}
+% In order to clarify the technical principles used in this work, \cref{chap:02_prerequisites}
 
