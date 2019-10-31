@@ -1,4 +1,4 @@
-\newpage
+\clearpage
 \section{Signal Start Detection}
 \label{sec:04_signalStartDetection}
 
@@ -6,15 +6,16 @@
 should be the last evaluation section. Is there a reason why you can't put this
 before that?}
 
-\todo[inline]{Zwei mal previously}
-Previously, the importance of the signal start was underlined
-by the results of the previous chapters.
+In previous chapters, the importance of the signal start was emphasized.
 % Due to the fact that the direction detection methods is
 % executed on smaller frames than the actual whistle detection.
 % To demonstrate this for the phase method, the frame to investigate is
 % shifted with time \cref{subsec:04_frameNumber}.
-Especially the result in \cref{subsec:03_phase} has shown that in fact, the accuracy
-decreases with belated frame.
+Especially the result in \cref{subsec:03_phase} has shown that in fact, the
+accuracy of the direction predictor decreases when evaluated on later samples
+of the whistle signal.\todo{Maybe interpret this somewhere: give a reason
+why shit makes sense (e.g. maybe because more reflections of the signal will
+have reached the microphone)}
 Also according to the outcome of \cref{subsec:04_psnr}, the \ac{GCC}
 method performs best with frames near to the signal start. \todo[inline]{Get
 rid of some cross-references and/or write more about what happened in these
@@ -23,52 +24,67 @@ forth is annoying.)}
 
 % There are some reasons why other methods were tested to find the signal start.
 In order to find a good solution for a highly reliable, accurate but
-computationally reasonable start detection, different approaches were
+computationally tractable start detection, different approaches were
 tested profoundly.
-For high accuracy either the number of samples in a frame have to be
-small or the window must be shifted with small steps which both implicit
-a high number of executions.
-The existent whistle detection algorithm of \cref{subsec:03_whistleDetection}
-is computationally intensive and causes causes some false positives
-for small frames as shown in \label{subsec:04_whistleDetection}.
-Therefore, it is looked for more simple algorithms that are not restricted
-to whistle sounds only.
+For high temporal\todo{I added "temporal" here because otherwise it seems unintuitive
+that a less samples is better (because at the same time it might be harder to
+predict from fewer samples as there is less information in the frame)} accuracy
+either the number of samples in a frame have to be small\todo{Maybe rather say
+that the frame as to be small? A low number of samples in a frame could also be
+achieved by a smaller sampling rate, which would not help.} or the window must
+be shifted with small steps which both implicit a large number of evaluations.
+The existing whistle detection algorithm of the HULKs presented in
+\cref{subsec:03_whistleDetection} is computationally intensive and has a low
+accuracy for small frames\todo{Is "frames" actually the correct term (in
+general)? Shouldn't it be "window"? I don't know what people use in signal
+processing literature} as shown in \label{subsec:04_whistleDetection}.
+Therefore, the goal is to identify a\todo{"looked" doesn't work this way. You are using this
+quite a lot. Maybe grep the document for it and replace it.} simple algorithm for
+the signal start detection. Ideally, this algorithm should be adaptable to
+signals other than the whistle sounds.\todo{I would add a reference to the section
+where you presented these algorithms. (this is only the evaluation, right?)}
 
-Hereinafter, the characteristics of the methods are pointed out by
+Hereinafter, the performance of each method methods is evaluated by
 analyzing the error between algorithmically determined start index
-and manually defined start index.
-For evaluation, the 11 measurements of on all robots \cref{subsec:04_labMeasurements}
-are taken into consideration.
+and manually labelled start index.
+As a benchmark, the prediction accuracy is evaluated on 11 measurements on all
+robots\todo{how many robots?} \todo{this sentence is missing some
+words}\cref{subsec:04_labMeasurements}.
 By the frame size of the \ac{FFT} being set to 256 samples for the
-correlation methods, a start index error of maximal 256 samples
+correlation methods, a start index error of at most 256 samples is
 desired.
 Therefore, a start index detection result is regarded as failure for errors
 larger than 256 for the following sections.
 Two metrics are specified to express the degree of failure.
-One counts the number of large errors for each channel.
+The former counts the number of large errors for each channel.
 In this case, 220 sample data for 11 measurements on five robots with
-four channels each exist.
-Another option is to count if any of the channels failed.
-For this case, 55 measurements are given.
+four channels each exist.\todo{I don't understand this sentence.}
+The second metric reports the number of measurements for which any of the
+channels failed. For this case, 55 measurements are given.\todo{Again, what is
+this sentence saying? I thought we had 11 measurements? Or is it 11
+measurements * 5 robots? Maybe simply write 55 in the first place (rather than
+11)}.
 % -----------------------------------------------------------------------------------------------------
 
 \subsection{Whistle Detection}
 \label{subsec:04_whistleDetection}
 
+\todo[inline]{It is not immediately clear that with "whistle detection" you refer
+to the "whistle detection of the HULKs", e.g. your "baseline"}
 First, the accuracy of the whistle detection in regard of the start index
 is evaluated.
 Here, the start index is defined as the first index where the whistle detection
 found a whistle.
 With a frame size of 1024, the whistle detection algorithm fails in every of the
-55 measurements with at least one channel if only a error of maximal 256 samples
+55 measurements with at least one channel if only an error of at most 256 samples
 is permitted.
 However, every error is in the range of 1024 samples which proves that the
 approximate start of the whistle sound is detected correctly.
-With a smaller frame size of 256, the error samples decrease but introduces
-false positive detections.
+With a smaller frame size of 256, the temporal accuracy is improved but
+introduces false positive detections.\todo{do you have numerical results here?}
 With the results, one can say that the whistle detection is not sufficient
 for the start detection or is at least not reliable as stand-alone solution.
-Furthermore, this approach as it is is limited to sounds in fixed and known frequency range.
+Furthermore, this approach is limited to sounds in fixed and known frequency range.
 %  failure rate of
 % 9\si{\percent} in regard to every channel.
 % In this work microphone data were saved as soon as the whistle detection module
@@ -91,21 +107,31 @@ Furthermore, this approach as it is is limited to sounds in fixed and known freq
 For the evaluation of the \ac{ZCR},
 the frame size is set to 256 samples and number of noise and signal frames
 are set to 10 frames.
-In 7\si{\percent} of the 220 channel sample data, the method fails with a significant
-error larger than 256 samples.
-In most cases, the method provides accurate results with small error.
-Taking all measurements of robot 26 as example, the \ac{RMSE} amounts
-54,23 samples.
+In 7\si{\percent} of the 220 channel sample data\todo{"sample data" sounds like
+it is not a term. Maybe only "samples"?}, the method fails with a significant
+error larger than 256 samples.\todo{I don't thing you have to repeat the 256
+sample criterion every time. You defined what is considered a failure earlier.
+Just say "failed".} In most cases, the method provides accurate results with
+small error. Taking all measurements of robot 26 as example, the \ac{RMSE}
+amounts 54,23 samples.\todo{Again, where is the data for this? Tables, figures?}
 
-However, there are cases where the algorithm fails.
-Looking at those cases it could be identified that
-the errors occur often due to incorrect assumptions that
-the signal is represented at the end of the buffered
-samples.
-Some measurements prove, that this is not always the case as \cref{fig:04_zcrFail} shows.
+However, there are cases where the algorithm fails. Looking at those cases it
+could be identified that the errors occur often due to incorrect assumptions
+that the signal is present at the end of the buffered samples.
+Some measurements prove that this is not always the case as shown in
+\cref{fig:04_zcrFail}.
 Here, the data of the front right channel of robot 21 with the whistle source
 at position 5 in \cref{subsec:04_labMeasurements}
-illustrates how the signal ended around 35000 samples already.
+illustrates how the signal ended around 35000 samples already. \todo{Neither
+the robot number, nor the position or the channel are relevant here I think.}
+If the start index is determined at the point where the \ac{ZCR}
+falls below the threshold searching backwards as stated in \cref{sec:02_signalStartDetection},
+the detection fails.
+
+In most cases, only one out of four channels produces a erroneous
+result.\todo{Why? Doesn't the signal end early on all channels?}
+Because the final start index on one robot is set equal for all channel,
+the failure can be compensated with a simple voting procedure.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -125,41 +151,43 @@ Because the final start index on one robot is set equal for all channel,
 the failure can be compensated with a smart voting procedure.
 
 Another option exists by changing the process of finding the
-threshold excess onwards.
-In this case, the threshold is raised with a factor of 1,25.
+threshold excess onwards.\todo{I don't understand what this is saying.}
+In this case, the threshold is scaled with a factor of 1,25.
 Results by this were poorer than the initially implemented manner
-with 15\si{\percent} failure rate.
+with a failure rate of 15\si{\percent}.\todo{Did you ever report the previous failure rate?}
 By adding the constraint that multiple samples must exceed the
-threshold successively, result can be slightly improved but implies higher
+threshold successively, result can be slightly improved for the cost of higher
 computational effort.
 
-Worth mentioning is the poor output of the \ac{ZCR} method with
-signal that was cleaned with spectral subtraction previously.
-This surprising outcome is convenient for the overall task,
-because the start index result can be embed into the spectral
-subtraction, providing information for separating the noise
-and signal part.
+It should be noted that the poor performance of the \ac{ZCR} method with signal that
+was cleaned with spectral subtraction previously. This surprising outcome is
+convenient for the overall task, because the start index result can be embed
+into the spectral subtraction, providing information for separating the noise
+and signal part.\todo{I don't get what this paragraph is saying?}
 
 \subsection{Entropy}
 \label{subsec:04_entropy}
 
 As discussed in \cref{subsec:02_Entropy} the entropy quantifies the amount
-of chaos in a signal frame.
+of chaos in a signal frame.\todo{Is this correct? Chaos is deterministic and not
+the same as randomness}
 Especially for signals to localize with unknown characteristics,
-this method can be useful because no a priori knowledge is needed.
-For all measurements this method yield poorer results than the \ac{ZCR} method
+this method can be useful because no a priori knowledge is needed.\todo{You should
+probably say that the only prior knowledge must be, that the signal to detect
+has lower entropy than the background noise.}
+For all measurements this method yielded poorer results than the \ac{ZCR} method
 with a failure rate of around 20\si{\percent}.
-Best results are achieved with a frame size of 512 samples and a difference
-step of 800 samples.
+Best results are achieved with a frame size of 512 samples and a step size of 800
+samples.
 % \change[]{Explain what steps are? Maybe in implementation?}
 However, for records with fading whistle the entropy method
-generates more reliable results than the \ac{ZCR} method.
-Taking the same measurement as an example where the \ac{ZCR} failed,
-\cref{fig:04_entropyGood} shows how the algorithm detects the
-signal start correctly even though
-the whistle sound ended at around 35000 samples.
-In this measurement, the start index errors of all four channels
-were smaller than 40 samples.
+generates more reliable results than the \ac{ZCR} method.\todo{What do you mean
+by "fading whiste"? Whistles that don't have a distinct/abrupt start?}
+Taking the same measurement as an example for which failure of the \ac{ZCR} method
+was discussed earlier, \cref{fig:04_entropyGood} shows how the algorithm
+detects the signal start correctly even though the whistle sound ended at
+around 35000 samples. In this measurement, the start index errors of all four
+channels were smaller than 40 samples.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
