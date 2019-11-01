@@ -6,39 +6,47 @@ damit man nicht vor und zurück springt. Aber das ist geschmackssache.}
 
 In this chapter, experimental results are presented while setting
 focus on different aspects.
-Before evaluating the performance of the final localization algorithm the prediction
-accuracy on a single robot is examined.
-For this purpose, the results of the direction detection methods is examined and
-discussed at the example of a single measurement in \cref{sec:04_tdoaSingle}.
+Before evaluating the performance of the final localization algorithm the
+\ac{WSDE} on single robots is examined by first taking a closer look
+at a representative example in \cref{sec:04_tdoaSingle}.
 There, the focus is set on the \ac{TDOA} methods itself for each channel pair
 before combining them to a robot direction result.
+\Cref{subsec:04_singleRobotAngleError} presents the validity of the methods with
+regard to a whole set of data.
 
 % Additional Info
-In \cref{chap:03_implementation}, the presence of determinable supplementary
-information \todo{Was meinst du mit "determinable supplementary information"?} was
-discussed regarding the \ac{SNR}, \ac{PSNR} and distance approximation. If and to
-what extent these factors are applicable for the source localization is analysed in
-\cref{sec:04_additionalInformation}.
+In \cref{chap:03_implementation}, the presence of additional
+information next to the estimated \ac{WSDE} on individual robots
+is discussed.
+This includes knowledge about \acp{SNR} of the channel signals, the \ac{PSNR}
+of the \ac{GCC} functions and a distance approximation if the signal source
+is detected straight in front or from behind.
+\Cref{sec:04_additionalInformation} analyses if and to
+what extent these factors are useful for the \ac{WSDE} or \ac{WSL}.
 
 % Team filter
 To investigate the whistle sound source localization of the robots as team,
 measurements were taken with five Naos on the field of the HULKs' laboratory
 as specified in \cref{subsec:04_labMeasurements}.
-The results of the \ac{TDOA} methods for all measurements are presented and
-compared in \cref{sec:04_teamEvaluation} to have a closer look at their
-performance.\todo{"to have a closer look at their performance" scheint redundant
-hier}
+In \cref{sec:04_teamEvaluation} the performance of the \ac{TDOA} methods are presented
+and compared for all measurements.
 Depending on the accuracy of the individual direction results, the quality
 of the team filter is limited.
-Therefore, the angular error of the single robots is demonstrated for each
-measurement and method in addition.\todo{"in addition" scheint redundant}
+% Therefore, the angular error of the single robots is demonstrated for each
+% measurement and method.
 
-Unless otherwise noted, measurements presented in this chapter were recorded in the
+All measurements presented in this chapter were recorded in the
 laboratory of the HULKs and are taken from a sound source at a height of
 \SI{1.5}{\meter} above ground.
+The size of the field used in this work is smaller than the regular \ac{SPL}
+field with 7.5\si{m} length and 5\si{m} width instead of 9\si{\meter} and 6\si{\meter}.
+This circumstances occur due to lack of space and limited size of the
+field room in the laboratory.
+Another deviation to competition conditions arise due to walls being next to field borders.
+In \cref{subsec:04_labMeasurements} further information about the measurement setup
+is introduced.
 
-% signal start detection evaluation
-
+\input{content/04_measurements}
 \input{content/04_tdoa}
 \input{content/04_additionalInfo}
 \input{content/04_teamDecision}
