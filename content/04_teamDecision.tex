@@ -20,82 +20,9 @@ start detection, the start indexes were set manually. \todo{for the entire chapt
 \todo[inline]{(outdated, see comment at the beginning of this section) Which
 TDOA method did you end up using here and why? Maybe there needs to be }
 
-The size of the field used in this work is smaller than the regular \ac{SPL}
-field with 7.5\si{m} length and 5\si{m} width.
-Further information about the measurement setup is introduced in
-\cref{subsec:04_labMeasurements}.\todo{Maybe state that this is the HULKs lab
-(just to show that this is the largest field you had access to, not that you
-scaled it on purpose.)}
 % It is looked at the result of one exemplary measurement where the behavior
 % of the team filter is of prime importance.
 
-\subsection{Measurement Setup}
-\label{subsec:04_labMeasurements}
-
-Eleven measurement were taken with five robots on the small-sized \ac{SPL} field
-of the HULKs laboratory.
-\Cref{fig:04_setup} illustrates the positions of the NAO robots
-and the positions of the whistle sound sources.
-According to these, the x- and y-coordinates of the sound source positions and
-robots are listed in \cref{tab:04_robots} and \cref{tab:04_sources}, respectively.
-The orientation $\theta$ of the robots are defined relatively to the global
-x-axis as defined in \cref{subsec:03_coordinates}. In the following sections,
-the signal data from these measurements will be used mainly.\todo{I don't think
-this sentence is relevant. If you want to keep it, clarify what you mean by
-"these"}
-% -------------------------------------------------------------
-\btline{ht}{1.2}
-\btab{|c|c|c|c|}
-\hline
-NAO & x [\si{m}] & y [\si{m}] & $\theta$ [\si{deg}]\\
-\hline
-21 & 3,75 & 2,5 & -40,2\\
-\hline
-24 & 3,75 & -2,5 & 90\\
-\hline
-26 & 0 & 0 & 0\\
-\hline
-27 & -3,75 & -2,5 & 66,06\\
-\hline
-28 & -2,45 & 0 & 0\\
-\hline
-\etab
-\et{Positions of the robots for evaluation measurement}{04_robots}
-\todo[inline]{I would not put the Measurements in brackets}
-% -------------------------------------------------------------
-\btline{ht}{1.2}
-\btab{|c|c|c|}
-\hline
-Measurement & x [\si{m}] & y [\si{m}]\\
-\hline
-[0] & 3,75 & 2,5\\
-\hline
-[1] & 3,75 & -2,5\\
-\hline
-[2] & -3,75 & -2,5\\
-\hline
-[3,9] & -3,75 & 2,5\\
-\hline
-[4] & -2,45 & 0\\
-\hline
-[5] & 2,45 & 0\\
-\hline
-[6,10] & 0 & 0\\
-\hline
-[7] & 0 & -2,5\\
-\hline
-[8] & -6.05 & 0\\
-\hline
-\etab
-\et{Positions of the whistle sound sources for evaluation measurement}{04_sources}
-% -------------------------------------------------------------
-\begin{figure}[ht]
-	\centering
-		\includegraphics[]{figures/evaluation/setup}
-	\caption{Setup of robots and sound source positions for the evaluation measurement.}
-    \label{fig:04_setup}
-\end{figure}
-% -------------------------------------------------------------
 
 \subsection{GCC Method}
 \label{04_teamGcc}
@@ -126,15 +53,15 @@ robots is visualized by a cross.
 \hline
 NAO & $\gamma$ [\si{\deg}] & Abs. Error [\si{\deg}] & Mean PSNR \\
 \hline
-21 & -26,22 & 3,71 & 18,3\\
+21 & -26.22 & 3.71 & 18.3\\
 \hline
-24 & -133,77 & 9,32 & 16,8\\
+24 & -133.77 & 9.32 & 16.8\\
 \hline
-26 & -30,19 & 3,50 & 19,6\\
+26 & -30.19 & 3.50 & 19.6\\
 \hline
-27 & -75,26 & 1,71 & 17,4\\
+27 & -75.26 & 1.71 & 17.4\\
 \hline
-28 & -15,90 & 2,53 & 15,1\\
+28 & -15.90 & 2.53 & 15.1\\
 \hline
 \etab
 \et{Resulting direction estimates of the individual robots with \ac{GCC-PHAT}
@@ -161,13 +88,13 @@ sufficiently for this case of application.
 \hline
  & Result & Error\\
 \hline
-Position x [\si{\meter}] & 3,38 & -0,37\\
+Position x [\si{\meter}] & 3.38 & -0.37\\
 \hline
-Position y [\si{\meter}] & -1,85 & 0,65\\
+Position y [\si{\meter}] & -1.85 & 0.65\\
 \hline
-Angle & 33,18\si{\degree} & 1,57\si{\degree}\\
+Angle & 33.18\si{\degree} & 1.57\si{\degree}\\
 \hline
-Distance [\si{\meter}] & 3,85 & 0,74 \\
+Distance [\si{\meter}] & 3.85 & 0.74 \\
 \hline
 \etab
 \et{Whistle localization result of measurement 1 with \ac{GCC-PHAT} method}{04_gccTeamResult}
@@ -176,7 +103,7 @@ Distance [\si{\meter}] & 3,85 & 0,74 \\
 \Cref{tab:04_gccTeamResult} shows the distance and angle errors
 for all measurements in \cref{subsec:04_labMeasurements}.
 The \ac{RMSE} in distance being 0.87\si{\meter} and angular \ac{RMSE}
-being 5,07\si{\degree} one can say that the \ac{GCC-PHAT} algorithm
+being 5.07\si{\degree} one can say that the \ac{GCC-PHAT} algorithm
 works well for whistle sound source localization.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
@@ -184,27 +111,27 @@ works well for whistle sound source localization.
 \hline
 Measurement & Error x [\si{\meter}] & Error y [\si{\meter}] & Abs. Distance Error [\si{\meter}] & Angle Error\\
 \hline
-[0] & 1,31 & 1,06 & 1,68 & 1,45\si{\degree}\\
+0 & 1.31 & 1.06 & 1.68 & 1.45\si{\degree}\\
 \hline
-[1] & 0,13 & 0,06 & 0,15 & 1,57\si{\degree}\\
+1 & 0.13 & 0.06 & 0.15 & 1.57\si{\degree}\\
 \hline
-[2] & 0,59 & 0,43 & 0,73 & 0,42\si{\degree}\\
+2 & 0.59 & 0.43 & 0.73 & 0.42\si{\degree}\\
 \hline
-[3] & 0,54 & 0,47 & 0,72 & 9,09\si{\degree}\\
+3 & 0.54 & 0.47 & 0.72 & 9.09\si{\degree}\\
 \hline
-[4] & 0,27 & 0,0 & 0,27 & 0,01\si{\degree}\\
+4 & 0.27 & 0.0 & 0.27 & 0.01\si{\degree}\\
 \hline
-[5] & 0,15 & 0,14 & 0,21 & 3,18\si{\degree}\\
+5 & 0.15 & 0.14 & 0.21 & 3.18\si{\degree}\\
 \hline
-[6] & 0,41 & -0,02 & 0,41 & 2,67\si{\degree}\\
+6 & 0.41 & -0.02 & 0.41 & 2.67\si{\degree}\\
 \hline
-[7] & 0,39 & 0,02 & 0,39 & 8,98\si{\degree}\\
+7 & 0.39 & 0.02 & 0.39 & 8.98\si{\degree}\\
 \hline
-[8] & 1,84 & -0,01 & 1,84 & 0,14\si{\degree}\\
+8 & 1.84 & -0.01 & 1.84 & 0.14\si{\degree}\\
 \hline
-[9] & 0,58 & 0,52 & 0,78 & 9,89\si{\degree}\\
+9 & 0.58 & 0.52 & 0.78 & 9.89\si{\degree}\\
 \hline
-[10] & 0,03 & -0,0 & 0,03 & 0,0\si{\degree}\\
+10 & 0.03 & -0.0 & 0.03 & 0.0\si{\degree}\\
 \hline
 \etab
 \et{Whistle localization results for all measurements in \cref{subsec:04_labMeasurements} with
@@ -235,27 +162,27 @@ true.
 \hline
 Measurement & Error x [\si{\meter}] & Error y [\si{\meter}] & Abs. Distance Error [\si{\meter}] & Angle Error\\
 \hline
-[0] & 0,6 & 1,39 & 1,51 & 8,15\si{\degree}\\
+0 & 0.6 & 1.39 & 1.51 & 8.15\si{\degree}\\
 \hline
-[1] & -0,49 & 1,2 & 1,3 & 11,97\si{\degree}\\
+1 & -0.49 & 1.2 & 1.3 & 11.97\si{\degree}\\
 \hline
-[2] & 2,32 & 2,11 & 3,13 & 18,28\si{\degree}\\
+2 & 2.32 & 2.11 & 3.13 & 18.28\si{\degree}\\
 \hline
-[3] & 1,07 & -0,96 & 1,44 & 3,71\si{\degree}\\
+3 & 1.07 & -0.96 & 1.44 & 3.71\si{\degree}\\
 \hline
-[4] & 1,95 & -0,09 & 1,95 & 10,44\si{\degree}\\
+4 & 1.95 & -0.09 & 1.95 & 10.44\si{\degree}\\
 \hline
-[5] & 0,07 & 0,01 & 0,07 & 0,32\si{\degree}\\
+5 & 0.07 & 0.01 & 0.07 & 0.32\si{\degree}\\
 \hline
-[6] & 0,4 & -0,01 & 0,4 & 1,91\si{\degree}\\
+6 & 0.4 & -0.01 & 0.4 & 1.91\si{\degree}\\
 \hline
-[7] & 1,06 & -0,0 & 1,06 & 22,99\si{\degree}\\
+7 & 1.06 & -0.0 & 1.06 & 22.99\si{\degree}\\
 \hline
-[8] & 1,24 & -0,06 & 1,24 & 0,77\si{\degree}\\
+8 & 1.24 & -0.06 & 1.24 & 0.77\si{\degree}\\
 \hline
-[9] & -0,04 & 0,78 & 0,78 & 7,22\si{\degree}\\
+9 & -0.04 & 0.78 & 0.78 & 7.22\si{\degree}\\
 \hline
-[10] & 0,03 & -0,0 & 0,03 & 0,0\si{\degree}\\
+10 & 0.03 & -0.0 & 0.03 & 0.0\si{\degree}\\
 \hline
 \etab
 \et{Whistle localization results for all measurements in \cref{subsec:04_labMeasurements} with
@@ -280,15 +207,15 @@ drop it.}
 The results of phase method for this experiment are shown in
 \cref{tab:04_phaseTeamResult}.
 The \ac{RMSE} of the position estimate is close to the prediction accuracy of
-the \ac{CC} method with 1,33\si{\meter}.
-The \ac{RMSE} of global direction estimate of 74,8\si{\degree}
+the \ac{CC} method with 1.33\si{\meter}.
+The \ac{RMSE} of global direction estimate of 74.8\si{\degree}
 shows a significantly worse performance than the other two methods.
 However, it must be noted that these angular error mainly arise from
 measurements 6 and 10. Both measurements are taken at the center point of the
 field. Since the absolute position is in an acceptable error range, these
 angular results will be treated as outliers for the error calculation. Thus,
 the angular \ac{RMSE} of the phase method without measurements 6 and 10 is
-11,69\si{\degree}.\todo{Does it even make sense to report the angular error for
+11.69\si{\degree}.\todo{Does it even make sense to report the angular error for
 the team estimate? This has weirdly non-linear as the error statistics
 essentially have a singularity at 0. It does not even seem to be well defined
 what should be the "true orientation" if the whistle is blown at 6 or 10. Any
@@ -300,59 +227,31 @@ direction would be correct for this case.}
 \hline
 Measurement & Error x [\si{\meter}] & Error y [\si{\meter}] & Abs. Distance Error [\si{\meter}] & Angle Error\\
 \hline
-[0] & -1,07 & -0,98 & 1,45 & 4,13\si{\degree}\\
+0 & -1.07 & -0.98 & 1.45 & 4.13\si{\degree}\\
 \hline
-[1] & 0,21 & 0,27 & 0,34 & 4,27\si{\degree}\\
+1 & 0.21 & 0.27 & 0.34 & 4.27\si{\degree}\\
 \hline
-[2] & 0,22 & 1,39 & 1,41 & 16,25\si{\degree}\\
+2 & 0.22 & 1.39 & 1.41 & 16.25\si{\degree}\\
 \hline
-[3] & 1,26 & -0,02 & 1,26 & 11,19\si{\degree}\\
+3 & 1.26 & -0.02 & 1.26 & 11.19\si{\degree}\\
 \hline
-[4] & 0,16 & -0,04 & 0,17 & 0,99\si{\degree}\\
+4 & 0.16 & -0.04 & 0.17 & 0.99\si{\degree}\\
 \hline
-[5] & -0,42 & 0,19 & 0,47 & 5,46\si{\degree}\\
+5 & -0.42 & 0.19 & 0.47 & 5.46\si{\degree}\\
 \hline
-[6] & -0,32 & 0,08 & 0,33 & 166,25\si{\degree}\\
+6 & -0.32 & 0.08 & 0.33 & 166.25\si{\degree}\\
 \hline
-[7] & -0,28 & 1,76 & 1,78 & 20,82\si{\degree}\\
+7 & -0.28 & 1.76 & 1.78 & 20.82\si{\degree}\\
 \hline
-[8] & 2,37 & 0,27 & 2,39 & 4,23\si{\degree}\\
+8 & 2.37 & 0.27 & 2.39 & 4.23\si{\degree}\\
 \hline
-[9] & 2,04 & 0,29 & 2,06 & 24,89\si{\degree}\\
+9 & 2.04 & 0.29 & 2.06 & 24.89\si{\degree}\\
 \hline
-[10] & -0,32 & 0,0 & 0,32 & 180,0\si{\degree}\\
+10 & -0.32 & 0.0 & 0.32 & 180.0\si{\degree}\\
 \hline
 \etab
 \et{Whistle localization results for all measurements in \cref{subsec:04_labMeasurements} with
 phase method}{04_phaseTeamResult}
-
-\subsection{Single Robot Angle Error}
-\label{subsec:04_singleRobotAngleError}
-\todo[inline]{This seems a bit misplaced (e.g. jumping back to angle errors of
-individual robots)}
-
-To identify the difference between the methods, a closer look
-into the results of the single robots prior to the team filter is given.
-\Cref{fig:04_compareRmse} presents the \ac{RMSE} considering the
-direction results of all five robots for each measurement in
-\cref{subsec:04_labMeasurements}.
-Additionally, the estimated standard deviation\todo{Is it standard deviation or
-variance here?} of each measurement
-provides insight into the validity of the single robot results.
-As one can see, the standard deviation of the relative angle of the \ac{GCC}
-method is significantly smaller as compared to the phase method for most
-measurements.
-How this influences the reliability of the sound localization is
-subject of discussion in \cref{sec:05_methodComparison}.
-% -------------------------------------------------------------
-\begin{figure}[ht]
-	\centering
-		\includegraphics[]{figures/evaluation/compare_rmse}
-	\caption{Angular RMSE and standard error of robot results per
-	measurement of \cref{subsec:04_labMeasurements}.}
-    \label{fig:04_compareRmse}
-\end{figure}
-% -------------------------------------------------------------
 
 % Another point to take into account is the number of intersections
 % yielded in the team filter from the direction rays.
