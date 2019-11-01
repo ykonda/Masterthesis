@@ -1,62 +1,53 @@
-\newpage
 \section{Additional Information}
 \label{sec:04_additionalInformation}
 
 On top of the direction detection by \ac{TDOA}, additional information can be
 extracted from the microphone data.
 This information can be used to improve the single robot result or
-to feed the team filter with beta\todo{beta or better? If beta: what does it mean?} information.
-As \cref{sec:03_distance} has described, the distance of the sound source
+to feed the team filter with information about the certainty of the \ac{WSDE} result.
+As \cref{subsec:03_distance} has described, the distance of the sound source
 can be estimated approximately for nearby signals that are aligned with
 the x-axis of the robot's head.
 Another intuitive approach is the inspection of the \ac{SNR} which
 is expected to be higher for closer sound sources.
-In addition, the \ac{PSNR} of the \ac{GCC} as defined in \cref{sec:03_snr} is examined.
+In addition, the \ac{PSNR} of the \ac{GCC} as defined in \cref{subsec:04_psnr} is
+examined in detail.
 
 \subsection{Distance Approximation}
 \label{subsec:04_distance}
 
-\Cref{sec:03_distance} presented the necessary conditions required to estimate the
-distance of the sound source on a single robot.\todo{Please check whether this
-sentence still states what you wanted to say. (Are you trying to say that under
-certain conditions one can estimate the distance of the sound source from
-a single robot? Or are you saying that certain conditions must hold for the
-single robot to compute the distance from multiple robots (e.g. single robot
-has to be able to resolve ambiguity of multiple candidates.))}
+\Cref{subsec:03_distance} stated that the distance to a sound source
+can be determined approximately if it comes from straight in front or
+backwards of the robot.
+Additionally, this calculation is only possible for sound sources that are
+less than 0.66\si{\meter} in front or 15.3\si{\meter} behind in theory.
+For this  case, a height of the sound source is estimated to be 1.5\si{\meter}.
 To examine the validity of these assumptions, measurements from the front and
-back of the robot are collected and evaluated.
+back of the robot are collected and evaluated among this range.
 \Cref{tab:04_distance} lists the true distance as well as the distance estimate
 for each measurement.
-For both measurements with zero distance, the orientation of the whistle differed.
+For both measurements with zero distance, the orientation of the whistle differs.
 180\si{\degree} indicates that the whistle was turned in the opposite direction
 of the robot.
-In the other case (0\si{\degree}), the whistle was aligned with the robot.
+In the other case (0\si{\degree}), the whistle was oriented unidirectional with the robot.
 The distance is represented in robot coordinates, so that positive distance
 expresses that the source was placed in front of the robot and oriented towards it
 and vise versa.
-\todo[inline]{Maybe it would be good to use the same convention for all
-measurements here. You could either annotate all measurements with an angle and
-only positive distances or have a only a sign for all measurements (omit angle
-for 0 as you can simply write +0 and -0) but have an explicit sign for all
-measurements ( write +0.9 instead of 0.9)}
-\todo[inline]{It might be more helpful to report errors here instead of the
+\todo{It might be more helpful to report errors here instead of the
 estimates, but it's not a big problem if you leave it like this.}
-\todo[inline]{I am guessing that for measurement 1 and 2 the true distance was
-6 and 9 meters rather than 0.6 and 0.9 meters? Also, is there a reason why you
-have more measurements from the back than from the front?}
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|c|}
 \hline
 No. & True Distance [\si{\meter}] & GCC Result [\si{\meter}] & CC Result [\si{\meter}] & Phase Result [\si{\meter}]\\
 \hline
-1 & 0.9 & $\infty$  & $\infty$ & $\infty$ \\
+1 & +0.9 & $\infty$  & $\infty$ & $\infty$ \\
 \hline
-2 & 0.6 & $\infty$ & $\infty$ & $\infty$ \\
+2 & +0.6 & $\infty$ & $\infty$ & $\infty$ \\
 \hline
-3 & 0.3 & 0.35 & 0.25 &  0.13 \\
+3 & +0.3 & 0.35 & 0.25 &  0.13 \\
 \hline
-4 & 0.0 (180\si{\degree}) & -0.13 & -0.15 & -0.23 \\
+4 & +0.0 (180\si{\degree}) & -0.13 & -0.15 & -0.23 \\
 \hline
 5 & -0.0 (0\si{\degree}) & 0.22 & 0.21 & 0.02 \\
 \hline
@@ -87,65 +78,101 @@ No. & True Distance [\si{\meter}] & GCC Result [\si{\meter}] & CC Result [\si{\m
 % -------------------------------------------------------------
 
 As the results show, that in many cases the distance can be approximated with
-adequate\todo{adequate rather means something like "hinreichend/ausreichend", maybe use "adequately
-small error" oder "sufficiently small error"} error. One can see that the
-\ac{GCC} results are erroneous for small
-distances, but gives a correct approximation steadily.\todo{What do you mean by "steadily"?}
+sufficiently small error.
+One can see that the \ac{GCC} results are erroneous for small
+distances, but gives a correct approximations that are not completely out of proportion
+for all measurements except of the edge cases (no. 1, 2 and 16).
 Compared to this, the \ac{CC} method performs better for small distances,
 but fails completely for some measurements.
-These failures of the \ac{CC} could be mostly attributed to cases where the
-lateral delays exceeded the maximum lateral samples incorrectly.\todo{What do
-you mean by "exceeded incorrectly", maybe drop "incorrectly"?}
-The phase method provides most incorrect results.
+These failures of the \ac{CC} could be attributed to cases where the
+lateral delays exceeded the maximum lateral samples to trigger the
+distance estimation algorithm.
+The phase difference method provides most incorrect results.
 Especially measurement 10 stands out by being double the real value.
 
-\todo[inline]{Maybe you can show only the error statistics here and put the
-real measurements in the appendix?}
+% \todo[inline]{Maybe you can show only the error statistics here and put the
+% real measurements in the appendix?}
 
-For all measurements, the resulting direction angle of the sound source were
-accurate.
-\todo[inline]{For all measurements and all methods? Or does this statement only
-hold for GCC? It seems like CC and Phase have some wrong predictions in 12 and
-13}
+From the results one can say, that it is possible to estimate the distance
+of a sound source by all methods but is mostly reliable for the \ac{GCC-PHAT} method.
 Furthermore, the algorithm correctly detects sources that are out of
-observable range.\todo{Is this the "observable range" or should this rather be
-the "relevant range" (since these bounds seem to be imposed by SPL, not in
-general)}
-
-Unfortunately, for real cases one can not rely on the height parameter of the sound
-source which varies from the referee's body height.
+constructionally observable range.
+However, for real cases one can not rely on the height parameter of the sound
+source which varies according to the referee's body height.
 Having this as approximation only, the distance result should be handled
 with care.
+Also if a localization algorithm is implemented for sound sources
+at the same height as the robots' head, the distance estimation becomes unusable.
 
 \subsection{SNR}
 \label{subsec:04_snr}
 
-Estimates of the uncertainty of a measurement can be utilized to inform the
-Bayesian updating algorithm.
+Receiving information about the source location by the strength of a signal
+is an intuitive approach.
+Ideally, channels and robots that are closer to the sound source
+receive greater signal data.
+\Cref{subsec:03_snr} covers the implementation details about the \ac{SNR} which
+is a value to expresses the strength of the signal compared to its background noise.
+For the purpose of clarification, it is examined if channels
+with larger \ac{SNR} are closer to the others on one single robot.
+Additionally, this examination helps to ensure that the individual channels
+are not biased towards internal noise of the robot's head.
+
+Therefore, 3\si{\kilo\hertz} sinusoid signals are played back digitally from
+0.73\si{\meter} distance and constant volume.
+14 Measurements from different angles were taken with one robot.
+Further evaluation is done by determining the channel with the maximum
+\ac{SNR} between the channels.
+It is expected that the nearest channel to the sound source has maximum \ac{SNR}.
+At 85.71\si{\percent} of the measurements this assertion could be
+evidenced.
+In general, the \ac{SNR} seems to correlate in some extend with the
+distance to the sound source and no channel seems to behave different
+by nature.
+To prove this relation for real whistle measurements, the same evaluation is
+done with the laboratory-measurements.
+By that, only 54.55\si{\percent} of the maximum \acp{SNR} match with the expected
+channels.
+This outcome is not sufficient to make conclusions about the signal source
+direction on one robot.
+
+From the multi-agent perspective, it would be a simple way to predict the sound
+source position roughly if a relation between received signal strength on one robot
+and distance to the source exists.
+For example if multiple potential source positions exist for the multi-agent decision,
+the \ac{SNR} information can used as subordinate indicator for the direction.
+Another point is that information about the uncertainty of a \ac{WSDE} result
+can be respected in the Bayesian updating algorithm straightforwardly.
 Depending on the uncertainty, the covariance matrix of the incoming result can
 be adjusted so that predictions that are assumed to have higher error have
 a smaller influence to the posterior estimate.
-If a relation between received signal strength and distance to the source exists,
-it would be a simple way to predict the sound source position roughly.
-This can help for example, when team filter intersections are clustered so that
-multiple location results exist.
+In other words, \acp{SNR} of robots closer to the source would be higher
+and to that effect, the reliability of their results is higher.
+Thus, a relation between \ac{SNR} and distance on multi-agent level is examined in addition.
+
+\unsure[]{IMHO a good practice is to report the number of experiments
+and/or have the data in the appendix (if you still have the data). But having
+it in the appendix is not super relevant. Don't waste time on it.}
 % Thus, one intuitive hypothesis is assuming the existence of a relation between the
 % received signal strength and distance to the source.
 
-Taking the measurements of \cref{subsec:04_labMeasurements}, this hypothesis is
-examined by looking at the relation between distance and relative \ac{SNR}.
-By reason of the whistle not blown equal for all measurements,
-the \ac{SNR} is scaled by the overall mean of all robots' \acp{SNR} for one
-measurement.
+Taking the laboratory-measurements of \cref{subsec:04_labMeasurements}, this
+hypothesis is examined by looking at the relation between distance and and the robots'
+\ac{SNR} mean over all channel which is now called \textit{robot-\ac{SNR}}.
+Because the whistle is not blown equally for all laboratory-measurements,
+the robot-\ac{SNR} is scaled by the overall mean of all robots' \acp{SNR} for each
+measurement (named \textit{measurement-\ac{SNR}}).
 % $\text{Relative SNR} = \frac{SNR_{robot}}{Mean(SNR_{measurement})}$.
-In \cref{fig:04_snrDistance} no straightforward
-link between both values can be found unexpectedly.\todo{I would not write
-"unexpectedly" here.}
-\todo[inline]{Maybe report the correlation of these measurements. You can then
-say, that SNR and Distance are only weakly correlated (small rho) which is
-a bit more precise that using the "optisch gefuehlte Korrelation".}
+\Cref{fig:04_snrDistance} presents the relations between distance of a robot
+and the robots-\ac{SNR} relative to the measurement-\ac{SNR}.
+Looking at the plot, no straightforward link between both values can be found.
+Calculating the correlation coefficient $\rho$ between both quantities,
+its value is -0.2860.
+This outcome verifies that no simple connection between \ac{SNR} and distance
+can be placed.
+
 % -------------------------------------------------------------
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\includegraphics[]{figures/evaluation/snr_scatter}
 	\caption{Visualization of relation between SNR and distance.}
@@ -153,39 +180,14 @@ a bit more precise that using the "optisch gefuehlte Korrelation".}
 \end{figure}
 % -------------------------------------------------------------
 
-Due to the result, further analysis on the \ac{SNR} values
-on individual robots is done for evaluation of the microphones' validity.
-\todo{How does this relate to your last sentence above? (I thought that the
-conclusion was that things don't correlate?)}
-For this purpose, a signal is played back digitally from fixed distance
-and constant volume with different angles.
-The main purpose of this measurement is to ensure that the individual channels
-are not biased.\todo{Biased towards what?}
-14 measurements of a 3\si{\kilo\hertz} sine signal
-with are distance of 0.73\si{m} are done but no tendency is detectable.
-Further evaluation is done by determining the channel with the maximum
-\ac{SNR} of one measurement.
-It is expected that the nearest channel to the sound source has maximum \ac{SNR}.
-At 85.71\si{\percent} of the measurements this assertion could be
-evidenced.\todo{How many measurements did you take?}
-From this, it can be said that the general recordings of the microphones
-are neither biased nor falsified.\todo{What do you men by falsified here?}
-\todo[inline]{From the number of comments I put to this section I would
-conclude that you could add a little bit more details on what the purpose of
-this measurement was.}
-\todo[inline]{IMHO a good practice is to report the number of experiments
-and/or have the data in the appendix (if you still have the data). But having
-it in the appendix is not super relevant. Don't waste time on it.}.
-
-The same procedure is done with the real whistle recordings of the
-measurement in \cref{subsec:04_labMeasurements}.
-Using these measurements, only 54.55\si{\percent} of the maximum \acp{SNR}
-match with the expected channels.
+For the real whistle measurements, no assuring relation between \ac{SNR}
+and distance to source can be found neither between the microphone
+channels on the robots' head nor between the single robots.
 Consequentially, one must assume that the environmental circumstances
 like multi-path propagation and reflection have large influence
 on the signal data.
-Thus, neither for a single robot direction result nor for the team filter
-the \ac{SNR} can be utilized.
+Thus, the \ac{SNR} will not utilized as additional information
+for the \ac{WSDE} algorithm nor for the multi-agent filter.
 
 \subsection{PSNR}
 \label{subsec:04_psnr}
