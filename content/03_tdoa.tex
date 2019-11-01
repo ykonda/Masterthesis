@@ -85,8 +85,8 @@ conditions:
 		  the selected reference frequency.
 \end{itemize}
 Meeting this conditions, a signed phase difference is ascertainable that indicates a
-distinct direction.
-\Cref{tab:03_maxFrequncies} lists the most feasible reference frequencies (Max. Frequency)
+distinct delay.
+\Cref{tab:03_maxFrequencies} lists the most feasible reference frequencies (Max. Frequency)
 meeting the second requirement.
 As the table presents, the distance between channel 0 and 1 is too large so that the
 reference frequency would need to be smaller than 2\si{\kilo\hertz}.
@@ -106,7 +106,7 @@ Channel Pairs & Absolute Distance [\si{\meter}] & Max. Frequency [\si{\hertz}]\\
 2 and 3 & 0.0618 & 2775,08\\
 \hline
 \etab
-\et{Most feasible frequencies for unambiguous phase difference detection}{03_maxFrequncies}
+\et{Most feasible frequencies for unambiguous phase difference detection}{03_maxFrequencies}
 % -------------------------------------------------------------
 
 For compatibility with the correlation method implementation, the phase difference
@@ -122,7 +122,7 @@ Considering the sensor pair of the two front channels, the most feasible
 reference frequency value is limited to 2775,08\si{\hertz} as stated in the table above.
 Evaluation of \cref{fig:04_diffFc} has shown, that the quality of the phase difference
 method relies on the reference frequency to some extent.
-To realize best performance, a reference frequency between 2,6\si{\kilo\hertz} 2,775\si{\kilo\hertz}
+To realize best performance, a reference frequency between 2,6\si{\kilo\hertz} and 2,775\si{\kilo\hertz}
 should be chosen.
 The frequency resolution of \acp{FFT} is $\frac{f_s}{N}$ depending on the sample frequency $f_s$ and
 the number of data points $N$.
