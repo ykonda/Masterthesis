@@ -130,9 +130,9 @@ For this purpose we consider all of eleven measurements of the the laboratory-da
 recorded with robot nr. 26 at the center point.
 
 According to \cref{subsubsec:03_phase}, the maximal feasible frequency is defined as
-2775.08\si{\hertz} and the whistle spectrum ranges between 2\si{\kilo\hertz}
+2775.08\si{\hertz} by the distance between the channels
+and the whistle spectrum ranges between 2\si{\kilo\hertz}
 and 4\si{\kilo\hertz}.
-\missing[]{Continue here! Say that limited by geometry?}
 
 As shown in \cref{fig:04_diffFc} shows, the \ac{RMSE} is high for
 frequencies smaller than 2600\si{\hertz}.
@@ -155,10 +155,8 @@ content of \cref{subsubsec:03_phase}.
 
 On the basis of the results, the reference frequency was set to a minimum
 of 2600\si{\hertz}.
-For the evaluation of the static reference frequency, 
- the reference frequency is set to be the first represented frequency larger
-than 2600\si{\hertz}.\todo{why? Einen Satz zur Begruendung wenn es eine gibt.}
-Hence, we chose $f_c = 2627.1\si{\hertz}$ with a \ac{FFT} length of 256.
+Hence, the reference frequency is 2627.1\si{\hertz} when the a \ac{FFT} length is
+set to of 256.
 Applying the phase difference method for this reference frequency, the final
 direction estimate computed from the candidates listed in
 \cref{tab:04_fixedFreqResult} is -29.6\si{\degree} which results in an error of
@@ -187,7 +185,7 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \label{subsubsec:04_frameNumber}
 
 Not only does the frequency play a major role for the phase method,
-but also the chosen frame.
+but also the samples chosen for analysis.
 To evaluate if and how the result changes over time, the frame to
 utilize is shifted by half the frame size for all measurements
 of \cref{subsec:04_labMeasurements} for the robot at the center
@@ -219,7 +217,8 @@ chosen where the frequencies of the maximal\todo{Du schreibst haeufiger
 "maximal". Laut dictCC gibt es das aber es ist glaube ich eher unueblich}
 amplitudes coincides for all channels. For the running example discussed here
 this corresponds to a frequency of 2756,25\si{\hertz}.
-In the upper plot of \cref{fig:04_phaseSingle}\todo{Die figure ist ganz schoen
+In the upper plot of \cref{fig:04_phaseSingle}
+\todo{Die figure ist ganz schoen
 weit weg (ich musste ein bisschen suchen)} one sees the received microphone
 data which will be Hann windowed and then transformed into frequency domain by
 \ac{FFT}. The resulting phases and amplitudes are listed in
