@@ -1,6 +1,7 @@
 ## specific files from HSU template
 _changelog.txt
 /examples_latex/
+/cut/
 makebst.tex
 *.bst
 *.dbj
