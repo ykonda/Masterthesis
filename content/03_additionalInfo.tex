@@ -12,7 +12,7 @@ the distance of the sound source can be estimated approximately.
 If $delay_{01}$ (delay between channel 0 and 1) and $delay_{32}$ (delay between channel 3 and 2)
 are both very small, the signal comes from
 the front or the back most likely.
-In theory, for this case the lateral delays are larger or equal the maximal
+In theory, for this case the lateral delays are larger or equal the maximum
 sample difference between the front and rear channels on the x-axis which is
 to 5,41 samples.
 With smaller lateral delays and some assumptions, the angle of the sound source in XZ
@@ -70,16 +70,16 @@ or larger than $\pm$ 170\si{\degree}.
 Additionally, the lateral delays must be smaller than 5,41 samples as mentioned above.
 
 Restrictions of the front and rear distance measurement differ.
-For the front case, the maximal angle for a unambiguous distance calculation
+For the front case, the maximum angle for a unambiguous distance calculation
 is $\frac{\pi}{2}- 2\alpha$.
-Thus, the maximal front distance that can be approximated shrinks to
+Thus, the maximum front distance that can be approximated shrinks to
 $\Delta x = (\Delta h_{source} - \Delta h_{NAO}) \cdot \tan(\frac{\pi}{2} - 2\alpha)$
 according to \cref{eq:02_deltaX}.
-To the rear, the maximal value for $\gamma$ is bounded by the 5,41 samples that
+To the rear, the maximum value for $\gamma$ is bounded by the 5,41 samples that
 are set as condition.
 Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{NAO}$ to 0,57\si{\meter} for example,
-the maximal measurable distance to the front is about 0,66\si{\meter}.
-With the same values the maximal distance backwards is more than 50\si{\meter} in theory.
+the maximum measurable distance to the front is about 0,66\si{\meter}.
+With the same values the maximum distance backwards is more than 50\si{\meter} in theory.
 However, measurements in \cref{subsec:04_distance} show that 7\si{\meter} is the
 limit for the real case.
 

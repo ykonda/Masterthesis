@@ -2,9 +2,9 @@
 \label{sec:02_subsampleShift}
 
 Considering the case that the sample frequency $f_s$ is set to 44.1\si{\kilo\hertz}
-and the sound speed is 343\si{m/s}, the maximal number of samples
+and the sound speed is 343\si{m/s}, the maximum number of samples
 between the rear channels is 14.
-Other neighboring pairs have even less maximal sample differences.
+Other neighboring pairs have even less maximum sample differences.
 This leads to a very low resolution of the direction angle which can be
 circumvented by either setting a higher resolution or interpolation.
 
@@ -13,7 +13,7 @@ shift from a correlation.
 For this, a parabola $y(x) = a(x-p)^2+b$ is fitted into the three values of $R$ around the peak
 of the \ac{CC} and the peak of the parabola is taken as the more accurate
 delay.
-Thus, the subsample delay $D_{sub}$ depends on the maximal value of the correlation $y_m$
+Thus, the subsample delay $D_{sub}$ depends on the maximum value of the correlation $y_m$
 and its previous one $y_{m-1}$ and the next value $y_{m+1}$.
 Substituting known values and derivations into the parabola function,
 the subsample delay is defined as
