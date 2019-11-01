@@ -7,6 +7,7 @@ one exemplary measurement is utilized
 to present and analyse the \ac{TDOA} methods in detail first.
 In this recording, the sound source is placed at the right front
 of the robot with 4.5\si{m} distance.
+Hereinafter, this measurement will be referenced to as \textit{demonstration-dataset}.
 This corresponds to an an angle of -33.7\si{\degree} in robot coordinates.
 To get an idea about the examined data, according whistle signal samples around the
 start are plotted in \cref{fig:04_tdoaSignal} for all channels.
@@ -31,8 +32,13 @@ function $R_{x_ax_b}$ of two signals $x_a$ and $x_b$  (\cf
 \label{subsec:04_ccSingle}
 % -------------------------------------------------------------
 
-To visualize the result of the \ac{CC}, the correlations are plotted in
-\cref{fig:04_cc}. For $R_{32}$ and $R_{13}$ a peak is clearly visible.
+The \ac{CC} is a widespread technique to obtain the time delay
+between two series of samples.
+To discuss the result of the \ac{CC}, the belonging correlation functions
+of the demonstration-dataset are plotted in \cref{fig:04_cc}.
+The selection process and implementation correspond to the explanations
+in \cref{subsubsec:03_cc}.
+For $R_{32}$ and $R_{13}$ a peak is clearly visible.
 However, for the other \ac{CC} the problem of a weak peak
 arises what was mentioned as downside of the \ac{CC} in \cref{sec:02_cc}.
 % -------------------------------------------------------------
@@ -74,8 +80,8 @@ direction candidate which correctly points to the sound source.
 \subsection{Generalized Cross Correlation}
 \label{subsec:04_gccSingle}
 % -------------------------------------------------------------
-\Cref{fig:04_gcc} presents the cross correlation result by the \ac{GCC} method of
-the same signal data as in the previous section.
+\Cref{fig:04_gcc} presents the \ac{GCC} result by the \ac{GCC-PHAT} method of
+the demonstration-dataset equal to \cref{subsec:04_ccSingle}.
 The subsample delays for each channel pair and their resulting direction candidates
 are listed in \cref{tab:04_gcc}.
 From this, a final direction of -30.0\si{\degree} is determined
@@ -127,7 +133,7 @@ investigating the influence of the chosen value.
 Therefore, \ac{WSDE} results with the phase difference method are evaluated by setting
 different values for the reference frequency within whistle range.
 For this purpose we consider all of eleven measurements of the the laboratory-dataset
-recorded with robot nr. 26 at the center point.
+recorded with robot no. 26 at the center point.
 
 According to \cref{subsubsec:03_phase}, the most feasible frequency is defined as
 2775.08\si{\hertz} by the distance between the channels
@@ -154,10 +160,10 @@ content of \cref{subsubsec:03_phase}.
 % -------------------------------------------------------------
 
 On the basis of the results, the reference frequency was set to a minimum
-of 2600\si{\hertz}.
-Hence, the reference frequency is 2627.1\si{\hertz} when the a \ac{FFT} length is
-set to of 256.
-Applying the phase difference method for this reference frequency, the final
+of 2600\si{\hertz} for evaluation of the demonstration-dataset.
+Hence, the reference frequency is 2627.1\si{\hertz} in the case of a \ac{FFT} length
+of 256 samples.
+Applying the phase difference method with this reference frequency, the final
 direction estimate computed from the candidates listed in
 \cref{tab:04_fixedFreqResult} is -29.6\si{\degree} which results in an error of
 4.1\si{\degree}.
@@ -180,47 +186,19 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 	(-33.7\si{\degree})}{04_fixedFreqResult}
 % -------------------------------------------------------------
 
-% Configuration for Phase Method
-\subsubsection*{Frame Number}
-\label{subsubsec:04_frameNumber}
-
-Not only does the frequency play a major role for the phase method,
-but also the samples chosen for analysis.
-To evaluate if and how the result changes over time, the frame to
-utilize is shifted by half the frame size for all measurements
-of \cref{subsec:04_labMeasurements} for the robot at the center
-point.
-% [ 29.08029745  58.1426789   65.27548831  67.91984464  76.82890558
-%   97.33976251  96.63736674 100.2203543  105.14752253  61.28179302
-%   60.0017076   50.60063622  53.80158271  49.0830362   62.64453085]
-In \cref{fig:04_phaseOverTime} one sees that the first channel frames with zero
-shift gives the best result with a \ac{RMSE} of 29.1\si{\degree}. These results
-show that the frame position has a significant influence on the prediction
-accuracy of the direction detection. Therefore, an accurate signal start
-detection is crucial for precise sound source localization.
-% -------------------------------------------------------------
-\begin{figure}[ht]
-	\centering
-		\includegraphics[]{figures/evaluation/phase_over_time}
-	\caption{Changing results by shifting the frame over the
-	samples. All measurements of \cref{subsec:04_labMeasurements}
-	with robot nr. 26 are taken into consideration.}
-	\label{fig:04_phaseOverTime}
-\end{figure}
-% -------------------------------------------------------------
-
 \subsubsection*{Dynamic Reference Frequency Selection}
 
-First, the result of the phase difference method using a  dynamically selected
-frequency are presented. As stated in the implementation chapter, the frame is
-chosen where the frequencies of the maximal\todo{Du schreibst haeufiger
-"maximal". Laut dictCC gibt es das aber es ist glaube ich eher unueblich}
-amplitudes coincides for all channels. For the running example discussed here
-this corresponds to a frequency of 2756,25\si{\hertz}.
-In the upper plot of \cref{fig:04_phaseSingle}
-\todo{Die figure ist ganz schoen
-weit weg (ich musste ein bisschen suchen)} one sees the received microphone
-data which will be Hann windowed and then transformed into frequency domain by
+Another option is to have a nonspecific reference frequency that
+is computed dynamically without a-priori knowledge.
+As stated in the implementation chapter, frames are chosen where the frequencies
+of the maximum amplitudes coincides for all channels.
+For the running example discussed here, this corresponds to a frequency of 2756.25\si{\hertz}.
+
+For comprehensibility, the determined frequency information visualized by
+wave signals with the detected phases and amplitudes
+in the lower subplot of \cref{fig:04_phaseSingle}.
+In the upper plot of \cref{fig:04_phaseSingle} one sees the originally received microphone
+data before applying a Hann window and transforming it into frequency domain by
 \ac{FFT}. The resulting phases and amplitudes are listed in
 \cref{tab:04_phaseSingle}.
 % -------------------------------------------------------------
@@ -231,17 +209,16 @@ data which will be Hann windowed and then transformed into frequency domain by
 	\label{fig:04_phaseSingle}
 \end{figure}
 % -------------------------------------------------------------
-For comprehensibility, the determined frequency information visualized by
-wave signals with the detected phases and amplitudes
-in the lower subplot of \cref{fig:04_phaseSingle}.
-Due to the larger distance between channels 0 and 1 \todo{distance in welcher
-Metric? Physical distance of the microphones? Kannst du vielleicht noch einen
-satz zur klarstellung dazu schreiben.}, the phase difference information must
-be neglected because the phase difference is ambiguous. Following the procedure
-discussed in \todo[inline]{section ref} the resulting phase difference estimate
-is -29.2\si{\degree} by combining the candidate direction -17.6\si{\degree}.
--30.6\si{\degree} and -39.3\si{\degree} from channel 1, 2 and 3 respectively
-(\cref{tab:04_phaseDiffSingle}).
+\Cref{tab:03_maxFrequencies} pointed out that the most feasible frequency
+of the rear channels 0 and 1 is not in whistle spectrum
+due to the larger physical distance between the microphones.
+Thus, the phase difference information is neglected because of the ambiguity of
+the temporal sequence between the signals.
+Following the procedure discussed in \cref{subsubsec:03_phase},
+the resulting phase difference estimate
+is -29.2\si{\degree} by combining the candidate direction -17.6\si{\degree},
+-30.6\si{\degree} and -39.3\si{\degree} from channels 1, 2 and 3 according to
+\cref{tab:04_phaseDiffSingle}.
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|}
@@ -272,21 +249,80 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 3 & 2 & 113.1 & -140.7 & -39.3\\
 \hline
 \etab
-\et{Phase differences and resulting direction candidates of example data with phase method}{04_phaseDiffSingle}
+\et{Phase differences and resulting direction candidates of demonstration-dataset
+with dynamically determined reference frequency}
+{04_phaseDiffSingle}
 % -------------------------------------------------------------
 
-\subsection{Single Robot Angle Error}
-\label{subsec:04_singleRobotAngleError}
-\todo[inline]{This seems a bit misplaced (e.g. jumping back to angle errors of
-individual robots)}
+\subsubsection*{Impact of Selected Frame}
+\label{subsubsec:04_frameNumber}
 
-To identify the difference between the methods, a closer look
-into the results of the single robots prior to the team filter is given.
+Not only does the frequency play a major role for the phase method,
+but also the samples chosen for analysis.
+Again it is referred to the eleven measurements of the laboratory-dataset
+recorded on the robot at the center point (no. 26).
+To evaluate if and how the result changes over time, the selection window
+is shifted by half the frame size from -5 shift steps to 20.
+Recapitulating the implementation details for the static reference frequency case
+in \cref{subsec:04_phaseSingle},
+the first frame after the start index is chosen in which the whistle detection would
+count a whistle signal.
+This frame is represented by zero shift.
+
+% [ 62.32629763  59.19634105  66.78950798  54.53898736  30.80692207
+%   25.91537359  56.55427899  65.27548831  66.3898905   75.48670644
+%   97.33965933  96.6373387  100.22012166 104.20160752  59.55737843
+%   58.22148221  48.51237213  51.93254436  49.08273252  62.64453085
+%   56.49506079  57.03430393  67.46509351  73.21671739  43.69704948]
+In \cref{fig:04_phaseOverTime}, the resulting errors per shift
+for all measurements are plotted, presenting the influence of the
+selected frame around the signal start.
+The reference frequency was set to 2627.1\si{\hertz} due to the
+outcome that frequencies larger than 2600\si{\hertz} achieve best results.
+The graph presents that frames nearest to the signal start reach best results
+with an \ac{RMSE} of 25.9\si{\degree}.
+These results show that the frame position has a significant influence on the prediction
+accuracy of the direction detection.
+Therefore, an accurate signal start detection is crucial for the preciseness of the \ac{SSL}
+by phase difference.
+% -------------------------------------------------------------
+\begin{figure}[ht]
+	\centering
+		\includegraphics[]{figures/evaluation/phase_over_time}
+	\caption{\ac{WSDE} result errors while shifting the frame over the
+	samples of the laboratory-dataset on robot no 26.}
+	\label{fig:04_phaseOverTime}
+\end{figure}
+% -------------------------------------------------------------
+
+\subsubsection*{Phase Method Conclusion}
+\label{subsubsec:04_phaseMethodConclusion}
+
+Different options were investigated relating to the phase difference method
+in the last subsections.
+One finding is that reference frequency values should be chosen larger than
+2.6\si{\kilo\hertz} for best results.
+Another is that samples at the beginning of the signal are most suitable
+for this method.
+An advantage of the dynamically selected reference frequency is the reduction of
+one parameter.
+It requires more effort to implement and considering edge cases but
+does not depend on the whistle detection.
+Both approaches are valid for this work and result in a similar reference
+frequency due to the limitations listed in \cref{subsubsec:03_phase}.
+
+\subsection{\ac{TDOA} Method Comparison}
+\label{subsec:04_singleRobotAngleError}
+
+As the different \ac{TDOA} methods were discussed profoundly in the last
+sections, all measurements of the laboratory-dataset are considered here
+to make a generalized statement about the performance.
+The \acp{WSDE} resulting from here are the inputs of the multi-agent
+localization filter.
 \Cref{fig:04_compareRmse} presents the \ac{RMSE} considering the
 direction results of all five robots for each measurement in
 \cref{subsec:04_labMeasurements}.
-Additionally, the estimated standard deviation\todo{Is it standard deviation or
-variance here?} of each measurement
+Additionally, the estimated standard deviation of each measurement
 provides insight into the validity of the single robot results.
 As one can see, the standard deviation of the relative angle of the \ac{GCC}
 method is significantly smaller as compared to the phase method for most
@@ -306,5 +342,9 @@ subject of discussion in \cref{sec:05_methodComparison}.
 \subsection{Conclusion}
 \label{subsec:04_tdoaConclusion}
 
+The results in \Cref{subsec:04_singleRobotAngleError} show
+that the \ac{GCC-PHAT} algorithm performs best according to the
+laboratory-measurements.
+Not only the errors are smallest, but also 
 \ac{GCC-PHAT} is best. \ac{PSNR} information that is only available for this method turned out
 to be very useful .
