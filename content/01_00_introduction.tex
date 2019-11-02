@@ -17,59 +17,76 @@
 % the time difference of arrival. The distance between the robots needs to be known
 % Robots needs to be synchronized (which is difficult with NTP only)
 
-\acf{SSL} is content of research for many years with
-application scenarios in various environments due to its
-validity for all sorts of signals (sonar, radar, acoustic, seismology,
-geophysics, ultrasonics, communications \cite{Chen2006}) 
-Explicitly for audio signals, use cases emerge with the progressing
-ordinariness of technical equipment on daily basis.
+\acf{SSL} has been subject of research for many years with application
+scenarios in various environments and applicability to a wide range of
+different sensors \todo[inline]{Chen2006, cite, cite}.
+\todo[inline]{Maybe enumerate two examples explicitly with "environment",
+"sensor used" and citation. E.g. Application domains range from X where SSl is
+applied on Y-sensor-data to achive Z, to ....}
+In particular for audio signals, use cases emerge with the progressing
+ordinariness of technical equipment on a daily basis.\todo{What do you mean by
+this sentence?}
 % As technical devices gained in importance more and more,
-Assuming robots as forthcoming everyday object, reaction to acoustic
+Assuming robots as forthcoming everyday objects, reaction to acoustic
 input is one essential step for natural human-robot interaction.
-For example, one plausible scenario is a humanoid robot keeping the eye
-contact with an interacting human.
+For example, one plausible scenario is a humanoid robot keeping eye
+contact with an interacting human.\todo{Why is acoustic localization important for eye-contact?}
 An even more tangible case can be seen in conference rooms of business environments
-where remote participation is commonplace in these days.
-Functions of communication systems like speaker identification and tracking of active talkers
-get crucially important to provide smooth operation \cite{Brandstein96apractical}.
+where remote participation is commonplace these days.
+Special features of communication systems like speaker identification and tracking
+become crucially important to provide smooth operation \cite{Brandstein96apractical}.
 In general, \ac{SSL} algorithms can be divided into three categories
-which are based on beamforming, eigenvalue decomposition or \ac{TDOA} \cite{Brandstein96apractical}.
-% intuitive handling with acoustic input
-% Especially, many use cases exist regarding non-acoustic signals
-% like sonar, radar,
-% investigated by researchers a broad topic which is
-% In this field of signal processing, signal source localization is
+which are based on beamforming, eigenvalue
+decomposition or \ac{TDOA} \cite{Brandstein96apractical}.
+\todo{maybe one more citation here. Are all of them described in Brandstein96apractical}
+\todo[inline]{You could also point to more modern methods if you have
+literature. RNNs, CVAE. You could easily justify why these methods are not
+considered in this work (due to computational effort)}
 
-In this thesis, the \ac{TDOA} method was chosen to estimate the \ac{SSL} and evaluates
-different implementations focussing on whistle sounds in the context of an engineering competition
-\textit{\ac{RoboCup}}.
-As \cite{BAS_estimator} states, beamforming is computationally expensive and eigenvalue
-decomposition is little suitable
-for signals with small bandwidth which is why the \ac{TDOA} method was selected as most
-appropriate solution.
-A widespread approach is to cross-correlate the sensor readings of two microphones
-to obtain the time delay between those.
-By this, the direction of a signal source can be derived by geometrical relation by one
-stand-alone system and a position by a multi-agent system.
+In this thesis, the \ac{TDOA} method was chosen to estimate the
+\ac{SSL}\todo{"estimate the localization" seems incorrect. I think it would be
+"sound source location" here. (OUTDATED:) Also, maybe write it out? Don't use
+SS-location. Also, you might want to briefly justify the choice of TDOA as you
+mentioned the alternatives earlier}. The performance of different such
+strategies is evaluated with a focus on whistle sound localization in the
+context of the \textit{\ac{RoboCup}}. \todo{Why textit (kursiv)? Write RoboCUP
+SPL. Also, should you write "focus on" or simply say "in the context of" as you
+don't really discuss things other than whistles?}
+As stated in \cite{BAS_estimator}, beamforming methods are computationally
+expensive and eigenvalue decomposition is little suitable for signals with
+small bandwidth. For an application in the \ac{RoboCup} domain, these constraints
+are undesirable as this setting requires real time processing of low-bandwidth
+whistle signals. Therefore, in this work the \ac{TDOA} method was selected as the
+most appropriate solution.\todo{Oh I see. Here is the justification for why you
+used TDOA. Maybe this up then.}
+\todo[inline]{I think I would just end the introduction here and remove the
+last sentence. IMHO too much detail for an introduction.}
+A widespread approach to compute the \ac{TDOA} is to cross-correlate the sensor
+readings of two microphones to recover the time delay between both channels. By
+this, the direction of a signal source can be derived by geometrical relation
+by one stand-alone system and a position by a multi-agent system.
 
 \section{Motivation}
 
 The \acf{RoboCup} is known for promoting research on autonomous robotic systems
-by scientists and students of universities.
-It offers a platform, where focus is set on fast intelligent systems and multi-agent
-collaboration \cite{robocup}.
+by scientists and students from around the world.
+It provides a platform that focuses on fast\todo{fast? LOL! Or fast as in
+"almost"?} intelligent systems and multi-agent collaboration \cite{robocup}.
 This initiative encourages young engineers to work in real case scenarios
-by providing several leagues with different engineering tasks that are required
-on the subject of robotics.
+by providing several leagues with different engineering tasks relevant to the field
+of robotics.
 
-In the \ac{SPL} of the \ac{RoboCup}, humanoid robots are developed to play soccer autonomously
-for scientific purpose.
-By requirement, the hardware is identical for all competitors in this league and no modification
-is allowed.
-Since 2008 commercially available humanoid robots named \textit{NAO} provided by the
-company \textit{SoftBank Robotics} are used.
-They are equipped with multiple units like cameras, speakers, microphones, sonar sensors,
-joint position sensors, tactile sensors, \ac{IMU} and many more \cite{nao_docu}.
+In the \ac{RoboCup} \ac{SPL}, software for humanoid robots is developed to
+play soccer autonomously for scientific purpose.
+According to the rules of this league, all competitors are constraint to use the
+same hardware platform and no modifications are allowed. By this means the \ac{SPL}
+provides a competitive algorithmic real world benchmark.
+Since 2008 commercially available humanoid \textit{NAO} robots by the company
+\textit{SoftBank Robotics} are the official standard platform in this league.
+They are equipped with a variety of different sensor like cameras, speakers,
+microphones, sonars, joint position sensors, tactile sensors, \ac{IMU}
+and many more \cite{nao_docu}.\todo{I don't think you have to enumerate all of them
+here.}
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -79,65 +96,79 @@ joint position sensors, tactile sensors, \ac{IMU} and many more \cite{nao_docu}.
 \end{figure}
 % -------------------------------------------------------------
 
-Within this scope, a \acf{WSL} competition \textit{Directional Whistle Challenge} was
-introduced as technical challenge in 2019 that acted as initiator for this work.
-The technical challenge covers smaller game independent tasks to test the realizability of
-concepts and investigate preliminary ideas that might affect the prospective rules for the games.
-By slightly changing the rules every year, the difficulty is increased and the conditions
-are adapted to reach the level of human soccer as overarching goal until 2050.
-Content of 2019's challenge specified to locate the position of a whistle blown by a referee
-with one or multiple robots on the soccer field.
-So far, whistles are only used for indicating the kick off of a game.
-However, future consideration exist to use the whistle more frequent
-to mark game state changes.
+Within the context of the \ac{SPL}, for the \ac{RoboCup} 2019 the \textit{Directional
+Whistle Challenge} was added as a technical challenge. This challenge acted as
+initiator for this work. In the \ac{SPL}, technical challenges cover smaller
+game independent tasks to test the realizability of concepts and to explore
+preliminary ideas that might be used to inspire prospective rule changes. By
+changing the rules every year, the difficulty is increased and the conditions
+are adapted to reach the level of human soccer as the overarching goal until
+2050. According to the current rules of the league\todo{cite SPL rule book},
+whistles are only used for indicating the kick off of a game. However,
+future considerations exist to use the whistle more frequently to mark
+game state changes. Therefore, 2019's challenge required participants to
+localize the position of a whistle blown by a referee with one or
+multiple robots on the soccer field.
 %  like executions of free kicks which include corner kicks or kick-ins.
-Currently, the issue occurs that robots detect whistles of neighboring
-games and start playing ahead of the own game start what yields to a penalty.
-With increasing function of whistles, this difficulty propagates.
+Currently, most teams are able to reliably detect whistle sounds. However, the
+issue occurs that robots detect whistles of neighboring games and therefore
+start playing ahead of the own game start which yields a penalty. With
+increasing importance of the whistle for the communication between the referee
+and the robots, this becomes a pressing issue.
 
-As another imaginable case of application, a \ac{SSL} can operate as confirmation
-functionality between team members.
-For example, the own keeper could send a audio output while an offensive player prepares
-to shoot a goal.
-If this audio signal is detected in the front by the offensive player, he recognizes
-that he is about to score a own goal.
+As another imaginable case of application, a \ac{SSL} can be used to improve team
+communication among the robots.
+For example, the keeper could use an audio signal to identify itself to other team
+members. With an \ac{SSL} in place this signal can be localized, allowing other
+team members to recognizes if they are about to score an own goal.
 Potential mistakes and failure of other program components can be corrected by such
 confirmation behavior between the robots.
-For this reason, it was taken care that the implemented result is not limited to
-whistle sounds.
+For this reason, it was taken care of designing an algorithm that is not
+limited to whistle sounds.\todo{is it?}
 
 \section{Objective}
 \label{sec:01_objective}
 
-For elaboration of this thesis, the sixth generation of NAO robots are being used
+In this work, the sixth generation of NAO robots are being used
 which consists of four microphones attached on the robot's head.
 Detailed information about the robots hardware relevant for this work are presented
-in \cref{subsec:03_microphones}.
-For development on the NAOs, a extensive software framework is provided by the
-\ac{SPL} team \textit{HULKs} which is student association at the \ac{TUHH}.
-As a stable whistle detection exist already in this framework,
-it will be utilized for the development of the \ac{SSL}.
-Its highly reliable with a hit rate of 98\si{\percent} \cite{Hasselbring} what has proved to be true at
-competitions in the past.
-False positives only occur when whistles are heard from other fields as explained above.
-This underlines the importance of a source localization to have the ability to neglect whistles
-that were detected from other fields' games.
+in \cref{subsec:03_microphones}.\todo{Maybe this should be part of the
+introduction, not objective?}
+For development of software for this system, an extensive framework is provided by
+the \ac{SPL} team \textit{HULKs}, a group of engineering students associated
+with the \ac{TUHH}.
+In this software framework, a reliable detector for whistle sounds is provided.
+This implementation will be utilized for the development of the \ac{SSL}. The
+whistle detector of the \textit{HULKs} achieves a hit rate of 98\si{\percent}
+and has shown good performance at competitions in the past \cite{Hasselbring}.
+\todo{Cite robocup statistics. Use "accuracy" and "precision" correctly rather
+than hit rate} In practice, false positives only occur when whistles are are blown
+at other fields as explained above. This emphasizes the importance of
+a source localization as a useful extension to allow rejection of whistles
+sounds detected from neighboring fields.
 
-Stages to realize the \ac{SSL} can be divided into a single robot \ac{WSDE} where
-the robots act as individual stand-alone systems and estimate the direction of the
-sound source by a \ac{TDOA} method separately.
-After this, the results are collected exchanging information between the
-team members via wireless communication so that a multi-agent decision can be executed.
-A inter-team communication what can be expanded at will also exists in the framework of the HULKs.
-Three \ac{TDOA} algorithms are implemented and evaluated within this work
-to find an appropriate method in order to compute reliable delays between the four robots'
-microphone sensors.
-The standard \acf{CC} method is compared with the \acf{GCC}, as well as a \ac{PD} method which
-observes the phases of a reference frequency between the microphones.
-In order to avoid reverberation and observing multi-path propagated signals, focus is layed on the
-start of the signal which is assumed to be most unaffected.
-Finally, the objective is to provide a full working \ac{SSL} process that can be executed
-in real-time within the HULKs framework with various numbers of robots.
+The stages required to realize the \ac{SSL} can be divided into two steps.
+First, a single robot \ac{WSDE} on individual stand-alone systems estimates the
+relative direction of the sound source by computing the \ac{TDOA} between
+multiple microphones. After this, the single robot results are shared among the team
+via wireless communication in an effort to compute the absolute sound location
+from the multi-agent data.
+
+In the framework of the HULKs, an interface for rule compliant intra-team
+communication already exists and can be used to manage the network
+communication.\todo{All of this seems to be quite a lot of detail for a section
+titled "objective"}.
+
+As part of this work, three \ac{TDOA} algorithms are implemented and evaluated
+to identify an appropriate method to reliable estimate the relative direction
+on a individual robots. The standard \acf{CC} method is compared with the
+\acf{GCC}, as well as a \ac{PD} method which observes the phases of a reference
+frequency between the microphones. In order to avoid reverberation and
+observing multi-path propagated signals, focus is layed on the start of the
+signal which is assumed to be most unaffected by these artefacts. Finally, the
+objective is to provide a fully functional \ac{SSL} pipeline within the HULKs
+framework that can be executed in real-time to estimate the sound location in
+a global frame using a varying numbers of robots.
 
 % say that all measurements were done in lab -> in evaluation part
 % evaluation -> SSD at beginning
