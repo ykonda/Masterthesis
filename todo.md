@@ -3,6 +3,7 @@
 - [ ] SA_DA_template.tex [273]: What to put in \hypersetup?
 - [ ] Team Dortmund: time difference when whistles were detected between robots (offline synchronization)
 - [ ] Why this method was chosen: One does not want to synchronize robots with PTP or offline
+- [ ] Say that GCC-PHAT is equal to GCC in this thesis if not specified explicitly.
 
 ## Structure
 
