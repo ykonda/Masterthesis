@@ -39,47 +39,38 @@ In general, \ac{SSL} algorithms can be divided into three categories
 which are based on beamforming, eigenvalue
 decomposition or \ac{TDOA} \cite{Brandstein96apractical}.
 \todo{maybe one more citation here. Are all of them described in Brandstein96apractical}
-\todo[inline]{You could also point to more modern methods if you have
-literature. RNNs, CVAE. You could easily justify why these methods are not
-considered in this work (due to computational effort)}
 
-In this thesis, the \ac{TDOA} method was chosen to estimate the
-\ac{SSL}\todo{"estimate the localization" seems incorrect. I think it would be
-"sound source location" here. (OUTDATED:) Also, maybe write it out? Don't use
-SS-location. Also, you might want to briefly justify the choice of TDOA as you
-mentioned the alternatives earlier}. The performance of different such
-strategies is evaluated with a focus on whistle sound localization in the
-context of the \textit{\ac{RoboCup}}. \todo{Why textit (kursiv)? Write RoboCUP
-SPL. Also, should you write "focus on" or simply say "in the context of" as you
-don't really discuss things other than whistles?}
+In this work, the performance of different \ac{SSL} strategies is evaluated
+with a focus on whistle sound localization in the context of the
+\textit{\acs{RoboCup} \ac{SPL}}.
 As stated in \cite{BAS_estimator}, beamforming methods are computationally
 expensive and eigenvalue decomposition is little suitable for signals with
-small bandwidth. For an application in the \ac{RoboCup} domain, these constraints
+small bandwidth. For an application in the \acs{RoboCup} domain, these constraints
 are undesirable as this setting requires real time processing of low-bandwidth
-whistle signals. Therefore, in this work the \ac{TDOA} method was selected as the
-most appropriate solution.\todo{Oh I see. Here is the justification for why you
-used TDOA. Maybe this up then.}
-\todo[inline]{I think I would just end the introduction here and remove the
-last sentence. IMHO too much detail for an introduction.}
+whistle signals.
+Therefore, in this work the \ac{TDOA} method was selected as the
+most appropriate solution.
+
 A widespread approach to compute the \ac{TDOA} is to cross-correlate the sensor
 readings of two microphones to recover the time delay between both channels. By
-this, the direction of a signal source can be derived by geometrical relation
-by one stand-alone system and a position by a multi-agent system.
+this, the relative direction of a signal source can be obtained from
+geometric reasoning on a single robot. From multiple such direction estimates
+a global sound source position can be estimated.
 
 \section{Motivation}
 
-The \acf{RoboCup} is known for promoting research on autonomous robotic systems
-by scientists and students from around the world.
-It provides a platform that focuses on fast\todo{fast? LOL! Or fast as in
-"almost"?} intelligent systems and multi-agent collaboration \cite{robocup}.
-This initiative encourages young engineers to work in real case scenarios
-by providing several leagues with different engineering tasks relevant to the field
-of robotics.
+The \acf{RoboCup} promotes research on autonomous robotic systems
+by hosting competitive events for  scientists and students from around the
+world.
+It provides a platform that focuses on fast intelligent systems and multi-agent
+collaboration \cite{robocup}. This initiative encourages young engineers to
+work in real case scenarios by providing several leagues focusing on different
+engineering challenges relevant to the field of robotics.
 
-In the \ac{RoboCup} \ac{SPL}, software for humanoid robots is developed to
+In the \ac{RoboCup} \acf{SPL}, software for humanoid robots is developed to
 play soccer autonomously for scientific purpose.
 According to the rules of this league, all competitors are constraint to use the
-same hardware platform and no modifications are allowed. By this means the \ac{SPL}
+same hardware platform and no modifications are allowed. By this means, the \ac{SPL}
 provides a competitive algorithmic real world benchmark.
 Since 2008 commercially available humanoid \textit{NAO} robots by the company
 \textit{SoftBank Robotics} are the official standard platform in this league.
@@ -96,6 +87,7 @@ here.}
 \end{figure}
 % -------------------------------------------------------------
 
+\todo[inline]{remove WSL from acronyms}
 Within the context of the \ac{SPL}, for the \ac{RoboCup} 2019 the \textit{Directional
 Whistle Challenge} was added as a technical challenge. This challenge acted as
 initiator for this work. In the \ac{SPL}, technical challenges cover smaller
@@ -114,7 +106,7 @@ Currently, most teams are able to reliably detect whistle sounds. However, the
 issue occurs that robots detect whistles of neighboring games and therefore
 start playing ahead of the own game start which yields a penalty. With
 increasing importance of the whistle for the communication between the referee
-and the robots, this becomes a pressing issue.
+and the robots, this becomes an even more pressing issue.
 
 As another imaginable case of application, a \ac{SSL} can be used to improve team
 communication among the robots.
@@ -131,13 +123,10 @@ limited to whistle sounds.\todo{is it?}
 
 In this work, the sixth generation of NAO robots are being used
 which consists of four microphones attached on the robot's head.
-Detailed information about the robots hardware relevant for this work are presented
-in \cref{subsec:03_microphones}.\todo{Maybe this should be part of the
-introduction, not objective?}
 For development of software for this system, an extensive framework is provided by
 the \ac{SPL} team \textit{HULKs}, a group of engineering students associated
 with the \ac{TUHH}.
-In this software framework, a reliable detector for whistle sounds is provided.
+In this software framework, a reliable detector for whistle sounds already exits.
 This implementation will be utilized for the development of the \ac{SSL}. The
 whistle detector of the \textit{HULKs} achieves a hit rate of 98\si{\percent}
 and has shown good performance at competitions in the past \cite{Hasselbring}.
@@ -154,10 +143,10 @@ multiple microphones. After this, the single robot results are shared among the 
 via wireless communication in an effort to compute the absolute sound location
 from the multi-agent data.
 
-In the framework of the HULKs, an interface for rule compliant intra-team
-communication already exists and can be used to manage the network
-communication.\todo{All of this seems to be quite a lot of detail for a section
-titled "objective"}.
+% In the framework of the HULKs, an interface for rule compliant intra-team
+% communication already exists and can be used to manage the network
+% communication.\todo{All of this seems to be quite a lot of detail for a section
+% titled "objective"}.
 
 As part of this work, three \ac{TDOA} algorithms are implemented and evaluated
 to identify an appropriate method to reliable estimate the relative direction
