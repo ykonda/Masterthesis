@@ -7,15 +7,15 @@
 % horizontal plane only.
 % However, the front and rear microphones differ 0.0212\si{m} in height
 % what can provide rough 
-For the particular case when the signal comes straight from front or behind
-the distance of the sound source can be estimated approximately.
+For the particular case when the signal comes straight from the front or behind,
+the distance of the sound source can be estimated\todo{estimated und approx. haben die selbe Aussage}.
 If $delay_{01}$ (delay between channel 0 and 1) and $delay_{32}$ (delay between channel 3 and 2)
 are both very small, the signal comes from
-the front or the back most likely.
-In theory, for this case the lateral delays are larger or equal the maximum
+the front or the back most likely. \todo{why "most likely" i think you can skip that and say it comes from front or back} \todo{comes most likely from the fround or rear.}
+In theory, for this case the lateral delays are larger or equal the maximal
 sample difference between the front and rear channels on the x-axis which is
-to 5,41 samples.
-With smaller lateral delays and some assumptions, the angle of the sound source in XZ
+to\todo{to?} 5.41 samples.
+With smaller lateral delays and some assumptions \todo{the assumptions given below / or which assumptions are you talking about?}, the angle of the sound source in the XZ
 plane can be estimated.
 \Cref{fig:02_headSideTdoa} illustrates the NAO's head from the right with
 channels 1 and 3.
@@ -37,9 +37,9 @@ to the Z-axis can be determined with delay $D$ as
 \gamma &= \alpha + \gamma'\\
 \gamma' &= sign(D) \cdot sin^{-1}\left(\frac{D}{D_{max}}\right)\\
 \intertext{whereby}
-\alpha &= tan^{-1}\left(\frac{\Delta z_{channel}}{\Delta x_{channel}}\right) \approx 26,73\si{\degree}
+\alpha &= tan^{-1}\left(\frac{\Delta z_{channel}}{\Delta x_{channel}}\right) \approx 26.73\si{\degree}
 \eal \esub
-which is the angle to the orthogonal axis to the plane though
+which is the angle to the orthogonal axis to \todo{zweimal to? muss da von einmal eins "from..." .."to.." sein? So ergibt sich mir die Aussage nicht } the plane though
 front and rear channels.
 $\Delta z_{channel}$ and $\Delta x_{channel}$ are the distances between the channels
 in z- and x-direction in \si{\meter}.
@@ -52,10 +52,10 @@ in z- and x-direction in \si{\meter}.
 \end{figure}
 % -------------------------------------------------------------
 
-Known that the sound source is ordinarily positioned above of the robot, the distance
+Knowing that the sound source is ordinarily positioned above of the robot, the distance
 of the sound source can be approximated with an assumed height $\Delta h_{source}$
-of the source. $\Delta h_{source}$ differs from referee and thus, is only
-a averaged value.
+of the source. $\Delta h_{source}$ differs from referee \todo{waere das dann "actual" height? Wuerde ich dann auch einmal als delta(hactual) of the referee oder so bezeichnen} and thus, is only
+an averaged value \todo{average of what? or approximate}.
 So, the distance in x-direction $\Delta x$ is
 % -------------------------------------------------------------
 \bal
@@ -67,7 +67,7 @@ So, the distance in x-direction $\Delta x$ is
 The distance estimation is triggered, if the direction candidates of
 $delay_{01}$ and $delay_{32}$ are smaller than $\pm$ 10\si{\degree}
 or larger than $\pm$ 170\si{\degree}.
-Additionally, the lateral delays must be smaller than 5,41 samples as mentioned above.
+Additionally, the lateral delays must be smaller than 5.41 samples as mentioned above.
 
 Restrictions of the front and rear distance measurement differ.
 For the front case, the maximum angle for a unambiguous distance calculation
@@ -75,13 +75,13 @@ is $\frac{\pi}{2}- 2\alpha$.
 Thus, the maximum front distance that can be approximated shrinks to
 $\Delta x = (\Delta h_{source} - \Delta h_{NAO}) \cdot \tan(\frac{\pi}{2} - 2\alpha)$
 according to \cref{eq:02_deltaX}.
-To the rear, the maximum value for $\gamma$ is bounded by the 5,41 samples that
+To the rear, the maximal value for $\gamma$ is bounded by the 5.41 samples that
 are set as condition.
-Setting $\Delta h_{source}$ to 1,5\si{m} and $\Delta h_{NAO}$ to 0,57\si{\meter} for example,
-the maximum measurable distance to the front is about 0,66\si{\meter}.
-With the same values the maximum distance backwards is more than 15.3\si{\meter} in theory.
+Setting $\Delta h_{source}$ to 1.5\si{m} and $\Delta h_{NAO}$ to 0.57\si{\meter} for example,
+the maximal measurable distance to the front is about 0.66\si{\meter}.
+With the same values the maximal distance backwards is more than 50\si{\meter} in theory.
 However, measurements in \cref{subsec:04_distance} show that 7\si{\meter} is the
-limit for the real case.
+limit for the real case. \todo{ich würde hier nochmal etwas klarer darstellen, woher der Unterschied zwischen front und rear kommt. Ist für dich vielleicht klar, für den Lesen, gerade beim ersten Mal aber nicht. Ein sollte da als Begründung reichen}
 
 % -------------------------------------------------------------
 
@@ -99,9 +99,9 @@ Thus, the \ac{SNR} which is defined as
     \label{eq:03_snr}
 \eal
 in decibels can be implemented straightforwardly.
-Informational content about this measure is examined in \cref{subsec:04_snr}.
-Expectations are that the \ac{SNR} can be feed into the covariance matrix
-of an incoming result in the Bayesian update process.
+Informational content about this measure is investigated in \cref{subsec:04_snr}.
+Expectations are that the \ac{SNR} can be fed into the covariance matrix
+of an incoming result in the Bayesian update process.\todo{link sec. of bayesian update process.}
 
 \subsection{PSNR}
 \label{subsec:03_psnr}

@@ -1,10 +1,10 @@
-\section{Whistle Source Direction Estimation}
+\section{Whistle Source Direction Estimation} \todo{whistle-source direction esimation}
 \label{subsec:03_directionEstimation}
 
 % started with \ac{WSDE}
 By one stand-alone system in form of a robot with four microphones
 attached on the head, only the direction of a sound source can be
-estimated.
+estimated. \todo{der Satz klingt etwas holprig durch den Anfang. Vielleicht etwas in die Richtung: Considering only one stand-alone system, i.e. one robot with four microphones, only the direction of a sound source can be estimated}
 As shortly introduced in \cref{subsec:03_whistleLocalizationStructure},
 the \lstinline!WhistleDirectionEstimation! module is responsible to
 determine the direction of the whistle sound detected by the \lstinline!WhistleDetection!.
@@ -21,8 +21,8 @@ is summarized by means of \cref{fig:04_stateMachine}.
 % -------------------------------------------------------------
 
 \lstinline!WhistleDirectionEstimation! depends on the data type \lstinline!WhistleData!
-which is a production of \lstinline!WhistleDetection!.
-Currently, it contains two values. A timestamp when the whistle was last detected
+which is a production of \lstinline!WhistleDetection!. \todo{ich hab "is a production of" noch nie so gelesen. Vielleicht eher "is produced by" oder "originates from " oder so?}
+Currently\todo{wann ist currently? In dieser Sekunde, bevor du das weiterentwickelt hast? Besser beschreiben!}, it contains two values. A timestamp when the whistle was last detected
 and a boolean value if a whistle start is found.
 Until this value is set to true by the \lstinline!WhistleDetection!, the
 \lstinline!WhistleDirectionEstimation! buffers up to
@@ -31,32 +31,32 @@ As a whistle needs to be detected for multiple cycles in a short time, one can
 be sure that the buffer contains a number of whistle samples.
 
 Out of the buffered samples, the signal start is calculated by the \ac{SSD}
-which will be further described in \cref{sec:02_signalStartDetection}.
+which will be further described in \cref{sec:02_signalStartDetection}. \todo{jetzt sind wir aber schon in section 3.2 oder so. Also eher "has been described" ?}
 
 According to the \ac{TDOA} method, frames considered for the delay estimation
-are chosen differently.
+are chosen differently \todo{differently from what?}.
 Detailed descriptions are given in the corresponding method
 \cref{subsubsec:03_cc,subsubsec:03_phase}.
-By \ac{TDOA} the delays between the two microphone channels are
-determined by either \ac{GCC-PHAT}, \ac{CC} or phase difference method.
+In \ac{TDOA}, the delays between the two microphone channels are
+determined by either \ac{GCC-PHAT}, \ac{CC} or phase difference method. \todo{holprig, eher: Using TDOA, the delay(s) between two microphone challes are either determined by xxx, yyy or the zzz method.}
 Each delay generates two potential source direction candidates as stated
 in \cref{sec:02_tdoa}.
 In the event of candidates indicating a nearby signal from straight forward or
 backwards, the distance to the source is estimated in addition.
 More precise explanation is given in \cref{subsec:03_distance}.
 For a final direction, the mean of the candidates with smallest difference
-is formed.
+is formed. \todo{wie ist difference definiert? Das ist hier unklar, scheint mir aber wichtig zu sein}
 
-If one of the correlation methods are used, the \ac{TDOA} is calculated
-multiple times shifting the frame over samples.
+If one of the correlation methods is used, the \ac{TDOA} is calculated
+multiple times by shifting the frame over samples.
 The range in which the frame is shifted around the start index is parameterized
-as well as the size of the shift.
-By saving the calculated \ac{TDOA} values and looking up certain conditions per frame shift,
-the most promising result can be chosen.
+as well as the size of the shift. \todo{The shift range around the start index, as well as the size of the shift, are parameterized.}
+By saving the calculated \ac{TDOA} values and looking up \todo{checking?} certain conditions per frame shift,
+the most promising \todo{etwas klarer waere hier etwas wie: best result according to the metric given in eq. XX } result can be chosen.
 This way, potential start estimation inaccuracies can be corrected and
-decision process is optimized.
+the decision process is optimized.
 In case of the \ac{GCC-PHAT}, the \ac{PSNR} provides information about
-the certainty of the \ac{TDOA} estimation as \cref{subsec:04_psnr} proves.
+the certainty of the \ac{TDOA} estimation as \cref{subsec:04_psnr} proves\todo{mit "proves" waere ich immer etwas vorsichtig. Vielleicht eher "shows" oder "as shown in"}.
 A frame shift delivers \ac{TDOA} values for each channel pair and a
 mean of all \acp{PSNR} from the \ac{GCC} functions.
 Comparing the frame shifts, the \ac{TDOA} results with
@@ -70,7 +70,7 @@ direction outcome in radians and additional information like distance or \ac{PSN
 
 All transformations into frequency domain and inverse transformations
 are executed with the \ac{FFTW} library just as the \lstinline!WhistleDetection!.
-For parallel development in Python, the widespread package \textit{NumPy} delivers
+For parallel development in Python, the widespread package \textit{NumPy} \todo{version} delivers
 all fundamental functions for computation in frequency domain.
 
 % -------------------------------------------------------------
