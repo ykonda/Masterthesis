@@ -2,9 +2,9 @@
 \label{subsec:03_directionEstimation}
 
 % started with \ac{WSDE}
-By one stand-alone system in form of a robot with four microphones
-attached on the head, only the direction of a sound source can be
-estimated. \todo{der Satz klingt etwas holprig durch den Anfang. Vielleicht etwas in die Richtung: Considering only one stand-alone system, i.e. one robot with four microphones, only the direction of a sound source can be estimated}
+Considering only one stand-alone system, i.e. one robot with four microphones,
+only the direction of a sound source can be
+estimated.
 As shortly introduced in \cref{subsec:03_whistleLocalizationStructure},
 the \lstinline!WhistleDirectionEstimation! module is responsible to
 determine the direction of the whistle-sound detected by the \lstinline!WhistleDetection!.
@@ -21,8 +21,8 @@ is summarized by means of \cref{fig:04_stateMachine}.
 % -------------------------------------------------------------
 
 \lstinline!WhistleDirectionEstimation! depends on the data type \lstinline!WhistleData!
-which is a production of \lstinline!WhistleDetection!. \todo{ich hab "is a production of" noch nie so gelesen. Vielleicht eher "is produced by" oder "originates from " oder so?}
-Currently\todo{wann ist currently? In dieser Sekunde, bevor du das weiterentwickelt hast? Besser beschreiben!}, it contains two values. A timestamp when the whistle was last detected
+which is produced by the \lstinline!WhistleDetection! module and contains two values.
+A timestamp when the whistle was last detected
 and a boolean value if a whistle start is found.
 Until this value is set to true by the \lstinline!WhistleDetection!, the
 \lstinline!WhistleDirectionEstimation! buffers up to
@@ -30,11 +30,12 @@ Until this value is set to true by the \lstinline!WhistleDetection!, the
 As a whistle needs to be detected for multiple cycles in a short time, one can
 be sure that the buffer contains a number of whistle samples.
 
-Out of the buffered samples, the signal start is calculated by the \ac{SSD}
-which will be further described in \cref{sec:02_signalStartDetection}. \todo{jetzt sind wir aber schon in section 3.2 oder so. Also eher "has been described" ?}
+Out of the buffered samples, the signal start is calculated
+according to the selected signal start detection
+which will be further described in \cref{subsec:03_signalStartDetection}.
 
-According to the \ac{TDOA} method, frames considered for the delay estimation
-are chosen differently \todo{differently from what?}.
+Frames considered for the delay estimation
+are chosen in a different way depending on the \ac{TDOA} method.
 Detailed descriptions are given in the corresponding method
 \cref{subsubsec:03_cc,subsubsec:03_phase}.
 In \ac{TDOA}, the delays between the two microphone channels are

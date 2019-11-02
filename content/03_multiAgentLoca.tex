@@ -54,17 +54,18 @@ If such intersection exists, the whistle source position information is updated 
 \label{subsec:03_teamCommunication}
 
 To agree on a whistle position as a multi-agent system by computing the whistle
-localization algorithm \cref{alg:03_multiAgentLoca} \todo{das ist zwar so korrekt, liesst sich im PDF aber mega komisch durch "algorithm algorithm 1". Vielleicht nochmal den Satzbau aendern.}, the \ac{WSDE} results of the
+localization process of \cref{alg:03_multiAgentLoca}, the \ac{WSDE} results of the
 stand-alone robots must be collected.
 As introduced in \cref{sec:03_naoFramework}, the robots are able to send and receive
 information from team mates wirelessly.
-By present implementation, the team message includes a robot's xy-position information,
-the orientation as well as the time point of the last detected whistle \todo{eher "among further information related to other tasks" oder so} (and much more).
+By present implementation, the team-message includes a robot's xy-position information,
+the orientation as well as the time point of the last detected whistle among further information
+related to other tasks.
 Thus, only the angular \ac{WSDE} and its additional information like distance and \ac{PSNR}
-are to be appended to the team message.
+are to be appended to the team-message.
 
 In order to wait for the team mates,
-a delay of 3\si{\second} \todo{eher "three seconds"} is implemented before collecting the \ac{WSDE} results
+a delay of three seconds is implemented before collecting the \ac{WSDE} results
 of the other players.
 By this artificially introduced delay, synchronization issues due to network lags and
 whistle detection differences can be circumvented.
