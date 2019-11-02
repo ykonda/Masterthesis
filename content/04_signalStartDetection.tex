@@ -28,7 +28,7 @@ The existing whistle detection algorithm of the HULKs presented in
 accuracy for small sample selection windows as shown in \label{subsec:04_whistleDetection}.
 Therefore, the goal is to identify a simple algorithm for
 the signal start detection which is one of the approaches in \Cref{subsec:03_signalStartDetection}.
-Ideally, this algorithm should be adaptable to signals other than the whistle sounds.
+Ideally, this algorithm should be adaptable to signals other than the whistle-sounds.
 
 Hereinafter, the performance of each method methods is evaluated by
 analyzing the number of index difference between algorithmically determined start index
@@ -40,7 +40,7 @@ correlation methods, a start index error of at most 256 samples is
 desired.
 Therefore, a start index detection result is regarded as failure for errors
 larger than 256 for the following sections.
-Having eleven whistle sounds recorded with five robots, a total number
+Having eleven whistle-sounds recorded with five robots, a total number
 of 55 measurements arise.
 Taking into account that each robot has four microphones attached,
 the overall number increase to 220 recorded signals on which the signal start detection
@@ -57,7 +57,7 @@ found a whistle.
 With a frame size of 1024, the whistle detection algorithm fails for 81\si{\percent}
 of the 220 measurements.
 However, every error is in the range of 1024 samples which proves that the
-approximate start of the whistle sound is detected correctly.
+approximate start of the whistle-sound is detected correctly.
 With a smaller frame size of 256, the temporal accuracy is improved up to a small
 failure rate of 9\si{\percent} but also introduces false positive detections.
 With the results, one can say that the whistle detection is not sufficient
@@ -66,7 +66,7 @@ Furthermore, this approach is limited to sounds in fixed and known frequency ran
 %  failure rate of
 % 9\si{\percent} in regard to every channel.
 % In this work microphone data were saved as soon as the whistle detection module
-% found a whistle sound in the audio samples.
+% found a whistle-sound in the audio samples.
 % Due to this implementation, the algorithm does never fail to detect the whistle
 % Standing alone, the error is always in the range of \si{\pm1024} samples due to the
 % set frame size of 1024 samples.
@@ -183,7 +183,7 @@ However, for records where the whistle ends before the end of the recorded signa
 it generates more reliable results than the \ac{ZCR} method.
 Taking the same measurement as an example for which failure of the \ac{ZCR} method
 was discussed earlier, \cref{fig:04_entropyGood} shows how the algorithm
-detects the signal start correctly even though the whistle sound ended at
+detects the signal start correctly even though the whistle-sound ended at
 around 35000 samples. In this measurement, the start index errors of all four
 channels were smaller than 40 samples.
 % -------------------------------------------------------------
