@@ -165,20 +165,12 @@ measurement (named \textit{measurement-\ac{SNR}}).
 % $\text{Relative SNR} = \frac{SNR_{robot}}{Mean(SNR_{measurement})}$.
 \Cref{fig:04_snrDistance} presents the relations between distance of a robot
 and the robots-\ac{SNR} relative to the measurement-\ac{SNR}.
+
 Looking at the plot, no straightforward link between both values can be found.
 Calculating the correlation coefficient $\rho$ between both quantities,
 its value is -0.2860.
 This outcome verifies that no simple connection between \ac{SNR} and distance
 can be placed.
-
-% -------------------------------------------------------------
-\begin{figure}[h]
-	\centering
-	\includegraphics[]{figures/evaluation/snr_scatter}
-	\caption{Visualization of relation between SNR and distance.}
-	\label{fig:04_snrDistance}
-\end{figure}
-% -------------------------------------------------------------
 
 For the real whistle measurements, no assuring relation between \ac{SNR}
 and distance to source can be found neither between the microphone
@@ -188,39 +180,117 @@ like multi-path propagation and reflection have large influence
 on the signal data.
 Thus, the \ac{SNR} will not utilized as additional information
 for the \ac{WSDE} algorithm nor for the multi-agent filter.
+% -------------------------------------------------------------
+\begin{figure}[h]
+	\centering
+	\includegraphics[]{figures/evaluation/snr_scatter}
+	\caption{Visualization of relation between SNR and distance.}
+	\label{fig:04_snrDistance}
+\end{figure}
+% -------------------------------------------------------------
 
 \subsection{PSNR}
 \label{subsec:04_psnr}
 
 As referred in \cref{sec:02_gcc}, the main characteristic of the \ac{GCC-PHAT}
-algorithm is the emerging sharp peak.
+algorithm is the emerging sharp peak compared to \ac{CC} functions.
+\Cref{fig:02_gccTheory} illustrates this characteristic for the ideal case where
+two similar, but shifted signals with normally distributed noise are
+input signals of the \ac{GCC} algorithm.
+However, with real whistle data the \ac{GCC} function does not always
+output a strong peak.
+This is a known topic and there exists research that inspects how to handle
+the ambiguity of \ac{GCC} functions like \cite{optimal_peak_localization} does.
+Exemplary \cref{fig:04_psnrExample} shows such a case where the \ac{GCC} does not produce
+a clear result.
+% -------------------------------------------------------------
+\begin{figure}[h]
+	\centering
+	\includegraphics[]{figures/evaluation/psnr_example}
+	\caption{}
+	\label{fig:04_psnrExample}
+\end{figure}
+% -------------------------------------------------------------
+
+$R_{13}$ and $R_{20}$ represents \ac{GCC} functions of the same measurement
+but between different channels.
+As the plot shows, the \ac{GCC} between channels 2 and 0 yields an outcome
+with a easily recognizable peak.
+In comparison, the peak of the upper plot which is the \ac{GCC} between channels 1 and 3
+is less distinguishable from the remaining part.
+
+
 In conclusion, one can assume that the lack of a sharp peak indicates
-a less valid delay result of the \ac{GCC}.\todo{What is the reasoning behind
-this conclusion? Maybe it is obvious to GCC familiar people but I fail to see
-the causality.}
-\todo[inline]{From this section introduction it is not clear what is happening in
-this section. Maybe add a sentence on what is going to happen in 4.2.3 PSNR}
+a less valid delay result of the \ac{GCC}.
+The next sections covers the validity of this hypothesis by first evaluating
+if the \ac{PSNR} can help with the selection of the frames used in the \ac{WSDE}.
+On the other hand the informative value contained in the \ac{PSNR} regarding the
+overall \ac{WSDE} on one robot is examined.
+
+\subsubsection*{Frame Selection}
+
+One perspective is to insert the PSNR information into the \ac{WSDE} of
+individual robots.
+In \cref{fig:04_psnr2FrameShift}, the frame to examine is
+shifted before and after a manually defined signal start index.
+The robot was positioned at the center point
+while the whistle is blown at -33.7\si{\degree} with 4.5\si{\meter}
+distance.
+The frame size of the \ac{GCC} is set to the default size of 256 samples and
+the window shift samples are quarter of the frame size.
+% -------------------------------------------------------------
+\begin{figure}[h]
+	\centering
+	\includegraphics[]{figures/evaluation/gcc_frame_shift}
+	\caption{
+		Relation between \ac{PSNR}
+		and selection of the frame in time. Signal data
+		of the rear left channel is plotted in the upper window.
+		In this measurement, the whistle is positioned at right front
+		of the robot.
+	}
+	\label{fig:04_psnr2FrameShift}
+\end{figure}
+% -------------------------------------------------------------
+For better understanding, samples of the front right channel are plotted
+in the upper graph of \cref{fig:04_psnr2FrameShift}.
+The second graph shows the \ac{RMSE} of the robot direction result
+over the frame shifts.
+For the lower graph, the mean over the \acp{PSNR} of all channels
+is presented.
+As a general trend, it can be observed that the error of the predicted
+direction is low for frame shifts with a high \ac{PSNR}.
+This confirms the hypothesis stated early in this section.
+For shifts smaller than -2, the whistle signal does not intersect with the
+evaluated frames.
+Therefore, the prediction error in this regime is high.
+An important notice is that the \ac{PSNR} decays as the frame is shifted towards
+later samples on the whistle signal. This indicates that the implemented
+\ac{GCC-PHAT} method is not suitable for arbitrary subsamples of the signal.
+% Without additional information about the rough direction,
+% ambiguity exists due to periodicity of the signal.
+% Due to the inconclusive result of the \ac{SNR} in \cref{subsec:04_snr}
+% one decides not to take the signal magnitude as such information
+% into account.
+% Thus, the decisive role of the start of the signal is underlined again.
+% -------------------------------------------------------------
 
 \subsubsection*{Informative Value}
 
-This statement is examined by comparing the \ac{PSNR} value
-to the error of the direction angle resulting from the \ac{GCC-PHAT} delay.
+In this section, the \ac{PSNR} value of one \ac{GCC-PHAT} calculation is brought
+into comparison with the error of the direction angle resulting from the delay.
 % Two cases of errors are taken into consideration.
 In the following, the \ac{PSNR} is referred to as high if it exceeds 17.5
 whereat the \ac{PSNR} value ranges from 10.1 to 28.8 for measurements in
 \cref{subsec:04_labMeasurements}.
 
-\todo[inline]{"Firstly" can not be used like this (it means "erstens" not
-"zunaechst/zuerst"). Maybe grep through the document to make sure you don't use
-it.}
-First, for each channel pair the error between true direction and the most
-suited direction candidate\todo{most suited according to which metric? The one
-that is closest to the true direction or the one that has the "sharpest peak"?}
-emerging from the \ac{GCC} delay.
+First, for each channel pair the error between true direction of the signal source
+and the most suited direction candidate according to the angle error
+emerging from the \ac{GCC} delay are related.
 The results are grouped into two classes based on the associated \ac{PSNR} value.
 If the \ac{PSNR} of the \ac{GCC} is greater than the threshold of 17.5,
 the \ac{RMSE} of its result is grouped to the errors with high \ac{PSNR}.
-Elsewise, it pertains to the errors with low \ac{PSNR}.
+Else, it pertains to the errors with low \ac{PSNR}.
 This valuation is done with the measurements of \cref{subsec:04_labMeasurements}
 and manually set start indices.
 \todo[inline]{Maybe rather:"Out of a total number of X measurements,
@@ -243,56 +313,6 @@ conclude that the PSNR is a useful indicator to inform about the validity of
 direction estimates.\todo{Make sure that this sentence still says what you want it
 to say.}
 
-\subsubsection*{Frame Selection}
-
-Another perspective is to include the PSNR information into the single
-robot whistle direction estimation.
-In \cref{fig:04_psnr2FrameShift}, the frame to examine is
-shifted before and after the signal start index.\todo{Signal start marked manually?}
-Here, the same measurement as in \cref{sec:04_tdoaSingle} is used where
-the robot was positioned at the center point
-while the whistle is blown at -33.7\si{\degree} with 4.5\si{\meter}
-distance.\todo{I would not cross-reference to another section here. Just
-explain the experiment setup again as if it was a stand-alone experiment.
-Jumping to other sections is annoying for the reader and it is not relevant to
-know that you used the exact same data.}
-The frame size of the \ac{GCC} is set to 256 samples and the shift
-was set to a quarter of the frame size.
-Samples of the rear left channel are plotted for better understanding
-in the upper graph of \cref{fig:04_psnr2FrameShift}.\todo{Why "rear left" if
-the signal comes from front right?}
-The second graph shows the \ac{RMSE} of the robot direction result
-over the frame shifts.
-For the lower graph, the mean over the \acp{PSNR} of all channels
-is presented.
-As a general trend, it can be observed that the error of the predicted
-direction is low for frame shifts with a high \ac{PSNR}. This again confirm the
-hypothesis stated early in this section.
-For shifts smaller than -2, the whistle signal does not intersect with the
-evaluated frames. Therefore, the prediction error in this regime is high.
-An important notice is that the \ac{PSNR} decays as the frame is shifted towards
-later samples on the whistle signal. This indicates that the implemented
-\ac{GCC-PHAT} method is not suitable for arbitrary subsamples of the signal.
-% Without additional information about the rough direction,
-% ambiguity exists due to periodicity of the signal.
-% Due to the inconclusive result of the \ac{SNR} in \cref{subsec:04_snr}
-% one decides not to take the signal magnitude as such information
-% into account.
-% Thus, the decisive role of the start of the signal is underlined again.
-% -------------------------------------------------------------
-\begin{figure}[ht]
-	\centering
-	\includegraphics[]{figures/evaluation/gcc_frame_shift}
-	\caption{
-		Relation between \ac{PSNR}
-		and selection of the frame in time. Signal data
-		of the rear left channel is plotted in the upper window.
-		In this measurement, the whistle is positioned at right front
-		of the robot.
-	}
-	\label{fig:04_psnr2FrameShift}
-\end{figure}
-% -------------------------------------------------------------
 
 \todo[inline]{Do you ever explicitly say how you end up using this information
 in the team filter?}
