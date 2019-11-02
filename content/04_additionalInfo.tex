@@ -34,7 +34,7 @@ The distance is represented in robot coordinates, so that positive distance
 expresses that the source was placed in front of the robot and oriented towards it
 and vise versa.
 \change[]{It might be more helpful to report errors here instead of the
-estimates, but it's not a big problem if you leave it like this.}
+	estimates, but it's not a big problem if you leave it like this.}
 % -------------------------------------------------------------
 \btline{ht}{1.2}
 \btab{|c|c|c|c|c|c|}
@@ -151,8 +151,8 @@ and to that effect, the reliability of their results is higher.
 Thus, a relation between \ac{SNR} and distance on multi-agent level is examined in addition.
 
 \unsure[]{IMHO a good practice is to report the number of experiments
-and/or have the data in the appendix (if you still have the data). But having
-it in the appendix is not super relevant. Don't waste time on it.}
+	and/or have the data in the appendix (if you still have the data). But having
+	it in the appendix is not super relevant. Don't waste time on it.}
 % Thus, one intuitive hypothesis is assuming the existence of a relation between the
 % received signal strength and distance to the source.
 
@@ -285,34 +285,29 @@ whereat the \ac{PSNR} value ranges from 10.1 to 28.8 for measurements in
 \cref{subsec:04_labMeasurements}.
 
 First, for each channel pair the error between true direction of the signal source
-and the most suited direction candidate according to the angle error
-emerging from the \ac{GCC} delay are related.
+and the direction candidate with smaller angle error emerging from the \ac{GCC}
+delay are put into context.
 The results are grouped into two classes based on the associated \ac{PSNR} value.
 If the \ac{PSNR} of the \ac{GCC} is greater than the threshold of 17.5,
-the \ac{RMSE} of its result is grouped to the errors with high \ac{PSNR}.
+the angular error of its source direction result is classified as high \ac{PSNR}.
 Else, it pertains to the errors with low \ac{PSNR}.
-This valuation is done with the measurements of \cref{subsec:04_labMeasurements}
-and manually set start indices.
-\todo[inline]{Maybe rather:"Out of a total number of X measurements,
-Y correlations reported a PSNR below the threshold. The RMSE within this group
-was 35.77\si{degree}".}
-Having 76 correlations assessed with low \ac{PSNR}, the \ac{RMSE} of this group
-is 35,77\si{\degree}.
+Out of a total number of 220 measurements, 78 correlations reported a
+\ac{PSNR} below the threshold. The \ac{RMSE} of all source directions within this
+group was 35.77\si{\degree}.
 Compared to this, the \ac{RMSE} of the remaining 144 measurements
 is 15.86\si{\degree} only.
-\todo[inline]{Always report what the RMSE belong to. E.g. here I can only
-conclude from the unit that these are errors on the phase. But the context
-sounds like they are errors on the PSNR.}
 
-To see the impact on a complete robot result, the same is done
-with the final angular errors of single robots results.
-Here, the \ac{RMSE} of the lower \ac{PSNR} case results in 25.36\si{\degree}
-whereat the error of the other case is 14.41\si{\degree}.
-From this correlation between PSNR value and prediction accuracy one can
-conclude that the PSNR is a useful indicator to inform about the validity of
-direction estimates.\todo{Make sure that this sentence still says what you want it
-to say.}
+To see the impact on a complete robot result, the same evaluation is done
+with the final angular errors of the robots' \acp{WSDE}.
+Here, the \ac{PSNR} value is the mean over all channel pairs' \acs{PSNR}.
+The angular \ac{RMSE} of the direction classified as low \ac{PSNR} value
+are larger with 21.15\si{\degree} whereat the error of the high \ac{PSNR} case
+is 9.1\si{\degree}.
 
-
-\todo[inline]{Do you ever explicitly say how you end up using this information
-in the team filter?}
+From the results one can find a relation between \ac{PSNR} and validity of a
+computed delay between two channels with the \ac{GCC-PHAT} method.
+Within this work the  \ac{PSNR} information is not included for the implementation
+of the multi-agent decision, but for the \ac{WSDE} of a single robot.
+Thus, the frames for the \ac{GCC} algorithm to compute the delay between the channels
+are selected by the highest \ac{PSNR} mean value in a range around the start index.
+The implementation is explained in \cref{subsec:03_directionEstimation} in further detail.
