@@ -17,28 +17,30 @@
 % the time difference of arrival. The distance between the robots needs to be known
 % Robots needs to be synchronized (which is difficult with NTP only)
 
-\acf{SSL} has been subject of research for many years with application
+\unsure[]{
+\acf{SSL} of audio signals is a present subject of research due to increasing
+has been subject of research for many years with application
 scenarios in various environments and applicability to a wide range of
-different sensors \todo[inline]{Chen2006, cite, cite}.
-\todo[inline]{Maybe enumerate two examples explicitly with "environment",
+different sensors}
+\todo{Chen2006, cite, cite}
+\todo{Maybe enumerate two examples explicitly with "environment",
 "sensor used" and citation. E.g. Application domains range from X where SSl is
 applied on Y-sensor-data to achive Z, to ....}
-In particular for audio signals, use cases emerge with the progressing
-ordinariness of technical equipment on a daily basis.\todo{What do you mean by
-this sentence?}
+% In particular for audio signals, use cases emerge with the progressing
+% ordinariness of technical equipment on a daily basis.\todo{What do you mean by
+% this sentence?}
 % As technical devices gained in importance more and more,
 Assuming robots as forthcoming everyday objects, reaction to acoustic
 input is one essential step for natural human-robot interaction.
-For example, one plausible scenario is a humanoid robot keeping eye
-contact with an interacting human.\todo{Why is acoustic localization important for eye-contact?}
+Additionally from another perspective, navigating robots being aware of obstacles beforehand
+due to acoustic perception is a beneficial ability.
 An even more tangible case can be seen in conference rooms of business environments
 where remote participation is commonplace these days.
 Special features of communication systems like speaker identification and tracking
 become crucially important to provide smooth operation \cite{Brandstein96apractical}.
 In general, \ac{SSL} algorithms can be divided into three categories
 which are based on beamforming, eigenvalue
-decomposition or \ac{TDOA} \cite{Brandstein96apractical}.
-\todo{maybe one more citation here. Are all of them described in Brandstein96apractical}
+decomposition or \ac{TDOA} \cite{Brandstein96apractical,gcc_time_broeck,benesty_passive_acoustic}.
 
 In this work, the performance of different \ac{SSL} strategies is evaluated
 with a focus on whistle sound localization in the context of the
@@ -52,8 +54,8 @@ Therefore, in this work the \ac{TDOA} method was selected as the
 most appropriate solution.
 
 A widespread approach to compute the \ac{TDOA} is to cross-correlate the sensor
-readings of two microphones to recover the time delay between both channels. By
-this, the relative direction of a signal source can be obtained from
+readings of two microphones to recover the time delay between both channels\cite{brandstein_robust_method}.
+By this, the relative direction of a signal source can be obtained from
 geometric reasoning on a single robot. From multiple such direction estimates
 a global sound source position can be estimated.
 
@@ -75,9 +77,7 @@ provides a competitive algorithmic real world benchmark.
 Since 2008 commercially available humanoid \textit{NAO} robots by the company
 \textit{SoftBank Robotics} are the official standard platform in this league.
 They are equipped with a variety of different sensor like cameras, speakers,
-microphones, sonars, joint position sensors, tactile sensors, \ac{IMU}
-and many more \cite{nao_docu}.\todo{I don't think you have to enumerate all of them
-here.}
+microphones, sonars and many more.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
@@ -87,7 +87,6 @@ here.}
 \end{figure}
 % -------------------------------------------------------------
 
-\todo[inline]{remove WSL from acronyms}
 Within the context of the \ac{SPL}, for the \ac{RoboCup} 2019 the \textit{Directional
 Whistle Challenge} was added as a technical challenge. This challenge acted as
 initiator for this work. In the \ac{SPL}, technical challenges cover smaller
@@ -95,7 +94,7 @@ game independent tasks to test the realizability of concepts and to explore
 preliminary ideas that might be used to inspire prospective rule changes. By
 changing the rules every year, the difficulty is increased and the conditions
 are adapted to reach the level of human soccer as the overarching goal until
-2050. According to the current rules of the league\todo{cite SPL rule book},
+2050. According to the current rules of the league \cite{spl_rules},
 whistles are only used for indicating the kick off of a game. However,
 future considerations exist to use the whistle more frequently to mark
 game state changes. Therefore, 2019's challenge required participants to
@@ -116,7 +115,7 @@ team members to recognizes if they are about to score an own goal.
 Potential mistakes and failure of other program components can be corrected by such
 confirmation behavior between the robots.
 For this reason, it was taken care of designing an algorithm that is not
-limited to whistle sounds.\todo{is it?}
+limited to whistle sounds only.
 
 \section{Objective}
 \label{sec:01_objective}
@@ -128,10 +127,9 @@ the \ac{SPL} team \textit{HULKs}, a group of engineering students associated
 with the \ac{TUHH}.
 In this software framework, a reliable detector for whistle sounds already exits.
 This implementation will be utilized for the development of the \ac{SSL}. The
-whistle detector of the \textit{HULKs} achieves a hit rate of 98\si{\percent}
-and has shown good performance at competitions in the past \cite{Hasselbring}.
-\todo{Cite robocup statistics. Use "accuracy" and "precision" correctly rather
-than hit rate} In practice, false positives only occur when whistles are are blown
+whistle detector of the \textit{HULKs} achieves a true positive rate of 98\si{\percent}
+and has shown good performance at competitions in the past \cite{Hasselbring}, \cite{statistics}.
+In practice, false positives only occur when whistles are are blown
 at other fields as explained above. This emphasizes the importance of
 a source localization as a useful extension to allow rejection of whistles
 sounds detected from neighboring fields.
