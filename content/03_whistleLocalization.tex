@@ -56,21 +56,20 @@ The combination with the smallest sum of angular error between the candidates is
 \acl{WSDE}.
 
 If one of the correlation methods is used, the \ac{TDOA} is calculated
-multiple times by shifting the frame over samples.
-The shift range around the start index, as well as the size of the shift, are parameterized.
-By saving the calculated \ac{TDOA} values and checking certain conditions per frame shift,
-the most promising \todo{etwas klarer waere hier etwas wie: best result according to the metric given in eq. XX } result can be chosen.
-
+multiple times by shifting the sample selection window to find the most
+suitable frame for the \ac{TDOA} estimation.
+Both, the shift range around the start index, as well as the size of the shift are
+parameterized values.
 This way, potential start estimation inaccuracies can be corrected and
 the decision process is optimized.
 In case of the \ac{GCC-PHAT}, the \ac{PSNR} provides information about
-the certainty of the \ac{TDOA} estimation as \cref{subsec:04_psnr} proves\todo{mit "proves" waere ich immer etwas vorsichtig. Vielleicht eher "shows" oder "as shown in"}.
-A frame shift delivers \ac{TDOA} values for each channel pair and a
+the certainty of the \ac{TDOA} estimation what is shown in \cref{subsec:04_psnr}.
+A computation of one frame delivers \ac{TDOA} values for each channel pair and a
 mean of all \acp{PSNR} from the \ac{GCC} functions.
 Comparing the frame shifts, the \ac{TDOA} results with
 greatest \ac{PSNR} mean value is assumed as best performing.
 The same procedure is done with the \ac{CC} method but by examining
-the greatest \ac{CC} function value.
+the maximum \ac{CC} function value.
 
 Regardless of the method, the production of this module is a
 \lstinline!WhistleDirection! data type which contains calculated
@@ -78,7 +77,7 @@ direction outcome in radians and additional information like distance or \ac{PSN
 
 All transformations into frequency domain and inverse transformations
 are executed with the \ac{FFTW} library just as the \lstinline!WhistleDetection!.
-For parallel development in Python, the widespread package \textit{NumPy} \todo{version} delivers
+For parallel development in Python, the widespread package \textit{NumPy 1.17.0} delivers
 all fundamental functions for computation in frequency domain.
 
 % -------------------------------------------------------------
