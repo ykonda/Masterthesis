@@ -2,13 +2,13 @@
 \label{chap:05_conclusion}
 
 The objective of this work was to find an approach to localize a whistle-sound
-source with multiple NAO robots.
-Each of this robots consists of four microphones attached on their head.
-On the scope of this work, stationary sound sources and motionless robots were
+source with multiple NAO robots. \todo{why should we want this? One more sentence for motivation}
+Each of these robots offers four microphones attached on their head.
+In the scope of this work, stationary sound sources and motionless robots were
 considered.
 
-In order to solve this task, the \acf{TDOA} method was selected as solution method
-which is popular with regard to acoustic signal source localization. \missing[]{citations}
+In order to solve this task, the \acf{TDOA} method was selected as the solution method
+which is popular in the field of acoustic signal source localization. \missing[]{citations}
 The fundamental concept of \ac{TDOA} algorithms is to obtain direction information
 about acoustic signals by observing the time delay between separated microphone sensors.
 Three different approaches were evaluated to obtain a stable method
@@ -16,24 +16,24 @@ for the delay estimation.
 The \acf{CC} and \acf{GCC-PHAT} approaches are based on cross-correlation theory in terms
 of signal processing.
 In comparison, the phase difference method performs spectral analysis on the signal
-to receive \ac{TDOA} information.
+to attain \ac{TDOA} information.
 
-On a whole, the process of the \acf{SSL} has been divided into three parts.
-First, different signal start algorithms were examined with regard to accuracy.
+On a whole\todo{"on a whole" sounds weird. The sentence works by just starting it with "The process of...}, the process of the \acf{SSL} has been divided into three parts.
+First, different signal start \todo{insert "detection"?}algorithms were examined with regard to accuracy.
 By this, appropriate subsignals were selected for the \ac{TDOA} process.
 Of capital importance is the \acf{WSDE} executed on stand-alone robots by
 using one of the \ac{TDOA} methods.
 Finally, a multi-agent decision is executed on a Bayesian updating filter
 depending on the \ac{WSDE} results of the single robots.
 
-The beginning of this work covers the theoretical principles of each component
+\todo{It feels weird to have the overview almost half way into the conclusion. However, I understand why you want to emphasize the to previous paragraphs. Maybe put all of them into one? That would probably work best.}The beginning of this work covers the theoretical principles of each component
 used for the multi-agent \ac{SSL}.
 Based on this, implementation details are presented which are followed by analysis
 and evaluation of real measurement data.
 According to the results, the \acf{GCC-PHAT} algorithm performs best by
-providing most accurate results for the \ac{WSDE} which brings most precise
+providing most accurate results for the \ac{WSDE} which offers the most precise
 whistle-sound source position estimations in consequence.
-For the measurement data recorded within this work, a average
+For the measurement data recorded within this work, an average
 distance error between estimated position and real source location
 of less than 1\si{\meter} could be achieved.
 \missing[]{More validation?}
@@ -44,18 +44,19 @@ Using the ability to localize signal sources that are not whistles,
 differentiation of multiple sounds and separation of those become important.
 \missing[]{cite}
 Furthermore, consideration of moving sources and robots can be interpreted
-as next essential step for the usage in real case scenarios.
+as the next essential step for the usage in real case scenarios.
 Especially when adopting the \ac{SSL} for verification of other robots' information
-like position and orientation, advancement towards these issues are unavoidable.
-On another perspective, the multi-agent behavior can be improved with various
+like position and orientation, advancement towards these issues are unavoidable\todo{"anticipated", "unavoidable" sounds very negative or ironic.}.
+In another perspective, the multi-agent behavior can be improved with various
 concepts.
 This includes processes like multimodal filtering or the exclusion of outliers
 with filtering.
-Also, more a-priori knowledge like the prior position of the sound source can be included.
+Also, more a-priori \todo{check entire document for " a priori" without "-", I think I saw that somewhere ->around Fig. 3.9} knowledge like the prior position of the sound source can be included.
 
-One sees that wide-ranging progress can be expected regarding \ac{SSL}
-in the field of robotics.
+One sees that wide-ranging progress \todo{...progress and novel applications}can be expected regarding \ac{SSL}
+in the field of \todo{maybe insert "humanoid" ?} robotics.
 
+\todo{overall you can probably add a little more detail in the summary of what you did. You can aim for 1.5 pages }
 
 
 
