@@ -6,17 +6,16 @@
 % For simplicity, the direction of the sound source is determined in
 % horizontal plane only.
 % However, the front and rear microphones differ 0.0212\si{m} in height
-% what can provide rough 
+% what can provide rough
 For the particular case when the signal comes straight from the front or behind,
-the distance of the sound source can be estimated\todo{estimated und approx. haben die selbe Aussage}.
+the distance of the sound source can be approximated up to a certain range.
 If $delay_{01}$ (delay between channel 0 and 1) and $delay_{32}$ (delay between channel 3 and 2)
-are both very small, the signal comes from
-the front or the back most likely. \todo{why "most likely" i think you can skip that and say it comes from front or back} \todo{comes most likely from the fround or rear.}
-In theory, for this case the lateral delays are larger or equal the maximal
-sample difference between the front and rear channels on the x-axis which is
-to\todo{to?} 5.41 samples.
-With smaller lateral delays and some assumptions \todo{the assumptions given below / or which assumptions are you talking about?}, the angle of the sound source in the XZ
-plane can be estimated.
+are both very small, the signal is detected from the front or rear.
+Assuming signal waves in one horizontal plane and arriving parallelly, the
+lateral delays would be larger or equal the maximal
+sample difference of 5.41 between the front and rear channels on the x-axis.
+For the case that these lateral delays are smaller, the angle of the sound source in the XZ
+plane identifiable.
 \Cref{fig:02_headSideTdoa} illustrates the NAO's head from the right with
 channels 1 and 3.
 % -------------------------------------------------------------
@@ -39,8 +38,8 @@ to the Z-axis can be determined with delay $D$ as
 \intertext{whereby}
 \alpha &= tan^{-1}\left(\frac{\Delta z_{channel}}{\Delta x_{channel}}\right) \approx 26.73\si{\degree}
 \eal \esub
-which is the angle to the orthogonal axis to \todo{zweimal to? muss da von einmal eins "from..." .."to.." sein? So ergibt sich mir die Aussage nicht } the plane though
-front and rear channels.
+which is the angle of the orthogonal axis of the plane though front and rear channels.
+
 $\Delta z_{channel}$ and $\Delta x_{channel}$ are the distances between the channels
 in z- and x-direction in \si{\meter}.
 % -------------------------------------------------------------
@@ -80,8 +79,9 @@ Setting $\Delta h_{source}$ to 1.5\si{m} and $\Delta h_{NAO}$ to 0.57\si{\meter}
 the maximal measurable distance to the front is about 0.66\si{\meter}.
 With the same values the maximal distance backwards is 15.3\si{\meter} in theory.
 However, measurements in \cref{subsec:04_distance} show that 7\si{\meter} is the
-limit for the real case. \todo{ich würde hier nochmal etwas klarer darstellen, woher der Unterschied zwischen front und rear kommt. Ist für dich vielleicht klar, für den Lesen, gerade beim ersten Mal aber nicht. Ein sollte da als Begründung reichen}
-
+limit for the real case.
+The difference between front and rear occurs due to the constructional positioning
+of the microphones being tilted to the back.
 % -------------------------------------------------------------
 
 \subsection{SNR}
