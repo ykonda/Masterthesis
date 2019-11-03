@@ -2,41 +2,56 @@
 \label{chap:05_conclusion}
 
 The objective of this work was to find an approach to localize a whistle-sound
-source with multiple NAO robots. \todo{why should we want this? One more sentence for motivation}
+source with multiple NAO robots.
 Each of these robots offers four microphones attached on their head.
 In the scope of this work, stationary sound sources and motionless robots were
 considered.
+This issue originates in the context of \ac{RoboCup} \ac{SPL} which is a
+platform where humanoid robots play soccer autonomously.
+In this games, whistle-sounds are used to initiate kickoffs at the current state of the rules.
+Due to parallel games at neighboring fields, other games' whistles can be heard and
+the risk exists that the robots begin to move illegally.
+To circumvent those situations by neglecting whistle-sounds from other
+games, a \acf{SSL} algorithm was quested.
 
+The beginning of this work covers the theoretical principles of each component
+used for the multi-agent \ac{SSL} which has been divided into three major parts.
+First, different signal start algorithms were examined with regard to accuracy.
+By this, appropriate subsignals were selected for the following processes with the
+assumption that the beginning of a whistle signal is most unaffected by
+reverberation and multi-path propagation.
+Evaluation of the recorded data confirmed this assumption.
+As accuracy and low computational effort are important on a real-time capable
+system, different approaches to detect the signal start were compared.
+Best results could be obtained by a simple \ac{ZCR} approach.
+However, in combination with the entropy signal start detection
+most reliable results can be expected without the dependency on a
+particular signal frequency.
+
+Having appropriate samples of the whistle signal, the direction of a whistle-source
+is computed by each robot of the multi-agent system.
 In order to solve this task, the \acf{TDOA} method was selected as solution method
 which is popular with regard to acoustic signal source localization.
 The fundamental concept of \ac{TDOA} algorithms is to obtain direction information
 about acoustic signals by observing the time delay between separated microphone sensors.
-Three different approaches were evaluated to obtain a stable method
-for the delay estimation.
+Three different approaches were evaluated to achieve a stable algorithm for the delay estimation.
 The \acf{CC} and \acf{GCC-PHAT} approaches are based on cross-correlation theory in terms
 of signal processing.
 In comparison, the phase difference method performs spectral analysis on the signal
 to attain \ac{TDOA} information.
-
-The process of the \acf{SSL} has been divided into three parts.
-First, different signal start algorithms were examined with regard to accuracy.
-By this, appropriate subsignals were selected for the \ac{TDOA} process.
-Of capital importance is the \acf{WSDE} executed on stand-alone robots by
-using one of the \ac{TDOA} methods.
-Finally, a multi-agent decision is executed on a Bayesian updating filter
-depending on the \ac{WSDE} results of the single robots.
-
-\todo{It feels weird to have the overview almost half way into the conclusion. However, I understand why you want to emphasize the to previous paragraphs. Maybe put all of them into one? That would probably work best.}The beginning of this work covers the theoretical principles of each component
-used for the multi-agent \ac{SSL}.
-Based on this, implementation details are presented which are followed by analysis
-and evaluation of real measurement data.
+This \acf{WSDE} is of capital importance which is why a wide range of examination
+was done with real measurement data.
 According to the results, the \acf{GCC-PHAT} algorithm performs best by
 providing most accurate results for the \ac{WSDE} which offers the most precise
 whistle-sound source position estimations in consequence.
+Evaluating \ac{WSDE} measurements recorded by the multi-agent system of five robots,
+the angular \ac{RMSE} by all robots was 11.84\si{\degree}.
+
+Finally, a multi-agent decision is executed on a Bayesian updating filter
+depending on the \ac{WSDE} results of the single robots.
 For the measurement data recorded within this work, an average
 distance error between estimated position and real source location
 of less than 1\si{\meter} could be achieved.
-\missing[]{More validation?}
 
 With the outcome of this work, further research topics arise to solve
 more complex \ac{SSL} challenges.
@@ -54,10 +69,6 @@ Also, more a-priori knowledge like the prior position of the sound source can be
 
 One sees that wide-ranging progress and novel applications can be expected regarding \ac{SSL}
 in the field of autonomously operating robotics.
-
-\todo{overall you can probably add a little more detail in the summary of what you did. You can aim for 1.5 pages }
-
-
 
 % One obtains the \ac{TDOA} by cross-correlating signal samples with standard
 % \acf{CC} and \acf{GCC-PHAT} algorithms in frequency domain.
