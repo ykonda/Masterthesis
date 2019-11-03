@@ -32,9 +32,8 @@ The same applies mirrored for negative delays.
 By this implementation, all candidates are represented in the robot coordinate system.
 Having four channels, each neighboring channel pair returns two candidate directions.
 Diagonal channels can be paired as well for the correlation methods.
-However, this case is non-observed profoundly\todo{ich würde "not considered" schreiben} in this work due to the overdetermined
+However, this case is not considered profoundly in this work due to the overdetermined
 system by four pairs.
-\missing[]{Extra: evaluation of diagonal \acp{GCC}?}
 Out of these eight candidates, a final direction angle $\gamma$ is chosen
 by computing all combinations and selecting the one with smallest sum of angle difference \todo{differences? Vielleicht hier einmal als Formel aufschreiben?}.
 During research, different factors like signal strength \todo{zweites Beispiel wenn vorhanden} were tested to include

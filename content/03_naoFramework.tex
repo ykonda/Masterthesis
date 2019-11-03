@@ -176,8 +176,10 @@ Whistles need to be detected in at least three frames within the last four cycle
 until the \lstinline!whistleFound! state is set to true.
 Both values are parameterized.
 
-For the whistle localization, the boolean of the whistle data can only be set to true
-after 3000\si{\milli\second} again. \change[]{better explanation} \todo{YES!}
+\unsure[]{Here could be an explanation about the time delay of whistle data but not necessary
+      For the whistle localization, the boolean of the whistle data can only be set to true
+      after 3000\si{\milli\second} again.
+}
 
 By default, only channel $0$ which is located rear left is used for he whistle detection.
 All transformations into frequency domain are executed with the C++ library
