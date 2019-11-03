@@ -349,8 +349,8 @@
 \cleardoublepage
 \include{precontent/abstract}
 
-\cleardoublepage
-\include{precontent/thanks}
+% \cleardoublepage
+% \include{precontent/thanks}
 
 \cleardoublepage
 \include{precontent/statement}
@@ -365,11 +365,16 @@
 
 % Hier wird das Symbolzeichnis eingef�gt
 % Falls es nicht gew�nscht ist, sind die folgenden sechs Zeilen auszukommentieren
-\cleardoublepage % to get correct page no. in TOC
+% \cleardoublepage % to get correct page no. in TOC
+% \phantomsection
+% \markboth{\bfseries LIST OF SYMBOLS}{\bfseries LIST OF SYMBOLS}
+% \addcontentsline{toc}{chapter}{\protect\numberline{List of Symbols}}
+% \include{precontent/symbol_list}
+
+\cleardoublepage
 \phantomsection
-\markboth{\bfseries LIST OF SYMBOLS}{\bfseries LIST OF SYMBOLS}
-\addcontentsline{toc}{chapter}{\protect\numberline{List of Symbols}}
-\include{precontent/symbol_list}
+\addcontentsline{toc}{chapter}{\protect\numberline{List of Abbreviations}}
+\include{postcontent/abbreviation}
 
 \listoftodos[ToDos]
 
@@ -411,10 +416,10 @@
 
 \end{appendix}
 
-\cleardoublepage
-\phantomsection
-\addcontentsline{toc}{chapter}{\protect\numberline{List of Abbreviations}}
-\include{postcontent/abbreviation}
+% \cleardoublepage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\protect\numberline{List of Abbreviations}}
+% \include{postcontent/abbreviation}
 
 %Softwareverzeichnis
 \cleardoublepage
