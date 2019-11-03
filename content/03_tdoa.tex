@@ -119,7 +119,7 @@ is converted to delay samples $D_s$ with
 \subsubsection*{Static Reference Frequency}
 
 Considering the sensor pair of the two front channels, the maximal feasible
-reference frequency value is limited to 2775.08\si{\hertz} as stated in the table above \todo{cref(table) nochmal}.
+reference frequency value is limited to 2775.08\si{\hertz} as stated in the \cref{tab:03_maxFrequencies} above.
 Evaluation of \cref{fig:04_diffFc} has shown, that the quality of the phase difference
 method relies on the reference frequency to some extent. \todo{I don't think it is a good idea to reference into the results section and possibly the discussion. Rather say "preliminary test results" and then talk a little bit about it in the discussion. }
 To realize best performance, a reference frequency between 2.6\si{\kilo\hertz} 2.775\si{\kilo\hertz}
@@ -128,8 +128,7 @@ The frequency resolution of \acp{FFT} is $\frac{f_s}{N}$, depending on the sampl
 the number of data points $N$.
 As the frame size for this method is set to 64 samples, the samples are zero-padded
 up to 512 samples before transforming them into frequency domain for higher resolution.
-With this \ac{FFT} size, it \todo{$f_c$ statt it} can be selected between 2670.1\si{\hertz}
-and 2756.25\si{\hertz}.
+With this \ac{FFT} size, $f_c$ can be selected between 2670.1\si{\hertz} and 2756.25\si{\hertz}.
 Frames after the signal start index are chosen, where a whistle is detected
 in all channels by the same algorithm\todo{ich würde "as the existant w.d. " weglassen} as the existent whistle detection.
 % -------------------------------------------------------------
