@@ -1,4 +1,4 @@
-\section{Whistle Source Direction Estimation} \todo{whistle-source direction esimation}
+\section{Whistle Source Direction Estimation} \unsure[]{whistle-source direction esimation}
 \label{subsec:03_directionEstimation}
 
 % started with \ac{WSDE}
@@ -38,22 +38,29 @@ Frames considered for the delay estimation
 are chosen in a different way depending on the \ac{TDOA} method.
 Detailed descriptions are given in the corresponding method
 \cref{subsubsec:03_cc,subsubsec:03_phase}.
-In \ac{TDOA}, the delays between the two microphone channels are
-determined by either \ac{GCC-PHAT}, \ac{CC} or phase difference method. \todo{holprig, eher: Using TDOA, the delay(s) between two microphone challes are either determined by xxx, yyy or the zzz method.}
+Using \ac{TDOA}, the delays between two microphone channels are either
+determined by \ac{CC}, \ac{GCC-PHAT} or the phase difference method.
+As previously stated, there exist various \ac{GCC} filter.
+However, in this work by \ac{GCC} the \ac{GCC-PHAT} method is always referenced
+if not explicitly specified differently.
 Each delay generates two potential source direction candidates as stated
 in \cref{sec:02_tdoa}.
 In the event of candidates indicating a nearby signal from straight forward or
 backwards, the distance to the source is estimated in addition.
 More precise explanation is given in \cref{subsec:03_distance}.
 For a final direction, the mean of the candidates with smallest difference
-is formed. \todo{wie ist difference definiert? Das ist hier unklar, scheint mir aber wichtig zu sein}
+is formed.
+This means that each candidate of a channel pair is compared to the other resulting candidates
+of the remaining channel combinations.
+The combination with the smallest sum of angular error between the candidates is selected as
+\acl{WSDE}.
 
 If one of the correlation methods is used, the \ac{TDOA} is calculated
 multiple times by shifting the frame over samples.
-The range in which the frame is shifted around the start index is parameterized
-as well as the size of the shift. \todo{The shift range around the start index, as well as the size of the shift, are parameterized.}
-By saving the calculated \ac{TDOA} values and looking up \todo{checking?} certain conditions per frame shift,
+The shift range around the start index, as well as the size of the shift, are parameterized.
+By saving the calculated \ac{TDOA} values and checking certain conditions per frame shift,
 the most promising \todo{etwas klarer waere hier etwas wie: best result according to the metric given in eq. XX } result can be chosen.
+
 This way, potential start estimation inaccuracies can be corrected and
 the decision process is optimized.
 In case of the \ac{GCC-PHAT}, the \ac{PSNR} provides information about
