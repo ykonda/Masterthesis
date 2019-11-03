@@ -1,46 +1,58 @@
 \chapter{Conclusion}
 \label{chap:05_conclusion}
 
+\todo[inline]{Maybe call this "Summary and Conclusion" as this is more than just
+a conclusion.}
+
 The objective of this work was to find an approach to localize a whistle-sound
 source with multiple NAO robots.
 Each of these robots offers four microphones attached on their head.
 In the scope of this work, stationary sound sources and motionless robots were
 considered.
+\todo[inline]{statt "originates" besser "arises"?}
+\todo[inline]{statt "platform" besser "competition"?}
 This issue originates in the context of \ac{RoboCup} \ac{SPL} which is a
 platform where humanoid robots play soccer autonomously.
 In this games, whistle-sounds are used to initiate kickoffs at the current state of the rules.
 Due to parallel games at neighboring fields, other games' whistles can be heard and
 the risk exists that the robots begin to move illegally.
 To circumvent those situations by neglecting whistle-sounds from other
-games, a \acf{SSL} algorithm was quested.
+games, a \acf{SSL} algorithm was quested. \todo{statt "quested" vielleicht "was to
+be designed and implemented"}
 
 The beginning of this work covers the theoretical principles of each component
 used for the multi-agent \ac{SSL} which has been divided into three major parts.
-First, different signal start algorithms were examined with regard to accuracy.
-By this, appropriate subsignals were selected for the following processes with the
+\todo[inline]{Add one sentence to make clear that things after this are
+are more than just the theory. E.g: "For each part of the SSL algorithm,
+different strategies are proposed and evaluted".}
+First, different signal start detection algorithms were examined with regard to accuracy.
+Using this algorithm, appropriate subsignals were selected for the following processes with the
 assumption that the beginning of a whistle signal is most unaffected by
 reverberation and multi-path propagation.
 Evaluation of the recorded data confirmed this assumption.
-As accuracy and low computational effort are important on a real-time capable
+As accuracy and low computational effort are important on a real-time constraint
 system, different approaches to detect the signal start were compared.
 Best results could be obtained by a simple \ac{ZCR} approach.
 However, in combination with the entropy signal start detection
 most reliable results can be expected without the dependency on a
-particular signal frequency.
+particular signal frequency.\todo[inline]{Vorher schreibst du, dass ZCR am besten
+ist, aber im Statz danach, dass es noch besser geht. Veilleicht eher  "Best
+performance of a stand-alone approach.... " und danach "The performance can be
+further increased by combining it with the entropy method..."}
 
-Having appropriate samples of the whistle signal, the direction of a whistle-source
+Having appropriate samples of the whistle signal, the relative direction of a whistle-source
 is computed by each robot of the multi-agent system.
 In order to solve this task, the \acf{TDOA} method was selected as solution method
-which is popular with regard to acoustic signal source localization.
+which is popular a approach for acoustic signal source localization.
 The fundamental concept of \ac{TDOA} algorithms is to obtain direction information
-about acoustic signals by observing the time delay between separated microphone sensors.
+about acoustic signals by observing the time delay between separate microphones.
 Three different approaches were evaluated to achieve a stable algorithm for the delay estimation.
 The \acf{CC} and \acf{GCC-PHAT} approaches are based on cross-correlation theory in terms
 of signal processing.
 In comparison, the phase difference method performs spectral analysis on the signal
 to attain \ac{TDOA} information.
 This \acf{WSDE} is of capital importance which is why a wide range of examination
-was done with real measurement data.
+was done with real measurement data.\todo{Capital ist unueblich, "significant"?}
 According to the results, the \acf{GCC-PHAT} algorithm performs best by
 providing most accurate results for the \ac{WSDE} which offers the most precise
 whistle-sound source position estimations in consequence.
@@ -57,18 +69,22 @@ With the outcome of this work, further research topics arise to solve
 more complex \ac{SSL} challenges.
 Using the ability to localize signal sources that are not whistles,
 differentiation of multiple sounds and separation of those become important.
+\todo{Maybe rather: Using the ability to localize signals other than whistles,
+this approach may be used to distinguish and attribute other sounds.}
 Furthermore, consideration of moving sources and robots can be interpreted
 as the next essential step for the usage in real case scenarios.
 Especially when adopting the \ac{SSL} for verification of other robots' information
-like position and orientation, advancement towards these issues are anticipated.
+like position and orientation, advancement towards these issues are
+anticipated.\todo{"important" statt "anticipated" (anticipated heisst vorhergesehen.)}
 In another perspective, the multi-agent behavior can be improved with various
 concepts.
 This includes processes like multi-modal filtering or the exclusion of outliers
-with filtering.
+with filtering.\todo{suggestion: "detection of outliers" (ohne "with filtering")}
 Also, more a-priori knowledge like the prior position of the sound source can be included.
 
 One sees that wide-ranging progress and novel applications can be expected regarding \ac{SSL}
-in the field of autonomously operating robotics.
+in the field of autonomously operating robotics.\todo{"It can be concluded" statt
+"One sees"?}
 
 % One obtains the \ac{TDOA} by cross-correlating signal samples with standard
 % \acf{CC} and \acf{GCC-PHAT} algorithms in frequency domain.
