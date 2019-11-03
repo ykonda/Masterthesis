@@ -333,10 +333,28 @@ subject of discussion in \cref{subsubsec:04_teamConclusion}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[]{figures/evaluation/compare_rmse}
-	\caption{Angular RMSE and standard error of robot results per
-		measurement of \cref{subsec:04_labMeasurements}.}
+	\caption{Angular RMSE and standard error of robot results
+		laboratory-measurement of \cref{subsec:04_labMeasurements}.}
 	\label{fig:04_compareRmse}
 \end{figure}
+% -------------------------------------------------------------
+
+% -------------------------------------------------------------
+\btline{ht}{1.2}
+\btab{|c|c|c|}
+\hline
+Method & \ac{RMSE} & Standard Deviation [deg]\\
+\hline
+\ac{CC} & 24.67\si{\degree} & 18.87\si{\degree} \\
+\hline
+\ac{GCC} & 11.84\si{\degree} & 8.29\si{\degree} \\
+\hline
+Phase Difference & 44.88\si{\degree} & 33.94\si{\degree} \\
+\hline
+\etab
+\et{Method comparison of averaged \acp{RMSE} of single robot \ac{WSDE}
+results. All laboratory-measurements are considered}
+{04_rmseMethodComparisonsAll}
 % -------------------------------------------------------------
 
 \subsection{Conclusion}
