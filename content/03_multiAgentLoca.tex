@@ -1,29 +1,28 @@
 \section{Multi-Agent Source Localization}
 \label{sec:03_multiAgentLoca}
 
-The final whistle source localization is realized by collecting the
+The final whistle-source localization is realized by collecting the
 all \ac{WSDE} results of all active robots and combining the directions
 into one xy-position outcome.
 Two separate implementation details are covered in the following.
 First, the actual localization algorithm that concludes the source localization
 task is set in focus.
 How the process of the multi-agent decision proceeds including the communication
-is dealt within \cref{subsec:03_teamCommunication}.
+is dealt with in \cref{subsec:03_teamCommunication}.
 % -------------------------------------------------------------
 
 As stated, the actual Bayesian updating filter algorithm is addressed first
-by paying attention on \cref{alg:03_multiAgentLoca}.
+by paying attention to \cref{alg:03_multiAgentLoca}.
 With the specification of the filter made in \cref{subsec:02_2dTeam}, the
-whistle source localization is realized when the results of the individual robots
+whistle-source localization is realized when the results of the individual robots
 are available.
 The multi-agent localization algorithm receives an array of rays that represent
 the \ac{WSDE} results in the field coordinate system.
-The whistle sound position to return consists of the x- and y-position $\vec{\mu}$ and
+The whistle-sound position to return consists of the x- and y-position $\vec{\mu}$ and
 a covariance matrix \textbit{C}.
 For each combination of the rays $R[j]$ and $R[k]$, the intersecting point position
-$\vec{\mu_{jk}}$ along with its covariance matrix $\textbit{C}_{jk}$ is examined.
-If such intersection exists, the whistle source position information is updated until
-until all intersections were taken into consideration.
+$\vec{\mu}_{jk}$ along with its covariance matrix $\textbit{C}_{jk}$ is examined.
+If such intersection exists, the whistle source position information is updated until all intersections are taken into consideration.
 
 % PSEUDO CODE UPDATING ALGORITHM
 \begin{algorithm}[H]
@@ -54,18 +53,19 @@ until all intersections were taken into consideration.
 \subsection{Team Communication}
 \label{subsec:03_teamCommunication}
 
-To agree on a whistle position as multi-agent system by computing the whistle
-localization algorithm \cref{alg:03_multiAgentLoca}, the \ac{WSDE} results of the
+To agree on a whistle position as a multi-agent system by computing the whistle
+localization process of \cref{alg:03_multiAgentLoca}, the \ac{WSDE} results of the
 stand-alone robots must be collected.
 As introduced in \cref{sec:03_naoFramework}, the robots are able to send and receive
 information from team mates wirelessly.
-By present implementation, the team message includes a robot's xy-position information,
-the orientation as well as the time point of the last detected whistle (and much more).
+By present implementation, the team-message includes a robot's xy-position information,
+the orientation as well as the time point of the last detected whistle among further information
+related to other tasks.
 Thus, only the angular \ac{WSDE} and its additional information like distance and \ac{PSNR}
-are to be appended to the team message.
+are to be appended to the team-message.
 
 In order to wait for the team mates,
-a delay of 3\si{\second} is implemented before collecting the \ac{WSDE} results
+a delay of three seconds is implemented before collecting the \ac{WSDE} results
 of the other players.
 By this artificially introduced delay, synchronization issues due to network lags and
 whistle detection differences can be circumvented.
