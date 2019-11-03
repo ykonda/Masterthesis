@@ -30,8 +30,8 @@ formulated to
 
 Imaging having results from two agents $robot_j$, $robot_k$ that accomplished the \ac{WSDE} algorithm by
 computing the \ac{TDOA} with any method, either the \ac{WSDE} angles of both robots
-cross and an intersection point would be found or no final whistle source position result arises.
-Each of these intersection points $\vec{i_{jk}}$ can be described as whistle source position
+cross and an intersection point would be found or no final whistle-source position result arises.
+Each of these intersection points $\vec{i_{jk}}$ can be described as whistle-source position
 state $\vec{\mu_{jk}}$ with variance $\textbit{C}_{jk}$ in accordance to \cref{eq:02_probabilityDensity}.
 % -------------------------------------------------------------
 
@@ -41,7 +41,7 @@ Furthermore, the following nomenclature applies:
       x- and y-coordinates
 \item \textbit{M}: matrix with elements $\left( \begin{matrix} m_{xx} & m_{xy} \\ m_{yx} & m_{yy} \end{matrix} \right)$.
 \end{itemize}
-Final whistle source position $\vec{\mu}$ of all robots is estimated by iterating over
+Final whistle-source position $\vec{\mu}$ of all robots is estimated by iterating over
 all intersections and updating the result with \cref{eq:02_intersectionState}.
 
 Exemplary, two robots at position $\vec{p_j}$ and $\vec{p_k}$ with their \ac{WSDE} results
@@ -62,7 +62,7 @@ is known by its team-message information.
 Thus, the absolute angle is
 \bal
 \Phi_j &= \theta_j + \gamma_j\\
-\intertext{from which the whistle source direction ray can be described as}
+\intertext{from which the whistle-source direction ray can be described as}
 \vec{r_j} &= \vec{p_j} + \vec{d_j} % = \begin{pmatrix}p_{jx}\\p_{jy}\end{pmatrix} + \ell \begin{pmatrix}d_{jx}\\d_{jy}\end{pmatrix}
     = \begin{pmatrix}p_{jx}\\p_{jy}\end{pmatrix} + \ell \begin{pmatrix}\cos(\Phi_j)\\\sin(\Phi_j)\end{pmatrix}.
 \label{eq:03_ray}
