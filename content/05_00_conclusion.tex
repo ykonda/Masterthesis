@@ -1,67 +1,65 @@
 \chapter{Conclusion}
 \label{chap:05_conclusion}
 
-The purpose of this work was to find an approach to localize a whistle
-signal with a multi-agent system consisting of multiple NAO robots.
-Each of these robots have four microphones attached on their head which
-record audio signals within a range of 150\si{\hertz} and 12\si{\kilo\hertz}
-with a sample rate of 44.1\si{\kilo\hertz}.
-Only stationary sound sources and robots were considered in the scope of this
-work.
-Roughly, the implementation can be divided into three parts.
-Of capital importance is the \acf{WSDE} executed by stand-alone robots which
-is realized by computing the \ac{TDOA} between the four channels on the robots' head.
-Two fundamentally different approaches were evaluated to obtain a stable method
+The objective of this work was to find an approach to localize a whistle-sound
+source with multiple NAO robots.
+Each of this robots consists of four microphones attached on their head.
+On the scope of this work, stationary sound sources and motionless robots were
+considered.
+
+In order to solve this task, the \acf{TDOA} method was selected as solution method
+which is popular with regard to acoustic signal source localization. \missing[]{citations}
+The fundamental concept of \ac{TDOA} algorithms is to obtain direction information
+about acoustic signals by observing the time delay between separated microphone sensors.
+Three different approaches were evaluated to obtain a stable method
 for the delay estimation.
-One obtains the \ac{TDOA} by cross-correlating signal samples with standard
-\acf{CC} and \acf{GCC-PHAT} algorithms in frequency domain.
-The other analyses recorded samples in frequency domain in terms of
-a phase of a reference frequency which is described as phase difference method.
-% Correct
-It was assumed that the start of a signal is most reliable 
-To circumvent impact of multi-path propagation and reverberation, 
-was examined and is true
-Thus, \acf{SSD} approaches were compared with regard to accuracy and computational effort.
-Finally, 
+The \acf{CC} and \acf{GCC-PHAT} approaches are based on cross-correlation theory in terms
+of signal processing.
+In comparison, the phase difference method performs spectral analysis on the signal
+to receive \ac{TDOA} information.
+
+On a whole, the process of the \acf{SSL} has been divided into three parts.
+First, different signal start algorithms were examined with regard to accuracy.
+By this, appropriate subsignals were selected for the \ac{TDOA} process.
+Of capital importance is the \acf{WSDE} executed on stand-alone robots by
+using one of the \ac{TDOA} methods.
+Finally, a multi-agent decision is executed on a Bayesian updating filter
+depending on the \ac{WSDE} results of the single robots.
+
+The beginning of this work covers the theoretical principles of each component
+used for the multi-agent \ac{SSL}.
+Based on this, implementation details are presented which are followed by analysis
+and evaluation of real measurement data.
+According to the results, the \acf{GCC-PHAT} algorithm performs best by
+providing most accurate results for the \ac{WSDE} which brings most precise
+whistle-sound source position estimations in consequence.
+For the measurement data recorded within this work, a average
+distance error between estimated position and real source location
+of less than 1\si{\meter} could be achieved.
+\missing[]{More validation?}
+
+With the outcome of this work, further research topics arise to solve
+more complex \ac{SSL} challenges.
+Using the ability to localize signal sources that are not whistles,
+differentiation of multiple sounds and separation of those become important.
+\missing[]{cite}
+Furthermore, consideration of moving sources and robots can be interpreted
+as next essential step for the usage in real case scenarios.
+Especially when adopting the \ac{SSL} for verification of other robots' information
+like position and orientation, advancement towards these issues are unavoidable.
+On another perspective, the multi-agent behavior can be improved with various
+concepts.
+This includes processes like multimodal filtering or the exclusion of outliers
+with filtering.
+Also, more a-priori knowledge like the prior position of the sound source can be included.
+
+One sees that wide-ranging progress can be expected regarding \ac{SSL}
+in the field of robotics.
 
 
-% -------------------------------------------------------------
-If the observed signal is known as whistle and computational effort is
-irrelevant, 
-% the evaluation shows that the start detection with the
-% existing whistle detection algorithm performs best.
-that a rough start detection by the exiting whistle detection
-with a large frame size followed by a \ac{ZCR} detection with small
-window size.
-This is a good trade-off with regard to the computational effort.
-% - entropy for large scale start detection\\
-% - zcr and energy for smaller scale (because high precision needed)\\
 
 
-% -------------------------------------------------------------
-% \section{TDOA Methods}
-% \label{sec:05_methodComparison}
-
-% Phase method: Much faster!
-
-% GCC is more accurate in regard to each robot result -> This is
-% important when less robots are used for localization.
-% It can be the case when robots are broken / got penalty
-% We want each robot result to be as accurate as possible so
-% that we can count on each result
-% Less robots means, that each wrong direction is weighted more
-% and influences the final position significantly.
-% -------------------------------------------------------------
-
-% \section{Team Filter}
-% \label{sec:05_teamFilter}
-
-% Team filter: more intelligent filtering (e.g. clustering
-% intersections for multiple position candidates)
-
-% Future work ___________________________________
-% Separation of multiple sounds
-% Moving sources, moving robots
-
-% conclusion -> multimodales filtering, expizite ausreißerfilter, include prior knowledge
-% of refree position
+% One obtains the \ac{TDOA} by cross-correlating signal samples with standard
+% \acf{CC} and \acf{GCC-PHAT} algorithms in frequency domain.
+% The other analyses recorded samples in frequency domain in terms of
+% a phase of a reference frequency which is described as phase difference method.
