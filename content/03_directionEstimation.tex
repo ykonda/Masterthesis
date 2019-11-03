@@ -19,7 +19,6 @@ For all smaller delays greater than zero, two direction candidates \textit{candi
 and \textit{candidate 1} result in the range of the max-delay vector $\pm \pi$.
 The same applies mirrored for negative delays.
 % -------------------------------------------------------------
-\todo{ich würde auch an $\gamma'$ in der Figure noch die Richtung, weg vom max-delay vector definieren. Sonst ist das mit den anderen Pfeilen verwirrend. } \todo{the angle definiton of gamma is not the same as given in fig 3.1 but rather 90° minus gamma}
 \begin{figure}[ht]
 	\centering
 		\includegraphics[width=0.6\columnwidth]{figures/tdoa_code}
@@ -35,9 +34,9 @@ Diagonal channels can be paired as well for the correlation methods.
 However, this case is not considered profoundly in this work due to the overdetermined
 system by four pairs.
 Out of these eight candidates, a final direction angle $\gamma$ is chosen
-by computing all combinations and selecting the one with smallest sum of angle difference \todo{differences? Vielleicht hier einmal als Formel aufschreiben?}.
-During research, different factors like signal strength \todo{zweites Beispiel wenn vorhanden} were tested to include
-more a priori knowledge.
+by computing all combinations and selecting the one with smallest sum of angle difference.
+During research, different factors like signal strength or smallest start index
+were tested to include more a-priori knowledge.
 Due to lack of reliability, no additional signal properties are taken into account.
 
 There exists one exceptional case, where the signal source is detected straight in front

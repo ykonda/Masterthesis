@@ -21,45 +21,52 @@ circumstances.
 \label{subsubsec:03_cc}
 
 In theory, \acf{CC} in time domain is usually illustrated by shifting
-two signals over each other and recording the similarity for each shift \todo{similarity muss definiert sein, Hier aber ja einfach: area under the curve of addition. }.
+two signals over each other and recording the similarity for each shift.
+Similarity in terms of signal processing is measured by the area under the curve of addition.
 Thus, a peak will arise at that shift where signals are most similar.
-Imaging\todo{meinst do "imaging" oder "imagining". Beides klingt aber irgendwie holprig. Nochmal drüber gucken!} two equal signals, one can image a peak at the middle of the \ac{CC} function
-\lstinline!R!. \todo{maybe mentin that this is also the auto-correlation}
-The index in this case is called \lstinline!zeroIndex! and calculated with
+Having two equal signals, the maximum value of the \ac{CC} \lstinline!R! (which in this case
+is called auto-correlation) arises at the middle of the function.
+This index in this case is called \lstinline!zeroIndex! and calculated with
 \lstinline!int(length(R))-1!.
-If one signal is alike the other but delayed by some\todo{a number of} samples, the peak will
-occur at so many samples next to the \lstinline!zeroIndex!. \todo{ich würde hier vielleicht mit einer Variablen arbeiten: " delayed by $n$ samples, the peak will occur at a shift of $n$ samples...}
+If one signal is alike the other but delayed by $D$ samples, the peak will
+occur at a shift of $D$ next to the \lstinline!zeroIndex!.
 This delay, which is directly related to the \ac{TDOA}, is computed
 by the \ac{CC} and \ac{GCC} in the unit of samples.
 As \cref{sec:02_cc,sec:02_gcc} have shown, the \ac{GCC} is commonly performed
-in frequency domain. \todo{due to a performance advantage?}
+in frequency domain due to a performance advantage.
 For unification, both \ac{CC} and \ac{GCC} are implemented in frequency domain.
 % Hereinafter, \ac{CC} and \ac{GCC} will be summarized as \textit{correlation} in this section.
 
 The samples for the \ac{CC} are defined by the start index and the frame shift
 according to \cref{subsec:03_directionEstimation} and originate from the data which was
 cleaned by spectral subtraction previously.
-The frame size in this work is set to 256 samples typically \todo{sind sie jetzt so gesetzt oder nicht? Am besten du kannst "typically" rausnehmen. Wenn du das doch variierst dann schreib das hier. So weiss der Leser nicht ob das jetzt immer so ist, manchmal oder nie} and the samples are Hann-windowed
-prior to the correlation.
-By zero padding the \ac{FFT}, resolution can be increased, but is refrained from for now. \todo{maybe put "due to higher computational effor" so you have some justification that should go well with the NAO system}
-For two real signals, the \ac{CC} can be realized by time-reversing one of the signals before
-the \ac{FFT} and then multiplying each component \todo{... element-wise in frequency domain. Würde ich hier nochal ausdruecklich schreiben, da es ja dadurch so effizient ist. and maybe be clearer about the steps: time-reversion, fft, element wise multiplication}.
-In the event \todo{ist das ein event, dass manchmal auftritt oder eine bewusste Einstellung (dann eher "case")} of \ac{GCC-PHAT}, each component of the multiplication is divided by the absolute
+The frame size in this work is set to 256 samples Hann-windowed prior to the correlation.
+By zero padding the \ac{FFT}, resolution can be increased, but is refrained from for now
+due to higher computational effort and sufficient \ac{CC} results.
+For two real signals, the \ac{CC} can be realized by time-reversing one of the signals first.
+After transforming both signals into frequency domain by \ac{FFT}, element wise multiplication is performed.
+
+In the case of \ac{GCC-PHAT}, each component of the multiplication is divided by the absolute
 value as the weighting function \cref{eq:02_gccPhat} defines.
 After this, the cross-correlated signal is transformed back into time domain and
 index of the peak \lstinline!peakIndex! is found.
 The delay in samples is then computed by \lstinline!peakIndex - zeroIndex!.
 In conformity with the definitions in this thesis, a positive delay \lstinline!d_01!
 between \lstinline!x_0! (signal at channel 0) and \lstinline!x_1! (signal at channel 1)
-indicates that the signal was at channel 0 first.
+indicates that the signal was received at channel 0 first.
 % -------------------------------------------------------------
 
 \subsubsection*{Subsample Delay}
 \label{subsubsec:03_subsample}
 
 Integer delays only offers a limited number of resulting direction angles.
+As demonstration, considering the distance between the two rear microphones on the
+robot's head the maximum sample difference obtains 14 samples.
+This means that 180\si{\degree} are separated in 14 directions only, whereby
+this represents the largest distance between neighboring channels.
 To avoid this low resolution, the subsample shift estimation as in \cref{sec:02_subsampleShift}
-is added to the delay estimation for both \ac{CC} and \ac{GCC}. \todo{give a few more implementation details. There probably are some parameters governing the resolution or fitting polynom or something..}
+is added to the delay estimation for both \ac{CC} and \ac{GCC}.
+Although the implementation is simple, it yields promising results.
 
 \subsubsection{Phase Difference}
 \label{subsubsec:03_phase}
@@ -120,8 +127,8 @@ is converted to delay samples $D_s$ with
 
 Considering the sensor pair of the two front channels, the maximal feasible
 reference frequency value is limited to 2775.08\si{\hertz} as stated in the \cref{tab:03_maxFrequencies} above.
-Evaluation of \cref{fig:04_diffFc} has shown, that the quality of the phase difference
-method relies on the reference frequency to some extent. \todo{I don't think it is a good idea to reference into the results section and possibly the discussion. Rather say "preliminary test results" and then talk a little bit about it in the discussion. }
+Preliminary tests results have shown, that the quality of the phase difference
+method relies on the reference frequency to some extent.
 To realize best performance, a reference frequency between 2.6\si{\kilo\hertz} 2.775\si{\kilo\hertz}
 should be chosen.
 The frequency resolution of \acp{FFT} is $\frac{f_s}{N}$, depending on the sample frequency $f_s$ and
@@ -130,20 +137,19 @@ As the frame size for this method is set to 64 samples, the samples are zero-pad
 up to 512 samples before transforming them into frequency domain for higher resolution.
 With this \ac{FFT} size, $f_c$ can be selected between 2670.1\si{\hertz} and 2756.25\si{\hertz}.
 Frames after the signal start index are chosen, where a whistle is detected
-in all channels by the same algorithm\todo{ich würde "as the existant w.d. " weglassen} as the existent whistle detection.
+in all channels by the same algorithm.
 % -------------------------------------------------------------
 
 \subsubsection*{Dynamic Reference Frequency}
 
-In the other case \todo{other sensor pair oder was? Klarrer!}, the frame is chosen by doing a frequency analysis on
+To define a dynamic reference frequency instead, the frame is chosen by doing a frequency analysis on
 multiple frames after the start index.
 The frequency $f_m$ belonging to the maximum magnitude of the signal spectrum
 is determined.
 The first frame is chosen where $f_m$ is equal for all channels and
 within whistle range.
-For better understanding, the $f_m$s \todo{das "s" sieht komisch aus... } per frame are plotted in \cref{fig:03_maxFreq}.
-Here, one sees that the conditions apply at the beginning of the whistle signal. \todo{around frame number XXX -> to avoid confusion}
-
+For better understanding, the $f_m$ values per frame are plotted in \cref{fig:03_maxFreq}.
+Here, one sees that the conditions apply at the beginning of the whistle signal after frame number 174.
 
 % -------------------------------------------------------------
 \begin{figure}[ht]
