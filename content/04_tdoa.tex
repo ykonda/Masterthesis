@@ -14,7 +14,7 @@ start are plotted in \cref{fig:04_tdoaSignal} for all channels.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/cc_frontRight_1_signal}
+	\includegraphics[]{figures/evaluation/cc_frontRight_1_signal}
 	\caption{Signal start section of a whistle-sound recorded from front right.}
 	\label{fig:04_tdoaSignal}
 \end{figure}
@@ -44,7 +44,7 @@ arises what was mentioned as downside of the \ac{CC} in \cref{sec:02_cc}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/cc_frontRight_1}
+	\includegraphics[]{figures/evaluation/cc_frontRight_1}
 	\caption{Cross correlation results of signal from front right (-33.7\si{\degree}).}
 	\label{fig:04_cc}
 \end{figure}
@@ -91,7 +91,7 @@ It is apparent that the peaks of the \ac{GCC} are better to detect than the peak
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/gcc_frontRight}
+	\includegraphics[]{figures/evaluation/gcc_frontRight}
 	\caption{Generalized cross correlation results of signal from front right.}
 	\label{fig:04_gcc}
 \end{figure}
@@ -152,9 +152,9 @@ content of \cref{subsubsec:03_phase}.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/phase_fc_rmse}
+	\includegraphics[]{figures/evaluation/phase_fc_rmse}
 	\caption{Result of all measurements done with robot 26 to compare different
-	fixed frequency values in whistle range.}
+		fixed frequency values in whistle range.}
 	\label{fig:04_diffFc}
 \end{figure}
 % -------------------------------------------------------------
@@ -202,9 +202,9 @@ data before applying a Hann window and transforming it into frequency domain by
 \ac{FFT}. The resulting phases and amplitudes are listed in
 \cref{tab:04_phaseSingle}.
 % -------------------------------------------------------------
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-		\includegraphics[]{figures/evaluation/phase_cos}
+	\includegraphics[]{figures/evaluation/phase_cos}
 	\caption{Frames used for the direction detection by phase method.}
 	\label{fig:04_phaseSingle}
 \end{figure}
@@ -250,7 +250,7 @@ Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
 \hline
 \etab
 \et{Phase differences and resulting direction candidates of demonstration-dataset
-with dynamically determined reference frequency}
+	with dynamically determined reference frequency}
 {04_phaseDiffSingle}
 % -------------------------------------------------------------
 
@@ -288,9 +288,9 @@ by phase difference.
 % -------------------------------------------------------------
 \begin{figure}[ht]
 	\centering
-		\includegraphics[]{figures/evaluation/phase_over_time}
+	\includegraphics[]{figures/evaluation/phase_over_time}
 	\caption{\ac{WSDE} result errors while shifting the frame over the
-	samples of the laboratory-dataset on robot no 26.}
+		samples of the laboratory-dataset on robot no 26.}
 	\label{fig:04_phaseOverTime}
 \end{figure}
 % -------------------------------------------------------------
@@ -332,10 +332,10 @@ subject of discussion in \cref{sec:05_methodComparison}.
 % -------------------------------------------------------------
 \begin{figure}[h]
 	\centering
-		\includegraphics[]{figures/evaluation/compare_rmse}
+	\includegraphics[]{figures/evaluation/compare_rmse}
 	\caption{Angular RMSE and standard error of robot results per
-	measurement of \cref{subsec:04_labMeasurements}.}
-    \label{fig:04_compareRmse}
+		measurement of \cref{subsec:04_labMeasurements}.}
+	\label{fig:04_compareRmse}
 \end{figure}
 % -------------------------------------------------------------
 
@@ -350,6 +350,10 @@ displays that the robots agree on the \ac{WSDE} and little outliers exist.
 Also in regard to the multi-agent Bayesian updating filter, unified
 results of the stand-alone robots are beneficial.
 Another advantage of the \ac{GCC-PHAT} method is the presence of
-a indication regarding the certainty of the measurement.
+an indication regarding the certainty of the measurement.
 Interpreting the \ac{PSNR} as such, it can be used to detect outliers
 or consider results with small \ac{PSNR} less.
+
+Regarding the computational effort, the phase difference method
+with static reference frequencies for \ac{TDOA} estimation
+accomplishes lowest demand.

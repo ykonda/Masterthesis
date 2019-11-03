@@ -1,14 +1,6 @@
 \chapter{Conclusion}
 \label{chap:05_conclusion}
 
-\begin{comment}
-    - Objective of this work:
-        x a whistle-sound locator (in xy-plane) with multiple robots
-        x stationary robots and sources
-        x evaluated different tdoa methods
-        - found a approach to detect direction of source on single robots
-\end{comment}
-
 The purpose of this work was to find an approach to localize a whistle
 signal with a multi-agent system consisting of multiple NAO robots.
 Each of these robots have four microphones attached on their head which
@@ -24,7 +16,7 @@ for the delay estimation.
 One obtains the \ac{TDOA} by cross-correlating signal samples with standard
 \acf{CC} and \acf{GCC-PHAT} algorithms in frequency domain.
 The other analyses recorded samples in frequency domain in terms of
-a phase of a reference frequency which is described as \acf{PD} method.
+a phase of a reference frequency which is described as phase difference method.
 % Correct
 It was assumed that the start of a signal is most reliable 
 To circumvent impact of multi-path propagation and reverberation, 
@@ -32,9 +24,40 @@ was examined and is true
 Thus, \acf{SSD} approaches were compared with regard to accuracy and computational effort.
 Finally, 
 
-\input{content/05_startDetection}
-\input{content/05_methodComparison}
-\input{content/05_teamFilter}
+
+% -------------------------------------------------------------
+If the observed signal is known as whistle and computational effort is
+irrelevant, 
+% the evaluation shows that the start detection with the
+% existing whistle detection algorithm performs best.
+that a rough start detection by the exiting whistle detection
+with a large frame size followed by a \ac{ZCR} detection with small
+window size.
+This is a good trade-off with regard to the computational effort.
+% - entropy for large scale start detection\\
+% - zcr and energy for smaller scale (because high precision needed)\\
+
+
+% -------------------------------------------------------------
+% \section{TDOA Methods}
+% \label{sec:05_methodComparison}
+
+% Phase method: Much faster!
+
+% GCC is more accurate in regard to each robot result -> This is
+% important when less robots are used for localization.
+% It can be the case when robots are broken / got penalty
+% We want each robot result to be as accurate as possible so
+% that we can count on each result
+% Less robots means, that each wrong direction is weighted more
+% and influences the final position significantly.
+% -------------------------------------------------------------
+
+% \section{Team Filter}
+% \label{sec:05_teamFilter}
+
+% Team filter: more intelligent filtering (e.g. clustering
+% intersections for multiple position candidates)
 
 % Future work ___________________________________
 % Separation of multiple sounds
