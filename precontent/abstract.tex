@@ -8,8 +8,38 @@
 \begin{minipage}[t]{0.8\linewidth}
 \setlength{\parskip}{\parspacing}
 
-This is my cool thesis.
-\todo[inline]{Just placing a TODO here so that this is marked as required change.}
+% Sound source localization is a ongoing topic in research that receives
+The RoboCup Standard Platform League provides a platform for prospective
+researchers to compete in autonomous robot soccer
+with the overall goal to contribute to research in the fields
+of humanoid robotics and autonomous multi-agent systems.
+Per specification, implementation is done on NAO robots.
+%  which
+% come with four microphones attached on the head.
+Currently, audio signals are only used as indicator for the kickoff
+in form of a whistle sound.
+To prevent the detection of false positives from neighboring fields,
+the realizability of a whistle sound source localization
+is evaluated.
+%  which is based on a \acf{TDOA} approach.
+% This work evaluates the realizability of a sound source localization according
+% to these whistles with an approach based on the \acf{TDOA}.
+% In order to obtain the time delay between the microphones,
+% three methods were investigated
+Different methods that are based on the \acf{TDOA} are implemented
+to obtain the direction of the whistle source using the four
+microphones attached on the robot's head.
+% time delay
+To compute a global position of the the acoustic source,
+direction estimates of multiple robots are fed into a multi-agent
+filter.
+The resulting algorithm is shown to allow whistles to be
+localized with an average \ac{RMSE} of 1\si{\meter} in terms of
+Euclidean distance
+% according
+% to the distance.
+
+
 
 
 \end{minipage}
