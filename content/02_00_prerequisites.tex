@@ -6,40 +6,30 @@ sequential steps needs to interact for a final result.
 To work with the implementations in \cref{chap:03_implementation}, the fundamentals
 are introduced in this chapter on a general basis.
 
-As this work specializes on the localization of a whistle-sound, this sound pattern
-must be detected at first.
-This was already done by previous work \cite{Hasselbring}.
-Hence, the flow of the whistle detection is only briefly explained in \cref{sec:02_whistleSignal}.
-The position of the sound source is determined by combining
-separate direction results on the single robots.
-Utilizing the \ac{TDOA} information referenced in \cref{sec:02_tdoa} between pairs
-of the Naos' microphones, every robot produces a sound direction ray which
-are fed into the team decision filter.
-As mentioned in \cref{chap:01_introduction}, different methods exist to identify the \ac{TDOA}
-and are terms of content in \cref{sec:02_cc,sec:02_gcc,sec:02_phase}.
+As this work specializes on the localization of a whistle source, this acoustic
+signal pattern must be detected at first.
+This work was already done by \cite{Hasselbring} and thus,
+the flow of the whistle detection is only briefly explained in \cref{sec:02_whistleSignal}.
+For the overall purpose of locating the positions of whistle sound sources,
+the directions of the whistle sources are obtained first by considering the
+start samples of the signal.
+Fundamentals for different approaches of the signal start detection are
+explained in \cref{sec:02_signalStartDetection}.
+In this work, the \ac{TDOA} information between microphone pairs of the robot's
+head are used to determine a \acf{WSDE} on each single robot.
+\Cref{sec:02_tdoa} introduces the different methods to observe the time delay
+by different methods in \cref{sec:02_cc,sec:02_gcc,sec:02_phase}.
 Due to the low resolution arising from the sample rate and small distance between the microphones,
 a subsample estimation is stated in \cref{sec:02_subsampleShift}.
-One of the most significant factors is the selection of the signal frame that is going to
-be used for the direction determination.
-In order to provide a correct and stable decision process, different approaches
-are considered.
-In all cases, the focus is on finding the signal starting index
-and are listed in \cref{sec:02_signalStartDetection}.
 After all, the results of the individual robots are filtered by assuming
 gaussian distribution to produce a sound source position.
-\Cref{sec:02_filter} describes the formulas for Bayesian Updating.
-
-% \missing[]{
-% - CC in time domain, because low frequency resolution (44100Hz/512samples=resolution)\\
-% and also CC corrupted and we want to detect which signal was first\\
-% }
+\Cref{sec:02_filter} describes the formulas for Bayesian Updating in two-dimensional space.
 
 \input{content/02_whistleSignal}
+\input{content/02_startDetection}
 \input{content/02_TDOA}
 \input{content/02_cc}
 \input{content/02_gcc}
 \input{content/02_phase}
 \input{content/02_subsampleShift}
-\input{content/02_startDetection}
-% \input{content/02_spectralSubtraction}
 \input{content/02_teamFilter}
