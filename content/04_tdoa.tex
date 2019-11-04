@@ -54,22 +54,25 @@ arises what was mentioned as downside of the \ac{CC} in \cref{sec:02_cc}.
 \hline
 Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 \hline
-0 & 1 & -8.25 & -144.9 & -35.1\\
+0 & 1 & -8.25\si{\degree} & -144.9\si{\degree} & -35.1\si{\degree} \\
 \hline
-1 & 3 & -4.59 & -17.4 & 78.6\\
+1 & 3 & -4.59\si{\degree} & -17.4\si{\degree} & 78.6\si{\degree} \\
 \hline
-2 & 0 & 9.16 & -30.6 & -30.6\\
+2 & 0 & 9.16 &\si{\degree} -30.6\si{\degree} & -30.6\si{\degree} \\
 \hline
-3 & 2 & 3.94 & -150.2 & -29.8\\
+3 & 2 & 3.94\si{\degree} & -150.2\si{\degree} & -29.8\si{\degree} \\
 \hline
 \etab
 \et{Cross correlation delay results of signal from front right}{04_cc}
 % -------------------------------------------------------------
 
-According to the delays in \cref{tab:04_cc}, two source direction candidates arise
-for each channel pair.
-By the implementation in \cref{subsec:03_directionCandidates}, the combination of
-all options with the smallest error is selected as \ac{WSDE}.
+\Cref{subsec:03_directionCandidates} explains how two possible direction
+results exists by considering the delay between a channel pair.
+In \Cref{tab:04_cc}, both arising direction candidates are listed for
+all channel delays.
+% and how the unification of those candidates takes place.
+By implementation, the combination of
+all options with the smallest error is selected as \ac{WSDE} of one robot.
 Hence, the algorithm outputs -26.9\si{\degree} what produces an error of 6.8\si{\degree}.
 The delay between channel 2 and 0 is larger than the maximum delay of 6.85 samples
 and therefore cut to the maximum sample delay.
@@ -101,16 +104,17 @@ It is apparent that the peaks of the \ac{GCC} are better to detect than the peak
 \hline
 Base Channel & Next Channel & Delay & Candidate (-) & Candidate (+)\\
 \hline
-0 & 1 & -8.28 & -144.7 & -35.3\\
+0 & 1 & -8.28\si{\degree} & -144.7\si{\degree} & -35.3\si{\degree}\\
 \hline
-1 & 3 & -4.09 & -22.8 & 84.0\\
+1 & 3 & -4.09\si{\degree} & -22.8\si{\degree} & 84.0\si{\degree}\\
 \hline
-2 & 0 & 7.60 & -30.6 & -30.6\\
+2 & 0 & 7.60\si{\degree} & -30.6\si{\degree} & -30.6\si{\degree}\\
 \hline
-3 & 2 & 4.13 & -148.7 & -31.3\\
+3 & 2 & 4.13\si{\degree} & -148.7\si{\degree} & -31.3\si{\degree}\\
 \hline
 \etab
-\et{Generalized cross correlation delay results of signal from front right}{04_gcc}
+\et{Generalized cross correlation delay results of signal from front right. Two possible
+	direction candidates exists by considering the delay between a channel pair}{04_gcc}
 % -------------------------------------------------------------
 \subsection{Phase Difference}
 \label{subsec:04_phaseSingle}
@@ -172,18 +176,20 @@ direction estimate computed from the candidates listed in
 \btab{|c|c|c|c|c|}
 \hline
 Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
-& & [\si{\deg}] & [\si{\deg}] & [\si{\deg}] \\
 \hline
-1 & 3 & -79.1 & -26.8 & 88.0\\
+1 & 3 & -79.1\si{\degree} & -26.8\si{\degree} & 88.0\si{\degree}\\
 \hline
-2 & 0 & 167.7 & -30.6 & -30.6\\
+2 & 0 & 167.7\si{\degree} & -30.6\si{\degree} & -30.6\si{\degree}\\
 \hline
-3 & 2 & 88.5 & -148.7 & -31.3\\
+3 & 2 & 88.5\si{\degree} & -148.7\si{\degree} & -31.3\si{\degree}\\
 \hline
 \etab
 \et{Resulting candidates of phase difference method with fixed frequency
 	2670.1Hz of example measurement from front right
-	(-33.7\si{\degree})}{04_fixedFreqResult}
+	(-33.7\si{\degree})
+	Two possible
+	direction candidates exists by considering the delay between a channel pair
+}{04_fixedFreqResult}
 % -------------------------------------------------------------
 
 \subsubsection*{Dynamic Reference Frequency Selection}
@@ -240,13 +246,12 @@ Channel & Phase [\si{\deg}] & Amplitude\\
 \btab{|c|c|c|c|c|}
 \hline
 Base Channel & Next Channel & Phase Difference & Candidate (-) & Candidate (+)\\
-& & [\si{\deg}] & [\si{\deg}] & [\si{\deg}] \\
 \hline
-1 & 3 & -102.7 & -17.6 & 78.8\\
+1 & 3 & -102.7\si{\degree} & -17.6\si{\degree} & 78.8\si{\degree}\\
 \hline
-2 & 0 & 173.4 & -30.6 & -30.6\\
+2 & 0 & 173.4\si{\degree} & -30.6\si{\degree} & -30.6\si{\degree}\\
 \hline
-3 & 2 & 113.1 & -140.7 & -39.3\\
+3 & 2 & 113.1\si{\degree} & -140.7\si{\degree} & -39.3\si{\degree}\\
 \hline
 \etab
 \et{Phase differences and resulting direction candidates of demonstration-dataset
@@ -353,7 +358,7 @@ Phase Difference & 44.88\si{\degree} & 33.94\si{\degree} \\
 \hline
 \etab
 \et{Method comparison of averaged \acp{RMSE} of single robot \ac{WSDE}
-results. All laboratory-measurements are considered}
+	results. All laboratory-measurements are considered}
 {04_rmseMethodComparisonsAll}
 % -------------------------------------------------------------
 
