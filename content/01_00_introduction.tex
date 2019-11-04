@@ -17,22 +17,13 @@
 % the time difference of arrival. The distance between the robots needs to be known
 % Robots needs to be synchronized (which is difficult with NTP only)
 
-\unsure[]{
-\acf{SSL} of audio signals is a present subject of research due to increasing
-has been subject of research for many years with application
-scenarios in various environments and applicability to a wide range of
-different sensors}
-\todo{Chen2006, cite, cite}
-\todo{Maybe enumerate two examples explicitly with "environment",
-"sensor used" and citation. E.g. Application domains range from X where SSl is
-applied on Y-sensor-data to achive Z, to ....}
 % In particular for audio signals, use cases emerge with the progressing
 % ordinariness of technical equipment on a daily basis.\todo{What do you mean by
 % this sentence?}
 % As technical devices gained in importance more and more,
 Assuming robots as forthcoming everyday objects, reaction to acoustic
 input is one essential step for natural human-robot interaction \cite{audio_loca_robotics,socially_interactive_robots}.
-Additionally, from a robots' perspective additional information about the environment
+From a robots' perspective additional information about the environment
 helps to manage unknown scenarios.
 For example, for navigating robots being aware of obstacles beforehand
 due to acoustic perception is a beneficial ability \cite{robust_localization_sources}.
@@ -40,11 +31,9 @@ An even more tangible case can be seen in conference rooms of business environme
 where remote participation is commonplace these days.
 Special features of communication systems like speaker identification and tracking
 become crucially important to provide smooth operation \cite{Brandstein96apractical}.
-In general, \ac{SSL} algorithms can be divided into three categories
+In general, \acf{SSL} algorithms can be divided into three categories
 which are based on beamforming, eigenvalue
-decomposition or \ac{TDOA} \cite{Brandstein96apractical,gcc_time_broeck,benesty_passive_acoustic}.
-\todo[inline]{Hier ein mal TDOA ausschreiben}
-\todo[inline]{Du solltest ein mal SSL als Begriff/Abkuerzung einfuehren}
+decomposition or \acf{TDOA} \cite{Brandstein96apractical,gcc_time_broeck,benesty_passive_acoustic}.
 
 In this work, the performance of different \ac{SSL} strategies is evaluated
 with a focus on whistle sound localization in the context of the
@@ -110,9 +99,8 @@ issue occurs that robots detect whistles of neighboring games and therefore
 start playing ahead of the own game start, which yields a penalty. With
 increasing importance of the whistle for the communication between the referee
 and the robots, this becomes an even more pressing issue.
-\todo[inline]{Fueg noch einen Satz ein, dass die SSL dabei hilt. (auch wenn es
-offensichtlich erscheint) bevor die die anderen Anwendungsfaelle erklaerst}
-
+By computing the \ac{SSL}, those whistles that are detected on other fields
+can be neglected.
 
 As another imaginable case of application, a \ac{SSL} can be used to improve team
 communication among the robots.
@@ -128,8 +116,7 @@ limited to whistle sounds alone.
 \label{sec:01_contribution}
 
 In this work, the sixth generation of NAO robots are being used
-which consists of four microphones attached on the robot's head.\todo{maybe: has four microphones attached
-to its head. (der besteht ja noch aus mehr als das)}
+which has four microphones attached to its head.
 For development of software for this system, an extensive framework is provided by
 the \ac{SPL} team \textit{HULKs}, a group of engineering students associated
 with the \ac{TUHH}.
@@ -141,7 +128,6 @@ In practice, false positives only occur when whistles are blown
 at other fields as explained above. This emphasizes the importance of
 a source localization as an useful extension to allow rejection of whistles
 sounds detected from neighboring fields.
-\missing[]{conditions at competition? -> large hall}
 
 The stages required to realize the \ac{SSL} can be divided into two steps.
 First, a single robot \acf{WSDE} on individual stand-alone systems estimates the
@@ -172,10 +158,9 @@ a global frame using a varying number of robots.
 \section{Outline}
 \label{sec:01_outline}
 
-\todo[inline]{Vielleicht davor: "This thesis is structured as follows:"}
+This thesis is structured as follows:
 \Cref{chap:02_prerequisites} covers the theoretical background of this work
 with regard to the main components of the \ac{SSL}, namely signal start detection,
-\ac{WSDE} and multi-agent filtering.
-In \Cref{chap:03_implementation} the implementation details are presented before
-the results of the different approaches are evaluated with real data in \cref{chap:04_evaluation}.\todo{Vielleicht: "on a real-world dataset" statt "read data"}
-With the outcome of this, a final conclusion is summarized in \Cref{chap:05_conclusion}.\todo{"conclusion is summarized" klingt falsch. Vielleicht: "A final conclusion and summary is presented in"}
+\ac{WSDE} and multi-agent filtering;
+In \cref{chap:03_implementation} the implementation details are presented before
+With the outcome of this, a final conclusion and summary is discussed in \cref{chap:05_conclusion};
