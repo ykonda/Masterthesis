@@ -32,9 +32,9 @@ applied on Y-sensor-data to achive Z, to ....}
 % As technical devices gained in importance more and more,
 Assuming robots as forthcoming everyday objects, reaction to acoustic
 input is one essential step for natural human-robot interaction \cite{audio_loca_robotics,socially_interactive_robots}.
-Additionally from robots' perspective, various information about the environment
+Additionally, from a robots' perspective additional information about the environment
 helps to manage unknown scenarios.
-For example, navigating robots being aware of obstacles beforehand
+For example, for navigating robots being aware of obstacles beforehand
 due to acoustic perception is a beneficial ability \cite{robust_localization_sources}.
 An even more tangible case can be seen in conference rooms of business environments
 where remote participation is commonplace these days.
@@ -43,6 +43,8 @@ become crucially important to provide smooth operation \cite{Brandstein96apracti
 In general, \ac{SSL} algorithms can be divided into three categories
 which are based on beamforming, eigenvalue
 decomposition or \ac{TDOA} \cite{Brandstein96apractical,gcc_time_broeck,benesty_passive_acoustic}.
+\todo[inline]{Hier ein mal TDOA ausschreiben}
+\todo[inline]{Du solltest ein mal SSL als Begriff/Abkuerzung einfuehren}
 
 In this work, the performance of different \ac{SSL} strategies is evaluated
 with a focus on whistle sound localization in the context of the
@@ -84,7 +86,7 @@ microphones, sonars and many more.
 \begin{figure}[ht]
 	\centering
         \includegraphics[width=0.6\columnwidth]{figures/robot}
-	\caption[NAO robot]{V6 NAO robots while game play at the \ac{RoboCup} Sydney in 2019.}
+	\caption[NAO robot]{V6 NAO robots during game play at the \ac{RoboCup} Sydney in 2019.}
 	\label{fig:01_robot}
 \end{figure}
 % -------------------------------------------------------------
@@ -105,9 +107,12 @@ multiple robots on the soccer field.
 %  like executions of free kicks which include corner kicks or kick-ins.
 Currently, most teams are able to reliably detect whistle sounds. However, the
 issue occurs that robots detect whistles of neighboring games and therefore
-start playing ahead of the own game start which yields a penalty. With
+start playing ahead of the own game start, which yields a penalty. With
 increasing importance of the whistle for the communication between the referee
 and the robots, this becomes an even more pressing issue.
+\todo[inline]{Fueg noch einen Satz ein, dass die SSL dabei hilt. (auch wenn es
+offensichtlich erscheint) bevor die die anderen Anwendungsfaelle erklaerst}
+
 
 As another imaginable case of application, a \ac{SSL} can be used to improve team
 communication among the robots.
@@ -117,13 +122,14 @@ team members to recognizes if they are about to score an own goal.
 Potential mistakes and failure of other program components can be corrected by such
 confirmation behavior between the robots.
 For this reason, it was taken care of designing an algorithm that is not
-limited to whistle sounds only.
+limited to whistle sounds alone.
 
 \section{Contribution}
 \label{sec:01_contribution}
 
 In this work, the sixth generation of NAO robots are being used
-which consists of four microphones attached on the robot's head.
+which consists of four microphones attached on the robot's head.\todo{maybe: has four microphones attached
+to its head. (der besteht ja noch aus mehr als das)}
 For development of software for this system, an extensive framework is provided by
 the \ac{SPL} team \textit{HULKs}, a group of engineering students associated
 with the \ac{TUHH}.
@@ -131,7 +137,7 @@ In this software framework, a reliable detector for whistle sounds already exits
 This implementation will be utilized for the development of the \ac{SSL}. The
 whistle detector of the \textit{HULKs} achieves a true positive rate of 98\si{\percent}
 and has shown good performance at competitions in the past \cite{Hasselbring}, \cite{statistics}.
-In practice, false positives only occur when whistles are are blown
+In practice, false positives only occur when whistles are blown
 at other fields as explained above. This emphasizes the importance of
 a source localization as an useful extension to allow rejection of whistles
 sounds detected from neighboring fields.
@@ -150,15 +156,15 @@ from the multi-agent data.
 % titled "objective"}.
 
 As part of this work, three \ac{TDOA} algorithms are implemented and evaluated
-to identify an appropriate method to reliable estimate the relative direction
+to identify an appropriate method to reliably estimate the relative direction
 on individual robots. The standard \acf{CC} method is compared with the
 \acf{GCC}, as well as a phase difference method which observes the phases of a reference
 frequency between the microphones. In order to avoid reverberation and
-observing multi-path propagated signals, focus is layed on the start of the
+observing multi-path propagated signals, focus is laid on the start of the
 signal which is assumed to be most unaffected by these artefacts. Finally, the
 objective is to provide a fully functional \ac{SSL} pipeline within the HULKs
 framework that can be executed in real-time to estimate the sound location in
-a global frame using a varying numbers of robots.
+a global frame using a varying number of robots.
 
 % say that all measurements were done in lab -> in evaluation part
 % evaluation -> SSD at beginning
@@ -166,9 +172,10 @@ a global frame using a varying numbers of robots.
 \section{Outline}
 \label{sec:01_outline}
 
+\todo[inline]{Vielleicht davor: "This thesis is structured as follows:"}
 \Cref{chap:02_prerequisites} covers the theoretical background of this work
-divided with regard to the main components of the \ac{SSL}, namely signal start detection,
+with regard to the main components of the \ac{SSL}, namely signal start detection,
 \ac{WSDE} and multi-agent filtering.
 In \Cref{chap:03_implementation} the implementation details are presented before
-the results of the different approaches are evaluated with real data in \cref{chap:04_evaluation}.
-With the outcome of this, a final conclusion is summarized in \Cref{chap:05_conclusion}.
+the results of the different approaches are evaluated with real data in \cref{chap:04_evaluation}.\todo{Vielleicht: "on a real-world dataset" statt "read data"}
+With the outcome of this, a final conclusion is summarized in \Cref{chap:05_conclusion}.\todo{"conclusion is summarized" klingt falsch. Vielleicht: "A final conclusion and summary is presented in"}
